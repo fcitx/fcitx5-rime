@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx\n"
-"Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2015-12-11 23:17-0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-21 09:03-0700\n"
 "PO-Revision-Date: 2014-01-08 21:13+0000\n"
 "Last-Translator: csslayer <wengxt@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/fcitx/fcitx/"
@@ -21,39 +21,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/fcitx-rime.c:148 src/fcitx-rime.c:149
-msgid "Deploy"
-msgstr "重新部署"
-
-#: src/fcitx-rime.c:527
-msgid "English"
-msgstr "英文"
-
-#: src/fcitx-rime.c:70 src/fcitx-rime.c:128 src/fcitx-rime.conf.in:3
-#: src/rime.conf.in:3
-msgid "Rime"
-msgstr "中州韻"
-
-#: src/fcitx-rime.conf.in:4
-msgid "Rime Wrapper For Fcitx"
-msgstr "Fcitx 的中州韻封装"
-
-#: src/fcitx-rime.c:64
-msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
-msgstr "Rime 出现了一个错误。请参阅/tmp/rime.fcitx.ERROR中细节。"
-
-#: src/fcitx-rime.c:62
-msgid "Rime is ready."
-msgstr "Rime 就绪。"
-
-#: src/fcitx-rime.c:60
+#: src/fcitx-rime.c:59
 msgid "Rime is under maintenance ..."
 msgstr "Rime 正在维护中..."
 
-#: src/fcitx-rime.c:172
+#: src/fcitx-rime.c:61
+msgid "Rime is ready."
+msgstr "Rime 就绪。"
+
+#: src/fcitx-rime.c:63
+msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
+msgstr "Rime 出现了一个错误。请参阅/tmp/rime.fcitx.ERROR中细节。"
+
+#: src/fcitx-rime.c:69 src/fcitx-rime.c:127 src/fcitx-rime.conf.in:3
+#: src/rime.conf.in:3 src/rime-addon.conf.in:3
+msgid "Rime"
+msgstr "中州韻"
+
+#: src/fcitx-rime.c:147 src/fcitx-rime.c:148
+msgid "Deploy"
+msgstr "重新部署"
+
+#: src/fcitx-rime.c:156 src/fcitx-rime.c:157
+msgid "Synchronize"
+msgstr "同步"
+
+#: src/fcitx-rime.c:171
 msgid "Schema List"
 msgstr "方案列表"
 
-#: src/fcitx-rime.c:157 src/fcitx-rime.c:158
-msgid "Synchronize"
-msgstr "同步"
+#: src/fcitx-rime.c:517
+msgid "English"
+msgstr "英文"
+
+#: src/fcitx-rime.conf.in:4 src/rime-addon.conf.in:4
+msgid "Rime Wrapper For Fcitx"
+msgstr "Fcitx 的中州韻封装"
+
+#: src/rime.conf.in:4
+msgid "rime"
+msgstr ""

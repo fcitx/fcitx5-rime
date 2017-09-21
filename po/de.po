@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx\n"
-"Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2017-07-28 05:02-0700\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-21 09:03-0700\n"
 "PO-Revision-Date: 2017-07-28 11:46+0000\n"
 "Last-Translator: mar well <m.wellendorf@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/fcitx/fcitx/language/de/)\n"
@@ -19,41 +19,45 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/fcitx-rime.c:148 src/fcitx-rime.c:149
-msgid "Deploy"
-msgstr "Deploy"
+#: src/fcitx-rime.c:59
+msgid "Rime is under maintenance ..."
+msgstr "Rime wird im Moment gewartet."
 
-#: src/fcitx-rime.c:527
-msgid "English"
-msgstr "Englisch"
+#: src/fcitx-rime.c:61
+msgid "Rime is ready."
+msgstr "Rime ist bereit."
 
-#: src/fcitx-rime.c:70 src/fcitx-rime.c:128 src/fcitx-rime.conf.in:3
-#: src/rime.conf.in:3
-msgid "Rime"
-msgstr "Rime"
-
-#: src/fcitx-rime.conf.in:4
-msgid "Rime Wrapper For Fcitx"
-msgstr "Rime Wrapper für Fcitx"
-
-#: src/fcitx-rime.c:64
+#: src/fcitx-rime.c:63
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr ""
 "Rime ist auf einen Fehler gestoßen. Bitte sehen Sie für mehr Infos in /tmp/"
 "rime.fcitx.ERROR nach."
 
-#: src/fcitx-rime.c:62
-msgid "Rime is ready."
-msgstr "Rime ist bereit."
+#: src/fcitx-rime.c:69 src/fcitx-rime.c:127 src/fcitx-rime.conf.in:3
+#: src/rime.conf.in:3 src/rime-addon.conf.in:3
+msgid "Rime"
+msgstr "Rime"
 
-#: src/fcitx-rime.c:60
-msgid "Rime is under maintenance ..."
-msgstr "Rime wird im Moment gewartet."
+#: src/fcitx-rime.c:147 src/fcitx-rime.c:148
+msgid "Deploy"
+msgstr "Deploy"
 
-#: src/fcitx-rime.c:172
+#: src/fcitx-rime.c:156 src/fcitx-rime.c:157
+msgid "Synchronize"
+msgstr "Synchronisieren"
+
+#: src/fcitx-rime.c:171
 msgid "Schema List"
 msgstr "Liste Schemata"
 
-#: src/fcitx-rime.c:157 src/fcitx-rime.c:158
-msgid "Synchronize"
-msgstr "Synchronisieren"
+#: src/fcitx-rime.c:517
+msgid "English"
+msgstr "Englisch"
+
+#: src/fcitx-rime.conf.in:4 src/rime-addon.conf.in:4
+msgid "Rime Wrapper For Fcitx"
+msgstr "Rime Wrapper für Fcitx"
+
+#: src/rime.conf.in:4
+msgid "rime"
+msgstr ""

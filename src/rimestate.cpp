@@ -112,11 +112,11 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
         /* converted text */
         if (context.composition.sel_start > 0) {
             preedit.append(std::string(context.composition.preedit,
-                                       context.composition.sel_start));
+                                       context.composition.sel_start), TextFormatFlag::Underline);
             if (context.commit_text_preview) {
                 clientPreedit.append(
                     std::string(context.commit_text_preview,
-                                context.composition.sel_start));
+                                context.composition.sel_start), TextFormatFlag::Underline);
             }
         }
 
@@ -139,7 +139,7 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
         if (context.composition.sel_end < context.composition.length) {
             preedit.append(std::string(
                 &context.composition.preedit[context.composition.sel_end],
-                &context.composition.preedit[context.composition.length]));
+                &context.composition.preedit[context.composition.length]), TextFormatFlag::Underline);
         }
 
         preedit.setCursor(context.composition.cursor_pos);

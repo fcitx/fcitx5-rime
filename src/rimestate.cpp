@@ -171,7 +171,7 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
 
         if (context.menu.num_candidates) {
             ic->inputPanel().setCandidateList(
-                new RimeCandidateList(engine_, ic, context.menu));
+                std::make_unique<RimeCandidateList>(engine_, ic, context.menu));
         } else {
             ic->inputPanel().setCandidateList(nullptr);
         }

@@ -1,60 +1,64 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the fcitx5-rime package.
 #
 # Translators:
-# Bon Keun Seo <scobyseo@gmail.com>, 2017
+# csslayer <wengxt@gmail.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: fcitx\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-21 09:03-0700\n"
-"PO-Revision-Date: 2017-08-03 16:58+0000\n"
-"Last-Translator: Bon Keun Seo <scobyseo@gmail.com>\n"
-"Language-Team: Korean (http://www.transifex.com/fcitx/fcitx/language/ko/)\n"
+"Project-Id-Version: fcitx5-rime\n"
+"Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
+"POT-Creation-Date: 2017-11-22 21:57-0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: csslayer <wengxt@gmail.com>, 2017\n"
+"Language-Team: Korean (https://www.transifex.com/fcitx/teams/12005/ko/)\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/fcitx-rime.c:59
-msgid "Rime is under maintenance ..."
-msgstr "Rime은 관리 중입니다..."
+#: src/fcitx-rime.c:147 src/fcitx-rime.c:148
+msgid "Deploy"
+msgstr "배치"
 
-#: src/fcitx-rime.c:61
-msgid "Rime is ready."
-msgstr "Rime이 준비되었습니다."
-
-#: src/fcitx-rime.c:63
-msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
-msgstr ""
-"Rime에 오류가 발생했습니다. 자세한 내용은 /tmp/rime.fcitx.ERROR을 참조하세요."
+#: src/fcitx-rime.c:517
+msgid "English"
+msgstr "영어"
 
 #: src/fcitx-rime.c:69 src/fcitx-rime.c:127 src/fcitx-rime.conf.in:3
 #: src/rime.conf.in:3 src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "Rime"
 
-#: src/fcitx-rime.c:147 src/fcitx-rime.c:148
-msgid "Deploy"
-msgstr "배치"
+#: src/fcitx-rime.conf.in:4 src/rime-addon.conf.in:4
+msgid "Rime Wrapper For Fcitx"
+msgstr "Fcitx Rime 입력기"
 
-#: src/fcitx-rime.c:156 src/fcitx-rime.c:157
-msgid "Synchronize"
-msgstr "동기화"
+#: src/fcitx-rime.c:63
+msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
+msgstr ""
+"Rime에 오류가 발생했습니다. 자세한 내용은 /tmp/rime.fcitx.ERROR을 참조하세요."
+
+#: src/fcitx-rime.c:61
+msgid "Rime is ready."
+msgstr "Rime이 준비되었습니다."
+
+#: src/fcitx-rime.c:59
+msgid "Rime is under maintenance ..."
+msgstr "Rime은 관리 중입니다..."
 
 #: src/fcitx-rime.c:171
 msgid "Schema List"
 msgstr "스키마 목록"
 
-#: src/fcitx-rime.c:517
-msgid "English"
-msgstr "영어"
+#: src/fcitx-rime.c:156 src/fcitx-rime.c:157
+msgid "Synchronize"
+msgstr "동기화"
 
-#: src/fcitx-rime.conf.in:4 src/rime-addon.conf.in:4
-msgid "Rime Wrapper For Fcitx"
-msgstr "Fcitx Rime 입력기"
+#: src/rime.conf.in:4
+msgid "fcitx-rime"
+msgstr ""
 
 #: src/rime.conf.in:4
 msgid "rime"

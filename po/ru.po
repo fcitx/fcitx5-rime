@@ -1,17 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the fcitx5-rime package.
 #
 # Translators:
-# TotalCaesar659 <x24cm5b8c54q6szxw@yandex.ru>, 2016
+# csslayer <wengxt@gmail.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: fcitx\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-21 09:03-0700\n"
-"PO-Revision-Date: 2017-08-03 16:58+0000\n"
-"Last-Translator: TotalCaesar659 <x24cm5b8c54q6szxw@yandex.ru>\n"
-"Language-Team: Russian (http://www.transifex.com/fcitx/fcitx/language/ru/)\n"
+"Project-Id-Version: fcitx5-rime\n"
+"Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
+"POT-Creation-Date: 2017-11-22 21:57-0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: csslayer <wengxt@gmail.com>, 2017\n"
+"Language-Team: Russian (https://www.transifex.com/fcitx/teams/12005/ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,42 +20,46 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: src/fcitx-rime.c:59
-msgid "Rime is under maintenance ..."
-msgstr "Rime перегружен..."
+#: src/fcitx-rime.c:147 src/fcitx-rime.c:148
+msgid "Deploy"
+msgstr "Развернуть"
 
-#: src/fcitx-rime.c:61
-msgid "Rime is ready."
-msgstr "Rime готов."
-
-#: src/fcitx-rime.c:63
-msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
-msgstr "Обнаружена ошибка Rime. Подробности в файле /tmp/rime.fcitx.ERROR."
+#: src/fcitx-rime.c:517
+msgid "English"
+msgstr "Английский"
 
 #: src/fcitx-rime.c:69 src/fcitx-rime.c:127 src/fcitx-rime.conf.in:3
 #: src/rime.conf.in:3 src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "Rime"
 
-#: src/fcitx-rime.c:147 src/fcitx-rime.c:148
-msgid "Deploy"
-msgstr "Развернуть"
+#: src/fcitx-rime.conf.in:4 src/rime-addon.conf.in:4
+msgid "Rime Wrapper For Fcitx"
+msgstr "Обертка Rime для Fcitx"
 
-#: src/fcitx-rime.c:156 src/fcitx-rime.c:157
-msgid "Synchronize"
-msgstr "Синхронизировать"
+#: src/fcitx-rime.c:63
+msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
+msgstr "Обнаружена ошибка Rime. Подробности в файле /tmp/rime.fcitx.ERROR."
+
+#: src/fcitx-rime.c:61
+msgid "Rime is ready."
+msgstr "Rime готов."
+
+#: src/fcitx-rime.c:59
+msgid "Rime is under maintenance ..."
+msgstr "Rime перегружен..."
 
 #: src/fcitx-rime.c:171
 msgid "Schema List"
 msgstr "Список схем"
 
-#: src/fcitx-rime.c:517
-msgid "English"
-msgstr "Английский"
+#: src/fcitx-rime.c:156 src/fcitx-rime.c:157
+msgid "Synchronize"
+msgstr "Синхронизировать"
 
-#: src/fcitx-rime.conf.in:4 src/rime-addon.conf.in:4
-msgid "Rime Wrapper For Fcitx"
-msgstr "Обертка Rime для Fcitx"
+#: src/rime.conf.in:4
+msgid "fcitx-rime"
+msgstr ""
 
 #: src/rime.conf.in:4
 msgid "rime"

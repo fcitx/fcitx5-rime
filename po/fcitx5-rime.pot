@@ -1,57 +1,60 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# This file is distributed under the same license as the fcitx5-rime package.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-21 09:03-0700\n"
+"Project-Id-Version: fcitx5-rime\n"
+"Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
+"POT-Creation-Date: 2017-11-22 21:57-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: LANG\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/fcitx-rime.c:59
-msgid "Rime is under maintenance ..."
-msgstr ""
-
-#: src/fcitx-rime.c:61
-msgid "Rime is ready."
-msgstr ""
-
-#: src/fcitx-rime.c:63
-msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
-msgstr ""
-
-#: src/fcitx-rime.c:69 src/fcitx-rime.c:127 src/fcitx-rime.conf.in:3
-#: src/rime.conf.in:3 src/rime.conf.in:3 src/rime-addon.conf.in:3
-msgid "Rime"
-msgstr ""
-
 #: src/fcitx-rime.c:147 src/fcitx-rime.c:148
 msgid "Deploy"
-msgstr ""
-
-#: src/fcitx-rime.c:156 src/fcitx-rime.c:157
-msgid "Synchronize"
-msgstr ""
-
-#: src/fcitx-rime.c:171
-msgid "Schema List"
 msgstr ""
 
 #: src/fcitx-rime.c:517
 msgid "English"
 msgstr ""
 
-#: src/fcitx-rime.conf.in:4 src/rime-addon.conf.in:4
+#: src/fcitx-rime.c:69 src/fcitx-rime.c:127 src/fcitx-rime.conf.in:3
+#: src/rime.conf.in:3 src/rime-addon.conf.in:3 src/rime.conf.in:3
+#: src/rime-addon.conf.in:3
+msgid "Rime"
+msgstr ""
+
+#: src/fcitx-rime.conf.in:4 src/rime-addon.conf.in:4 src/rime-addon.conf.in:4
 msgid "Rime Wrapper For Fcitx"
+msgstr ""
+
+#: src/fcitx-rime.c:63
+msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
+msgstr ""
+
+#: src/fcitx-rime.c:61
+msgid "Rime is ready."
+msgstr ""
+
+#: src/fcitx-rime.c:59
+msgid "Rime is under maintenance ..."
+msgstr ""
+
+#: src/fcitx-rime.c:171
+msgid "Schema List"
+msgstr ""
+
+#: src/fcitx-rime.c:156 src/fcitx-rime.c:157
+msgid "Synchronize"
+msgstr ""
+
+#: src/rime.conf.in:4 src/rime.conf.in:4
+msgid "fcitx-rime"
 msgstr ""
 
 #: src/rime.conf.in:4

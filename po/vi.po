@@ -1,60 +1,63 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the fcitx5-rime package.
 #
 # Translators:
-# Thu Hoai <contact@bizover.net>, 2013
+# csslayer <wengxt@gmail.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: fcitx\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-21 09:03-0700\n"
-"PO-Revision-Date: 2014-01-01 08:57+0000\n"
-"Last-Translator: csslayer <wengxt@gmail.com>\n"
-"Language-Team: Vietnamese (http://www.transifex.com/fcitx/fcitx/language/"
-"vi/)\n"
+"Project-Id-Version: fcitx5-rime\n"
+"Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
+"POT-Creation-Date: 2017-11-22 21:57-0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: csslayer <wengxt@gmail.com>, 2017\n"
+"Language-Team: Vietnamese (https://www.transifex.com/fcitx/teams/12005/vi/)\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/fcitx-rime.c:59
-msgid "Rime is under maintenance ..."
-msgstr "Rime đang bảo trì..."
+#: src/fcitx-rime.c:147 src/fcitx-rime.c:148
+msgid "Deploy"
+msgstr "Triển khai"
 
-#: src/fcitx-rime.c:61
-msgid "Rime is ready."
-msgstr "Rime sẵn sàng,"
-
-#: src/fcitx-rime.c:63
-msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
-msgstr "Rime gặp lỗi. Xem ở /tmp/rime.fcitx.ERROR để biết chi tiết."
+#: src/fcitx-rime.c:517
+msgid "English"
+msgstr ""
 
 #: src/fcitx-rime.c:69 src/fcitx-rime.c:127 src/fcitx-rime.conf.in:3
 #: src/rime.conf.in:3 src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "Rime"
 
-#: src/fcitx-rime.c:147 src/fcitx-rime.c:148
-msgid "Deploy"
-msgstr "Triển khai"
+#: src/fcitx-rime.conf.in:4 src/rime-addon.conf.in:4
+msgid "Rime Wrapper For Fcitx"
+msgstr "Bộ Wrapper cho Fcitx"
 
-#: src/fcitx-rime.c:156 src/fcitx-rime.c:157
-msgid "Synchronize"
-msgstr "Đồng bộ hóa"
+#: src/fcitx-rime.c:63
+msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
+msgstr "Rime gặp lỗi. Xem ở /tmp/rime.fcitx.ERROR để biết chi tiết."
+
+#: src/fcitx-rime.c:61
+msgid "Rime is ready."
+msgstr "Rime sẵn sàng,"
+
+#: src/fcitx-rime.c:59
+msgid "Rime is under maintenance ..."
+msgstr "Rime đang bảo trì..."
 
 #: src/fcitx-rime.c:171
 msgid "Schema List"
 msgstr ""
 
-#: src/fcitx-rime.c:517
-msgid "English"
-msgstr ""
+#: src/fcitx-rime.c:156 src/fcitx-rime.c:157
+msgid "Synchronize"
+msgstr "Đồng bộ hóa"
 
-#: src/fcitx-rime.conf.in:4 src/rime-addon.conf.in:4
-msgid "Rime Wrapper For Fcitx"
-msgstr "Bộ Wrapper cho Fcitx"
+#: src/rime.conf.in:4
+msgid "fcitx-rime"
+msgstr ""
 
 #: src/rime.conf.in:4
 msgid "rime"

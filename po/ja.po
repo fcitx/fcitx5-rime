@@ -4,13 +4,14 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
+# ABE Tsunehiko <hallconnen2+transifex@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2017-11-22 21:57-0800\n"
+"POT-Creation-Date: 2017-11-24 10:15-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: csslayer <wengxt@gmail.com>, 2017\n"
+"Last-Translator: ABE Tsunehiko <hallconnen2+transifex@gmail.com>, 2017\n"
 "Language-Team: Japanese (https://www.transifex.com/fcitx/teams/12005/ja/)\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +52,7 @@ msgstr "Rimeはメンテナンス中です..."
 
 #: src/fcitx-rime.c:171
 msgid "Schema List"
-msgstr ""
+msgstr "スキーマリスト"
 
 #: src/fcitx-rime.c:156 src/fcitx-rime.c:157
 msgid "Synchronize"

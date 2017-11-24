@@ -4,13 +4,14 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
+# Bon Keun Seo <scobyseo@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2017-11-22 21:57-0800\n"
+"POT-Creation-Date: 2017-11-24 10:15-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: csslayer <wengxt@gmail.com>, 2017\n"
+"Last-Translator: Bon Keun Seo <scobyseo@gmail.com>, 2017\n"
 "Language-Team: Korean (https://www.transifex.com/fcitx/teams/12005/ko/)\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -58,8 +59,8 @@ msgstr "동기화"
 
 #: src/rime.conf.in:4
 msgid "fcitx-rime"
-msgstr ""
+msgstr "fcitx-rime"
 
 #: src/rime.conf.in:4
 msgid "rime"
-msgstr ""
+msgstr "rime"

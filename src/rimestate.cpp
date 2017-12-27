@@ -44,13 +44,17 @@ RimeState::RimeState(RimeEngine *engine) : engine_(engine) {
 
 RimeState::~RimeState() {
     if (auto api = engine_->api()) {
-        api->destroy_session(session_);
+        if (session_) {
+            api->destroy_session(session_);
+        }
     }
 }
 
 void RimeState::clear() {
     if (auto api = engine_->api()) {
-        api->clear_composition(session_);
+        if (session_) {
+            api->clear_composition(session_);
+        }
     }
 }
 
@@ -112,11 +116,12 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
         /* converted text */
         if (context.composition.sel_start > 0) {
             preedit.append(std::string(context.composition.preedit,
-                                       context.composition.sel_start), TextFormatFlag::Underline);
+                                       context.composition.sel_start),
+                           TextFormatFlag::Underline);
             if (context.commit_text_preview) {
-                clientPreedit.append(
-                    std::string(context.commit_text_preview,
-                                context.composition.sel_start), TextFormatFlag::Underline);
+                clientPreedit.append(std::string(context.commit_text_preview,
+                                                 context.composition.sel_start),
+                                     TextFormatFlag::Underline);
             }
         }
 
@@ -137,9 +142,11 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
 
         /* remaining input to convert */
         if (context.composition.sel_end < context.composition.length) {
-            preedit.append(std::string(
-                &context.composition.preedit[context.composition.sel_end],
-                &context.composition.preedit[context.composition.length]), TextFormatFlag::Underline);
+            preedit.append(
+                std::string(
+                    &context.composition.preedit[context.composition.sel_end],
+                    &context.composition.preedit[context.composition.length]),
+                TextFormatFlag::Underline);
         }
 
         preedit.setCursor(context.composition.cursor_pos);
@@ -154,11 +161,14 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
         inputPanel.reset();
     }
     bool oldEmptyExceptAux = emptyExceptAux(inputPanel);
-    // FIXME: update status (button, menu)
+    engine_->updateAction(ic);
 
     do {
         auto api = engine_->api();
         if (!api || api->is_maintenance_mode()) {
+            return;
+        }
+        if (!api->find_session(session_)) {
             return;
         }
 
@@ -192,6 +202,15 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
 
     if (!keyRelease || !oldEmptyExceptAux || !newEmptyExceptAux) {
         ic->updateUserInterface(UserInterfaceComponent::InputPanel);
+    }
+}
+
+void RimeState::release() {
+    if (auto api = engine_->api()) {
+        if (session_) {
+            api->destroy_session(session_);
+        }
+        session_ = 0;
     }
 }
 }

@@ -20,11 +20,13 @@
 #define _FCITX_RIMEENGINE_H_
 
 #include <fcitx-config/configuration.h>
+#include <fcitx/action.h>
 #include <fcitx/addonfactory.h>
 #include <fcitx/addonmanager.h>
 #include <fcitx/inputcontextproperty.h>
 #include <fcitx/inputmethodengine.h>
 #include <fcitx/instance.h>
+#include <fcitx/menu.h>
 #include <memory>
 #include <rime_api.h>
 
@@ -39,6 +41,8 @@ public:
     Instance *instance() { return instance_; }
     void activate(const InputMethodEntry &entry,
                   InputContextEvent &event) override;
+    void deactivate(const InputMethodEntry &entry,
+                    InputContextEvent &event) override;
     void keyEvent(const InputMethodEntry &entry, KeyEvent &keyEvent) override;
     void reloadConfig() override;
     void reset(const InputMethodEntry &entry,
@@ -46,7 +50,9 @@ public:
     void save() override;
     auto &factory() { return factory_; }
 
-    void updateUI(InputContext *inputContext);
+    void updateAction(InputContext *inputContext) {
+        imAction_->update(inputContext);
+    }
 
     std::string subMode(const InputMethodEntry &, InputContext &) override;
 
@@ -66,6 +72,12 @@ private:
     rime_api_t *api_;
     bool firstRun_ = true;
     FactoryFor<RimeState> factory_;
+
+    std::unique_ptr<Action> imAction_;
+    SimpleAction deployAction_;
+    SimpleAction syncAction_;
+
+    Menu imMenu_;
 
     FCITX_ADDON_DEPENDENCY_LOADER(notifications, instance_->addonManager());
 };

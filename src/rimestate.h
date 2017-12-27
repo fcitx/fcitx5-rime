@@ -35,6 +35,7 @@ public:
     bool getStatus(RimeStatus *status);
     void updatePreedit(InputContext *ic, const RimeContext &context);
     void updateUI(InputContext *ic, bool keyRelease);
+    void release();
 
 private:
     RimeEngine *engine_;

@@ -4,14 +4,13 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
-# Bon Keun Seo <scobyseo@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2017-12-12 09:52-0800\n"
+"POT-Creation-Date: 2017-12-28 00:01-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Bon Keun Seo <scobyseo@gmail.com>, 2017\n"
+"Last-Translator: csslayer <wengxt@gmail.com>, 2017\n"
 "Language-Team: Korean (https://www.transifex.com/fcitx/teams/12005/ko/)\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -19,48 +18,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/fcitx-rime.c:147 src/fcitx-rime.c:148
+#: src/rimeengine.cpp:106
 msgid "Deploy"
 msgstr "배치"
 
-#: src/fcitx-rime.c:517
-msgid "English"
-msgstr "영어"
-
-#: src/fcitx-rime.c:69 src/fcitx-rime.c:127 src/fcitx-rime.conf.in:3
-#: src/rime.conf.in:3 src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:237 src/rime.conf.in:3 src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "Rime"
 
-#: src/fcitx-rime.conf.in:4 src/rime-addon.conf.in:4
+#: src/rime-addon.conf.in:4
 msgid "Rime Wrapper For Fcitx"
 msgstr "Fcitx Rime 입력기"
 
-#: src/fcitx-rime.c:63
+#: src/rimeengine.cpp:229
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr ""
 "Rime에 오류가 발생했습니다. 자세한 내용은 /tmp/rime.fcitx.ERROR을 참조하세요."
 
-#: src/fcitx-rime.c:61
+#: src/rimeengine.cpp:227
 msgid "Rime is ready."
 msgstr "Rime이 준비되었습니다."
 
-#: src/fcitx-rime.c:59
+#: src/rimeengine.cpp:225
 msgid "Rime is under maintenance ..."
 msgstr "Rime은 관리 중입니다..."
 
-#: src/fcitx-rime.c:171
-msgid "Schema List"
-msgstr "스키마 목록"
-
-#: src/fcitx-rime.c:156 src/fcitx-rime.c:157
+#: src/rimeengine.cpp:125
 msgid "Synchronize"
 msgstr "동기화"
 
-#: src/rime.conf.in:4
-msgid "fcitx-rime"
-msgstr "fcitx-rime"
-
-#: src/rime.conf.in:4
-msgid "rime"
-msgstr "rime"
+#: src/rimeengine.cpp:124
+msgid "rime-sync"
+msgstr ""

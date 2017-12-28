@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2017-12-12 09:52-0800\n"
+"POT-Creation-Date: 2017-12-28 00:01-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2017\n"
 "Language-Team: Catalan (https://www.transifex.com/fcitx/teams/12005/ca/)\n"
@@ -19,47 +19,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/fcitx-rime.c:147 src/fcitx-rime.c:148
+#: src/rimeengine.cpp:106
 msgid "Deploy"
 msgstr "Desplega"
 
-#: src/fcitx-rime.c:517
-msgid "English"
-msgstr "Anglès"
-
-#: src/fcitx-rime.c:69 src/fcitx-rime.c:127 src/fcitx-rime.conf.in:3
-#: src/rime.conf.in:3 src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:237 src/rime.conf.in:3 src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "Rime"
 
-#: src/fcitx-rime.conf.in:4 src/rime-addon.conf.in:4
+#: src/rime-addon.conf.in:4
 msgid "Rime Wrapper For Fcitx"
 msgstr "Contenidor rime per a fcitx"
 
-#: src/fcitx-rime.c:63
+#: src/rimeengine.cpp:229
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr "Rime ha trobat un error. Vegeu /tmp/rime.fcitx.ERROR per als detalls."
 
-#: src/fcitx-rime.c:61
+#: src/rimeengine.cpp:227
 msgid "Rime is ready."
 msgstr "Rime està preparat."
 
-#: src/fcitx-rime.c:59
+#: src/rimeengine.cpp:225
 msgid "Rime is under maintenance ..."
 msgstr "Rime estar sota manteniment ..."
 
-#: src/fcitx-rime.c:171
-msgid "Schema List"
-msgstr "Llista d'esquemes"
-
-#: src/fcitx-rime.c:156 src/fcitx-rime.c:157
+#: src/rimeengine.cpp:125
 msgid "Synchronize"
 msgstr "Sincronitza"
 
-#: src/rime.conf.in:4
-msgid "fcitx-rime"
-msgstr "fcitx-rime"
-
-#: src/rime.conf.in:4
-msgid "rime"
-msgstr "rime"
+#: src/rimeengine.cpp:124
+msgid "rime-sync"
+msgstr ""

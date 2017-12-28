@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2017-12-12 09:52-0800\n"
+"POT-Creation-Date: 2017-12-28 00:01-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: csslayer <wengxt@gmail.com>, 2017\n"
 "Language-Team: Turkish (https://www.transifex.com/fcitx/teams/12005/tr/)\n"
@@ -18,49 +18,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/fcitx-rime.c:147 src/fcitx-rime.c:148
+#: src/rimeengine.cpp:106
 msgid "Deploy"
 msgstr "Dağıt"
 
-#: src/fcitx-rime.c:517
-msgid "English"
-msgstr "İngilizce"
-
-#: src/fcitx-rime.c:69 src/fcitx-rime.c:127 src/fcitx-rime.conf.in:3
-#: src/rime.conf.in:3 src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:237 src/rime.conf.in:3 src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "Rime"
 
-#: src/fcitx-rime.conf.in:4 src/rime-addon.conf.in:4
+#: src/rime-addon.conf.in:4
 msgid "Rime Wrapper For Fcitx"
 msgstr "Fcitx için Rime Wrapper"
 
-#: src/fcitx-rime.c:63
+#: src/rimeengine.cpp:229
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr ""
 "Rime bir hatayla karşılaştı. Detaylar için  /tmp/rime.fcitx.ERROR  yoluna "
 "bakın."
 
-#: src/fcitx-rime.c:61
+#: src/rimeengine.cpp:227
 msgid "Rime is ready."
 msgstr "Rime hazır."
 
-#: src/fcitx-rime.c:59
+#: src/rimeengine.cpp:225
 msgid "Rime is under maintenance ..."
 msgstr "Rime bakımda..."
 
-#: src/fcitx-rime.c:171
-msgid "Schema List"
-msgstr "Şema Listesi"
-
-#: src/fcitx-rime.c:156 src/fcitx-rime.c:157
+#: src/rimeengine.cpp:125
 msgid "Synchronize"
 msgstr "Eşitleme"
 
-#: src/rime.conf.in:4
-msgid "fcitx-rime"
-msgstr ""
-
-#: src/rime.conf.in:4
-msgid "rime"
+#: src/rimeengine.cpp:124
+msgid "rime-sync"
 msgstr ""

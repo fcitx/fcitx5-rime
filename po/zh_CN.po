@@ -4,13 +4,14 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
+# Mingcong Bai <jeffbai@aosc.xyz>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2017-12-28 00:01-0800\n"
+"POT-Creation-Date: 2018-02-06 00:01-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: csslayer <wengxt@gmail.com>, 2017\n"
+"Last-Translator: Mingcong Bai <jeffbai@aosc.xyz>, 2018\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/fcitx/teams/12005/"
 "zh_CN/)\n"
 "Language: zh_CN\n"
@@ -49,4 +50,4 @@ msgstr "同步"
 
 #: src/rimeengine.cpp:124
 msgid "rime-sync"
-msgstr ""
+msgstr "rime-sync"

@@ -20,6 +20,8 @@
 #define _FCITX_RIMEENGINE_H_
 
 #include <fcitx-config/configuration.h>
+#include <fcitx-utils/eventdispatcher.h>
+#include <fcitx-utils/log.h>
 #include <fcitx/action.h>
 #include <fcitx/addonfactory.h>
 #include <fcitx/addonmanager.h>
@@ -69,6 +71,7 @@ private:
                                         const char *message_value);
 
     Instance *instance_;
+    EventDispatcher eventDispatcher_;
     rime_api_t *api_;
     bool firstRun_ = true;
     FactoryFor<RimeState> factory_;
@@ -89,5 +92,10 @@ public:
     }
 };
 } // namespace fcitx
+
+FCITX_DECLARE_LOG_CATEGORY(rime);
+
+#define RIME_DEBUG() FCITX_LOGC(rime, Debug)
+#define RIME_ERROR() FCITX_LOGC(rime, Error)
 
 #endif // _FCITX_RIMEENGINE_H_

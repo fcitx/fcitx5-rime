@@ -21,6 +21,7 @@
 #include "notifications_public.h"
 #include "rimestate.h"
 #include <cstring>
+#include <fcitx-utils/event.h>
 #include <fcitx-utils/fs.h>
 #include <fcitx-utils/i18n.h>
 #include <fcitx-utils/log.h>
@@ -31,6 +32,8 @@
 #include <fcitx/inputpanel.h>
 #include <fcitx/userinterfacemanager.h>
 #include <rime_api.h>
+
+FCITX_DEFINE_LOG_CATEGORY(rime, "rime");
 
 namespace fcitx {
 
@@ -102,6 +105,7 @@ RimeEngine::RimeEngine(Instance *instance)
     imAction_ = std::make_unique<IMAction>(this);
     instance_->userInterfaceManager().registerAction("rime-im",
                                                      imAction_.get());
+    eventDispatcher_.attach(&instance_->eventLoop());
     deployAction_.setIcon("rime-deploy");
     deployAction_.setShortText(_("Deploy"));
     deployAction_.connect<SimpleAction::Activated>([this](InputContext *ic) {
@@ -137,8 +141,12 @@ RimeEngine::RimeEngine(Instance *instance)
 
 RimeEngine::~RimeEngine() {
     factory_.unregister();
-    if (api_) {
-        api_->finalize();
+    try {
+        if (api_) {
+            api_->finalize();
+        }
+    } catch (const std::exception &e) {
+        RIME_ERROR() << e.what();
     }
 }
 
@@ -147,10 +155,14 @@ void RimeEngine::rimeStart(bool fullcheck) {
         return;
     }
 
-    auto userDir =
-        StandardPath::global().userDirectory(StandardPath::Type::PkgData) +
-        "/rime";
-    fs::makePath(userDir);
+    auto userDir = stringutils::joinPath(
+        StandardPath::global().userDirectory(StandardPath::Type::PkgData),
+        "rime");
+    if (!fs::makePath(userDir)) {
+        if (fs::isdir(userDir)) {
+            RIME_ERROR() << "Failed to create user directory: " << userDir;
+        }
+    }
     const char *sharedDataDir = RIME_DATA_DIR;
 
     RIME_STRUCT(RimeTraits, fcitx_rime_traits);
@@ -172,7 +184,11 @@ void RimeEngine::rimeStart(bool fullcheck) {
 void RimeEngine::reloadConfig() {
     factory_.unregister();
     if (api_) {
-        api_->finalize();
+        try {
+            api_->finalize();
+        } catch (const std::exception &e) {
+            RIME_ERROR() << e.what();
+        }
     }
     rimeStart(false);
     instance_->inputContextManager().registerProperty("rimeState", &factory_);
@@ -211,31 +227,38 @@ void RimeEngine::reset(const InputMethodEntry &, InputContextEvent &event) {
 
 void RimeEngine::save() {}
 
-void RimeEngine::rimeNotificationHandler(void *context, RimeSessionId,
+void RimeEngine::rimeNotificationHandler(void *context, RimeSessionId session,
                                          const char *messageType,
                                          const char *messageValue) {
+    RIME_DEBUG() << "Notification: " << session << " " << messageType << " "
+                 << messageValue;
     RimeEngine *that = static_cast<RimeEngine *>(context);
-    auto notifications = that->notifications();
-    if (!notifications) {
-        return;
-    }
-    const char *message = nullptr;
-    if (!strcmp(messageType, "deploy")) {
-        if (!strcmp(messageValue, "start")) {
-            message = _("Rime is under maintenance ...");
-        } else if (!strcmp(messageValue, "success")) {
-            message = _("Rime is ready.");
-        } else if (!strcmp(messageValue, "failure")) {
-            message = _("Rime has encountered an error. "
-                        "See /tmp/rime.fcitx.ERROR for details.");
-        }
-    }
+    that->eventDispatcher_.schedule(
+        [that, messageType = std::string(messageType),
+         messageValue = std::string(messageValue)]() {
+            auto notifications = that->notifications();
+            if (!notifications) {
+                return;
+            }
+            const char *message = nullptr;
+            if (messageType == "deploy") {
+                if (messageValue == "start") {
+                    message = _("Rime is under maintenance. It may take a few "
+                                "seconds. Please wait until it is finished...");
+                } else if (messageValue == "success") {
+                    message = _("Rime is ready.");
+                } else if (messageValue == "failure") {
+                    message = _("Rime has encountered an error. "
+                                "See /tmp/rime.fcitx.ERROR for details.");
+                }
+            }
 
-    if (message) {
-        notifications->call<INotifications::showTip>("fcitx-rime-deploy",
-                                                     "fcitx", "rime-deploy",
-                                                     _("Rime"), message, -1);
-    }
+            if (message) {
+                notifications->call<INotifications::showTip>(
+                    "fcitx-rime-deploy", "fcitx", "rime-deploy", _("Rime"),
+                    message, -1);
+            }
+        });
 }
 
 RimeState *RimeEngine::state(InputContext *ic) {
@@ -255,6 +278,6 @@ std::string RimeEngine::subMode(const InputMethodEntry &, InputContext &ic) {
     }
     return result;
 }
-}
+} // namespace fcitx
 
 FCITX_ADDON_FACTORY(fcitx::RimeEngineFactory)

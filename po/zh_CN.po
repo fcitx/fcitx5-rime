@@ -5,12 +5,13 @@
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
 # Mingcong Bai <jeffbai@aosc.xyz>, 2018
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2018-02-06 00:01-0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2019-11-15 00:01-0800\n"
+"PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Mingcong Bai <jeffbai@aosc.xyz>, 2018\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/fcitx/teams/12005/"
 "zh_CN/)\n"
@@ -20,11 +21,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/rimeengine.cpp:106
+#: src/rimeengine.cpp:110
 msgid "Deploy"
 msgstr "重新部署"
 
-#: src/rimeengine.cpp:237 src/rime.conf.in:3 src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:258 src/rime.conf.in:3 src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "中州韻"
 
@@ -32,22 +33,24 @@ msgstr "中州韻"
 msgid "Rime Wrapper For Fcitx"
 msgstr "Fcitx 的中州韻封装"
 
-#: src/rimeengine.cpp:229
+#: src/rimeengine.cpp:251
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr "Rime 出现了一个错误。请参阅/tmp/rime.fcitx.ERROR中细节。"
 
-#: src/rimeengine.cpp:227
+#: src/rimeengine.cpp:249
 msgid "Rime is ready."
 msgstr "Rime 就绪。"
 
-#: src/rimeengine.cpp:225
-msgid "Rime is under maintenance ..."
-msgstr "Rime 正在维护中..."
+#: src/rimeengine.cpp:246
+msgid ""
+"Rime is under maintenance. It may take a few seconds. Please wait until it "
+"is finished..."
+msgstr ""
 
-#: src/rimeengine.cpp:125
+#: src/rimeengine.cpp:129
 msgid "Synchronize"
 msgstr "同步"
 
-#: src/rimeengine.cpp:124
+#: src/rimeengine.cpp:128
 msgid "rime-sync"
 msgstr "rime-sync"

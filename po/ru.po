@@ -4,12 +4,13 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2017-12-28 00:01-0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2019-11-15 00:01-0800\n"
+"PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: csslayer <wengxt@gmail.com>, 2017\n"
 "Language-Team: Russian (https://www.transifex.com/fcitx/teams/12005/ru/)\n"
 "Language: ru\n"
@@ -20,11 +21,11 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: src/rimeengine.cpp:106
+#: src/rimeengine.cpp:110
 msgid "Deploy"
 msgstr "Развернуть"
 
-#: src/rimeengine.cpp:237 src/rime.conf.in:3 src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:258 src/rime.conf.in:3 src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "Rime"
 
@@ -32,22 +33,24 @@ msgstr "Rime"
 msgid "Rime Wrapper For Fcitx"
 msgstr "Обертка Rime для Fcitx"
 
-#: src/rimeengine.cpp:229
+#: src/rimeengine.cpp:251
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr "Обнаружена ошибка Rime. Подробности в файле /tmp/rime.fcitx.ERROR."
 
-#: src/rimeengine.cpp:227
+#: src/rimeengine.cpp:249
 msgid "Rime is ready."
 msgstr "Rime готов."
 
-#: src/rimeengine.cpp:225
-msgid "Rime is under maintenance ..."
-msgstr "Rime перегружен..."
+#: src/rimeengine.cpp:246
+msgid ""
+"Rime is under maintenance. It may take a few seconds. Please wait until it "
+"is finished..."
+msgstr ""
 
-#: src/rimeengine.cpp:125
+#: src/rimeengine.cpp:129
 msgid "Synchronize"
 msgstr "Синхронизировать"
 
-#: src/rimeengine.cpp:124
+#: src/rimeengine.cpp:128
 msgid "rime-sync"
 msgstr ""

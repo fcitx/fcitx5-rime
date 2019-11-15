@@ -4,12 +4,13 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2017-12-28 00:01-0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2019-11-15 00:01-0800\n"
+"PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: csslayer <wengxt@gmail.com>, 2017\n"
 "Language-Team: Vietnamese (https://www.transifex.com/fcitx/teams/12005/vi/)\n"
 "Language: vi\n"
@@ -18,11 +19,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/rimeengine.cpp:106
+#: src/rimeengine.cpp:110
 msgid "Deploy"
 msgstr "Triển khai"
 
-#: src/rimeengine.cpp:237 src/rime.conf.in:3 src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:258 src/rime.conf.in:3 src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "Rime"
 
@@ -30,22 +31,24 @@ msgstr "Rime"
 msgid "Rime Wrapper For Fcitx"
 msgstr "Bộ Wrapper cho Fcitx"
 
-#: src/rimeengine.cpp:229
+#: src/rimeengine.cpp:251
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr "Rime gặp lỗi. Xem ở /tmp/rime.fcitx.ERROR để biết chi tiết."
 
-#: src/rimeengine.cpp:227
+#: src/rimeengine.cpp:249
 msgid "Rime is ready."
 msgstr "Rime sẵn sàng,"
 
-#: src/rimeengine.cpp:225
-msgid "Rime is under maintenance ..."
-msgstr "Rime đang bảo trì..."
+#: src/rimeengine.cpp:246
+msgid ""
+"Rime is under maintenance. It may take a few seconds. Please wait until it "
+"is finished..."
+msgstr ""
 
-#: src/rimeengine.cpp:125
+#: src/rimeengine.cpp:129
 msgid "Synchronize"
 msgstr "Đồng bộ hóa"
 
-#: src/rimeengine.cpp:124
+#: src/rimeengine.cpp:128
 msgid "rime-sync"
 msgstr ""

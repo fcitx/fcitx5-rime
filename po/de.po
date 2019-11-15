@@ -4,14 +4,15 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
-# mar well <m.wellendorf@gmx.de>, 2017
+# mar well <m.wellendorf@gmx.de>, 2018
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2018-06-20 00:02-0700\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: mar well <m.wellendorf@gmx.de>, 2017\n"
+"POT-Creation-Date: 2019-11-15 00:01-0800\n"
+"PO-Revision-Date: 2017-11-23 05:02+0000\n"
+"Last-Translator: mar well <m.wellendorf@gmx.de>, 2018\n"
 "Language-Team: German (https://www.transifex.com/fcitx/teams/12005/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -19,11 +20,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/rimeengine.cpp:106
+#: src/rimeengine.cpp:110
 msgid "Deploy"
 msgstr "Einsetzen"
 
-#: src/rimeengine.cpp:237 src/rime.conf.in:3 src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:258 src/rime.conf.in:3 src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "Rime"
 
@@ -31,24 +32,26 @@ msgstr "Rime"
 msgid "Rime Wrapper For Fcitx"
 msgstr "Rime Wrapper für Fcitx"
 
-#: src/rimeengine.cpp:229
+#: src/rimeengine.cpp:251
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr ""
 "Rime ist auf einen Fehler gestoßen. Bitte sehen Sie für mehr Infos in /tmp/"
 "rime.fcitx.ERROR nach."
 
-#: src/rimeengine.cpp:227
+#: src/rimeengine.cpp:249
 msgid "Rime is ready."
 msgstr "Rime ist bereit."
 
-#: src/rimeengine.cpp:225
-msgid "Rime is under maintenance ..."
-msgstr "Rime wird im Moment gewartet."
+#: src/rimeengine.cpp:246
+msgid ""
+"Rime is under maintenance. It may take a few seconds. Please wait until it "
+"is finished..."
+msgstr ""
 
-#: src/rimeengine.cpp:125
+#: src/rimeengine.cpp:129
 msgid "Synchronize"
 msgstr "Synchronisieren"
 
-#: src/rimeengine.cpp:124
+#: src/rimeengine.cpp:128
 msgid "rime-sync"
 msgstr "rime-sync"

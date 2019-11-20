@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the fcitx5-rime package.
 #
 # Translators:
-# scootergrisen, 2017
+# scootergrisen, 2019
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2019-11-15 00:01-0800\n"
+"POT-Creation-Date: 2019-11-20 00:01-0800\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: scootergrisen, 2017\n"
+"Last-Translator: scootergrisen, 2019\n"
 "Language-Team: Danish (https://www.transifex.com/fcitx/teams/12005/da/)\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -44,6 +44,8 @@ msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
 msgstr ""
+"Rime er ved at blive vedligeholdt. Det kan tage nogle sekunder. Vent "
+"venligst til den er færdig ..."
 
 #: src/rimeengine.cpp:129
 msgid "Synchronize"

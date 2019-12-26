@@ -20,6 +20,7 @@
 #define _FCITX_RIMEENGINE_H_
 
 #include <fcitx-config/configuration.h>
+#include <fcitx-config/iniparser.h>
 #include <fcitx-utils/eventdispatcher.h>
 #include <fcitx-utils/log.h>
 #include <fcitx/action.h>
@@ -35,6 +36,11 @@
 namespace fcitx {
 
 class RimeState;
+
+FCITX_CONFIGURATION(RimeEngineConfig,
+                    Option<bool> showPreeditInApplication{
+                        this, "PreeditInApplicaation",
+                        "Use preedit in application when possible", false};);
 
 class RimeEngine final : public InputMethodEngine {
 public:
@@ -56,7 +62,15 @@ public:
         imAction_->update(inputContext);
     }
 
+    const Configuration *getConfig() const override { return &config_; }
+    void setConfig(const RawConfig &config) override {
+        config_.load(config, true);
+        safeSaveAsIni(config_, "conf/rime.conf");
+        reloadConfig();
+    }
+
     std::string subMode(const InputMethodEntry &, InputContext &) override;
+    const RimeEngineConfig &config() const { return config_; }
 
     rime_api_t *api() { return api_; }
 
@@ -81,6 +95,7 @@ private:
     SimpleAction syncAction_;
 
     Menu imMenu_;
+    RimeEngineConfig config_;
 
     FCITX_ADDON_DEPENDENCY_LOADER(notifications, instance_->addonManager());
 };

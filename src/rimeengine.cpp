@@ -182,6 +182,7 @@ void RimeEngine::rimeStart(bool fullcheck) {
 }
 
 void RimeEngine::reloadConfig() {
+    readAsIni(config_, "conf/rime.conf");
     factory_.unregister();
     if (api_) {
         try {

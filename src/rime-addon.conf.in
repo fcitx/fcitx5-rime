@@ -5,6 +5,7 @@ Category=InputMethod
 Library=rime
 Type=SharedLibrary
 OnDemand=True
+Configurable=True
 
 [Addon/OptionalDependencies]
 0=notifications

@@ -1,7 +1,7 @@
 [InputMethod]
 Name=Rime
 Icon=fcitx-rime
-Label=韻
+Label=ㄓ
 LangCode=zh_TW
 Addon=rime
 Configurable=True

@@ -41,7 +41,7 @@ class RimeCandidateList final : public CandidateList,
                                 public PageableCandidateList {
 public:
     RimeCandidateList(RimeEngine *engine, InputContext *ic,
-                      const RimeMenu &menu);
+                      const RimeContext &context);
 
     const Text &label(int idx) const override {
         checkIndex(idx);

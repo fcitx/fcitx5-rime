@@ -43,21 +43,35 @@ void RimeCandidateWord::select(InputContext *inputContext) const {
 }
 
 RimeCandidateList::RimeCandidateList(RimeEngine *engine, InputContext *ic,
-                                     const RimeMenu &menu)
-    : engine_(engine), ic_(ic), hasPrev_(menu.page_no != 0),
-      hasNext_(!menu.is_last_page) {
+                                     const RimeContext &context)
+    : engine_(engine), ic_(ic), hasPrev_(context.menu.page_no != 0),
+      hasNext_(!context.menu.is_last_page) {
     setPageable(this);
 
+    const auto &menu = context.menu;
+
     int num_select_keys = menu.select_keys ? strlen(menu.select_keys) : 0;
+    bool has_label = RIME_STRUCT_HAS_MEMBER(context, context.select_labels) &&
+                     context.select_labels;
+
     int i;
     for (i = 0; i < menu.num_candidates; ++i) {
         KeySym sym = FcitxKey_None;
+        std::string label;
+        if (i < menu.page_size && has_label) {
+            label = context.select_labels[i];
+        } else if (i < num_select_keys) {
+            label = std::string(1, menu.select_keys[i]);
+        } else {
+            label = std::to_string((i + 1) % 10);
+        }
+        label.append(" ");
+        labels_.emplace_back(label);
+
         if (i < num_select_keys) {
             sym = static_cast<KeySym>(menu.select_keys[i]);
-            labels_.emplace_back(std::string(menu.select_keys[i], 1));
         } else {
             sym = static_cast<KeySym>('0' + (i + 1) % 10);
-            labels_.emplace_back(std::to_string((i + 1) % 10));
         }
         auto candWord = std::make_shared<RimeCandidateWord>(
             engine, menu.candidates[i], sym);

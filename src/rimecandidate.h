@@ -48,9 +48,9 @@ public:
         return labels_[idx];
     }
 
-    std::shared_ptr<const CandidateWord> candidate(int idx) const override {
+    const CandidateWord &candidate(int idx) const override {
         checkIndex(idx);
-        return candidateWords_[idx];
+        return *candidateWords_[idx];
     }
     int size() const override { return candidateWords_.size(); }
 
@@ -85,7 +85,7 @@ private:
     bool hasNext_ = false;
     CandidateLayoutHint layout_ = CandidateLayoutHint::NotSet;
     int cursor_ = -1;
-    std::vector<std::shared_ptr<CandidateWord>> candidateWords_;
+    std::vector<std::unique_ptr<CandidateWord>> candidateWords_;
 };
 } // namespace fcitx
 

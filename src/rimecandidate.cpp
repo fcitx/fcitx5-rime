@@ -73,9 +73,8 @@ RimeCandidateList::RimeCandidateList(RimeEngine *engine, InputContext *ic,
         } else {
             sym = static_cast<KeySym>('0' + (i + 1) % 10);
         }
-        auto candWord = std::make_shared<RimeCandidateWord>(
-            engine, menu.candidates[i], sym);
-        candidateWords_.push_back(candWord);
+        candidateWords_.emplace_back(std::make_unique<RimeCandidateWord>(
+            engine, menu.candidates[i], sym));
 
         if (i == menu.highlighted_candidate_index) {
             cursor_ = i;

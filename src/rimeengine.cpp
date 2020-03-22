@@ -256,8 +256,8 @@ void RimeEngine::rimeNotificationHandler(void *context, RimeSessionId session,
 
             if (message) {
                 notifications->call<INotifications::showTip>(
-                    "fcitx-rime-deploy", "fcitx", "rime-deploy", _("Rime"),
-                    message, -1);
+                    "rime-deploy", "fcitx", "rime-deploy", _("Rime"), message,
+                    -1);
             }
         });
 }

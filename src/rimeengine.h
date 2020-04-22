@@ -39,7 +39,7 @@ class RimeState;
 
 FCITX_CONFIGURATION(RimeEngineConfig,
                     Option<bool> showPreeditInApplication{
-                        this, "PreeditInApplicaation",
+                        this, "PreeditInApplication",
                         "Use preedit in application when possible", false};);
 
 class RimeEngine final : public InputMethodEngine {

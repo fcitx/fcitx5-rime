@@ -4,15 +4,15 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
-# 이정희 <daemul72@gmail.com>, 2020
+# MarongHappy <daemul72@gmail.com>, 2020
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-03-07 16:19-0800\n"
+"POT-Creation-Date: 2020-04-26 00:01-0700\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: 이정희 <daemul72@gmail.com>, 2020\n"
+"Last-Translator: MarongHappy <daemul72@gmail.com>, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/fcitx/teams/12005/ko/)\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -48,6 +48,10 @@ msgid ""
 msgstr ""
 "라임은 유지 보수 중입니다. 몇 초 정도 걸릴 수 있습니다. 끝날 때까지 기다려 주"
 "십시오..."
+
+#: src/rimeengine.h:43
+msgid "Show preedit within application"
+msgstr ""
 
 #: src/rimeengine.cpp:129
 msgid "Synchronize"

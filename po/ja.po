@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2019-11-15 00:01-0800\n"
+"POT-Creation-Date: 2020-04-26 00:01-0700\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: csslayer <wengxt@gmail.com>, 2017\n"
 "Language-Team: Japanese (https://www.transifex.com/fcitx/teams/12005/ja/)\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Deploy"
 msgstr "デプロイ"
 
-#: src/rimeengine.cpp:258 src/rime.conf.in:3 src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:259 src/rime.conf.in:3 src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "Rime"
 
@@ -31,20 +31,24 @@ msgstr "Rime"
 msgid "Rime Wrapper For Fcitx"
 msgstr "Fcitx 用 Rime ラッパー"
 
-#: src/rimeengine.cpp:251
+#: src/rimeengine.cpp:252
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr ""
 "Rimeでエラーが起こりました。より詳しくは /tmp/rime.fcitx.ERROR を見てくださ"
 "い。"
 
-#: src/rimeengine.cpp:249
+#: src/rimeengine.cpp:250
 msgid "Rime is ready."
 msgstr "Rimeの準備ができました。"
 
-#: src/rimeengine.cpp:246
+#: src/rimeengine.cpp:247
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
+msgstr ""
+
+#: src/rimeengine.h:43
+msgid "Show preedit within application"
 msgstr ""
 
 #: src/rimeengine.cpp:129

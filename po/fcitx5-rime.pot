@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2019-11-15 00:01-0800\n"
+"POT-Creation-Date: 2020-04-26 00:01-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "Deploy"
 msgstr ""
 
-#: src/rimeengine.cpp:258 src/rime.conf.in:3 src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:259 src/rime.conf.in:3 src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr ""
 
@@ -27,18 +27,22 @@ msgstr ""
 msgid "Rime Wrapper For Fcitx"
 msgstr ""
 
-#: src/rimeengine.cpp:251
+#: src/rimeengine.cpp:252
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr ""
 
-#: src/rimeengine.cpp:249
+#: src/rimeengine.cpp:250
 msgid "Rime is ready."
 msgstr ""
 
-#: src/rimeengine.cpp:246
+#: src/rimeengine.cpp:247
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
+msgstr ""
+
+#: src/rimeengine.h:43
+msgid "Show preedit within application"
 msgstr ""
 
 #: src/rimeengine.cpp:129

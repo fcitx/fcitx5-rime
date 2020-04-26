@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-04-02 00:02-0700\n"
+"POT-Creation-Date: 2020-04-26 00:01-0700\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: csslayer <wengxt@gmail.com>, 2020\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/fcitx/teams/12005/"
@@ -46,6 +46,10 @@ msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
 msgstr "Rime 正在进行维护程序。可能需要几秒钟。请等待完成……"
+
+#: src/rimeengine.h:43
+msgid "Show preedit within application"
+msgstr ""
 
 #: src/rimeengine.cpp:129
 msgid "Synchronize"

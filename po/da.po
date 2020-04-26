@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2019-11-20 00:01-0800\n"
+"POT-Creation-Date: 2020-04-26 00:01-0700\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: scootergrisen, 2019\n"
 "Language-Team: Danish (https://www.transifex.com/fcitx/teams/12005/da/)\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Deploy"
 msgstr "Udsend"
 
-#: src/rimeengine.cpp:258 src/rime.conf.in:3 src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:259 src/rime.conf.in:3 src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "Rime"
 
@@ -31,21 +31,25 @@ msgstr "Rime"
 msgid "Rime Wrapper For Fcitx"
 msgstr "Rime-wrapper til Fcitx"
 
-#: src/rimeengine.cpp:251
+#: src/rimeengine.cpp:252
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr "Rime stødte på en fejl. Se /tmp/rime.fcitx.ERROR for detaljer."
 
-#: src/rimeengine.cpp:249
+#: src/rimeengine.cpp:250
 msgid "Rime is ready."
 msgstr "Rime er klar."
 
-#: src/rimeengine.cpp:246
+#: src/rimeengine.cpp:247
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
 msgstr ""
 "Rime er ved at blive vedligeholdt. Det kan tage nogle sekunder. Vent "
 "venligst til den er færdig ..."
+
+#: src/rimeengine.h:43
+msgid "Show preedit within application"
+msgstr ""
 
 #: src/rimeengine.cpp:129
 msgid "Synchronize"

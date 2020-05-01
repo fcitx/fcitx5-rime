@@ -22,6 +22,7 @@
 #include <fcitx-config/configuration.h>
 #include <fcitx-config/iniparser.h>
 #include <fcitx-utils/eventdispatcher.h>
+#include <fcitx-utils/i18n.h>
 #include <fcitx-utils/log.h>
 #include <fcitx/action.h>
 #include <fcitx/addonfactory.h>

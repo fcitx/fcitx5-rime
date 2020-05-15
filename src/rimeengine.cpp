@@ -196,8 +196,8 @@ void RimeEngine::deactivate(const InputMethodEntry &entry,
 }
 void RimeEngine::keyEvent(const InputMethodEntry &entry, KeyEvent &event) {
     FCITX_UNUSED(entry);
-    FCITX_LOG(Debug) << "Rime receive key: " << event.key() << " "
-                     << event.isRelease();
+    RIME_DEBUG() << "Rime receive key: " << event.rawKey() << " "
+                 << event.isRelease();
     auto inputContext = event.inputContext();
     auto state = inputContext->propertyFor(&factory_);
     state->keyEvent(event);

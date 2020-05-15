@@ -56,11 +56,20 @@ void RimeState::keyEvent(KeyEvent &event) {
     if (!session_) {
         return;
     }
-    uint32_t states = event.key().states();
-    if (event.isRelease()) {
-        states |= (1 << 30);
+    auto states = event.rawKey().states() &
+                  KeyStates{KeyState::Mod1, KeyState::CapsLock, KeyState::Shift,
+                            KeyState::Ctrl, KeyState::Super};
+    if (states.test(KeyState::Super)) {
+        states.unset(KeyState::Super);
+        // IBus uses virtual super mask.
+        states |= KeyState::Super2;
     }
-    auto result = api->process_key(session_, event.key().sym(), states);
+    uint32_t intStates = states;
+    if (event.isRelease()) {
+        // IBUS_RELEASE_MASK
+        intStates |= (1 << 30);
+    }
+    auto result = api->process_key(session_, event.rawKey().sym(), intStates);
 
     auto ic = event.inputContext();
     RIME_STRUCT(RimeCommit, commit);

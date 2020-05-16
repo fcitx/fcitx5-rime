@@ -2,7 +2,7 @@
 Name=Rime
 Comment=Rime Wrapper For Fcitx
 Category=InputMethod
-Library=rime
+Library=export:rime
 Type=SharedLibrary
 OnDemand=True
 Configurable=True

@@ -10,6 +10,7 @@
 #include <fcitx-config/iniparser.h>
 #include <fcitx-utils/eventdispatcher.h>
 #include <fcitx-utils/i18n.h>
+#include <fcitx-utils/library.h>
 #include <fcitx-utils/log.h>
 #include <fcitx/action.h>
 #include <fcitx/addonfactory.h>
@@ -25,10 +26,18 @@ namespace fcitx {
 
 class RimeState;
 
-FCITX_CONFIGURATION(RimeEngineConfig,
-                    Option<bool> showPreeditInApplication{
-                        this, "PreeditInApplication",
-                        _("Show preedit within application"), false};);
+FCITX_CONFIGURATION(
+    RimeEngineConfig,
+    Option<bool> showPreeditInApplication{this, "PreeditInApplication",
+                                          _("Show preedit within application"),
+                                          false};
+    Option<bool> autoloadPlugins{this, "AutoloadPlugins",
+                                 _("Load available plugins automatically"),
+                                 false};
+    Option<std::vector<std::string>> plugins{this, "Plugins", _("Plugins"),
+                                             std::vector<std::string>()};
+    Option<std::vector<std::string>> modules{this, "Modules", _("Modules"),
+                                             std::vector<std::string>()};);
 
 class RimeEngine final : public InputMethodEngine {
 public:
@@ -86,6 +95,8 @@ private:
     RimeEngineConfig config_;
 
     FCITX_ADDON_DEPENDENCY_LOADER(notifications, instance_->addonManager());
+
+    std::unordered_map<std::string, Library> pluginPool_;
 };
 
 class RimeEngineFactory : public AddonFactory {

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-05-17 00:01-0700\n"
+"POT-Creation-Date: 2020-05-20 00:02-0700\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: MarongHappy <daemul72@gmail.com>, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/fcitx/teams/12005/ko/)\n"
@@ -26,15 +26,15 @@ msgstr "배치"
 
 #: src/rimeengine.h:35
 msgid "Load available plugins automatically"
-msgstr ""
+msgstr "사용 가능한 플러그인 자동으로 불러오기"
 
 #: src/rimeengine.h:39
 msgid "Modules"
-msgstr ""
+msgstr "모듈"
 
 #: src/rimeengine.h:37
 msgid "Plugins"
-msgstr ""
+msgstr "플러그인"
 
 #: src/rimeengine.cpp:309 src/rime.conf.in:3 src/rime-addon.conf.in:3
 msgid "Rime"
@@ -63,7 +63,7 @@ msgstr ""
 
 #: src/rimeengine.h:32
 msgid "Show preedit within application"
-msgstr ""
+msgstr "응용프로그램 내에서 프리에디트 표시"
 
 #: src/rimeengine.cpp:117
 msgid "Synchronize"

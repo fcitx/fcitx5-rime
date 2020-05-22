@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-05-17 00:01-0700\n"
+"POT-Creation-Date: 2020-05-22 00:01-0700\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: scootergrisen, 2020\n"
 "Language-Team: Danish (https://www.transifex.com/fcitx/teams/12005/da/)\n"
@@ -25,15 +25,15 @@ msgstr "Udsend"
 
 #: src/rimeengine.h:35
 msgid "Load available plugins automatically"
-msgstr ""
+msgstr "Indlæs tilgængelige plugins automatisk"
 
 #: src/rimeengine.h:39
 msgid "Modules"
-msgstr ""
+msgstr "Moduler"
 
 #: src/rimeengine.h:37
 msgid "Plugins"
-msgstr ""
+msgstr "Plugins"
 
 #: src/rimeengine.cpp:309 src/rime.conf.in:3 src/rime-addon.conf.in:3
 msgid "Rime"

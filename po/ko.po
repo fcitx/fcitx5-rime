@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-05-20 00:02-0700\n"
+"POT-Creation-Date: 2020-06-15 00:01-0700\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: MarongHappy <daemul72@gmail.com>, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/fcitx/teams/12005/ko/)\n"
@@ -63,7 +63,7 @@ msgstr ""
 
 #: src/rimeengine.h:32
 msgid "Show preedit within application"
-msgstr "응용프로그램 내에서 프리에디트 표시"
+msgstr "응용프로그램 내에서 사전편집 표시"
 
 #: src/rimeengine.cpp:117
 msgid "Synchronize"

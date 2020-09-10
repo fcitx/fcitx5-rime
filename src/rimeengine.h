@@ -63,8 +63,10 @@ public:
     void setConfig(const RawConfig &config) override {
         config_.load(config, true);
         safeSaveAsIni(config_, "conf/rime.conf");
-        reloadConfig();
+        updateConfig();
     }
+    void setSubConfig(const std::string &path, const RawConfig &);
+    void updateConfig();
 
     std::string subMode(const InputMethodEntry &, InputContext &) override;
     const RimeEngineConfig &config() const { return config_; }
@@ -80,6 +82,9 @@ private:
                                         RimeSessionId session_id,
                                         const char *message_type,
                                         const char *message_value);
+
+    void deploy();
+    void sync();
 
     Instance *instance_;
     EventDispatcher eventDispatcher_;

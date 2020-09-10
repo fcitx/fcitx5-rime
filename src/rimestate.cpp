@@ -60,7 +60,6 @@ void RimeState::keyEvent(KeyEvent &event) {
                   KeyStates{KeyState::Mod1, KeyState::CapsLock, KeyState::Shift,
                             KeyState::Ctrl, KeyState::Super};
     if (states.test(KeyState::Super)) {
-        states.unset(KeyState::Super);
         // IBus uses virtual super mask.
         states |= KeyState::Super2;
     }

@@ -97,14 +97,7 @@ RimeEngine::RimeEngine(Instance *instance)
     deployAction_.setIcon("rime-deploy");
     deployAction_.setShortText(_("Deploy"));
     deployAction_.connect<SimpleAction::Activated>([this](InputContext *ic) {
-        instance_->inputContextManager().foreach([this](InputContext *ic) {
-            auto state = this->state(ic);
-            state->release();
-            return true;
-        });
-        api_->sync_user_data();
-        api_->finalize();
-        rimeStart(true);
+        deploy();
         auto state = this->state(ic);
         if (ic->hasFocus()) {
             state->updateUI(ic, false);
@@ -117,7 +110,7 @@ RimeEngine::RimeEngine(Instance *instance)
     syncAction_.setShortText(_("Synchronize"));
 
     syncAction_.connect<SimpleAction::Activated>([this](InputContext *ic) {
-        api_->sync_user_data();
+        sync();
         auto state = this->state(ic);
         if (ic->hasFocus()) {
             state->updateUI(ic, false);
@@ -186,6 +179,18 @@ void RimeEngine::rimeStart(bool fullcheck) {
 
 void RimeEngine::reloadConfig() {
     readAsIni(config_, "conf/rime.conf");
+    updateConfig();
+}
+
+void RimeEngine::setSubConfig(const std::string &path, const RawConfig &) {
+    if (path == "deploy") {
+        deploy();
+    } else if (path == "sync") {
+        sync();
+    }
+}
+
+void RimeEngine::updateConfig() {
     factory_.unregister();
     if (api_) {
         try {
@@ -329,6 +334,20 @@ std::string RimeEngine::subMode(const InputMethodEntry &, InputContext &ic) {
     }
     return result;
 }
+
+void RimeEngine::deploy() {
+    instance_->inputContextManager().foreach([this](InputContext *ic) {
+        auto state = this->state(ic);
+        state->release();
+        return true;
+    });
+    api_->sync_user_data();
+    api_->finalize();
+    rimeStart(true);
+}
+
+void RimeEngine::sync() { api_->sync_user_data(); }
+
 } // namespace fcitx
 
 FCITX_ADDON_FACTORY(fcitx::RimeEngineFactory)

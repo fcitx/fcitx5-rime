@@ -260,6 +260,12 @@ void RimeEngine::activate(const InputMethodEntry &, InputContextEvent &event) {
 void RimeEngine::deactivate(const InputMethodEntry &entry,
                             InputContextEvent &event) {
     event.inputContext()->statusArea().clearGroup(StatusGroup::InputMethod);
+    if (event.type() == EventType::InputContextSwitchInputMethod &&
+        *config_.commitWhenDeactivate) {
+        auto inputContext = event.inputContext();
+        auto state = inputContext->propertyFor(&factory_);
+        state->commitPreedit(inputContext);
+    }
     reset(entry, event);
 }
 void RimeEngine::keyEvent(const InputMethodEntry &entry, KeyEvent &event) {

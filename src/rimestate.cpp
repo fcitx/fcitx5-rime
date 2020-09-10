@@ -214,4 +214,17 @@ void RimeState::release() {
         session_ = 0;
     }
 }
+
+void RimeState::commitPreedit(InputContext *ic) {
+    if (auto api = engine_->api()) {
+        RIME_STRUCT(RimeContext, context);
+        if (!api->get_context(session_, &context)) {
+            return;
+        }
+        if (context.commit_text_preview) {
+            ic->commitString(context.commit_text_preview);
+        }
+    }
+}
+
 } // namespace fcitx

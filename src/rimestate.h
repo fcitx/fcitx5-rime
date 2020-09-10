@@ -23,6 +23,7 @@ public:
     void updatePreedit(InputContext *ic, const RimeContext &context);
     void updateUI(InputContext *ic, bool keyRelease);
     void release();
+    void commitPreedit(InputContext *ic);
 
 private:
     RimeEngine *engine_;

@@ -31,6 +31,9 @@ FCITX_CONFIGURATION(
     Option<bool> showPreeditInApplication{this, "PreeditInApplication",
                                           _("Show preedit within application"),
                                           false};
+    Option<bool> commitWhenDeactivate{
+        this, "Commit when deactivate.",
+        _("Commit current text when deactivating."), true};
     Option<bool> autoloadPlugins{this, "AutoloadPlugins",
                                  _("Load available plugins automatically"),
                                  false};

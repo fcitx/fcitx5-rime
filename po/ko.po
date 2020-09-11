@@ -4,15 +4,15 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
-# MarongHappy <daemul72@gmail.com>, 2020
+# JungHee Lee <daemul72@gmail.com>, 2020
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-06-15 00:01-0700\n"
+"POT-Creation-Date: 2020-09-11 00:01-0700\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: MarongHappy <daemul72@gmail.com>, 2020\n"
+"Last-Translator: JungHee Lee <daemul72@gmail.com>, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/fcitx/teams/12005/ko/)\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -20,23 +20,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: src/rimeengine.h:36
+msgid "Commit current text when deactivating."
+msgstr ""
+
 #: src/rimeengine.cpp:98
 msgid "Deploy"
 msgstr "배치"
 
-#: src/rimeengine.h:35
+#: src/rimeengine.h:38
 msgid "Load available plugins automatically"
 msgstr "사용 가능한 플러그인 자동으로 불러오기"
 
-#: src/rimeengine.h:39
+#: src/rimeengine.h:42
 msgid "Modules"
 msgstr "모듈"
 
-#: src/rimeengine.h:37
+#: src/rimeengine.h:40
 msgid "Plugins"
 msgstr "플러그인"
 
-#: src/rimeengine.cpp:309 src/rime.conf.in:3 src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:320 src/rime.conf.in:3 src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "라임"
 
@@ -44,16 +48,16 @@ msgstr "라임"
 msgid "Rime Wrapper For Fcitx"
 msgstr "Fcitx 라임 입력기"
 
-#: src/rimeengine.cpp:302
+#: src/rimeengine.cpp:313
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr ""
 "라임에 오류가 발생했습니다. 자세한 내용은 /tmp/rime.fcitx.ERROR을 참조하세요."
 
-#: src/rimeengine.cpp:300
+#: src/rimeengine.cpp:311
 msgid "Rime is ready."
 msgstr "라임이 준비되었습니다."
 
-#: src/rimeengine.cpp:297
+#: src/rimeengine.cpp:308
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -65,10 +69,10 @@ msgstr ""
 msgid "Show preedit within application"
 msgstr "응용프로그램 내에서 사전편집 표시"
 
-#: src/rimeengine.cpp:117
+#: src/rimeengine.cpp:110
 msgid "Synchronize"
 msgstr "동기화"
 
-#: src/rimeengine.cpp:116
+#: src/rimeengine.cpp:109
 msgid "rime-sync"
 msgstr "라임 동기화"

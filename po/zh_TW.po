@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-05-17 00:01-0700\n"
+"POT-Creation-Date: 2020-09-11 00:01-0700\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: byStarTW (pan93412) <pan93412@gmail.com>, 2019\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/fcitx/teams/12005/"
@@ -21,23 +21,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: src/rimeengine.h:36
+msgid "Commit current text when deactivating."
+msgstr ""
+
 #: src/rimeengine.cpp:98
 msgid "Deploy"
 msgstr "重新部署"
 
-#: src/rimeengine.h:35
+#: src/rimeengine.h:38
 msgid "Load available plugins automatically"
 msgstr ""
 
-#: src/rimeengine.h:39
+#: src/rimeengine.h:42
 msgid "Modules"
 msgstr ""
 
-#: src/rimeengine.h:37
+#: src/rimeengine.h:40
 msgid "Plugins"
 msgstr ""
 
-#: src/rimeengine.cpp:309 src/rime.conf.in:3 src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:320 src/rime.conf.in:3 src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "中州韻"
 
@@ -45,15 +49,15 @@ msgstr "中州韻"
 msgid "Rime Wrapper For Fcitx"
 msgstr "Fcitx 的中州韻封裝"
 
-#: src/rimeengine.cpp:302
+#: src/rimeengine.cpp:313
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr "Rime 遇到了一個錯誤。見 /tmp/rime.fcitx.ERROR 以取得更多資訊。"
 
-#: src/rimeengine.cpp:300
+#: src/rimeengine.cpp:311
 msgid "Rime is ready."
 msgstr "Rime 準備好了。"
 
-#: src/rimeengine.cpp:297
+#: src/rimeengine.cpp:308
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -63,10 +67,10 @@ msgstr "Rime 正在維護中。這可能需要幾秒鐘。請等待完成…"
 msgid "Show preedit within application"
 msgstr ""
 
-#: src/rimeengine.cpp:117
+#: src/rimeengine.cpp:110
 msgid "Synchronize"
 msgstr "同步"
 
-#: src/rimeengine.cpp:116
+#: src/rimeengine.cpp:109
 msgid "rime-sync"
 msgstr "rime-sync"

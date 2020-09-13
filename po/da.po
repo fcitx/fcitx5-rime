@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-09-11 00:01-0700\n"
+"POT-Creation-Date: 2020-09-13 00:02-0700\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: scootergrisen, 2020\n"
 "Language-Team: Danish (https://www.transifex.com/fcitx/teams/12005/da/)\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: src/rimeengine.h:36
 msgid "Commit current text when deactivating."
-msgstr ""
+msgstr "Udfør nuværende tekst når der deaktiveres."
 
 #: src/rimeengine.cpp:98
 msgid "Deploy"

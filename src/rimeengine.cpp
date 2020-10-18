@@ -187,6 +187,8 @@ void RimeEngine::setSubConfig(const std::string &path, const RawConfig &) {
         deploy();
     } else if (path == "sync") {
         sync();
+    } else if (path == "custom_config") {
+        deploy();
     }
 }
 

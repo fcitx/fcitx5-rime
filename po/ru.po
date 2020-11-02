@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-09-11 00:01-0700\n"
+"POT-Creation-Date: 2020-11-02 15:55-0800\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: csslayer <wengxt@gmail.com>, 2017\n"
 "Language-Team: Russian (https://www.transifex.com/fcitx/teams/12005/ru/)\n"
@@ -49,9 +49,17 @@ msgstr "Rime"
 msgid "Rime Wrapper For Fcitx"
 msgstr "Обертка Rime для Fcitx"
 
+#: org.fcitx.fcitx5-rime.metainfo.xml.in:7
+msgid "Rime for Fcitx 5"
+msgstr ""
+
 #: src/rimeengine.cpp:313
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr "Обнаружена ошибка Rime. Подробности в файле /tmp/rime.fcitx.ERROR."
+
+#: org.fcitx.fcitx5-rime.metainfo.xml.in:8
+msgid "Rime input method"
+msgstr ""
 
 #: src/rimeengine.cpp:311
 msgid "Rime is ready."

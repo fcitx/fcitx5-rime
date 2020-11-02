@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-09-11 00:01-0700\n"
+"POT-Creation-Date: 2020-11-02 15:55-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,8 +43,16 @@ msgstr ""
 msgid "Rime Wrapper For Fcitx"
 msgstr ""
 
+#: org.fcitx.fcitx5-rime.metainfo.xml.in:7
+msgid "Rime for Fcitx 5"
+msgstr ""
+
 #: src/rimeengine.cpp:313
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
+msgstr ""
+
+#: org.fcitx.fcitx5-rime.metainfo.xml.in:8
+msgid "Rime input method"
 msgstr ""
 
 #: src/rimeengine.cpp:311

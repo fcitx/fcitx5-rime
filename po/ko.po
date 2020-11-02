@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-09-11 00:01-0700\n"
+"POT-Creation-Date: 2020-11-02 15:55-0800\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: JungHee Lee <daemul72@gmail.com>, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/fcitx/teams/12005/ko/)\n"
@@ -48,10 +48,18 @@ msgstr "라임"
 msgid "Rime Wrapper For Fcitx"
 msgstr "Fcitx 라임 입력기"
 
+#: org.fcitx.fcitx5-rime.metainfo.xml.in:7
+msgid "Rime for Fcitx 5"
+msgstr ""
+
 #: src/rimeengine.cpp:313
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr ""
 "라임에 오류가 발생했습니다. 자세한 내용은 /tmp/rime.fcitx.ERROR을 참조하세요."
+
+#: org.fcitx.fcitx5-rime.metainfo.xml.in:8
+msgid "Rime input method"
+msgstr ""
 
 #: src/rimeengine.cpp:311
 msgid "Rime is ready."

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-11-02 15:55-0800\n"
+"POT-Creation-Date: 2020-11-03 00:02-0800\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: scootergrisen, 2020\n"
 "Language-Team: Danish (https://www.transifex.com/fcitx/teams/12005/da/)\n"
@@ -49,7 +49,7 @@ msgstr "Rime-wrapper til Fcitx"
 
 #: org.fcitx.fcitx5-rime.metainfo.xml.in:7
 msgid "Rime for Fcitx 5"
-msgstr ""
+msgstr "Rime til Fcitx 5"
 
 #: src/rimeengine.cpp:313
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
@@ -57,7 +57,7 @@ msgstr "Rime stødte på en fejl. Se /tmp/rime.fcitx.ERROR for detaljer."
 
 #: org.fcitx.fcitx5-rime.metainfo.xml.in:8
 msgid "Rime input method"
-msgstr ""
+msgstr "Rime-inputmetode"
 
 #: src/rimeengine.cpp:311
 msgid "Rime is ready."

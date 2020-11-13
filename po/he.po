@@ -1,0 +1,83 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the fcitx5-rime package.
+#
+# Translators:
+# Omer I.S. <omeritzicschwartz@gmail.com>, 2020
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fcitx5-rime\n"
+"Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
+"POT-Creation-Date: 2020-11-13 00:02-0800\n"
+"PO-Revision-Date: 2017-11-23 05:02+0000\n"
+"Last-Translator: Omer I.S. <omeritzicschwartz@gmail.com>, 2020\n"
+"Language-Team: Hebrew (https://www.transifex.com/fcitx/teams/12005/he/)\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % "
+"1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;\n"
+
+#: src/rimeengine.h:36
+msgid "Commit current text when deactivating."
+msgstr ""
+
+#: src/rimeengine.cpp:98
+msgid "Deploy"
+msgstr ""
+
+#: src/rimeengine.h:38
+msgid "Load available plugins automatically"
+msgstr ""
+
+#: src/rimeengine.h:42
+msgid "Modules"
+msgstr "מודולים"
+
+#: src/rimeengine.h:40
+msgid "Plugins"
+msgstr "תוספים"
+
+#: src/rimeengine.cpp:320 src/rime.conf.in:3 src/rime-addon.conf.in:3
+msgid "Rime"
+msgstr ""
+
+#: src/rime-addon.conf.in:4
+msgid "Rime Wrapper For Fcitx"
+msgstr ""
+
+#: org.fcitx.fcitx5-rime.metainfo.xml.in:7
+msgid "Rime for Fcitx 5"
+msgstr ""
+
+#: src/rimeengine.cpp:313
+msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
+msgstr ""
+
+#: org.fcitx.fcitx5-rime.metainfo.xml.in:8
+msgid "Rime input method"
+msgstr ""
+
+#: src/rimeengine.cpp:311
+msgid "Rime is ready."
+msgstr ""
+
+#: src/rimeengine.cpp:308
+msgid ""
+"Rime is under maintenance. It may take a few seconds. Please wait until it "
+"is finished..."
+msgstr ""
+
+#: src/rimeengine.h:32
+msgid "Show preedit within application"
+msgstr ""
+
+#: src/rimeengine.cpp:110
+msgid "Synchronize"
+msgstr "סנכרון"
+
+#: src/rimeengine.cpp:109
+msgid "rime-sync"
+msgstr ""

@@ -140,7 +140,7 @@ void RimeEngine::rimeStart(bool fullcheck) {
         StandardPath::global().userDirectory(StandardPath::Type::PkgData),
         "rime");
     if (!fs::makePath(userDir)) {
-        if (fs::isdir(userDir)) {
+        if (!fs::isdir(userDir)) {
             RIME_ERROR() << "Failed to create user directory: " << userDir;
         }
     }

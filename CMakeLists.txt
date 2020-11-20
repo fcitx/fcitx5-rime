@@ -25,9 +25,15 @@ add_definitions(-DFCITX_RIME_VERSION=\"${PROJECT_VERSION}\")
 
 include("${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cmake")
 
+option(ENABLE_GUI "Build Fcitx5 Rime Config GUI Tool" ON)
+
 add_subdirectory(po)
 add_subdirectory(src)
 add_subdirectory(data)
+
+if(ENABLE_GUI)
+    add_subdirectory(gui)
+endif()
 
 fcitx5_translate_desktop_file(org.fcitx.fcitx5-rime.metainfo.xml.in
                               org.fcitx.fcitx5-rime.metainfo.xml XML)
@@ -35,4 +41,3 @@ fcitx5_translate_desktop_file(org.fcitx.fcitx5-rime.metainfo.xml.in
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/org.fcitx.fcitx5-rime.metainfo.xml" DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
-

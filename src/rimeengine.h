@@ -40,7 +40,9 @@ FCITX_CONFIGURATION(
     Option<std::vector<std::string>> plugins{this, "Plugins", _("Plugins"),
                                              std::vector<std::string>()};
     Option<std::vector<std::string>> modules{this, "Modules", _("Modules"),
-                                             std::vector<std::string>()};);
+                                             std::vector<std::string>()};
+    ExternalOption customConfig{this, "Custom Config", _("Custom Config"),
+                                "fcitx://config/addon/rime/custom_config"};);
 
 class RimeEngine final : public InputMethodEngine {
 public:

@@ -259,7 +259,6 @@ void RimeEngine::activate(const InputMethodEntry &, InputContextEvent &event) {
 }
 void RimeEngine::deactivate(const InputMethodEntry &entry,
                             InputContextEvent &event) {
-    event.inputContext()->statusArea().clearGroup(StatusGroup::InputMethod);
     if (event.type() == EventType::InputContextSwitchInputMethod &&
         *config_.commitWhenDeactivate) {
         auto inputContext = event.inputContext();

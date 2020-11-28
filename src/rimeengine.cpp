@@ -136,6 +136,8 @@ void RimeEngine::rimeStart(bool fullcheck) {
         return;
     }
 
+    RIME_DEBUG() << "Rime Start (fullcheck: " << fullcheck << ")";
+
     auto userDir = stringutils::joinPath(
         StandardPath::global().userDirectory(StandardPath::Type::PkgData),
         "rime");
@@ -191,6 +193,7 @@ void RimeEngine::setSubConfig(const std::string &path, const RawConfig &) {
 }
 
 void RimeEngine::updateConfig() {
+    RIME_DEBUG() << "Rime UpdateConfig";
     factory_.unregister();
     if (api_) {
         try {
@@ -341,12 +344,12 @@ std::string RimeEngine::subMode(const InputMethodEntry &, InputContext &ic) {
 }
 
 void RimeEngine::deploy() {
+    RIME_DEBUG() << "Rime Deploy";
     instance_->inputContextManager().foreach([this](InputContext *ic) {
         auto state = this->state(ic);
         state->release();
         return true;
     });
-    api_->sync_user_data();
     api_->finalize();
     rimeStart(true);
 }

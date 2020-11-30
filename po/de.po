@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-11-02 15:55-0800\n"
+"POT-Creation-Date: 2020-12-01 00:02+0100\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: mar well <m.wellendorf@gmx.de>, 2018\n"
 "Language-Team: German (https://www.transifex.com/fcitx/teams/12005/de/)\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Commit current text when deactivating."
 msgstr ""
 
-#: src/rimeengine.cpp:98
+#: src/rimeengine.cpp:99
 msgid "Deploy"
 msgstr "Einsetzen"
 
@@ -40,7 +40,8 @@ msgstr ""
 msgid "Plugins"
 msgstr ""
 
-#: src/rimeengine.cpp:320 src/rime.conf.in:3 src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:324 src/rimeengine.cpp:325 src/rime.conf.in:3
+#: src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "Rime"
 
@@ -48,25 +49,25 @@ msgstr "Rime"
 msgid "Rime Wrapper For Fcitx"
 msgstr "Rime Wrapper für Fcitx"
 
-#: org.fcitx.fcitx5-rime.metainfo.xml.in:7
+#: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:7
 msgid "Rime for Fcitx 5"
 msgstr ""
 
-#: src/rimeengine.cpp:313
+#: src/rimeengine.cpp:317
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr ""
 "Rime ist auf einen Fehler gestoßen. Bitte sehen Sie für mehr Infos in /tmp/"
 "rime.fcitx.ERROR nach."
 
-#: org.fcitx.fcitx5-rime.metainfo.xml.in:8
+#: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:8
 msgid "Rime input method"
 msgstr ""
 
-#: src/rimeengine.cpp:311
+#: src/rimeengine.cpp:315
 msgid "Rime is ready."
 msgstr "Rime ist bereit."
 
-#: src/rimeengine.cpp:308
+#: src/rimeengine.cpp:312
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -76,10 +77,10 @@ msgstr ""
 msgid "Show preedit within application"
 msgstr ""
 
-#: src/rimeengine.cpp:110
+#: src/rimeengine.cpp:111
 msgid "Synchronize"
 msgstr "Synchronisieren"
 
-#: src/rimeengine.cpp:109
-msgid "rime-sync"
-msgstr "rime-sync"
+#: src/rimeengine.cpp:110
+msgid "fcitx-rime-sync"
+msgstr ""

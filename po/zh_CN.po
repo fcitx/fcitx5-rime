@@ -3,14 +3,13 @@
 # This file is distributed under the same license as the fcitx5-rime package.
 #
 # Translators:
-# Mingcong Bai <jeffbai@aosc.xyz>, 2018
 # csslayer <wengxt@gmail.com>, 2020
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-11-02 16:10-0800\n"
+"POT-Creation-Date: 2020-12-01 00:02+0100\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: csslayer <wengxt@gmail.com>, 2020\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/fcitx/teams/12005/"
@@ -25,7 +24,7 @@ msgstr ""
 msgid "Commit current text when deactivating."
 msgstr "取消激活输入法时提交当前文本。"
 
-#: src/rimeengine.cpp:98
+#: src/rimeengine.cpp:99
 msgid "Deploy"
 msgstr "重新部署"
 
@@ -41,7 +40,8 @@ msgstr "模块"
 msgid "Plugins"
 msgstr "插件"
 
-#: src/rimeengine.cpp:320 src/rime.conf.in:3 src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:324 src/rimeengine.cpp:325 src/rime.conf.in:3
+#: src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "中州韻"
 
@@ -49,23 +49,23 @@ msgstr "中州韻"
 msgid "Rime Wrapper For Fcitx"
 msgstr "Fcitx 的中州韻封装"
 
-#: org.fcitx.fcitx5-rime.metainfo.xml.in:7
+#: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:7
 msgid "Rime for Fcitx 5"
 msgstr "Fcitx 5 的中州韻支持"
 
-#: src/rimeengine.cpp:313
+#: src/rimeengine.cpp:317
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr "Rime 出现了一个错误。请参阅/tmp/rime.fcitx.ERROR中细节。"
 
-#: org.fcitx.fcitx5-rime.metainfo.xml.in:8
+#: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:8
 msgid "Rime input method"
 msgstr "中州韻输入法"
 
-#: src/rimeengine.cpp:311
+#: src/rimeengine.cpp:315
 msgid "Rime is ready."
 msgstr "Rime 就绪。"
 
-#: src/rimeengine.cpp:308
+#: src/rimeengine.cpp:312
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -75,10 +75,10 @@ msgstr "Rime 正在进行维护程序。可能需要几秒钟。请等待完成�
 msgid "Show preedit within application"
 msgstr "在程序中显示预编辑文本"
 
-#: src/rimeengine.cpp:110
+#: src/rimeengine.cpp:111
 msgid "Synchronize"
 msgstr "同步"
 
-#: src/rimeengine.cpp:109
-msgid "rime-sync"
-msgstr "rime-sync"
+#: src/rimeengine.cpp:110
+msgid "fcitx-rime-sync"
+msgstr ""

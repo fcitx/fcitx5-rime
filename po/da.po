@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-11-03 00:02-0800\n"
+"POT-Creation-Date: 2020-12-01 00:02+0100\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: scootergrisen, 2020\n"
 "Language-Team: Danish (https://www.transifex.com/fcitx/teams/12005/da/)\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Commit current text when deactivating."
 msgstr "Udfør nuværende tekst når der deaktiveres."
 
-#: src/rimeengine.cpp:98
+#: src/rimeengine.cpp:99
 msgid "Deploy"
 msgstr "Udsend"
 
@@ -39,7 +39,8 @@ msgstr "Moduler"
 msgid "Plugins"
 msgstr "Plugins"
 
-#: src/rimeengine.cpp:320 src/rime.conf.in:3 src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:324 src/rimeengine.cpp:325 src/rime.conf.in:3
+#: src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "Rime"
 
@@ -47,23 +48,23 @@ msgstr "Rime"
 msgid "Rime Wrapper For Fcitx"
 msgstr "Rime-wrapper til Fcitx"
 
-#: org.fcitx.fcitx5-rime.metainfo.xml.in:7
+#: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:7
 msgid "Rime for Fcitx 5"
 msgstr "Rime til Fcitx 5"
 
-#: src/rimeengine.cpp:313
+#: src/rimeengine.cpp:317
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr "Rime stødte på en fejl. Se /tmp/rime.fcitx.ERROR for detaljer."
 
-#: org.fcitx.fcitx5-rime.metainfo.xml.in:8
+#: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:8
 msgid "Rime input method"
 msgstr "Rime-inputmetode"
 
-#: src/rimeengine.cpp:311
+#: src/rimeengine.cpp:315
 msgid "Rime is ready."
 msgstr "Rime er klar."
 
-#: src/rimeengine.cpp:308
+#: src/rimeengine.cpp:312
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -75,10 +76,10 @@ msgstr ""
 msgid "Show preedit within application"
 msgstr "Brug preedit i program"
 
-#: src/rimeengine.cpp:110
+#: src/rimeengine.cpp:111
 msgid "Synchronize"
 msgstr "Synkroniser"
 
-#: src/rimeengine.cpp:109
-msgid "rime-sync"
-msgstr "rime-synk"
+#: src/rimeengine.cpp:110
+msgid "fcitx-rime-sync"
+msgstr ""

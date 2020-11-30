@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-11-29 00:02+0100\n"
+"POT-Creation-Date: 2020-12-01 00:02+0100\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: bruh, 2020\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/fcitx/teams/12005/"
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Commit current text when deactivating."
 msgstr "取消啟用輸入法時提交當前文字。"
 
-#: src/rimeengine.cpp:98
+#: src/rimeengine.cpp:99
 msgid "Deploy"
 msgstr "重新部署"
 
@@ -42,7 +42,8 @@ msgstr "模組"
 msgid "Plugins"
 msgstr "外掛"
 
-#: src/rimeengine.cpp:322 src/rime.conf.in:3 src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:324 src/rimeengine.cpp:325 src/rime.conf.in:3
+#: src/rime-addon.conf.in:3
 msgid "Rime"
 msgstr "中州韻"
 
@@ -54,7 +55,7 @@ msgstr "Fcitx 的中州韻封裝"
 msgid "Rime for Fcitx 5"
 msgstr "Fcitx 5 的中州韻支援"
 
-#: src/rimeengine.cpp:315
+#: src/rimeengine.cpp:317
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr "Rime 遇到了一個錯誤。見 /tmp/rime.fcitx.ERROR 以取得更多資訊。"
 
@@ -62,11 +63,11 @@ msgstr "Rime 遇到了一個錯誤。見 /tmp/rime.fcitx.ERROR 以取得更多�
 msgid "Rime input method"
 msgstr "Rime 輸入法"
 
-#: src/rimeengine.cpp:313
+#: src/rimeengine.cpp:315
 msgid "Rime is ready."
 msgstr "Rime 準備好了。"
 
-#: src/rimeengine.cpp:310
+#: src/rimeengine.cpp:312
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -76,10 +77,10 @@ msgstr "Rime 正在維護中。這可能需要幾秒鐘。請等待完成…"
 msgid "Show preedit within application"
 msgstr "在程式中顯示預編輯字串"
 
-#: src/rimeengine.cpp:110
+#: src/rimeengine.cpp:111
 msgid "Synchronize"
 msgstr "同步"
 
-#: src/rimeengine.cpp:109
-msgid "rime-sync"
-msgstr "rime-sync"
+#: src/rimeengine.cpp:110
+msgid "fcitx-rime-sync"
+msgstr ""

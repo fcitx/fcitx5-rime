@@ -66,17 +66,18 @@ public:
 
     std::string icon(InputContext *ic) const override {
         auto state = engine_->state(ic);
-        std::string result = "rime-disable";
+        std::string result = "fcitx-rime-disable";
         RIME_STRUCT(RimeStatus, status);
         if (state->getStatus(&status)) {
             if (status.is_disabled) {
-                result = "rime-disable";
+                result = "fcitx-rime-disable";
             } else if (status.is_ascii_mode) {
-                result = "rime-latin";
+                result = "fcitx-rime-latin";
             } else if (status.schema_id) {
-                result = stringutils::concat("rime-im-", status.schema_id);
+                result =
+                    stringutils::concat("fcitx-rime-im-", status.schema_id);
             } else {
-                result = "rime-im";
+                result = "fcitx-rime-im";
             }
             engine_->api()->free_status(&status);
         }
@@ -91,10 +92,10 @@ RimeEngine::RimeEngine(Instance *instance)
     : instance_(instance), api_(rime_get_api()),
       factory_([this](InputContext &) { return new RimeState(this); }) {
     imAction_ = std::make_unique<IMAction>(this);
-    instance_->userInterfaceManager().registerAction("rime-im",
+    instance_->userInterfaceManager().registerAction("fcitx-rime-im",
                                                      imAction_.get());
     eventDispatcher_.attach(&instance_->eventLoop());
-    deployAction_.setIcon("rime-deploy");
+    deployAction_.setIcon("fcitx-rime-deploy");
     deployAction_.setShortText(_("Deploy"));
     deployAction_.connect<SimpleAction::Activated>([this](InputContext *ic) {
         deploy();
@@ -103,10 +104,10 @@ RimeEngine::RimeEngine(Instance *instance)
             state->updateUI(ic, false);
         }
     });
-    instance_->userInterfaceManager().registerAction("rime-deploy",
+    instance_->userInterfaceManager().registerAction("fcitx-rime-deploy",
                                                      &deployAction_);
 
-    syncAction_.setIcon(_("rime-sync"));
+    syncAction_.setIcon(_("fcitx-rime-sync"));
     syncAction_.setShortText(_("Synchronize"));
 
     syncAction_.connect<SimpleAction::Activated>([this](InputContext *ic) {
@@ -116,7 +117,8 @@ RimeEngine::RimeEngine(Instance *instance)
             state->updateUI(ic, false);
         }
     });
-    instance_->userInterfaceManager().registerAction("rime-sync", &syncAction_);
+    instance_->userInterfaceManager().registerAction("fcitx-rime-sync",
+                                                     &syncAction_);
     reloadConfig();
 }
 
@@ -319,8 +321,8 @@ void RimeEngine::rimeNotificationHandler(void *context, RimeSessionId session,
 
             if (message) {
                 notifications->call<INotifications::showTip>(
-                    "rime-deploy", _("Rime"), "rime-deploy", _("Rime"), message,
-                    -1);
+                    "fcitx-rime-deploy", _("Rime"), "fcitx-rime-deploy",
+                    _("Rime"), message, -1);
             }
         });
 }

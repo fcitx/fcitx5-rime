@@ -107,7 +107,7 @@ RimeEngine::RimeEngine(Instance *instance)
     instance_->userInterfaceManager().registerAction("fcitx-rime-deploy",
                                                      &deployAction_);
 
-    syncAction_.setIcon(_("fcitx-rime-sync"));
+    syncAction_.setIcon("fcitx-rime-sync");
     syncAction_.setShortText(_("Synchronize"));
 
     syncAction_.connect<SimpleAction::Activated>([this](InputContext *ic) {

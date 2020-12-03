@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-12-01 00:02+0100\n"
+"POT-Creation-Date: 2020-12-04 00:02+0100\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: scootergrisen, 2020\n"
 "Language-Team: Danish (https://www.transifex.com/fcitx/teams/12005/da/)\n"
@@ -79,7 +79,3 @@ msgstr "Brug preedit i program"
 #: src/rimeengine.cpp:111
 msgid "Synchronize"
 msgstr "Synkroniser"
-
-#: src/rimeengine.cpp:110
-msgid "fcitx-rime-sync"
-msgstr ""

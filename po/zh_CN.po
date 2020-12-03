@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-12-01 00:02+0100\n"
+"POT-Creation-Date: 2020-12-04 00:02+0100\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: csslayer <wengxt@gmail.com>, 2020\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/fcitx/teams/12005/"
@@ -78,7 +78,3 @@ msgstr "在程序中显示预编辑文本"
 #: src/rimeengine.cpp:111
 msgid "Synchronize"
 msgstr "同步"
-
-#: src/rimeengine.cpp:110
-msgid "fcitx-rime-sync"
-msgstr ""

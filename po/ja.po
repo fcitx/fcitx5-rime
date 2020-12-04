@@ -4,14 +4,15 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
+# Takuro Onoue <kusanaginoturugi@gmail.com>, 2020
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-12-04 00:02+0100\n"
+"POT-Creation-Date: 2020-12-05 00:03+0100\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: csslayer <wengxt@gmail.com>, 2017\n"
+"Last-Translator: Takuro Onoue <kusanaginoturugi@gmail.com>, 2020\n"
 "Language-Team: Japanese (https://www.transifex.com/fcitx/teams/12005/ja/)\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +22,7 @@ msgstr ""
 
 #: src/rimeengine.h:36
 msgid "Commit current text when deactivating."
-msgstr ""
+msgstr "非アクティブ化するときに現在のテキストをコミットします。"
 
 #: src/rimeengine.cpp:99
 msgid "Deploy"
@@ -29,15 +30,15 @@ msgstr "デプロイ"
 
 #: src/rimeengine.h:38
 msgid "Load available plugins automatically"
-msgstr ""
+msgstr "利用可能なプラグインを自動的にロードする"
 
 #: src/rimeengine.h:42
 msgid "Modules"
-msgstr ""
+msgstr "モジュール"
 
 #: src/rimeengine.h:40
 msgid "Plugins"
-msgstr ""
+msgstr "プラグイン"
 
 #: src/rimeengine.cpp:324 src/rimeengine.cpp:325 src/rime.conf.in:3
 #: src/rime-addon.conf.in:3
@@ -50,7 +51,7 @@ msgstr "Fcitx 用 Rime ラッパー"
 
 #: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:7
 msgid "Rime for Fcitx 5"
-msgstr ""
+msgstr "Rime for Fcitx 5"
 
 #: src/rimeengine.cpp:317
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
@@ -60,7 +61,7 @@ msgstr ""
 
 #: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:8
 msgid "Rime input method"
-msgstr ""
+msgstr "Rime 入力メソッド"
 
 #: src/rimeengine.cpp:315
 msgid "Rime is ready."
@@ -71,10 +72,12 @@ msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
 msgstr ""
+"Rime はメンテナンス中です。数秒かかる場合があります。終了するまでお待ちくださ"
+"い..."
 
 #: src/rimeengine.h:32
 msgid "Show preedit within application"
-msgstr ""
+msgstr "アプリケーション内でプリエディットを表示"
 
 #: src/rimeengine.cpp:111
 msgid "Synchronize"

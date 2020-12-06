@@ -1,6 +1,6 @@
 [InputMethod]
 Name=Rime
-Icon=rime
+Icon=fcitx-rime
 Label=ㄓ
 LangCode=zh_TW
 Addon=rime

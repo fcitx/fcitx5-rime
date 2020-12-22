@@ -337,7 +337,11 @@ std::string RimeEngine::subMode(const InputMethodEntry &, InputContext &ic) {
     std::string result;
     RIME_STRUCT(RimeStatus, status);
     if (rimeState->getStatus(&status)) {
-        if (status.schema_name) {
+        if (status.is_disabled) {
+            result = "\xe2\x8c\x9b";
+        } else if (status.is_ascii_mode) {
+            result = _("Latin Mode");
+        } else if (status.schema_name && status.schema_name[0] != '.') {
             result = status.schema_name;
         }
         api_->free_status(&status);

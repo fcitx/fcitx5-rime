@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-12-06 00:02+0100\n"
+"POT-Creation-Date: 2020-12-22 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: bruh, 2020\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/fcitx/teams/12005/"
@@ -29,6 +29,10 @@ msgstr "取消啟用輸入法時提交當前文字"
 #: src/rimeengine.cpp:99
 msgid "Deploy"
 msgstr "重新部署"
+
+#: src/rimeengine.cpp:343
+msgid "Latin Mode"
+msgstr ""
 
 #: src/rimeengine.h:38
 msgid "Load available plugins automatically"

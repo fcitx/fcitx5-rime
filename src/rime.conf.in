@@ -2,6 +2,6 @@
 Name=Rime
 Icon=fcitx-rime
 Label=ㄓ
-LangCode=zh_TW
+LangCode=zh
 Addon=rime
 Configurable=True

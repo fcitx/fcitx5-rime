@@ -96,6 +96,11 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
     Text preedit;
     Text clientPreedit;
 
+    TextFormatFlags flag;
+    if (engine_->config().showPreeditInApplication.value() &&
+        ic->capabilityFlags().test(CapabilityFlag::Preedit)) {
+        flag = TextFormatFlag::Underline;
+    }
     do {
         if (context.composition.length == 0) {
             break;
@@ -112,11 +117,11 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
         if (context.composition.sel_start > 0) {
             preedit.append(std::string(context.composition.preedit,
                                        context.composition.sel_start),
-                           TextFormatFlag::Underline);
+                           flag);
             if (context.commit_text_preview) {
                 clientPreedit.append(std::string(context.commit_text_preview,
                                                  context.composition.sel_start),
-                                     TextFormatFlag::Underline);
+                                     flag);
             }
         }
 
@@ -126,12 +131,12 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
                 std::string(
                     &context.composition.preedit[context.composition.sel_start],
                     &context.composition.preedit[context.composition.sel_end]),
-                TextFormatFlag::HighLight);
+                flag | TextFormatFlag::HighLight);
             if (context.commit_text_preview) {
                 clientPreedit.append(
                     std::string(&context.commit_text_preview[context.composition
                                                                  .sel_start]),
-                    TextFormatFlag::HighLight);
+                    flag | TextFormatFlag::HighLight);
             }
         }
 
@@ -141,16 +146,16 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
                 std::string(
                     &context.composition.preedit[context.composition.sel_end],
                     &context.composition.preedit[context.composition.length]),
-                TextFormatFlag::Underline);
+                flag);
         }
 
-        preedit.setCursor(context.composition.cursor_pos);
     } while (0);
 
     if (engine_->config().showPreeditInApplication.value() &&
         ic->capabilityFlags().test(CapabilityFlag::Preedit)) {
         ic->inputPanel().setClientPreedit(preedit);
     } else {
+        preedit.setCursor(context.composition.cursor_pos);
         ic->inputPanel().setPreedit(preedit);
         ic->inputPanel().setClientPreedit(clientPreedit);
     }

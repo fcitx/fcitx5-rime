@@ -149,13 +149,13 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
                 flag);
         }
 
+        preedit.setCursor(context.composition.cursor_pos);
     } while (0);
 
     if (engine_->config().showPreeditInApplication.value() &&
         ic->capabilityFlags().test(CapabilityFlag::Preedit)) {
         ic->inputPanel().setClientPreedit(preedit);
     } else {
-        preedit.setCursor(context.composition.cursor_pos);
         ic->inputPanel().setPreedit(preedit);
         ic->inputPanel().setClientPreedit(clientPreedit);
     }

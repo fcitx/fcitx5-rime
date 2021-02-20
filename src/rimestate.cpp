@@ -45,6 +45,22 @@ void RimeState::clear() {
     }
 }
 
+std::string RimeState::subMode() {
+    std::string result;
+    RIME_STRUCT(RimeStatus, status);
+    if (getStatus(&status)) {
+        if (status.is_disabled) {
+            result = "\xe2\x8c\x9b";
+        } else if (status.is_ascii_mode) {
+            result = _("Latin Mode");
+        } else if (status.schema_name && status.schema_name[0] != '.') {
+            result = status.schema_name;
+        }
+        engine_->api()->free_status(&status);
+    }
+    return result;
+}
+
 void RimeState::keyEvent(KeyEvent &event) {
     auto api = engine_->api();
     if (!api || api->is_maintenance_mode()) {
@@ -56,6 +72,8 @@ void RimeState::keyEvent(KeyEvent &event) {
     if (!session_) {
         return;
     }
+
+    lastMode_ = subMode();
     auto states = event.rawKey().states() &
                   KeyStates{KeyState::Mod1, KeyState::CapsLock, KeyState::Shift,
                             KeyState::Ctrl, KeyState::Super};
@@ -201,9 +219,12 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
     bool newEmptyExceptAux = emptyExceptAux(inputPanel);
     // If it's key release and old information is not "empty", do the rest of
     // "reset".
-    if (keyRelease && !emptyExceptAux(inputPanel)) {
+    if (keyRelease && !newEmptyExceptAux) {
         inputPanel.setAuxUp(Text());
         inputPanel.setAuxDown(Text());
+    }
+    if (newEmptyExceptAux && lastMode_ != subMode()) {
+        engine_->instance()->showInputMethodInformation(ic);
     }
 
     if (!keyRelease || !oldEmptyExceptAux || !newEmptyExceptAux) {

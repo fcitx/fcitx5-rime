@@ -24,8 +24,10 @@ public:
     void updateUI(InputContext *ic, bool keyRelease);
     void release();
     void commitPreedit(InputContext *ic);
+    std::string subMode();
 
 private:
+    std::string lastMode_;
     RimeEngine *engine_;
     RimeSessionId session_ = 0;
 };

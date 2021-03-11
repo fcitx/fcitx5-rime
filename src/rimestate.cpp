@@ -61,6 +61,23 @@ std::string RimeState::subMode() {
     return result;
 }
 
+void RimeState::setLatinMode() {
+    auto api = engine_->api();
+    if (!api || api->is_maintenance_mode()) {
+        return;
+    }
+    api->set_option(session_, "ascii_mode", true);
+}
+
+void RimeState::selectSchema(const std::string &schema) {
+    auto api = engine_->api();
+    if (!api || api->is_maintenance_mode()) {
+        return;
+    }
+    api->set_option(session_, "ascii_mode", false);
+    api->select_schema(session_, schema.data());
+}
+
 void RimeState::keyEvent(KeyEvent &event) {
     auto api = engine_->api();
     if (!api || api->is_maintenance_mode()) {
@@ -104,7 +121,13 @@ void RimeState::keyEvent(KeyEvent &event) {
 
 bool RimeState::getStatus(RimeStatus *status) {
     auto api = engine_->api();
-    if (!api || !session_) {
+    if (!api) {
+        return false;
+    }
+    if (!api->find_session(session_)) {
+        session_ = api->create_session();
+    }
+    if (!session_) {
         return false;
     }
     return api->get_status(session_, status);
@@ -225,6 +248,7 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
     }
     if (newEmptyExceptAux && lastMode_ != subMode()) {
         engine_->instance()->showInputMethodInformation(ic);
+        ic->updateUserInterface(UserInterfaceComponent::StatusArea);
     }
 
     if (!keyRelease || !oldEmptyExceptAux || !newEmptyExceptAux) {

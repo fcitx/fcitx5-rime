@@ -25,6 +25,8 @@ public:
     void release();
     void commitPreedit(InputContext *ic);
     std::string subMode();
+    void setLatinMode();
+    void selectSchema(const std::string &schemaId);
 
 private:
     std::string lastMode_;

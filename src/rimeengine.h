@@ -8,6 +8,7 @@
 
 #include <fcitx-config/configuration.h>
 #include <fcitx-config/iniparser.h>
+#include <fcitx-utils/event.h>
 #include <fcitx-utils/eventdispatcher.h>
 #include <fcitx-utils/i18n.h>
 #include <fcitx-utils/library.h>
@@ -15,6 +16,7 @@
 #include <fcitx/action.h>
 #include <fcitx/addonfactory.h>
 #include <fcitx/addonmanager.h>
+#include <fcitx/icontheme.h>
 #include <fcitx/inputcontextproperty.h>
 #include <fcitx/inputmethodengine.h>
 #include <fcitx/instance.h>
@@ -42,7 +44,7 @@ FCITX_CONFIGURATION(
     Option<std::vector<std::string>> modules{this, "Modules", _("Modules"),
                                              std::vector<std::string>()};);
 
-class RimeEngine final : public InputMethodEngine {
+class RimeEngine final : public InputMethodEngineV2 {
 public:
     RimeEngine(Instance *instance);
     ~RimeEngine();
@@ -68,10 +70,12 @@ public:
         safeSaveAsIni(config_, "conf/rime.conf");
         updateConfig();
     }
-    void setSubConfig(const std::string &path, const RawConfig &);
+    void setSubConfig(const std::string &path, const RawConfig &) override;
     void updateConfig();
 
     std::string subMode(const InputMethodEntry &, InputContext &) override;
+    std::string subModeIconImpl(const InputMethodEntry &,
+                                InputContext &) override;
     const RimeEngineConfig &config() const { return config_; }
 
     rime_api_t *api() { return api_; }
@@ -88,7 +92,10 @@ private:
 
     void deploy();
     void sync();
+    void updateSchemaMenu();
+    void notify(const std::string &type, const std::string &value);
 
+    IconTheme theme_;
     Instance *instance_;
     EventDispatcher eventDispatcher_;
     rime_api_t *api_;
@@ -99,12 +106,14 @@ private:
     SimpleAction deployAction_;
     SimpleAction syncAction_;
 
-    Menu imMenu_;
     RimeEngineConfig config_;
 
     FCITX_ADDON_DEPENDENCY_LOADER(notifications, instance_->addonManager());
 
+    std::list<SimpleAction> schemActions_;
+    Menu schemaMenu_;
     std::unordered_map<std::string, Library> pluginPool_;
+    std::unique_ptr<EventSourceTime> timeEvent_;
 };
 
 class RimeEngineFactory : public AddonFactory {

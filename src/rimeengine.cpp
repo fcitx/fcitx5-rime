@@ -52,7 +52,6 @@ public:
 
     std::string longText(InputContext *ic) const override {
         auto state = engine_->state(ic);
-
         std::string result;
         RIME_STRUCT(RimeStatus, status);
         if (state->getStatus(&status)) {
@@ -66,22 +65,13 @@ public:
 
     std::string icon(InputContext *ic) const override {
         auto state = engine_->state(ic);
-        std::string result = "fcitx-rime-disable";
         RIME_STRUCT(RimeStatus, status);
         if (state->getStatus(&status)) {
             if (status.is_disabled) {
-                result = "fcitx-rime-disable";
-            } else if (status.is_ascii_mode) {
-                result = "fcitx-rime-latin";
-            } else if (status.schema_id) {
-                result =
-                    stringutils::concat("fcitx-rime-im-", status.schema_id);
-            } else {
-                result = "fcitx-rime-im";
+                return "fcitx-rime-disabled";
             }
-            engine_->api()->free_status(&status);
         }
-        return result;
+        return "fcitx-rime-im";
     }
 
 private:
@@ -94,6 +84,7 @@ RimeEngine::RimeEngine(Instance *instance)
     imAction_ = std::make_unique<IMAction>(this);
     instance_->userInterfaceManager().registerAction("fcitx-rime-im",
                                                      imAction_.get());
+    imAction_->setMenu(&schemaMenu_);
     eventDispatcher_.attach(&instance_->eventLoop());
     deployAction_.setIcon("fcitx-rime-deploy");
     deployAction_.setShortText(_("Deploy"));
@@ -253,6 +244,7 @@ void RimeEngine::updateConfig() {
 
     rimeStart(false);
     instance_->inputContextManager().registerProperty("rimeState", &factory_);
+    updateSchemaMenu();
 }
 void RimeEngine::activate(const InputMethodEntry &, InputContextEvent &event) {
     event.inputContext()->statusArea().addAction(StatusGroup::InputMethod,
@@ -302,28 +294,40 @@ void RimeEngine::rimeNotificationHandler(void *context, RimeSessionId session,
     that->eventDispatcher_.schedule(
         [that, messageType = std::string(messageType),
          messageValue = std::string(messageValue)]() {
-            auto notifications = that->notifications();
-            if (!notifications) {
-                return;
-            }
-            const char *message = nullptr;
-            if (messageType == "deploy") {
-                if (messageValue == "start") {
-                    message = _("Rime is under maintenance. It may take a few "
-                                "seconds. Please wait until it is finished...");
-                } else if (messageValue == "success") {
-                    message = _("Rime is ready.");
-                } else if (messageValue == "failure") {
-                    message = _("Rime has encountered an error. "
-                                "See /tmp/rime.fcitx.ERROR for details.");
-                }
-            }
+            that->notify(messageType, messageValue);
+        });
+}
 
-            if (message) {
-                notifications->call<INotifications::showTip>(
-                    "fcitx-rime-deploy", _("Rime"), "fcitx-rime-deploy",
-                    _("Rime"), message, -1);
+void RimeEngine::notify(const std::string &messageType,
+                        const std::string &messageValue) {
+    const char *message = nullptr;
+    if (messageType == "deploy") {
+        if (messageValue == "start") {
+            message = _("Rime is under maintenance. It may take a few "
+                        "seconds. Please wait until it is finished...");
+        } else if (messageValue == "success") {
+            message = _("Rime is ready.");
+            updateSchemaMenu();
+        } else if (messageValue == "failure") {
+            message = _("Rime has encountered an error. "
+                        "See /tmp/rime.fcitx.ERROR for details.");
+        }
+    }
+
+    auto notifications = this->notifications();
+    if (message && notifications) {
+        notifications->call<INotifications::showTip>(
+            "fcitx-rime-deploy", _("Rime"), "fcitx-rime-deploy", _("Rime"),
+            message, -1);
+    }
+    timeEvent_ = instance_->eventLoop().addTimeEvent(
+        CLOCK_MONOTONIC, now(CLOCK_MONOTONIC) + 1000000, 0,
+        [this](EventSourceTime *, uint64_t) {
+            if (auto *ic = instance_->lastFocusedInputContext()) {
+                imAction_->update(ic);
+                ic->updateUserInterface(UserInterfaceComponent::StatusArea);
             }
+            return true;
         });
 }
 
@@ -334,6 +338,27 @@ RimeState *RimeEngine::state(InputContext *ic) {
 std::string RimeEngine::subMode(const InputMethodEntry &, InputContext &ic) {
     auto rimeState = state(&ic);
     return rimeState->subMode();
+}
+
+std::string RimeEngine::subModeIconImpl(const InputMethodEntry &,
+                                        InputContext &ic) {
+    std::string result = "fcitx-rime";
+    if (!api_ || !factory_.registered()) {
+        return result;
+    }
+    auto state = this->state(&ic);
+    RIME_STRUCT(RimeStatus, status);
+    if (state->getStatus(&status)) {
+        if (status.is_disabled) {
+            result = "fcitx-rime-disable";
+        } else if (status.is_ascii_mode) {
+            result = "fcitx-rime-latin";
+        } else {
+            result = "fcitx-rime";
+        }
+        api_->free_status(&status);
+    }
+    return result;
 }
 
 void RimeEngine::deploy() {
@@ -348,6 +373,44 @@ void RimeEngine::deploy() {
 }
 
 void RimeEngine::sync() { api_->sync_user_data(); }
+
+void RimeEngine::updateSchemaMenu() {
+    if (!api_) {
+        return;
+    }
+
+    schemActions_.clear();
+    RimeSchemaList list;
+    list.size = 0;
+    if (api_->get_schema_list(&list)) {
+        schemActions_.emplace_back();
+
+        schemActions_.back().setShortText(_("Latin Mode"));
+        schemActions_.back().connect<SimpleAction::Activated>(
+            [this](InputContext *ic) {
+                auto state = ic->propertyFor(&factory_);
+                state->setLatinMode();
+                imAction_->update(ic);
+            });
+        instance_->userInterfaceManager().registerAction(&schemActions_.back());
+        schemaMenu_.addAction(&schemActions_.back());
+        for (size_t i = 0; i < list.size; i++) {
+            schemActions_.emplace_back();
+            std::string schemaId = list.list[i].schema_id;
+            auto &schemaAction = schemActions_.back();
+            schemaAction.setShortText(list.list[i].name);
+            schemaAction.connect<SimpleAction::Activated>(
+                [this, schemaId](InputContext *ic) {
+                    auto state = ic->propertyFor(&factory_);
+                    state->selectSchema(schemaId);
+                    imAction_->update(ic);
+                });
+            instance_->userInterfaceManager().registerAction(&schemaAction);
+            schemaMenu_.addAction(&schemaAction);
+        }
+        api_->free_schema_list(&list);
+    }
+}
 
 } // namespace fcitx
 

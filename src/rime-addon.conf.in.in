@@ -8,6 +8,9 @@ Type=SharedLibrary
 OnDemand=True
 Configurable=True
 
+[Addon/Dependencies]
+0=core:5.0.6
+
 [Addon/OptionalDependencies]
 0=notifications
 

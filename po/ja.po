@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2021-01-29 20:24+0000\n"
+"POT-Creation-Date: 2021-03-16 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2021\n"
 "Language-Team: Japanese (https://www.transifex.com/fcitx/teams/12005/ja/)\n"
@@ -21,36 +21,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/rimeengine.h:36
-msgid "Commit current text when deactivating."
-msgstr "非アクティブ化するときに現在のテキストをコミットします。"
+#: src/rimeengine.h:38
+msgid "Commit current text when deactivating"
+msgstr ""
 
-#: src/rimeengine.cpp:99
+#: src/rimeengine.cpp:90
 msgid "Deploy"
 msgstr "デプロイ"
 
-#: src/rimeengine.cpp:343
+#: src/rimestate.cpp:56 src/rimeengine.cpp:394
 msgid "Latin Mode"
 msgstr "ラテンモード"
 
-#: src/rimeengine.h:38
+#: src/rimeengine.h:40
 msgid "Load available plugins automatically"
 msgstr "利用可能なプラグインを自動的にロードする"
 
-#: src/rimeengine.h:42
+#: src/rimeengine.h:44
 msgid "Modules"
 msgstr "モジュール"
 
-#: src/rimeengine.h:40
+#: src/rimeengine.h:42
 msgid "Plugins"
 msgstr "プラグイン"
 
-#: src/rimeengine.cpp:324 src/rimeengine.cpp:325 src/rime.conf.in:3
-#: src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:320 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
 msgid "Rime"
 msgstr "Rime"
 
-#: src/rime-addon.conf.in:4
+#: src/rime-addon.conf.in.in:4
 msgid "Rime Wrapper For Fcitx"
 msgstr "Fcitx 用 Rime ラッパー"
 
@@ -58,7 +57,7 @@ msgstr "Fcitx 用 Rime ラッパー"
 msgid "Rime for Fcitx 5"
 msgstr "Rime for Fcitx 5"
 
-#: src/rimeengine.cpp:317
+#: src/rimeengine.cpp:312
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr ""
 "Rimeでエラーが起こりました。より詳しくは /tmp/rime.fcitx.ERROR を見てくださ"
@@ -68,11 +67,11 @@ msgstr ""
 msgid "Rime input method"
 msgstr "Rime 入力メソッド"
 
-#: src/rimeengine.cpp:315
+#: src/rimeengine.cpp:309
 msgid "Rime is ready."
 msgstr "Rimeの準備ができました。"
 
-#: src/rimeengine.cpp:312
+#: src/rimeengine.cpp:306
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -80,10 +79,10 @@ msgstr ""
 "Rime はメンテナンス中です。数秒かかる場合があります。終了するまでお待ちくださ"
 "い..."
 
-#: src/rimeengine.h:32
+#: src/rimeengine.h:34
 msgid "Show preedit within application"
 msgstr "アプリケーション内でプリエディットを表示"
 
-#: src/rimeengine.cpp:111
+#: src/rimeengine.cpp:102
 msgid "Synchronize"
 msgstr "同期"

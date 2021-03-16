@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2020-12-23 20:24+0000\n"
+"POT-Creation-Date: 2021-03-16 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: csslayer <wengxt@gmail.com>, 2020\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/fcitx/teams/12005/"
@@ -20,36 +20,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/rimeengine.h:36
-msgid "Commit current text when deactivating."
-msgstr "取消激活输入法时提交当前文本。"
+#: src/rimeengine.h:38
+msgid "Commit current text when deactivating"
+msgstr ""
 
-#: src/rimeengine.cpp:99
+#: src/rimeengine.cpp:90
 msgid "Deploy"
 msgstr "重新部署"
 
-#: src/rimeengine.cpp:343
+#: src/rimestate.cpp:56 src/rimeengine.cpp:394
 msgid "Latin Mode"
 msgstr "英文模式"
 
-#: src/rimeengine.h:38
+#: src/rimeengine.h:40
 msgid "Load available plugins automatically"
 msgstr "自动加载可用插件"
 
-#: src/rimeengine.h:42
+#: src/rimeengine.h:44
 msgid "Modules"
 msgstr "模块"
 
-#: src/rimeengine.h:40
+#: src/rimeengine.h:42
 msgid "Plugins"
 msgstr "插件"
 
-#: src/rimeengine.cpp:324 src/rimeengine.cpp:325 src/rime.conf.in:3
-#: src/rime-addon.conf.in:3
+#: src/rimeengine.cpp:320 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
 msgid "Rime"
 msgstr "中州韻"
 
-#: src/rime-addon.conf.in:4
+#: src/rime-addon.conf.in.in:4
 msgid "Rime Wrapper For Fcitx"
 msgstr "Fcitx 的中州韻封装"
 
@@ -57,7 +56,7 @@ msgstr "Fcitx 的中州韻封装"
 msgid "Rime for Fcitx 5"
 msgstr "Fcitx 5 的中州韻支持"
 
-#: src/rimeengine.cpp:317
+#: src/rimeengine.cpp:312
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr "Rime 出现了一个错误。请参阅/tmp/rime.fcitx.ERROR中细节。"
 
@@ -65,20 +64,20 @@ msgstr "Rime 出现了一个错误。请参阅/tmp/rime.fcitx.ERROR中细节。"
 msgid "Rime input method"
 msgstr "中州韻输入法"
 
-#: src/rimeengine.cpp:315
+#: src/rimeengine.cpp:309
 msgid "Rime is ready."
 msgstr "Rime 就绪。"
 
-#: src/rimeengine.cpp:312
+#: src/rimeengine.cpp:306
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
 msgstr "Rime 正在进行维护程序。可能需要几秒钟。请等待完成……"
 
-#: src/rimeengine.h:32
+#: src/rimeengine.h:34
 msgid "Show preedit within application"
 msgstr "在程序中显示预编辑文本"
 
-#: src/rimeengine.cpp:111
+#: src/rimeengine.cpp:102
 msgid "Synchronize"
 msgstr "同步"

@@ -34,8 +34,8 @@ FCITX_CONFIGURATION(
                                           _("Show preedit within application"),
                                           false};
     Option<bool> commitWhenDeactivate{
-        this, "Commit when deactivate.",
-        _("Commit current text when deactivating."), true};
+        this, "Commit when deactivate",
+        _("Commit current text when deactivating"), true};
     Option<bool> autoloadPlugins{this, "AutoloadPlugins",
                                  _("Load available plugins automatically"),
                                  false};
@@ -76,6 +76,8 @@ public:
     std::string subMode(const InputMethodEntry &, InputContext &) override;
     std::string subModeIconImpl(const InputMethodEntry &,
                                 InputContext &) override;
+    std::string subModeLabelImpl(const InputMethodEntry &,
+                                 InputContext &) override;
     const RimeEngineConfig &config() const { return config_; }
 
     rime_api_t *api() { return api_; }

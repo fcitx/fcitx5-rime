@@ -340,6 +340,12 @@ std::string RimeEngine::subMode(const InputMethodEntry &, InputContext &ic) {
     return rimeState->subMode();
 }
 
+std::string RimeEngine::subModeLabelImpl(const InputMethodEntry &,
+                                         InputContext &ic) {
+    auto rimeState = state(&ic);
+    return rimeState->subModeLabel();
+}
+
 std::string RimeEngine::subModeIconImpl(const InputMethodEntry &,
                                         InputContext &ic) {
     std::string result = "fcitx-rime";

@@ -6,6 +6,7 @@
 
 #include "rimestate.h"
 #include "rimecandidate.h"
+#include <fcitx-utils/utf8.h>
 #include <fcitx/candidatelist.h>
 #include <fcitx/inputcontext.h>
 #include <fcitx/inputpanel.h>
@@ -55,6 +56,28 @@ std::string RimeState::subMode() {
             result = _("Latin Mode");
         } else if (status.schema_name && status.schema_name[0] != '.') {
             result = status.schema_name;
+        }
+        engine_->api()->free_status(&status);
+    }
+    return result;
+}
+
+std::string RimeState::subModeLabel() {
+    std::string result;
+    RIME_STRUCT(RimeStatus, status);
+    if (getStatus(&status)) {
+        if (status.is_disabled) {
+            result = "";
+        } else if (status.is_ascii_mode) {
+            result = "A";
+        } else if (status.schema_name && status.schema_name[0] != '.') {
+            result = status.schema_name;
+            if (!result.empty() &&
+                utf8::lengthValidated(result) != utf8::INVALID_LENGTH) {
+                result = result.substr(
+                    0, std::distance(result.begin(),
+                                     utf8::nextChar(result.begin())));
+            }
         }
         engine_->api()->free_status(&status);
     }

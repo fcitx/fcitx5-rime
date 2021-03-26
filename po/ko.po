@@ -4,15 +4,15 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
-# JungHee Lee <daemul72@gmail.com>, 2020
+# Bruce Lee <daemul72@gmail.com>, 2020
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2021-03-16 20:24+0000\n"
+"POT-Creation-Date: 2021-03-26 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: JungHee Lee <daemul72@gmail.com>, 2020\n"
+"Last-Translator: Bruce Lee <daemul72@gmail.com>, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/fcitx/teams/12005/ko/)\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/rimeengine.h:38
+#: src/rimeengine.h:37
 msgid "Commit current text when deactivating"
 msgstr ""
 
@@ -28,23 +28,11 @@ msgstr ""
 msgid "Deploy"
 msgstr "배치"
 
-#: src/rimestate.cpp:56 src/rimeengine.cpp:394
+#: src/rimestate.cpp:56 src/rimeengine.cpp:335
 msgid "Latin Mode"
 msgstr ""
 
-#: src/rimeengine.h:40
-msgid "Load available plugins automatically"
-msgstr "사용 가능한 플러그인 자동으로 불러오기"
-
-#: src/rimeengine.h:44
-msgid "Modules"
-msgstr "모듈"
-
-#: src/rimeengine.h:42
-msgid "Plugins"
-msgstr "플러그인"
-
-#: src/rimeengine.cpp:320 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
+#: src/rimeengine.cpp:261 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
 msgid "Rime"
 msgstr "라임"
 
@@ -56,7 +44,7 @@ msgstr "Fcitx 라임 입력기"
 msgid "Rime for Fcitx 5"
 msgstr ""
 
-#: src/rimeengine.cpp:312
+#: src/rimeengine.cpp:253
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr ""
 "라임에 오류가 발생했습니다. 자세한 내용은 /tmp/rime.fcitx.ERROR을 참조하세요."
@@ -65,11 +53,11 @@ msgstr ""
 msgid "Rime input method"
 msgstr ""
 
-#: src/rimeengine.cpp:309
+#: src/rimeengine.cpp:250
 msgid "Rime is ready."
 msgstr "라임이 준비되었습니다."
 
-#: src/rimeengine.cpp:306
+#: src/rimeengine.cpp:247
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."

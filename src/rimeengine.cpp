@@ -148,7 +148,20 @@ void RimeEngine::rimeStart(bool fullcheck) {
     fcitx_rime_traits.distribution_name = "Rime";
     fcitx_rime_traits.distribution_code_name = "fcitx-rime";
     fcitx_rime_traits.distribution_version = FCITX_RIME_VERSION;
-    fcitx_rime_traits.modules = nullptr;
+
+    std::vector<const char *> modules;
+    // When it is not test, rime will load the default set.
+    RIME_DEBUG() << "Modules: " << *config_.modules;
+    if (!config_.modules->empty()) {
+        modules.push_back("default");
+        for (const std::string &module : *config_.modules) {
+            modules.push_back(module.data());
+        }
+        modules.push_back(nullptr);
+        fcitx_rime_traits.modules = modules.data();
+    } else {
+        fcitx_rime_traits.modules = nullptr;
+    }
 
     if (firstRun_) {
         api_->setup(&fcitx_rime_traits);
@@ -180,6 +193,52 @@ void RimeEngine::updateConfig() {
             api_->finalize();
         } catch (const std::exception &e) {
             RIME_ERROR() << e.what();
+        }
+    }
+
+    std::vector<std::string> plugins;
+    if (*config_.autoloadPlugins) {
+        auto closedir0 = [](DIR *dir) {
+            if (dir) {
+                closedir(dir);
+            }
+        };
+
+        const char *libdir = StandardPath::fcitxPath("libdir");
+        std::unique_ptr<DIR, void (*)(DIR *)> scopedDir{opendir(libdir),
+                                                        closedir0};
+        if (scopedDir) {
+            auto dir = scopedDir.get();
+            struct dirent *drt;
+            while ((drt = readdir(dir)) != nullptr) {
+                if (strcmp(drt->d_name, ".") == 0 ||
+                    strcmp(drt->d_name, "..") == 0) {
+                    continue;
+                }
+
+                auto name = drt->d_name;
+                if (stringutils::startsWith(name, "librime-") &&
+                    stringutils::endsWith(name, ".so")) {
+                    plugins.push_back(
+                        stringutils::joinPath(libdir, std::move(name)));
+                }
+            }
+        }
+    } else {
+        plugins = *config_.plugins;
+    }
+
+    for (const std::string &plugin : plugins) {
+        if (pluginPool_.count(plugin)) {
+            continue;
+        }
+        pluginPool_.emplace(plugin, Library(plugin));
+        pluginPool_[plugin].load({LibraryLoadHint::ExportExternalSymbolsHint});
+        RIME_DEBUG() << "Trying to load rime plugin: " << plugin;
+        if (!pluginPool_[plugin].loaded()) {
+            RIME_ERROR() << "Failed to load plugin: " << plugin
+                         << " error: " << pluginPool_[plugin].error();
+            pluginPool_.erase(plugin);
         }
     }
 

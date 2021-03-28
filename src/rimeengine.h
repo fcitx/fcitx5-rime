@@ -28,13 +28,21 @@ namespace fcitx {
 
 class RimeState;
 
-FCITX_CONFIGURATION(RimeEngineConfig,
-                    Option<bool> showPreeditInApplication{
-                        this, "PreeditInApplication",
-                        _("Show preedit within application"), false};
-                    Option<bool> commitWhenDeactivate{
-                        this, "Commit when deactivate",
-                        _("Commit current text when deactivating"), true};);
+FCITX_CONFIGURATION(
+    RimeEngineConfig,
+    Option<bool> showPreeditInApplication{this, "PreeditInApplication",
+                                          _("Show preedit within application"),
+                                          false};
+    Option<bool> commitWhenDeactivate{
+        this, "Commit when deactivate",
+        _("Commit current text when deactivating"), true};
+    Option<bool> autoloadPlugins{this, "AutoloadPlugins",
+                                 _("Load available plugins automatically"),
+                                 false};
+    Option<std::vector<std::string>> plugins{this, "Plugins", _("Plugins"),
+                                             std::vector<std::string>()};
+    Option<std::vector<std::string>> modules{this, "Modules", _("Modules"),
+                                             std::vector<std::string>()};);
 
 class RimeEngine final : public InputMethodEngineV2 {
 public:
@@ -106,6 +114,7 @@ private:
 
     std::list<SimpleAction> schemActions_;
     Menu schemaMenu_;
+    std::unordered_map<std::string, Library> pluginPool_;
     std::unique_ptr<EventSourceTime> timeEvent_;
 };
 

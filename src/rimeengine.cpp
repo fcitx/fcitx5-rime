@@ -149,6 +149,7 @@ void RimeEngine::rimeStart(bool fullcheck) {
     fcitx_rime_traits.distribution_code_name = "fcitx-rime";
     fcitx_rime_traits.distribution_version = FCITX_RIME_VERSION;
 
+#ifdef FCITX_RIME_LOAD_PLUGIN
     std::vector<const char *> modules;
     // When it is not test, rime will load the default set.
     RIME_DEBUG() << "Modules: " << *config_.modules;
@@ -162,6 +163,9 @@ void RimeEngine::rimeStart(bool fullcheck) {
     } else {
         fcitx_rime_traits.modules = nullptr;
     }
+#else
+    fcitx_rime_traits.modules = nullptr;
+#endif
 
     if (firstRun_) {
         api_->setup(&fcitx_rime_traits);
@@ -196,6 +200,7 @@ void RimeEngine::updateConfig() {
         }
     }
 
+#ifdef FCITX_RIME_LOAD_PLUGIN
     std::vector<std::string> plugins;
     if (*config_.autoloadPlugins) {
         auto closedir0 = [](DIR *dir) {
@@ -241,6 +246,7 @@ void RimeEngine::updateConfig() {
             pluginPool_.erase(plugin);
         }
     }
+#endif
 
     rimeStart(false);
     instance_->inputContextManager().registerProperty("rimeState", &factory_);

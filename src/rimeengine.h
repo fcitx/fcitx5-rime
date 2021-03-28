@@ -36,13 +36,16 @@ FCITX_CONFIGURATION(
     Option<bool> commitWhenDeactivate{
         this, "Commit when deactivate",
         _("Commit current text when deactivating"), true};
+#ifdef FCITX_RIME_LOAD_PLUGIN
     Option<bool> autoloadPlugins{this, "AutoloadPlugins",
                                  _("Load available plugins automatically"),
                                  false};
     Option<std::vector<std::string>> plugins{this, "Plugins", _("Plugins"),
                                              std::vector<std::string>()};
     Option<std::vector<std::string>> modules{this, "Modules", _("Modules"),
-                                             std::vector<std::string>()};);
+                                             std::vector<std::string>()};
+#endif
+);
 
 class RimeEngine final : public InputMethodEngineV2 {
 public:
@@ -114,7 +117,9 @@ private:
 
     std::list<SimpleAction> schemActions_;
     Menu schemaMenu_;
+#ifdef FCITX_RIME_LOAD_PLUGIN
     std::unordered_map<std::string, Library> pluginPool_;
+#endif
     std::unique_ptr<EventSourceTime> timeEvent_;
 };
 

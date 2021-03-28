@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2021-03-26 20:24+0000\n"
+"POT-Creation-Date: 2021-03-28 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: csslayer <wengxt@gmail.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/fcitx/teams/12005/"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/rimeengine.h:37
+#: src/rimeengine.h:38
 msgid "Commit current text when deactivating"
 msgstr "取消激活输入法时提交当前文本"
 
@@ -28,11 +28,23 @@ msgstr "取消激活输入法时提交当前文本"
 msgid "Deploy"
 msgstr "重新部署"
 
-#: src/rimestate.cpp:56 src/rimeengine.cpp:335
+#: src/rimestate.cpp:56 src/rimeengine.cpp:400
 msgid "Latin Mode"
 msgstr "英文模式"
 
-#: src/rimeengine.cpp:261 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
+#: src/rimeengine.h:41
+msgid "Load available plugins automatically"
+msgstr ""
+
+#: src/rimeengine.h:45
+msgid "Modules"
+msgstr ""
+
+#: src/rimeengine.h:43
+msgid "Plugins"
+msgstr ""
+
+#: src/rimeengine.cpp:326 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
 msgid "Rime"
 msgstr "中州韻"
 
@@ -44,7 +56,7 @@ msgstr "Fcitx 的中州韻封装"
 msgid "Rime for Fcitx 5"
 msgstr "Fcitx 5 的中州韻支持"
 
-#: src/rimeengine.cpp:253
+#: src/rimeengine.cpp:318
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr "Rime 出现了一个错误。请参阅/tmp/rime.fcitx.ERROR中细节。"
 
@@ -52,11 +64,11 @@ msgstr "Rime 出现了一个错误。请参阅/tmp/rime.fcitx.ERROR中细节。"
 msgid "Rime input method"
 msgstr "中州韻输入法"
 
-#: src/rimeengine.cpp:250
+#: src/rimeengine.cpp:315
 msgid "Rime is ready."
 msgstr "Rime 就绪。"
 
-#: src/rimeengine.cpp:247
+#: src/rimeengine.cpp:312
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."

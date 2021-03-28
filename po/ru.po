@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2021-03-26 20:24+0000\n"
+"POT-Creation-Date: 2021-03-28 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: csslayer <wengxt@gmail.com>, 2017\n"
 "Language-Team: Russian (https://www.transifex.com/fcitx/teams/12005/ru/)\n"
@@ -21,7 +21,7 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: src/rimeengine.h:37
+#: src/rimeengine.h:38
 msgid "Commit current text when deactivating"
 msgstr ""
 
@@ -29,11 +29,23 @@ msgstr ""
 msgid "Deploy"
 msgstr "Развернуть"
 
-#: src/rimestate.cpp:56 src/rimeengine.cpp:335
+#: src/rimestate.cpp:56 src/rimeengine.cpp:400
 msgid "Latin Mode"
 msgstr ""
 
-#: src/rimeengine.cpp:261 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
+#: src/rimeengine.h:41
+msgid "Load available plugins automatically"
+msgstr ""
+
+#: src/rimeengine.h:45
+msgid "Modules"
+msgstr ""
+
+#: src/rimeengine.h:43
+msgid "Plugins"
+msgstr ""
+
+#: src/rimeengine.cpp:326 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
 msgid "Rime"
 msgstr "Rime"
 
@@ -45,7 +57,7 @@ msgstr "Обертка Rime для Fcitx"
 msgid "Rime for Fcitx 5"
 msgstr ""
 
-#: src/rimeengine.cpp:253
+#: src/rimeengine.cpp:318
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr "Обнаружена ошибка Rime. Подробности в файле /tmp/rime.fcitx.ERROR."
 
@@ -53,11 +65,11 @@ msgstr "Обнаружена ошибка Rime. Подробности в фай
 msgid "Rime input method"
 msgstr ""
 
-#: src/rimeengine.cpp:250
+#: src/rimeengine.cpp:315
 msgid "Rime is ready."
 msgstr "Rime готов."
 
-#: src/rimeengine.cpp:247
+#: src/rimeengine.cpp:312
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."

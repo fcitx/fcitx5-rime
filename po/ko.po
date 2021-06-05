@@ -4,15 +4,15 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
-# Bruce Lee <daemul72@gmail.com>, 2020
+# Jung Hee Lee <daemul72@gmail.com>, 2021
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2021-03-28 20:24+0000\n"
+"POT-Creation-Date: 2021-06-05 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: Bruce Lee <daemul72@gmail.com>, 2020\n"
+"Last-Translator: Jung Hee Lee <daemul72@gmail.com>, 2021\n"
 "Language-Team: Korean (https://www.transifex.com/fcitx/teams/12005/ko/)\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -50,7 +50,7 @@ msgstr "라임"
 
 #: src/rime-addon.conf.in.in:4
 msgid "Rime Wrapper For Fcitx"
-msgstr "Fcitx 라임 입력기"
+msgstr "Fcitx용 라임 입력기"
 
 #: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:7
 msgid "Rime for Fcitx 5"
@@ -59,7 +59,7 @@ msgstr ""
 #: src/rimeengine.cpp:318
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr ""
-"라임에 오류가 발생했습니다. 자세한 내용은 /tmp/rime.fcitx.ERROR을 참조하세요."
+"라임에 오류가 발생했습니다. 자세한 내용은 /tmp/rime.Fcitx.ERROR을 참조하세요."
 
 #: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:8
 msgid "Rime input method"

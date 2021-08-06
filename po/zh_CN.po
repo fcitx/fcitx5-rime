@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2021-03-28 20:24+0000\n"
+"POT-Creation-Date: 2021-08-06 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: csslayer <wengxt@gmail.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/fcitx/teams/12005/"
@@ -34,15 +34,15 @@ msgstr "英文模式"
 
 #: src/rimeengine.h:41
 msgid "Load available plugins automatically"
-msgstr ""
+msgstr "自动加载可用插件"
 
 #: src/rimeengine.h:45
 msgid "Modules"
-msgstr ""
+msgstr "模块"
 
 #: src/rimeengine.h:43
 msgid "Plugins"
-msgstr ""
+msgstr "插件"
 
 #: src/rimeengine.cpp:326 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
 msgid "Rime"

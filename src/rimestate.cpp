@@ -84,12 +84,12 @@ std::string RimeState::subModeLabel() {
     return result;
 }
 
-void RimeState::setLatinMode() {
+void RimeState::setLatinMode(bool latin) {
     auto api = engine_->api();
     if (!api || api->is_maintenance_mode()) {
         return;
     }
-    api->set_option(session_, "ascii_mode", true);
+    api->set_option(session_, "ascii_mode", latin);
 }
 
 void RimeState::selectSchema(const std::string &schema) {

@@ -6,6 +6,7 @@
 #ifndef _FCITX_RIMEENGINE_H_
 #define _FCITX_RIMEENGINE_H_
 
+#include "rimeservice.h"
 #include <fcitx-config/configuration.h>
 #include <fcitx-config/iniparser.h>
 #include <fcitx-utils/event.h>
@@ -89,6 +90,8 @@ public:
 
     RimeState *state(InputContext *ic);
 
+    FCITX_ADDON_DEPENDENCY_LOADER(dbus, instance_->addonManager());
+
 private:
     static void rimeNotificationHandler(void *context_object,
                                         RimeSessionId session_id,
@@ -121,6 +124,8 @@ private:
     std::unordered_map<std::string, Library> pluginPool_;
 #endif
     std::unique_ptr<EventSourceTime> timeEvent_;
+
+    RimeService service_{this};
 };
 
 class RimeEngineFactory : public AddonFactory {

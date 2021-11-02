@@ -11,7 +11,7 @@ include(ECMUninstallTarget)
 
 find_package(Gettext REQUIRED)
 find_package(Fcitx5Core 5.0.6 REQUIRED)
-find_package(Fcitx5Module REQUIRED COMPONENTS Notifications)
+find_package(Fcitx5Module REQUIRED COMPONENTS Notifications DBus)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(Rime REQUIRED IMPORTED_TARGET "rime>=1.0.0")
 if ("${Rime_VERSION}" VERSION_LESS "1.7.0")

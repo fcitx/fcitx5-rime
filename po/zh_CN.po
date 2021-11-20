@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2021-08-06 20:24+0000\n"
+"POT-Creation-Date: 2021-11-20 15:07+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: csslayer <wengxt@gmail.com>, 2021\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/fcitx/teams/12005/"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/rimeengine.h:38
+#: src/rimeengine.h:42
 msgid "Commit current text when deactivating"
 msgstr "取消激活输入法时提交当前文本"
 
@@ -28,19 +28,23 @@ msgstr "取消激活输入法时提交当前文本"
 msgid "Deploy"
 msgstr "重新部署"
 
+#: src/rimeengine.h:39
+msgid "Fix embedded preedit cursor at the beginning of the preedit"
+msgstr ""
+
 #: src/rimestate.cpp:56 src/rimeengine.cpp:400
 msgid "Latin Mode"
 msgstr "英文模式"
 
-#: src/rimeengine.h:41
+#: src/rimeengine.h:45
 msgid "Load available plugins automatically"
 msgstr "自动加载可用插件"
 
-#: src/rimeengine.h:45
+#: src/rimeengine.h:49
 msgid "Modules"
 msgstr "模块"
 
-#: src/rimeengine.h:43
+#: src/rimeengine.h:47
 msgid "Plugins"
 msgstr "插件"
 
@@ -74,7 +78,7 @@ msgid ""
 "is finished..."
 msgstr "Rime 正在进行维护程序。可能需要几秒钟。请等待完成……"
 
-#: src/rimeengine.h:34
+#: src/rimeengine.h:35
 msgid "Show preedit within application"
 msgstr "在程序中显示预编辑文本"
 

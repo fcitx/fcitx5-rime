@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2021-03-28 20:24+0000\n"
+"POT-Creation-Date: 2021-11-20 15:07+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: scootergrisen, 2021\n"
 "Language-Team: Danish (https://www.transifex.com/fcitx/teams/12005/da/)\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/rimeengine.h:38
+#: src/rimeengine.h:42
 msgid "Commit current text when deactivating"
 msgstr ""
 
@@ -27,19 +27,23 @@ msgstr ""
 msgid "Deploy"
 msgstr "Udsend"
 
+#: src/rimeengine.h:39
+msgid "Fix embedded preedit cursor at the beginning of the preedit"
+msgstr ""
+
 #: src/rimestate.cpp:56 src/rimeengine.cpp:400
 msgid "Latin Mode"
 msgstr "Latinsk tilstand"
 
-#: src/rimeengine.h:41
+#: src/rimeengine.h:45
 msgid "Load available plugins automatically"
 msgstr ""
 
-#: src/rimeengine.h:45
+#: src/rimeengine.h:49
 msgid "Modules"
 msgstr ""
 
-#: src/rimeengine.h:43
+#: src/rimeengine.h:47
 msgid "Plugins"
 msgstr ""
 
@@ -75,7 +79,7 @@ msgstr ""
 "Rime er ved at blive vedligeholdt. Det kan tage nogle sekunder. Vent "
 "venligst til den er færdig ..."
 
-#: src/rimeengine.h:34
+#: src/rimeengine.h:35
 msgid "Show preedit within application"
 msgstr "Vis preedit i program"
 

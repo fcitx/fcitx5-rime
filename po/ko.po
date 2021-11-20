@@ -4,15 +4,15 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
-# JungHee Lee <daemul72@gmail.com>, 2021
+# Jung Hee Lee <daemul72@gmail.com>, 2021
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2021-08-30 20:24+0000\n"
+"POT-Creation-Date: 2021-11-20 15:07+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: JungHee Lee <daemul72@gmail.com>, 2021\n"
+"Last-Translator: Jung Hee Lee <daemul72@gmail.com>, 2021\n"
 "Language-Team: Korean (https://www.transifex.com/fcitx/teams/12005/ko/)\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/rimeengine.h:38
+#: src/rimeengine.h:42
 msgid "Commit current text when deactivating"
 msgstr ""
 
@@ -28,19 +28,23 @@ msgstr ""
 msgid "Deploy"
 msgstr "배치"
 
+#: src/rimeengine.h:39
+msgid "Fix embedded preedit cursor at the beginning of the preedit"
+msgstr ""
+
 #: src/rimestate.cpp:56 src/rimeengine.cpp:400
 msgid "Latin Mode"
 msgstr "로마자 모드"
 
-#: src/rimeengine.h:41
+#: src/rimeengine.h:45
 msgid "Load available plugins automatically"
 msgstr ""
 
-#: src/rimeengine.h:45
+#: src/rimeengine.h:49
 msgid "Modules"
 msgstr "모듈"
 
-#: src/rimeengine.h:43
+#: src/rimeengine.h:47
 msgid "Plugins"
 msgstr "플러그인"
 
@@ -77,7 +81,7 @@ msgstr ""
 "라임은 유지 보수 중입니다. 몇 초 정도 걸릴 수 있습니다. 끝날 때까지 기다려 주"
 "십시오..."
 
-#: src/rimeengine.h:34
+#: src/rimeengine.h:35
 msgid "Show preedit within application"
 msgstr "응용프로그램 내에서 사전편집 표시"
 

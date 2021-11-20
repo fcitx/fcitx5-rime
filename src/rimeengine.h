@@ -33,7 +33,10 @@ FCITX_CONFIGURATION(
     RimeEngineConfig,
     Option<bool> showPreeditInApplication{this, "PreeditInApplication",
                                           _("Show preedit within application"),
-                                          false};
+                                          true};
+    Option<bool> preeditCursorPositionAtBeginning{
+        this, "PreeditCursorPositionAtBeginning",
+        _("Fix embedded preedit cursor at the beginning of the preedit"), true};
     Option<bool> commitWhenDeactivate{
         this, "Commit when deactivate",
         _("Commit current text when deactivating"), true};

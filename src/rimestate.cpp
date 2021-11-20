@@ -218,11 +218,14 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
 
     if (engine_->config().showPreeditInApplication.value() &&
         ic->capabilityFlags().test(CapabilityFlag::Preedit)) {
-        ic->inputPanel().setClientPreedit(preedit);
+        clientPreedit = preedit;
     } else {
         ic->inputPanel().setPreedit(preedit);
-        ic->inputPanel().setClientPreedit(clientPreedit);
     }
+    if (engine_->config().preeditCursorPositionAtBeginning.value()) {
+        clientPreedit.setCursor(0);
+    }
+    ic->inputPanel().setClientPreedit(clientPreedit);
 }
 
 void RimeState::updateUI(InputContext *ic, bool keyRelease) {

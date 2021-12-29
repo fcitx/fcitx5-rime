@@ -24,10 +24,9 @@ bool emptyExceptAux(const InputPanel &inputPanel) {
 }
 } // namespace
 
-RimeState::RimeState(RimeEngine *engine) : engine_(engine) {
-    if (auto api = engine_->api()) {
-        session_ = api->create_session();
-    }
+RimeState::RimeState(RimeEngine *engine, InputContext &ic)
+    : engine_(engine), ic_(ic) {
+    createSession();
 }
 
 RimeState::~RimeState() {
@@ -107,7 +106,7 @@ void RimeState::keyEvent(KeyEvent &event) {
         return;
     }
     if (!api->find_session(session_)) {
-        session_ = api->create_session();
+        createSession();
     }
     if (!session_) {
         return;
@@ -148,7 +147,7 @@ bool RimeState::getStatus(RimeStatus *status) {
         return false;
     }
     if (!api->find_session(session_)) {
-        session_ = api->create_session();
+        createSession();
     }
     if (!session_) {
         return false;
@@ -299,6 +298,30 @@ void RimeState::commitPreedit(InputContext *ic) {
         }
         if (context.commit_text_preview) {
             ic->commitString(context.commit_text_preview);
+        }
+    }
+}
+
+void RimeState::createSession() {
+    auto api = engine_->api();
+    if (!api) {
+        return;
+    }
+    session_ = api->create_session();
+    if (!session_) {
+        return;
+    }
+
+    if (ic_.program().empty()) {
+        return;
+    }
+
+    const auto &appOptions = engine_->appOptions();
+    if (auto iter = appOptions.find(ic_.program()); iter != appOptions.end()) {
+        RIME_DEBUG() << "Apply app options to " << ic_.program() << ": "
+                     << iter->second;
+        for (const auto &[key, value] : iter->second) {
+            api->set_option(session_, key.data(), value);
         }
     }
 }

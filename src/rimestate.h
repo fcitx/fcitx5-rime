@@ -13,7 +13,7 @@ namespace fcitx {
 
 class RimeState : public InputContextProperty {
 public:
-    RimeState(RimeEngine *engine);
+    RimeState(RimeEngine *engine, InputContext &ic);
 
     virtual ~RimeState();
 
@@ -30,9 +30,12 @@ public:
     void selectSchema(const std::string &schemaId);
 
 private:
+    void createSession();
+
     std::string lastMode_;
     RimeEngine *engine_;
     RimeSessionId session_ = 0;
+    InputContext &ic_;
 };
 } // namespace fcitx
 

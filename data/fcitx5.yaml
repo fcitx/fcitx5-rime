@@ -1,0 +1,6 @@
+# Fcitx5 settings
+# encoding: utf-8
+
+config_version: "0.22"
+
+app_options: {}

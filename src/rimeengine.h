@@ -88,6 +88,7 @@ public:
     const RimeEngineConfig &config() const { return config_; }
 
     rime_api_t *api() { return api_; }
+    const auto &appOptions() const { return appOptions_; }
 
     void rimeStart(bool fullcheck);
 
@@ -118,6 +119,8 @@ private:
     SimpleAction syncAction_;
 
     RimeEngineConfig config_;
+    std::unordered_map<std::string, std::unordered_map<std::string, bool>>
+        appOptions_;
 
     FCITX_ADDON_DEPENDENCY_LOADER(notifications, instance_->addonManager());
 

@@ -25,6 +25,31 @@ FCITX_DEFINE_LOG_CATEGORY(rime, "rime");
 
 namespace fcitx {
 
+namespace {
+
+std::unordered_map<std::string, std::unordered_map<std::string, bool>>
+parseAppOptions(rime_api_t *api, RimeConfig *config) {
+    std::unordered_map<std::string, std::unordered_map<std::string, bool>>
+        appOptions;
+    RimeConfigIterator appIter;
+    RimeConfigIterator optionIter;
+    api->config_begin_map(&appIter, config, "app_options");
+    while (api->config_next(&appIter)) {
+        auto &options = appOptions[appIter.key];
+        api->config_begin_map(&optionIter, config, appIter.path);
+        while (api->config_next(&optionIter)) {
+            Bool value = False;
+            if (api->config_get_bool(config, optionIter.path, &value)) {
+                options[optionIter.key] = !!value;
+            }
+        }
+        api->config_end(&optionIter);
+    }
+    api->config_end(&appIter);
+    return appOptions;
+}
+} // namespace
+
 class IMAction : public Action {
 public:
     IMAction(RimeEngine *engine) : engine_(engine) {}
@@ -80,7 +105,7 @@ private:
 
 RimeEngine::RimeEngine(Instance *instance)
     : instance_(instance), api_(rime_get_api()),
-      factory_([this](InputContext &) { return new RimeState(this); }) {
+      factory_([this](InputContext &ic) { return new RimeState(this, ic); }) {
     imAction_ = std::make_unique<IMAction>(this);
     instance_->userInterfaceManager().registerAction("fcitx-rime-im",
                                                      imAction_.get());
@@ -173,7 +198,17 @@ void RimeEngine::rimeStart(bool fullcheck) {
     }
     api_->initialize(&fcitx_rime_traits);
     api_->set_notification_handler(&rimeNotificationHandler, this);
-    api_->start_maintenance(fullcheck);
+    if (api_->start_maintenance(fullcheck)) {
+        api_->deploy_config_file("fcitx5.yaml", "config_version");
+    }
+
+    appOptions_.clear();
+    RimeConfig config = {NULL};
+    if (api_->config_open("fcitx5", &config)) {
+        appOptions_ = parseAppOptions(api_, &config);
+        api_->config_close(&config);
+    }
+    RIME_DEBUG() << "App options are " << appOptions_;
 }
 
 void RimeEngine::reloadConfig() {

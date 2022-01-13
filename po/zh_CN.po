@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the fcitx5-rime package.
 #
 # Translators:
-# csslayer <wengxt@gmail.com>, 2021
+# csslayer <wengxt@gmail.com>, 2022
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2022-01-12 20:24+0000\n"
+"POT-Creation-Date: 2022-01-13 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: csslayer <wengxt@gmail.com>, 2021\n"
+"Last-Translator: csslayer <wengxt@gmail.com>, 2022\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/fcitx/teams/12005/"
 "zh_CN/)\n"
 "Language: zh_CN\n"
@@ -34,19 +34,19 @@ msgstr "固定嵌入预编辑文本光标在预编辑的开头"
 
 #: src/rimeengine.cpp:363
 msgid "Full Shape is enabled."
-msgstr ""
+msgstr "已启用全角字符。 "
 
 #: src/rimeengine.cpp:365
 msgid "Full width punctuation is enabled."
-msgstr ""
+msgstr "已启用全角标点。"
 
 #: src/rimeengine.cpp:361
 msgid "Half Shape is enabled."
-msgstr ""
+msgstr "已启用半角字符。"
 
 #: src/rimeengine.cpp:367
 msgid "Half width punctuation is enabled."
-msgstr ""
+msgstr "已启用半角标点。"
 
 #: src/rimestate.cpp:55 src/rimeengine.cpp:451
 msgid "Latin Mode"
@@ -100,7 +100,7 @@ msgstr "在程序中显示预编辑文本"
 
 #: src/rimeengine.cpp:371
 msgid "Simplified Chinese is enabled."
-msgstr ""
+msgstr "已启用简体中文。"
 
 #: src/rimeengine.cpp:127
 msgid "Synchronize"
@@ -108,4 +108,4 @@ msgstr "同步"
 
 #: src/rimeengine.cpp:369
 msgid "Traditional Chinese is enabled."
-msgstr ""
+msgstr "已启用繁体中文。"

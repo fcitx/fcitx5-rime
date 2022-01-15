@@ -5,14 +5,15 @@
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
 # mar well <m.wellendorf@gmx.de>, 2018
+# Ettore Atalan <atalanttore@googlemail.com>, 2022
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2022-01-12 20:24+0000\n"
+"POT-Creation-Date: 2022-01-15 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: mar well <m.wellendorf@gmx.de>, 2018\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2022\n"
 "Language-Team: German (https://www.transifex.com/fcitx/teams/12005/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -50,7 +51,7 @@ msgstr ""
 
 #: src/rimestate.cpp:55 src/rimeengine.cpp:451
 msgid "Latin Mode"
-msgstr ""
+msgstr "Lateinischer Modus"
 
 #: src/rimeengine.h:45
 msgid "Load available plugins automatically"
@@ -58,7 +59,7 @@ msgstr ""
 
 #: src/rimeengine.h:49
 msgid "Modules"
-msgstr ""
+msgstr "Module"
 
 #: src/rimeengine.h:47
 msgid "Plugins"
@@ -102,7 +103,7 @@ msgstr ""
 
 #: src/rimeengine.cpp:371
 msgid "Simplified Chinese is enabled."
-msgstr ""
+msgstr "Vereinfachtes Chinesisch ist aktiviert."
 
 #: src/rimeengine.cpp:127
 msgid "Synchronize"
@@ -110,4 +111,4 @@ msgstr "Synchronisieren"
 
 #: src/rimeengine.cpp:369
 msgid "Traditional Chinese is enabled."
-msgstr ""
+msgstr "Traditionelles Chinesisch ist aktiviert."

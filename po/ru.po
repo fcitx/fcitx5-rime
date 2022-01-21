@@ -4,14 +4,15 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
+# Dmitry <dmitrydmitry761@gmail.com>, 2022
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2022-01-12 20:24+0000\n"
+"POT-Creation-Date: 2022-01-21 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: csslayer <wengxt@gmail.com>, 2017\n"
+"Last-Translator: Dmitry <dmitrydmitry761@gmail.com>, 2022\n"
 "Language-Team: Russian (https://www.transifex.com/fcitx/teams/12005/ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +24,7 @@ msgstr ""
 
 #: src/rimeengine.h:42
 msgid "Commit current text when deactivating"
-msgstr ""
+msgstr "Зафиксировать текущий текст при деактивации"
 
 #: src/rimeengine.cpp:115
 msgid "Deploy"
@@ -32,38 +33,40 @@ msgstr "Развернуть"
 #: src/rimeengine.h:39
 msgid "Fix embedded preedit cursor at the beginning of the preedit"
 msgstr ""
+"Зафиксировать встроенный курсор предварительного редактирования в начале "
+"предварительного редактирования."
 
 #: src/rimeengine.cpp:363
 msgid "Full Shape is enabled."
-msgstr ""
+msgstr "Полноширинная форма включена."
 
 #: src/rimeengine.cpp:365
 msgid "Full width punctuation is enabled."
-msgstr ""
+msgstr "Пунктуация по всей ширине включена."
 
 #: src/rimeengine.cpp:361
 msgid "Half Shape is enabled."
-msgstr ""
+msgstr "Полуширинная форма включена."
 
 #: src/rimeengine.cpp:367
 msgid "Half width punctuation is enabled."
-msgstr ""
+msgstr "Включена пунктуация половинной ширины."
 
 #: src/rimestate.cpp:55 src/rimeengine.cpp:451
 msgid "Latin Mode"
-msgstr ""
+msgstr "Режим Латиницы"
 
 #: src/rimeengine.h:45
 msgid "Load available plugins automatically"
-msgstr ""
+msgstr "Автоматически загружать доступные плагины"
 
 #: src/rimeengine.h:49
 msgid "Modules"
-msgstr ""
+msgstr "Модули"
 
 #: src/rimeengine.h:47
 msgid "Plugins"
-msgstr ""
+msgstr "Плагины"
 
 #: src/rimeengine.cpp:378 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
 msgid "Rime"
@@ -75,7 +78,7 @@ msgstr "Обертка Rime для Fcitx"
 
 #: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:7
 msgid "Rime for Fcitx 5"
-msgstr ""
+msgstr "Rime для Fcitx 5"
 
 #: src/rimeengine.cpp:355
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
@@ -83,7 +86,7 @@ msgstr "Обнаружена ошибка Rime. Подробности в фай
 
 #: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:8
 msgid "Rime input method"
-msgstr ""
+msgstr "Метод ввода Rime"
 
 #: src/rimeengine.cpp:352
 msgid "Rime is ready."
@@ -94,14 +97,16 @@ msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
 msgstr ""
+"Rime находится на техническом обслуживании. Это может занять несколько "
+"секунд. Пожалуйста, дождитесь окончания..."
 
 #: src/rimeengine.h:35
 msgid "Show preedit within application"
-msgstr ""
+msgstr "Показать предварительное редактирование в приложении"
 
 #: src/rimeengine.cpp:371
 msgid "Simplified Chinese is enabled."
-msgstr ""
+msgstr "Упрощенный Китайский включен."
 
 #: src/rimeengine.cpp:127
 msgid "Synchronize"
@@ -109,4 +114,4 @@ msgstr "Синхронизировать"
 
 #: src/rimeengine.cpp:369
 msgid "Traditional Chinese is enabled."
-msgstr ""
+msgstr "Традиционный Китайский включен."

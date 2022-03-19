@@ -6,14 +6,15 @@
 # csslayer <wengxt@gmail.com>, 2017
 # pan93412 <pan93412@gmail.com>, 2019
 # bruh, 2020
+# 菘菘 <rrt467778@gmail.com>, 2022
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2022-01-12 20:24+0000\n"
+"POT-Creation-Date: 2022-03-19 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: bruh, 2020\n"
+"Last-Translator: 菘菘 <rrt467778@gmail.com>, 2022\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/fcitx/teams/12005/"
 "zh_TW/)\n"
 "Language: zh_TW\n"
@@ -24,7 +25,7 @@ msgstr ""
 
 #: src/rimeengine.h:42
 msgid "Commit current text when deactivating"
-msgstr ""
+msgstr "取消啟用輸入法時提交目前文字"
 
 #: src/rimeengine.cpp:115
 msgid "Deploy"
@@ -64,7 +65,7 @@ msgstr ""
 
 #: src/rimeengine.h:47
 msgid "Plugins"
-msgstr ""
+msgstr "插件"
 
 #: src/rimeengine.cpp:378 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
 msgid "Rime"
@@ -102,7 +103,7 @@ msgstr "在程式中顯示預編輯字串"
 
 #: src/rimeengine.cpp:371
 msgid "Simplified Chinese is enabled."
-msgstr ""
+msgstr "已啟用簡體中文。"
 
 #: src/rimeengine.cpp:127
 msgid "Synchronize"
@@ -110,4 +111,4 @@ msgstr "同步"
 
 #: src/rimeengine.cpp:369
 msgid "Traditional Chinese is enabled."
-msgstr ""
+msgstr "已啟用繁體中文。"

@@ -4,15 +4,15 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
-# JungHee Lee <daemul72@gmail.com>, 2022
+# Junghee Lee <daemul72@gmail.com>, 2022
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2022-03-01 20:24+0000\n"
+"POT-Creation-Date: 2022-04-09 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: JungHee Lee <daemul72@gmail.com>, 2022\n"
+"Last-Translator: Junghee Lee <daemul72@gmail.com>, 2022\n"
 "Language-Team: Korean (https://www.transifex.com/fcitx/teams/12005/ko/)\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: src/rimeengine.h:42
 msgid "Commit current text when deactivating"
-msgstr ""
+msgstr "비활성화할 때 현재 텍스트 입력완료"
 
 #: src/rimeengine.cpp:115
 msgid "Deploy"
@@ -54,7 +54,7 @@ msgstr "로마자 모드"
 
 #: src/rimeengine.h:45
 msgid "Load available plugins automatically"
-msgstr ""
+msgstr "사용 가능한 플러그인 자동으로 불러오기"
 
 #: src/rimeengine.h:49
 msgid "Modules"

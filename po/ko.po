@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2022-04-09 20:24+0000\n"
+"POT-Creation-Date: 2022-04-10 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Junghee Lee <daemul72@gmail.com>, 2022\n"
 "Language-Team: Korean (https://www.transifex.com/fcitx/teams/12005/ko/)\n"
@@ -30,23 +30,23 @@ msgstr "배치"
 
 #: src/rimeengine.h:39
 msgid "Fix embedded preedit cursor at the beginning of the preedit"
-msgstr ""
+msgstr "사전편집 시작 부분에 포함된 사전편집 커서 수정"
 
 #: src/rimeengine.cpp:363
 msgid "Full Shape is enabled."
-msgstr ""
+msgstr "전각이 활성화되었습니다."
 
 #: src/rimeengine.cpp:365
 msgid "Full width punctuation is enabled."
-msgstr ""
+msgstr "전각 문장부호가 활성화되었습니다."
 
 #: src/rimeengine.cpp:361
 msgid "Half Shape is enabled."
-msgstr ""
+msgstr "반각이 활성화되었습니다."
 
 #: src/rimeengine.cpp:367
 msgid "Half width punctuation is enabled."
-msgstr ""
+msgstr "반각 문장부호가 활성화되었습니다."
 
 #: src/rimestate.cpp:55 src/rimeengine.cpp:451
 msgid "Latin Mode"
@@ -66,7 +66,7 @@ msgstr "플러그인"
 
 #: src/rimeengine.cpp:378 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
 msgid "Rime"
-msgstr "라임"
+msgstr "Rime"
 
 #: src/rime-addon.conf.in.in:4
 msgid "Rime Wrapper For Fcitx"
@@ -74,12 +74,13 @@ msgstr "Fcitx용 Rime 래퍼"
 
 #: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:7
 msgid "Rime for Fcitx 5"
-msgstr "Fcitx 5용 Rime"
+msgstr "Fcitx5용 Rime"
 
 #: src/rimeengine.cpp:355
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr ""
-"라임에 오류가 발생했습니다. 자세한 내용은 /tmp/rime.Fcitx.ERROR을 참조하세요."
+"Rime에 오류가 발생했습니다. 자세한 내용은 /tmp/rime.fcitx.ERROR를 참조하십시"
+"오."
 
 #: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:8
 msgid "Rime input method"
@@ -87,15 +88,15 @@ msgstr "Rime 입력 방식"
 
 #: src/rimeengine.cpp:352
 msgid "Rime is ready."
-msgstr "라임이 준비되었습니다."
+msgstr "Rime이 준비되었습니다."
 
 #: src/rimeengine.cpp:349
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
 msgstr ""
-"라임은 유지 보수 중입니다. 몇 초 정도 걸릴 수 있습니다. 끝날 때까지 기다려 주"
-"십시오..."
+"라임이 점검중입니다. 몇 초 정도 걸릴 수 있습니다. 완료될 때까지 기다려 주십시"
+"오..."
 
 #: src/rimeengine.h:35
 msgid "Show preedit within application"
@@ -103,7 +104,7 @@ msgstr "응용프로그램 내에서 사전편집 표시"
 
 #: src/rimeengine.cpp:371
 msgid "Simplified Chinese is enabled."
-msgstr ""
+msgstr "간화자가 활성화되었습니다."
 
 #: src/rimeengine.cpp:127
 msgid "Synchronize"
@@ -111,4 +112,4 @@ msgstr "동기화"
 
 #: src/rimeengine.cpp:369
 msgid "Traditional Chinese is enabled."
-msgstr ""
+msgstr "정체자가 활성화되었습니다."

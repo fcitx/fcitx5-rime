@@ -40,6 +40,16 @@ FCITX_CONFIGURATION(
     Option<bool> commitWhenDeactivate{
         this, "Commit when deactivate",
         _("Commit current text when deactivating"), true};
+    ExternalOption userDataDir{
+        this, "UserDataDir", _("User data dir"),
+        stringutils::concat(
+            "xdg-open \"",
+            stringutils::replaceAll(
+                stringutils::joinPath(StandardPath::global().userDirectory(
+                                          StandardPath::Type::PkgData),
+                                      "rime"),
+                "\"", "\"\"\""),
+            "\"")};
 #ifdef FCITX_RIME_LOAD_PLUGIN
     Option<bool> autoloadPlugins{this, "AutoloadPlugins",
                                  _("Load available plugins automatically"),

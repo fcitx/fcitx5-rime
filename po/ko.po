@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2022-04-10 20:24+0000\n"
+"POT-Creation-Date: 2022-04-13 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Junghee Lee <daemul72@gmail.com>, 2022\n"
 "Language-Team: Korean (https://www.transifex.com/fcitx/teams/12005/ko/)\n"
@@ -52,15 +52,15 @@ msgstr "반각 문장부호가 활성화되었습니다."
 msgid "Latin Mode"
 msgstr "로마자 모드"
 
-#: src/rimeengine.h:45
+#: src/rimeengine.h:55
 msgid "Load available plugins automatically"
 msgstr "사용 가능한 플러그인 자동으로 불러오기"
 
-#: src/rimeengine.h:49
+#: src/rimeengine.h:59
 msgid "Modules"
 msgstr "모듈"
 
-#: src/rimeengine.h:47
+#: src/rimeengine.h:57
 msgid "Plugins"
 msgstr "플러그인"
 
@@ -113,3 +113,7 @@ msgstr "동기화"
 #: src/rimeengine.cpp:369
 msgid "Traditional Chinese is enabled."
 msgstr "정체자가 활성화되었습니다."
+
+#: src/rimeengine.h:44
+msgid "User data dir"
+msgstr ""

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2022-01-12 20:24+0000\n"
+"POT-Creation-Date: 2022-04-13 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2021\n"
 "Language-Team: Japanese (https://www.transifex.com/fcitx/teams/12005/ja/)\n"
@@ -53,15 +53,15 @@ msgstr ""
 msgid "Latin Mode"
 msgstr "ラテンモード"
 
-#: src/rimeengine.h:45
+#: src/rimeengine.h:55
 msgid "Load available plugins automatically"
 msgstr ""
 
-#: src/rimeengine.h:49
+#: src/rimeengine.h:59
 msgid "Modules"
 msgstr ""
 
-#: src/rimeengine.h:47
+#: src/rimeengine.h:57
 msgid "Plugins"
 msgstr ""
 
@@ -113,4 +113,8 @@ msgstr "同期"
 
 #: src/rimeengine.cpp:369
 msgid "Traditional Chinese is enabled."
+msgstr ""
+
+#: src/rimeengine.h:44
+msgid "User data dir"
 msgstr ""

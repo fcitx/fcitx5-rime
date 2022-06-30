@@ -343,7 +343,9 @@ void RimeEngine::notify(const std::string &messageType,
                         const std::string &messageValue) {
     const char *message = nullptr;
     const char *icon = "";
+    const char *tipId = "";
     if (messageType == "deploy") {
+        tipId = "fcitx-rime-deploy";
         icon = "fcitx-rime-deploy";
         if (messageValue == "start") {
             message = _("Rime is under maintenance. It may take a few "
@@ -358,24 +360,30 @@ void RimeEngine::notify(const std::string &messageType,
     } else if (messageType == "option") {
         icon = "fcitx-rime";
         if (messageValue == "!full_shape") {
+            tipId = "fcitx-rime-full-shape";
             message = _("Half Shape is enabled.");
         } else if (messageValue == "full_shape") {
+            tipId = "fcitx-rime-full-shape";
             message = _("Full Shape is enabled.");
         } else if (messageValue == "!ascii_punct") {
+            tipId = "fcitx-rime-ascii-punct";
             message = _("Full width punctuation is enabled.");
         } else if (messageValue == "ascii_punct") {
+            tipId = "fcitx-rime-ascii-punct";
             message = _("Half width punctuation is enabled.");
         } else if (messageValue == "!simplification") {
+            tipId = "fcitx-rime-simplification";
             message = _("Traditional Chinese is enabled.");
         } else if (messageValue == "simplification") {
+            tipId = "fcitx-rime-simplification";
             message = _("Simplified Chinese is enabled.");
         }
     }
 
     auto notifications = this->notifications();
     if (message && notifications) {
-        notifications->call<INotifications::showTip>(
-            "fcitx-rime-deploy", _("Rime"), icon, _("Rime"), message, -1);
+        notifications->call<INotifications::showTip>(tipId, _("Rime"), icon,
+                                                     _("Rime"), message, -1);
     }
     timeEvent_ = instance_->eventLoop().addTimeEvent(
         CLOCK_MONOTONIC, now(CLOCK_MONOTONIC) + 1000000, 0,

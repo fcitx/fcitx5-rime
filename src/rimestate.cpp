@@ -302,6 +302,7 @@ void RimeState::commitPreedit(InputContext *ic) {
         if (context.commit_text_preview) {
             ic->commitString(context.commit_text_preview);
         }
+        api->free_context(&context);
     }
 }
 

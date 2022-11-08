@@ -24,9 +24,10 @@ RimeCandidateWord::RimeCandidateWord(RimeEngine *engine,
 void RimeCandidateWord::select(InputContext *inputContext) const {
     // Rime does not provide such an API, simulate the selection with a fake
     // key event.
-    auto state = engine_->state(inputContext);
-    KeyEvent event(inputContext, Key(sym_));
-    state->keyEvent(event);
+    if (auto state = engine_->state(inputContext)) {
+        KeyEvent event(inputContext, Key(sym_));
+        state->keyEvent(event);
+    }
 }
 
 RimeCandidateList::RimeCandidateList(RimeEngine *engine, InputContext *ic,

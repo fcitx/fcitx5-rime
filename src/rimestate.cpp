@@ -47,8 +47,7 @@ void RimeState::clear() {
 
 std::string RimeState::subMode() {
     std::string result;
-    RIME_STRUCT(RimeStatus, status);
-    if (getStatus(&status)) {
+    getStatus([&result](const RimeStatus &status) {
         if (status.is_disabled) {
             result = "\xe2\x8c\x9b";
         } else if (status.is_ascii_mode) {
@@ -56,15 +55,13 @@ std::string RimeState::subMode() {
         } else if (status.schema_name && status.schema_name[0] != '.') {
             result = status.schema_name;
         }
-        engine_->api()->free_status(&status);
-    }
+    });
     return result;
 }
 
 std::string RimeState::subModeLabel() {
     std::string result;
-    RIME_STRUCT(RimeStatus, status);
-    if (getStatus(&status)) {
+    getStatus([this, &result](const RimeStatus &status) {
         if (status.is_disabled) {
             result = "";
         } else if (status.is_ascii_mode) {
@@ -78,8 +75,7 @@ std::string RimeState::subModeLabel() {
                                      utf8::nextChar(result.begin())));
             }
         }
-        engine_->api()->free_status(&status);
-    }
+    });
     return result;
 }
 
@@ -141,7 +137,8 @@ void RimeState::keyEvent(KeyEvent &event) {
     }
 }
 
-bool RimeState::getStatus(RimeStatus *status) {
+bool RimeState::getStatus(
+    const std::function<void(const RimeStatus &)> &callback) {
     auto api = engine_->api();
     if (!api) {
         return false;
@@ -152,7 +149,13 @@ bool RimeState::getStatus(RimeStatus *status) {
     if (!session_) {
         return false;
     }
-    return api->get_status(session_, status);
+    RIME_STRUCT(RimeStatus, status);
+    if (!api->get_status(session_, &status)) {
+        return false;
+    }
+    callback(status);
+    api->free_status(&status);
+    return true;
 }
 
 void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {

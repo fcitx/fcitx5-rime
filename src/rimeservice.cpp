@@ -24,7 +24,7 @@ RimeState *RimeService::currentState() {
     if (!ic) {
         return nullptr;
     }
-    return ic->propertyFor(&engine_->factory());
+    return engine_->state(ic);
 }
 
 void RimeService::setAsciiMode(bool ascii) {
@@ -38,13 +38,13 @@ void RimeService::setAsciiMode(bool ascii) {
 }
 
 bool RimeService::isAsciiMode() {
+    bool isAscii = false;
     if (auto state = currentState()) {
-        RIME_STRUCT(RimeStatus, status);
-        if (state->getStatus(&status)) {
-            return status.is_ascii_mode;
-        }
+        state->getStatus([&isAscii](const RimeStatus &status) {
+            isAscii = status.is_ascii_mode;
+        });
     }
-    return false;
+    return isAscii;
 }
 
 void RimeService::setSchema(const std::string &schema) {
@@ -58,13 +58,14 @@ void RimeService::setSchema(const std::string &schema) {
 }
 
 std::string RimeService::currentSchema() {
-    if (auto state = currentState()) {
-        RIME_STRUCT(RimeStatus, status);
-        if (state->getStatus(&status)) {
-            return status.schema_id ? status.schema_id : "";
-        }
+    std::string result;
+    auto state = currentState();
+    if (state) {
+        state->getStatus([&result](const RimeStatus &status) {
+            result = status.schema_id ? status.schema_id : "";
+        });
     }
-    return "";
+    return result;
 }
 
 std::vector<std::string> RimeService::listAllSchemas() {

@@ -19,7 +19,7 @@ public:
 
     void clear();
     void keyEvent(KeyEvent &event);
-    bool getStatus(RimeStatus *status);
+    bool getStatus(const std::function<void(const RimeStatus &)> &);
     void updatePreedit(InputContext *ic, const RimeContext &context);
     void updateUI(InputContext *ic, bool keyRelease);
     void release();

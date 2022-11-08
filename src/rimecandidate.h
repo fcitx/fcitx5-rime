@@ -49,11 +49,15 @@ public:
     bool hasNext() const override { return hasNext_; }
     void prev() override {
         KeyEvent event(ic_, Key(FcitxKey_Page_Up));
-        engine_->state(ic_)->keyEvent(event);
+        if (auto state = engine_->state(ic_)) {
+            state->keyEvent(event);
+        }
     }
     void next() override {
         KeyEvent event(ic_, Key(FcitxKey_Page_Down));
-        engine_->state(ic_)->keyEvent(event);
+        if (auto state = engine_->state(ic_)) {
+            state->keyEvent(event);
+        }
     }
 
     bool usedNextBefore() const override { return true; }

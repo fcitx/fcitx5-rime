@@ -55,20 +55,21 @@ public:
     IMAction(RimeEngine *engine) : engine_(engine) {}
 
     std::string shortText(InputContext *ic) const override {
-        auto state = engine_->state(ic);
-        RIME_STRUCT(RimeStatus, status);
         std::string result;
-        if (state->getStatus(&status)) {
-            if (status.is_disabled) {
-                result = "\xe2\x8c\x9b";
-            } else if (status.is_ascii_mode) {
-                result = "A";
-            } else if (status.schema_name && status.schema_name[0] != '.') {
-                result = status.schema_name;
-            } else {
-                result = "中";
-            }
-            engine_->api()->free_status(&status);
+        auto state = engine_->state(ic);
+        if (state) {
+            state->getStatus([&result](const RimeStatus &status) {
+                result = status.schema_id ? status.schema_id : "";
+                if (status.is_disabled) {
+                    result = "\xe2\x8c\x9b";
+                } else if (status.is_ascii_mode) {
+                    result = "A";
+                } else if (status.schema_name && status.schema_name[0] != '.') {
+                    result = status.schema_name;
+                } else {
+                    result = "中";
+                }
+            });
         } else {
             result = "\xe2\x8c\x9b";
         }
@@ -76,25 +77,26 @@ public:
     }
 
     std::string longText(InputContext *ic) const override {
-        auto state = engine_->state(ic);
         std::string result;
-        RIME_STRUCT(RimeStatus, status);
-        if (state->getStatus(&status)) {
-            if (status.schema_name) {
-                result = status.schema_name;
-            }
-            engine_->api()->free_status(&status);
+        auto state = engine_->state(ic);
+        if (state) {
+            state->getStatus([&result](const RimeStatus &status) {
+                result = status.schema_name ? status.schema_name : "";
+            });
         }
         return result;
     }
 
     std::string icon(InputContext *ic) const override {
+        bool isDisabled = false;
         auto state = engine_->state(ic);
-        RIME_STRUCT(RimeStatus, status);
-        if (state->getStatus(&status)) {
-            if (status.is_disabled) {
-                return "fcitx-rime-disabled";
-            }
+        if (state) {
+            state->getStatus([&isDisabled](const RimeStatus &status) {
+                isDisabled = status.is_disabled;
+            });
+        }
+        if (isDisabled) {
+            return "fcitx-rime-disabled";
         }
         return "fcitx-rime-im";
     }
@@ -116,7 +118,7 @@ RimeEngine::RimeEngine(Instance *instance)
     deployAction_.connect<SimpleAction::Activated>([this](InputContext *ic) {
         deploy();
         auto state = this->state(ic);
-        if (ic->hasFocus()) {
+        if (state && ic->hasFocus()) {
             state->updateUI(ic, false);
         }
     });
@@ -129,7 +131,7 @@ RimeEngine::RimeEngine(Instance *instance)
     syncAction_.connect<SimpleAction::Activated>([this](InputContext *ic) {
         sync();
         auto state = this->state(ic);
-        if (ic->hasFocus()) {
+        if (state && ic->hasFocus()) {
             state->updateUI(ic, false);
         }
     });
@@ -397,18 +399,25 @@ void RimeEngine::notify(const std::string &messageType,
 }
 
 RimeState *RimeEngine::state(InputContext *ic) {
+    if (!factory_.registered()) {
+        return nullptr;
+    }
     return ic->propertyFor(&factory_);
 }
 
 std::string RimeEngine::subMode(const InputMethodEntry &, InputContext &ic) {
-    auto rimeState = state(&ic);
-    return rimeState->subMode();
+    if (auto rimeState = state(&ic)) {
+        return rimeState->subMode();
+    }
+    return "";
 }
 
 std::string RimeEngine::subModeLabelImpl(const InputMethodEntry &,
                                          InputContext &ic) {
-    auto rimeState = state(&ic);
-    return rimeState->subModeLabel();
+    if (auto rimeState = state(&ic)) {
+        return rimeState->subModeLabel();
+    }
+    return "";
 }
 
 std::string RimeEngine::subModeIconImpl(const InputMethodEntry &,
@@ -418,16 +427,16 @@ std::string RimeEngine::subModeIconImpl(const InputMethodEntry &,
         return result;
     }
     auto state = this->state(&ic);
-    RIME_STRUCT(RimeStatus, status);
-    if (state->getStatus(&status)) {
-        if (status.is_disabled) {
-            result = "fcitx-rime-disable";
-        } else if (status.is_ascii_mode) {
-            result = "fcitx-rime-latin";
-        } else {
-            result = "fcitx-rime";
-        }
-        api_->free_status(&status);
+    if (state) {
+        state->getStatus([&result](const RimeStatus &status) {
+            if (status.is_disabled) {
+                result = "fcitx-rime-disable";
+            } else if (status.is_ascii_mode) {
+                result = "fcitx-rime-latin";
+            } else {
+                result = "fcitx-rime";
+            }
+        });
     }
     return result;
 }
@@ -435,8 +444,9 @@ std::string RimeEngine::subModeIconImpl(const InputMethodEntry &,
 void RimeEngine::deploy() {
     RIME_DEBUG() << "Rime Deploy";
     instance_->inputContextManager().foreach([this](InputContext *ic) {
-        auto state = this->state(ic);
-        state->release();
+        if (auto state = this->state(ic)) {
+            state->release();
+        }
         return true;
     });
     api_->finalize();

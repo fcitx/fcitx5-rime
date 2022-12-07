@@ -6,14 +6,15 @@
 # csslayer <wengxt@gmail.com>, 2017
 # Takuro Onoue <kusanaginoturugi@gmail.com>, 2020
 # UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2021
+# Aaron Muir Hamilton <aaron@correspondwith.me>, 2022
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2022-04-13 20:24+0000\n"
+"POT-Creation-Date: 2022-12-07 20:25+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: UTUMI Hirosi <utuhiro78@yahoo.co.jp>, 2021\n"
+"Last-Translator: Aaron Muir Hamilton <aaron@correspondwith.me>, 2022\n"
 "Language-Team: Japanese (https://www.transifex.com/fcitx/teams/12005/ja/)\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -23,49 +24,50 @@ msgstr ""
 
 #: src/rimeengine.h:42
 msgid "Commit current text when deactivating"
-msgstr ""
+msgstr "非アクティブ化するときに現在のテキストをコミットします"
 
-#: src/rimeengine.cpp:115
+#: src/rimeengine.cpp:117
 msgid "Deploy"
 msgstr "デプロイ"
 
 #: src/rimeengine.h:39
 msgid "Fix embedded preedit cursor at the beginning of the preedit"
-msgstr ""
+msgstr "プリエディットカーソルをプリエディットの先頭に固定する"
 
-#: src/rimeengine.cpp:363
+#: src/rimeengine.cpp:369
 msgid "Full Shape is enabled."
-msgstr ""
+msgstr "全角は有効です。"
 
-#: src/rimeengine.cpp:365
+#: src/rimeengine.cpp:372
 msgid "Full width punctuation is enabled."
-msgstr ""
+msgstr "全角句読点は有効です。"
 
-#: src/rimeengine.cpp:361
+#: src/rimeengine.cpp:366
 msgid "Half Shape is enabled."
-msgstr ""
+msgstr "半角は有効です。"
 
-#: src/rimeengine.cpp:367
+#: src/rimeengine.cpp:375
 msgid "Half width punctuation is enabled."
-msgstr ""
+msgstr "半角句読点は有効です。"
 
-#: src/rimestate.cpp:55 src/rimeengine.cpp:451
+#: src/rimestate.cpp:54 src/rimeengine.cpp:469
 msgid "Latin Mode"
 msgstr "ラテンモード"
 
 #: src/rimeengine.h:55
 msgid "Load available plugins automatically"
-msgstr ""
+msgstr "利用可能なプラグインを自動的にロードする"
 
 #: src/rimeengine.h:59
 msgid "Modules"
-msgstr ""
+msgstr "モジュール"
 
 #: src/rimeengine.h:57
 msgid "Plugins"
-msgstr ""
+msgstr "プラグイン"
 
-#: src/rimeengine.cpp:378 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
+#: src/rimeengine.cpp:387 src/rimeengine.cpp:388 src/rime.conf.in:3
+#: src/rime-addon.conf.in.in:3
 msgid "Rime"
 msgstr "Rime"
 
@@ -77,7 +79,7 @@ msgstr "Fcitx 用 Rime ラッパー"
 msgid "Rime for Fcitx 5"
 msgstr "Rime for Fcitx 5"
 
-#: src/rimeengine.cpp:355
+#: src/rimeengine.cpp:359
 msgid "Rime has encountered an error. See /tmp/rime.fcitx.ERROR for details."
 msgstr ""
 "Rimeでエラーが起こりました。より詳しくは /tmp/rime.fcitx.ERROR を見てくださ"
@@ -87,11 +89,11 @@ msgstr ""
 msgid "Rime input method"
 msgstr "Rime 入力メソッド"
 
-#: src/rimeengine.cpp:352
+#: src/rimeengine.cpp:356
 msgid "Rime is ready."
 msgstr "Rimeの準備ができました。"
 
-#: src/rimeengine.cpp:349
+#: src/rimeengine.cpp:353
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -103,18 +105,18 @@ msgstr ""
 msgid "Show preedit within application"
 msgstr "アプリケーション内でプリエディットを表示"
 
-#: src/rimeengine.cpp:371
+#: src/rimeengine.cpp:381
 msgid "Simplified Chinese is enabled."
-msgstr ""
+msgstr "簡体字は有効です。"
 
-#: src/rimeengine.cpp:127
+#: src/rimeengine.cpp:129
 msgid "Synchronize"
 msgstr "同期"
 
-#: src/rimeengine.cpp:369
+#: src/rimeengine.cpp:378
 msgid "Traditional Chinese is enabled."
-msgstr ""
+msgstr "繁體字は有効です。"
 
 #: src/rimeengine.h:44
 msgid "User data dir"
-msgstr ""
+msgstr "ユーザーデータディレクトリ"

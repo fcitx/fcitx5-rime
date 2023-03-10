@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-07 20:25+0000\n"
+"POT-Creation-Date: 2023-03-10 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Aaron Muir Hamilton <aaron@correspondwith.me>, 2022\n"
 "Language-Team: Japanese (https://www.transifex.com/fcitx/teams/12005/ja/)\n"
@@ -38,17 +38,9 @@ msgstr "プリエディットカーソルをプリエディットの先頭に固
 msgid "Full Shape is enabled."
 msgstr "全角は有効です。"
 
-#: src/rimeengine.cpp:372
-msgid "Full width punctuation is enabled."
-msgstr "全角句読点は有効です。"
-
 #: src/rimeengine.cpp:366
 msgid "Half Shape is enabled."
 msgstr "半角は有効です。"
-
-#: src/rimeengine.cpp:375
-msgid "Half width punctuation is enabled."
-msgstr "半角句読点は有効です。"
 
 #: src/rimestate.cpp:54 src/rimeengine.cpp:469
 msgid "Latin Mode"
@@ -65,6 +57,14 @@ msgstr "モジュール"
 #: src/rimeengine.h:57
 msgid "Plugins"
 msgstr "プラグイン"
+
+#: src/rimeengine.cpp:375
+msgid "Punctuation conversion is disabled."
+msgstr ""
+
+#: src/rimeengine.cpp:372
+msgid "Punctuation conversion is enabled."
+msgstr ""
 
 #: src/rimeengine.cpp:387 src/rimeengine.cpp:388 src/rime.conf.in:3
 #: src/rime-addon.conf.in.in:3

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2022-12-17 20:25+0000\n"
+"POT-Creation-Date: 2023-03-10 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Neko ◣ 0xFF, 2022\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/fcitx/teams/12005/"
@@ -40,16 +40,8 @@ msgstr "在預編輯的開頭修復嵌入的預編輯光標"
 msgid "Full Shape is enabled."
 msgstr ""
 
-#: src/rimeengine.cpp:372
-msgid "Full width punctuation is enabled."
-msgstr ""
-
 #: src/rimeengine.cpp:366
 msgid "Half Shape is enabled."
-msgstr ""
-
-#: src/rimeengine.cpp:375
-msgid "Half width punctuation is enabled."
 msgstr ""
 
 #: src/rimestate.cpp:54 src/rimeengine.cpp:469
@@ -67,6 +59,14 @@ msgstr "模組"
 #: src/rimeengine.h:57
 msgid "Plugins"
 msgstr "插件"
+
+#: src/rimeengine.cpp:375
+msgid "Punctuation conversion is disabled."
+msgstr ""
+
+#: src/rimeengine.cpp:372
+msgid "Punctuation conversion is enabled."
+msgstr ""
 
 #: src/rimeengine.cpp:387 src/rimeengine.cpp:388 src/rime.conf.in:3
 #: src/rime-addon.conf.in.in:3

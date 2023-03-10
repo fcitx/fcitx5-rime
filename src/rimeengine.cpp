@@ -369,10 +369,10 @@ void RimeEngine::notify(const std::string &messageType,
             message = _("Full Shape is enabled.");
         } else if (messageValue == "!ascii_punct") {
             tipId = "fcitx-rime-ascii-punct";
-            message = _("Full width punctuation is enabled.");
+            message = _("Punctuation conversion is enabled.");
         } else if (messageValue == "ascii_punct") {
             tipId = "fcitx-rime-ascii-punct";
-            message = _("Half width punctuation is enabled.");
+            message = _("Punctuation conversion is disabled.");
         } else if (messageValue == "!simplification") {
             tipId = "fcitx-rime-simplification";
             message = _("Traditional Chinese is enabled.");

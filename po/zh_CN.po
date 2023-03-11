@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the fcitx5-rime package.
 #
 # Translators:
-# csslayer <wengxt@gmail.com>, 2022
+# csslayer <wengxt@gmail.com>, 2023
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2023-03-10 20:24+0000\n"
+"POT-Creation-Date: 2023-03-11 04:08+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: csslayer <wengxt@gmail.com>, 2022\n"
+"Last-Translator: csslayer <wengxt@gmail.com>, 2023\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/fcitx/teams/12005/"
 "zh_CN/)\n"
 "Language: zh_CN\n"
@@ -58,11 +58,11 @@ msgstr "插件"
 
 #: src/rimeengine.cpp:375
 msgid "Punctuation conversion is disabled."
-msgstr ""
+msgstr "已禁用标点转换。"
 
 #: src/rimeengine.cpp:372
 msgid "Punctuation conversion is enabled."
-msgstr ""
+msgstr "已启用标点转换"
 
 #: src/rimeengine.cpp:387 src/rimeengine.cpp:388 src/rime.conf.in:3
 #: src/rime-addon.conf.in.in:3

@@ -4,15 +4,15 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
-# Dmitry <dmitrydmitry761@gmail.com>, 2022
+# Dmitry <dmitrydmitry761@gmail.com>, 2023
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2023-03-10 20:24+0000\n"
+"POT-Creation-Date: 2023-03-11 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: Dmitry <dmitrydmitry761@gmail.com>, 2022\n"
+"Last-Translator: Dmitry <dmitrydmitry761@gmail.com>, 2023\n"
 "Language-Team: Russian (https://www.transifex.com/fcitx/teams/12005/ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -62,11 +62,11 @@ msgstr "Плагины"
 
 #: src/rimeengine.cpp:375
 msgid "Punctuation conversion is disabled."
-msgstr ""
+msgstr "Преобразование знаков препинания отключено."
 
 #: src/rimeengine.cpp:372
 msgid "Punctuation conversion is enabled."
-msgstr ""
+msgstr "Преобразование знаков препинания включено."
 
 #: src/rimeengine.cpp:387 src/rimeengine.cpp:388 src/rime.conf.in:3
 #: src/rime-addon.conf.in.in:3

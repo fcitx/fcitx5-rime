@@ -8,15 +8,16 @@
 # bruh, 2020
 # 菘菘 <rrt467778@gmail.com>, 2022
 # Neko ◣ 0xFF, 2022
+# Lau YeeYu, 2023
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2023-03-10 20:24+0000\n"
+"POT-Creation-Date: 2023-04-25 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: Neko ◣ 0xFF, 2022\n"
-"Language-Team: Chinese (Taiwan) (https://www.transifex.com/fcitx/teams/12005/"
+"Last-Translator: Lau YeeYu, 2023\n"
+"Language-Team: Chinese (Taiwan) (https://app.transifex.com/fcitx/teams/12005/"
 "zh_TW/)\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -38,11 +39,11 @@ msgstr "在預編輯的開頭修復嵌入的預編輯光標"
 
 #: src/rimeengine.cpp:369
 msgid "Full Shape is enabled."
-msgstr ""
+msgstr "已啟用全形字符。"
 
 #: src/rimeengine.cpp:366
 msgid "Half Shape is enabled."
-msgstr ""
+msgstr "已啟用半形字符。"
 
 #: src/rimestate.cpp:54 src/rimeengine.cpp:469
 msgid "Latin Mode"
@@ -62,11 +63,11 @@ msgstr "插件"
 
 #: src/rimeengine.cpp:375
 msgid "Punctuation conversion is disabled."
-msgstr ""
+msgstr "已禁用標點轉換。"
 
 #: src/rimeengine.cpp:372
 msgid "Punctuation conversion is enabled."
-msgstr ""
+msgstr "已啟用標點轉換。"
 
 #: src/rimeengine.cpp:387 src/rimeengine.cpp:388 src/rime.conf.in:3
 #: src/rime-addon.conf.in.in:3

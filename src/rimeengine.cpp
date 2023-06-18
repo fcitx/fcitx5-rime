@@ -348,7 +348,11 @@ void RimeEngine::reset(const InputMethodEntry &, InputContextEvent &event) {
     inputContext->updateUserInterface(UserInterfaceComponent::InputPanel);
 }
 
-void RimeEngine::save() {}
+void RimeEngine::save() {
+    // Block notification for 5 sec.
+    blockNotificationBefore_ = now(CLOCK_MONOTONIC) + 5000000;
+    sync();
+}
 
 void RimeEngine::rimeNotificationHandler(void *context, RimeSessionId session,
                                          const char *messageType,
@@ -365,6 +369,9 @@ void RimeEngine::rimeNotificationHandler(void *context, RimeSessionId session,
 
 void RimeEngine::notify(const std::string &messageType,
                         const std::string &messageValue) {
+    if (now(CLOCK_MONOTONIC) < blockNotificationBefore_) {
+        return;
+    }
     const char *message = nullptr;
     const char *icon = "";
     const char *tipId = "";

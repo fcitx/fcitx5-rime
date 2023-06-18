@@ -122,6 +122,7 @@ private:
     EventDispatcher eventDispatcher_;
     rime_api_t *api_;
     bool firstRun_ = true;
+    uint64_t blockNotificationBefore_ = 0;
     FactoryFor<RimeState> factory_;
 
     std::unique_ptr<Action> imAction_;

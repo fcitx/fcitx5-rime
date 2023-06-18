@@ -175,6 +175,28 @@ void RimeEngine::rimeStart(bool fullcheck) {
     fcitx_rime_traits.distribution_name = "Rime";
     fcitx_rime_traits.distribution_code_name = "fcitx-rime";
     fcitx_rime_traits.distribution_version = FCITX_RIME_VERSION;
+#ifndef FCITX_RIME_NO_LOG_LEVEL
+    switch (rime().logLevel()) {
+    case NoLog:
+        fcitx_rime_traits.min_log_level = 4;
+        break;
+    case Fatal:
+        fcitx_rime_traits.min_log_level = 3;
+        break;
+    case Error:
+        fcitx_rime_traits.min_log_level = 2;
+        break;
+    case Warn:
+    case Info:
+        fcitx_rime_traits.min_log_level = 1;
+        break;
+    case Debug:
+    default:
+        // Rime info is too noisy.
+        fcitx_rime_traits.min_log_level = 0;
+        break;
+    }
+#endif
 
 #ifdef FCITX_RIME_LOAD_PLUGIN
     std::vector<const char *> modules;

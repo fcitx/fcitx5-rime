@@ -7,10 +7,13 @@
 #define _FCITX_RIMEENGINE_H_
 
 #include "rimeservice.h"
+#include "rimesession.h"
+#include "rimestate.h"
 #include <fcitx-config/configuration.h>
 #include <fcitx-config/iniparser.h>
 #include <fcitx-utils/event.h>
 #include <fcitx-utils/eventdispatcher.h>
+#include <fcitx-utils/handlertable_details.h>
 #include <fcitx-utils/i18n.h>
 #include <fcitx-utils/library.h>
 #include <fcitx-utils/log.h>
@@ -103,6 +106,7 @@ public:
     void rimeStart(bool fullcheck);
 
     RimeState *state(InputContext *ic);
+    RimeSessionPool &sessionPool() { return sessionPool_; }
 
     FCITX_ADDON_DEPENDENCY_LOADER(dbus, instance_->addonManager());
 
@@ -116,6 +120,7 @@ private:
     void sync();
     void updateSchemaMenu();
     void notify(const std::string &type, const std::string &value);
+    void releaseAllSession();
 
     IconTheme theme_;
     Instance *instance_;
@@ -141,8 +146,10 @@ private:
     std::unordered_map<std::string, Library> pluginPool_;
 #endif
     std::unique_ptr<EventSourceTime> timeEvent_;
+    std::unique_ptr<HandlerTableEntry<EventHandler>> globalConfigReloadHandle_;
 
     RimeService service_{this};
+    RimeSessionPool sessionPool_;
 };
 
 class RimeEngineFactory : public AddonFactory {

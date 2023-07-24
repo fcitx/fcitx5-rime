@@ -10,6 +10,7 @@
 #include <fcitx/candidatelist.h>
 #include <fcitx/inputcontext.h>
 #include <fcitx/inputpanel.h>
+#include <rime_api.h>
 
 namespace fcitx {
 
@@ -26,22 +27,24 @@ bool emptyExceptAux(const InputPanel &inputPanel) {
 
 RimeState::RimeState(RimeEngine *engine, InputContext &ic)
     : engine_(engine), ic_(ic) {
-    createSession();
 }
 
 RimeState::~RimeState() {
-    if (auto api = engine_->api()) {
-        if (session_) {
-            api->destroy_session(session_);
-        }
+}
+
+RimeSessionId RimeState::session() {
+    if (!session_) {
+        session_ = engine_->sessionPool().requestSession(&ic_);
     }
+    if (!session_) {
+        return 0;
+    }
+    return session_->id();
 }
 
 void RimeState::clear() {
-    if (auto api = engine_->api()) {
-        if (session_) {
-            api->clear_composition(session_);
-        }
+    if (auto session = this->session()) {
+        engine_->api()->clear_composition(session);
     }
 }
 
@@ -61,7 +64,7 @@ std::string RimeState::subMode() {
 
 std::string RimeState::subModeLabel() {
     std::string result;
-    getStatus([this, &result](const RimeStatus &status) {
+    getStatus([&result](const RimeStatus &status) {
         if (status.is_disabled) {
             result = "";
         } else if (status.is_ascii_mode) {
@@ -84,7 +87,7 @@ void RimeState::setLatinMode(bool latin) {
     if (!api || api->is_maintenance_mode()) {
         return;
     }
-    api->set_option(session_, "ascii_mode", latin);
+    api->set_option(session(), "ascii_mode", latin);
 }
 
 void RimeState::selectSchema(const std::string &schema) {
@@ -92,8 +95,8 @@ void RimeState::selectSchema(const std::string &schema) {
     if (!api || api->is_maintenance_mode()) {
         return;
     }
-    api->set_option(session_, "ascii_mode", false);
-    api->select_schema(session_, schema.data());
+    api->set_option(session(), "ascii_mode", false);
+    api->select_schema(session(), schema.data());
 }
 
 void RimeState::keyEvent(KeyEvent &event) {
@@ -101,10 +104,8 @@ void RimeState::keyEvent(KeyEvent &event) {
     if (!api || api->is_maintenance_mode()) {
         return;
     }
-    if (!api->find_session(session_)) {
-        createSession();
-    }
-    if (!session_) {
+    auto session = this->session();
+    if (!session) {
         return;
     }
 
@@ -121,11 +122,11 @@ void RimeState::keyEvent(KeyEvent &event) {
         // IBUS_RELEASE_MASK
         intStates |= (1 << 30);
     }
-    auto result = api->process_key(session_, event.rawKey().sym(), intStates);
+    auto result = api->process_key(session, event.rawKey().sym(), intStates);
 
     auto ic = event.inputContext();
     RIME_STRUCT(RimeCommit, commit);
-    if (api->get_commit(session_, &commit)) {
+    if (api->get_commit(session, &commit)) {
         ic->commitString(commit.text);
         api->free_commit(&commit);
     }
@@ -143,14 +144,12 @@ bool RimeState::getStatus(
     if (!api) {
         return false;
     }
-    if (!api->find_session(session_)) {
-        createSession();
-    }
-    if (!session_) {
+    auto session = this->session();
+    if (!session) {
         return false;
     }
     RIME_STRUCT(RimeStatus, status);
-    if (!api->get_status(session_, &status)) {
+    if (!api->get_status(session, &status)) {
         return false;
     }
     callback(status);
@@ -243,12 +242,13 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
         if (!api || api->is_maintenance_mode()) {
             return;
         }
-        if (!api->find_session(session_)) {
+        auto session = this->session();
+        if (!api->find_session(session)) {
             return;
         }
 
         RIME_STRUCT(RimeContext, context);
-        if (!api->get_context(session_, &context)) {
+        if (!api->get_context(session, &context)) {
             break;
         }
 
@@ -285,18 +285,14 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
 }
 
 void RimeState::release() {
-    if (auto api = engine_->api()) {
-        if (session_) {
-            api->destroy_session(session_);
-        }
-        session_ = 0;
-    }
+    session_.reset();
 }
 
 void RimeState::commitPreedit(InputContext *ic) {
     if (auto api = engine_->api()) {
         RIME_STRUCT(RimeContext, context);
-        if (!api->get_context(session_, &context)) {
+        auto session = this->session();
+        if (!api->get_context(session, &context)) {
             return;
         }
         if (context.commit_text_preview) {
@@ -305,29 +301,4 @@ void RimeState::commitPreedit(InputContext *ic) {
         api->free_context(&context);
     }
 }
-
-void RimeState::createSession() {
-    auto api = engine_->api();
-    if (!api) {
-        return;
-    }
-    session_ = api->create_session();
-    if (!session_) {
-        return;
-    }
-
-    if (ic_.program().empty()) {
-        return;
-    }
-
-    const auto &appOptions = engine_->appOptions();
-    if (auto iter = appOptions.find(ic_.program()); iter != appOptions.end()) {
-        RIME_DEBUG() << "Apply app options to " << ic_.program() << ": "
-                     << iter->second;
-        for (const auto &[key, value] : iter->second) {
-            api->set_option(session_, key.data(), value);
-        }
-    }
-}
-
 } // namespace fcitx

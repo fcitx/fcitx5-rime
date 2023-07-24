@@ -6,10 +6,16 @@
 #ifndef _FCITX_RIMESTATE_H_
 #define _FCITX_RIMESTATE_H_
 
-#include "rimeengine.h"
+#include "rimesession.h"
+#include <fcitx/inputcontextmanager.h>
 #include <fcitx/inputcontextproperty.h>
+#include <fcitx/globalconfig.h>
+#include <memory>
+#include <rime_api.h>
 
 namespace fcitx {
+
+class RimeEngine;
 
 class RimeState : public InputContextProperty {
 public:
@@ -28,14 +34,13 @@ public:
     std::string subModeLabel();
     void setLatinMode(bool latin);
     void selectSchema(const std::string &schemaId);
+    RimeSessionId session();
 
 private:
-    void createSession();
-
     std::string lastMode_;
     RimeEngine *engine_;
-    RimeSessionId session_ = 0;
     InputContext &ic_;
+    std::shared_ptr<RimeSessionHolder> session_;
 };
 } // namespace fcitx
 

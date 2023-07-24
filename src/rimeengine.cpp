@@ -107,7 +107,8 @@ private:
 
 RimeEngine::RimeEngine(Instance *instance)
     : instance_(instance), api_(rime_get_api()),
-      factory_([this](InputContext &ic) { return new RimeState(this, ic); }) {
+      factory_([this](InputContext &ic) { return new RimeState(this, ic); }),
+      sessionPool_(this, instance_->globalConfig().shareInputState()) {
     imAction_ = std::make_unique<IMAction>(this);
     instance_->userInterfaceManager().registerAction("fcitx-rime-im",
                                                      imAction_.get());
@@ -137,6 +138,10 @@ RimeEngine::RimeEngine(Instance *instance)
     });
     instance_->userInterfaceManager().registerAction("fcitx-rime-sync",
                                                      &syncAction_);
+    globalConfigReloadHandle_ = instance_->watchEvent(EventType::GlobalConfigReloaded, EventWatcherPhase::Default, [this] (Event&) {
+        releaseAllSession();
+        sessionPool_.setPropertyPropagatePolicy(instance_->globalConfig().shareInputState());
+    });
     reloadConfig();
 }
 
@@ -470,14 +475,18 @@ std::string RimeEngine::subModeIconImpl(const InputMethodEntry &,
     return result;
 }
 
-void RimeEngine::deploy() {
-    RIME_DEBUG() << "Rime Deploy";
+void RimeEngine::releaseAllSession() {
     instance_->inputContextManager().foreach([this](InputContext *ic) {
         if (auto state = this->state(ic)) {
             state->release();
         }
         return true;
     });
+}
+
+void RimeEngine::deploy() {
+    RIME_DEBUG() << "Rime Deploy";
+    releaseAllSession();
     api_->finalize();
     rimeStart(true);
 }

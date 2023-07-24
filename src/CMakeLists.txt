@@ -3,6 +3,7 @@ set(RIME_SOURCES
     rimeengine.cpp
     rimecandidate.cpp
     rimeservice.cpp
+    rimesession.cpp
 )
 add_library(rime MODULE ${RIME_SOURCES})
 target_link_libraries(rime Fcitx5::Core Fcitx5::Config PkgConfig::Rime Fcitx5::Module::Notifications Fcitx5::Module::DBus)

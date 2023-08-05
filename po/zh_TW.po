@@ -35,7 +35,7 @@ msgstr "重新部署"
 
 #: src/rimeengine.h:39
 msgid "Fix embedded preedit cursor at the beginning of the preedit"
-msgstr "在預編輯的開頭修復嵌入的預編輯光標"
+msgstr "在預編輯的開頭固定嵌入的預編輯光標"
 
 #: src/rimeengine.cpp:369
 msgid "Full Shape is enabled."

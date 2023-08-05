@@ -121,6 +121,7 @@ private:
     void updateSchemaMenu();
     void notify(const std::string &type, const std::string &value);
     void releaseAllSession();
+    void updateAppOptions();
 
     IconTheme theme_;
     Instance *instance_;

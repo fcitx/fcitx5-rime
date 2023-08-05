@@ -229,10 +229,14 @@ void RimeEngine::rimeStart(bool fullcheck) {
     }
     api_->initialize(&fcitx_rime_traits);
     api_->set_notification_handler(&rimeNotificationHandler, this);
-    if (api_->start_maintenance(fullcheck)) {
-        api_->deploy_config_file("fcitx5.yaml", "config_version");
-    }
+    api_->start_maintenance(fullcheck);
 
+    if (!api_->is_maintenance_mode()) {
+        updateAppOptions();
+    }
+}
+
+void RimeEngine::updateAppOptions() {
     appOptions_.clear();
     RimeConfig config = {NULL};
     if (api_->config_open("fcitx5", &config)) {
@@ -240,6 +244,7 @@ void RimeEngine::rimeStart(bool fullcheck) {
         api_->config_close(&config);
     }
     RIME_DEBUG() << "App options are " << appOptions_;
+    releaseAllSession();
 }
 
 void RimeEngine::reloadConfig() {
@@ -391,6 +396,11 @@ void RimeEngine::notify(const std::string &messageType,
         } else if (messageValue == "success") {
             message = _("Rime is ready.");
             updateSchemaMenu();
+            if (!api_->is_maintenance_mode()) {
+                api_->deploy_config_file("fcitx5.yaml", "config_version");
+                updateAppOptions();
+                releaseAllSession();
+            }
         } else if (messageValue == "failure") {
             message = _("Rime has encountered an error. "
                         "See /tmp/rime.fcitx.ERROR for details.");

@@ -138,10 +138,13 @@ RimeEngine::RimeEngine(Instance *instance)
     });
     instance_->userInterfaceManager().registerAction("fcitx-rime-sync",
                                                      &syncAction_);
-    globalConfigReloadHandle_ = instance_->watchEvent(EventType::GlobalConfigReloaded, EventWatcherPhase::Default, [this] (Event&) {
-        releaseAllSession();
-        sessionPool_.setPropertyPropagatePolicy(instance_->globalConfig().shareInputState());
-    });
+    globalConfigReloadHandle_ = instance_->watchEvent(
+        EventType::GlobalConfigReloaded, EventWatcherPhase::Default,
+        [this](Event &) {
+            releaseAllSession();
+            sessionPool_.setPropertyPropagatePolicy(
+                instance_->globalConfig().shareInputState());
+        });
     reloadConfig();
 }
 
@@ -166,6 +169,7 @@ void RimeEngine::rimeStart(bool fullcheck) {
     auto userDir = stringutils::joinPath(
         StandardPath::global().userDirectory(StandardPath::Type::PkgData),
         "rime");
+    RIME_DEBUG() << "Rime data directory: " << userDir;
     if (!fs::makePath(userDir)) {
         if (!fs::isdir(userDir)) {
             RIME_ERROR() << "Failed to create user directory: " << userDir;
@@ -189,11 +193,9 @@ void RimeEngine::rimeStart(bool fullcheck) {
         fcitx_rime_traits.min_log_level = 3;
         break;
     case Error:
-        fcitx_rime_traits.min_log_level = 2;
-        break;
     case Warn:
     case Info:
-        fcitx_rime_traits.min_log_level = 1;
+        fcitx_rime_traits.min_log_level = 2;
         break;
     case Debug:
     default:

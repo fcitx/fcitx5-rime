@@ -6,8 +6,8 @@
  */
 #include "rimeservice.h"
 #include "dbus_public.h"
-#include "rimestate.h"
 #include "rimeengine.h"
+#include "rimestate.h"
 
 namespace fcitx {
 

@@ -26,11 +26,9 @@ bool emptyExceptAux(const InputPanel &inputPanel) {
 } // namespace
 
 RimeState::RimeState(RimeEngine *engine, InputContext &ic)
-    : engine_(engine), ic_(ic) {
-}
+    : engine_(engine), ic_(ic) {}
 
-RimeState::~RimeState() {
-}
+RimeState::~RimeState() {}
 
 RimeSessionId RimeState::session() {
     if (!session_) {
@@ -284,9 +282,7 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
     }
 }
 
-void RimeState::release() {
-    session_.reset();
-}
+void RimeState::release() { session_.reset(); }
 
 void RimeState::commitPreedit(InputContext *ic) {
     if (auto api = engine_->api()) {

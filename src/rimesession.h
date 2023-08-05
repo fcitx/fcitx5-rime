@@ -21,44 +21,43 @@ class RimeSessionPool;
 
 class RimeSessionHolder {
     friend class RimeSessionPool;
+
 public:
-    RimeSessionHolder(RimeSessionPool* pool, const std::string &program);
+    RimeSessionHolder(RimeSessionPool *pool, const std::string &program);
 
     RimeSessionHolder(RimeSessionHolder &&) = delete;
 
     ~RimeSessionHolder();
 
-    RimeSessionId id() const
-    {
-        return id_;
-    }
+    RimeSessionId id() const { return id_; }
 
 private:
-    RimeSessionPool* pool_;
+    RimeSessionPool *pool_;
     RimeSessionId id_ = 0;
     std::string key_;
 };
 
 class RimeSessionPool {
     friend class RimeSessionHolder;
+
 public:
     RimeSessionPool(RimeEngine *engine, PropertyPropagatePolicy initialPolicy);
 
     void setPropertyPropagatePolicy(PropertyPropagatePolicy policy);
 
-    std::shared_ptr<RimeSessionHolder> requestSession(InputContext* ic);
+    std::shared_ptr<RimeSessionHolder> requestSession(InputContext *ic);
 
-    RimeEngine* engine() const { return engine_; }
+    RimeEngine *engine() const { return engine_; }
 
-    
 private:
-    void registerSession(const std::string &key, std::shared_ptr<RimeSessionHolder> session);
+    void registerSession(const std::string &key,
+                         std::shared_ptr<RimeSessionHolder> session);
     void unregisterSession(const std::string &key);
     RimeEngine *engine_;
     PropertyPropagatePolicy policy_;
     std::unordered_map<std::string, std::weak_ptr<RimeSessionHolder>> sessions_;
 };
 
-}
+} // namespace fcitx
 
 #endif

@@ -503,7 +503,11 @@ void RimeEngine::deploy() {
     rimeStart(true);
 }
 
-void RimeEngine::sync() { api_->sync_user_data(); }
+void RimeEngine::sync() {
+    RIME_DEBUG() << "Rime Sync user data";
+    api_->sync_user_data();
+    releaseAllSession();
+}
 
 void RimeEngine::updateSchemaMenu() {
     if (!api_) {

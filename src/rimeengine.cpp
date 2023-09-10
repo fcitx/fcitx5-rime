@@ -19,6 +19,7 @@
 #include <fcitx/inputcontextmanager.h>
 #include <fcitx/inputpanel.h>
 #include <fcitx/userinterfacemanager.h>
+#include <format>
 #include <rime_api.h>
 
 FCITX_DEFINE_LOG_CATEGORY(rime, "rime");
@@ -179,7 +180,7 @@ void RimeEngine::rimeStart(bool fullcheck) {
 
     RIME_STRUCT(RimeTraits, fcitx_rime_traits);
     fcitx_rime_traits.shared_data_dir = sharedDataDir;
-    fcitx_rime_traits.app_name = "rime.fcitx-rime";
+    fcitx_rime_traits.app_name = APP_NAME;
     fcitx_rime_traits.user_data_dir = userDir.c_str();
     fcitx_rime_traits.distribution_name = "Rime";
     fcitx_rime_traits.distribution_code_name = "fcitx-rime";
@@ -402,8 +403,10 @@ void RimeEngine::notify(const std::string &messageType,
                 releaseAllSession();
             }
         } else if (messageValue == "failure") {
-            message = _("Rime has encountered an error. "
-                        "See /tmp/rime.fcitx.ERROR for details.");
+            message = _(std::format("Rime has encountered an error. See "
+                                    "/tmp/{}.ERROR for details.",
+                                    APP_NAME)
+                            .c_str());
         }
     } else if (messageType == "option") {
         icon = "fcitx-rime";

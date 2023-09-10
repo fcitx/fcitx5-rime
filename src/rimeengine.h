@@ -123,6 +123,8 @@ private:
     void releaseAllSession();
     void updateAppOptions();
 
+    static constexpr inline const char *APP_NAME = "rime.fcitx-rime";
+
     IconTheme theme_;
     Instance *instance_;
     EventDispatcher eventDispatcher_;

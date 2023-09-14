@@ -15,13 +15,14 @@ namespace fcitx {
 class RimeCandidateWord : public CandidateWord {
 public:
     RimeCandidateWord(RimeEngine *engine, const RimeCandidate &candidate,
-                      KeySym sym);
+                      KeySym sym, int idx);
 
     void select(InputContext *inputContext) const override;
 
 private:
     RimeEngine *engine_;
     KeySym sym_;
+    int idx_;
 };
 
 class RimeCandidateList final : public CandidateList,

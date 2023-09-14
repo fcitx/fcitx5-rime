@@ -10,8 +10,9 @@
 namespace fcitx {
 
 RimeCandidateWord::RimeCandidateWord(RimeEngine *engine,
-                                     const RimeCandidate &candidate, KeySym sym)
-    : CandidateWord(), engine_(engine), sym_(sym) {
+                                     const RimeCandidate &candidate, KeySym sym,
+                                     int idx)
+    : CandidateWord(), engine_(engine), sym_(sym), idx_(idx) {
     Text text;
     text.append(std::string(candidate.text));
     if (candidate.comment && strlen(candidate.comment)) {
@@ -22,11 +23,14 @@ RimeCandidateWord::RimeCandidateWord(RimeEngine *engine,
 }
 
 void RimeCandidateWord::select(InputContext *inputContext) const {
-    // Rime does not provide such an API, simulate the selection with a fake
-    // key event.
     if (auto state = engine_->state(inputContext)) {
+#ifndef FCITX_RIME_NO_SELECT_CANDIDATE
+        state->selectCandidate(inputContext, idx_);
+#else
+        // Simulate the selection with a fake key event.
         KeyEvent event(inputContext, Key(sym_));
         state->keyEvent(event);
+#endif
     }
 }
 
@@ -62,7 +66,7 @@ RimeCandidateList::RimeCandidateList(RimeEngine *engine, InputContext *ic,
             sym = static_cast<KeySym>('0' + (i + 1) % 10);
         }
         candidateWords_.emplace_back(std::make_unique<RimeCandidateWord>(
-            engine, menu.candidates[i], sym));
+            engine, menu.candidates[i], sym, i));
 
         if (i == menu.highlighted_candidate_index) {
             cursor_ = i;

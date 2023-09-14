@@ -136,6 +136,26 @@ void RimeState::keyEvent(KeyEvent &event) {
     }
 }
 
+#ifndef FCITX_RIME_NO_SELECT_CANDIDATE
+void RimeState::selectCandidate(InputContext *inputContext, int idx) {
+    auto api = engine_->api();
+    if (!api || api->is_maintenance_mode()) {
+        return;
+    }
+    auto session = this->session();
+    if (!session) {
+        return;
+    }
+    api->select_candidate_on_current_page(session, idx);
+    RIME_STRUCT(RimeCommit, commit);
+    if (api->get_commit(session, &commit)) {
+        inputContext->commitString(commit.text);
+        api->free_commit(&commit);
+    }
+    updateUI(inputContext, false);
+}
+#endif
+
 bool RimeState::getStatus(
     const std::function<void(const RimeStatus &)> &callback) {
     auto api = engine_->api();

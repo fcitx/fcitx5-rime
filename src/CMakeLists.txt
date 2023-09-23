@@ -2,11 +2,26 @@ set(RIME_SOURCES
     rimestate.cpp
     rimeengine.cpp
     rimecandidate.cpp
-    rimeservice.cpp
     rimesession.cpp
 )
+
+set(RIME_LINK_LIBRARIES
+    Fcitx5::Core
+    Fcitx5::Config
+    PkgConfig::Rime
+    Fcitx5::Module::Notifications
+)
+
+find_package(Fcitx5ModuleDBus QUIET)
+if (Fcitx5ModuleDBus_FOUND)
+    list(APPEND RIME_SOURCES rimeservice.cpp)
+    list(APPEND RIME_LINK_LIBRARIES Fcitx5::Module::DBus)
+else()
+    add_definitions(-DFCITX_RIME_NO_DBUS)
+endif()
+
 add_library(rime MODULE ${RIME_SOURCES})
-target_link_libraries(rime Fcitx5::Core Fcitx5::Config PkgConfig::Rime Fcitx5::Module::Notifications Fcitx5::Module::DBus)
+target_link_libraries(rime ${RIME_LINK_LIBRARIES})
 set_target_properties(rime PROPERTIES PREFIX "")
 install(TARGETS rime DESTINATION "${CMAKE_INSTALL_LIBDIR}/fcitx5")
 fcitx5_translate_desktop_file(rime.conf.in rime.conf)

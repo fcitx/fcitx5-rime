@@ -6,7 +6,9 @@
 #ifndef _FCITX_RIMEENGINE_H_
 #define _FCITX_RIMEENGINE_H_
 
+#ifndef FCITX_RIME_NO_DBUS
 #include "rimeservice.h"
+#endif
 #include "rimesession.h"
 #include "rimestate.h"
 #include <fcitx-config/configuration.h>
@@ -108,7 +110,9 @@ public:
     RimeState *state(InputContext *ic);
     RimeSessionPool &sessionPool() { return sessionPool_; }
 
+#ifndef FCITX_RIME_NO_DBUS
     FCITX_ADDON_DEPENDENCY_LOADER(dbus, instance_->addonManager());
+#endif
 
 private:
     static void rimeNotificationHandler(void *context_object,
@@ -149,7 +153,9 @@ private:
     std::unique_ptr<EventSourceTime> timeEvent_;
     std::unique_ptr<HandlerTableEntry<EventHandler>> globalConfigReloadHandle_;
 
+#ifndef FCITX_RIME_NO_DBUS
     RimeService service_{this};
+#endif
     RimeSessionPool sessionPool_;
 };
 

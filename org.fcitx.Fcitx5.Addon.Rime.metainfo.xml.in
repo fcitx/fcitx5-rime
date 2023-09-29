@@ -10,6 +10,7 @@
   <url type="bugtracker">https://github.com/fcitx/fcitx5-rime/issues</url>
   <project_group>Fcitx</project_group>
   <releases>
+    <release version="5.1.2" date="2023-09-29"/>
     <release version="5.1.1" date="2023-08-19"/>
     <release version="5.1.0" date="2023-08-14"/>
     <release version="5.0.16" date="2023-03-10"/>

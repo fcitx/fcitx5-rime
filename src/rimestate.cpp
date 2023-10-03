@@ -85,7 +85,7 @@ void RimeState::setLatinMode(bool latin) {
     if (!api || api->is_maintenance_mode()) {
         return;
     }
-    api->set_option(session(), "ascii_mode", latin);
+    api->set_option(session(), RIME_ASCII_MODE, latin);
 }
 
 void RimeState::selectSchema(const std::string &schema) {
@@ -93,7 +93,7 @@ void RimeState::selectSchema(const std::string &schema) {
     if (!api || api->is_maintenance_mode()) {
         return;
     }
-    api->set_option(session(), "ascii_mode", false);
+    api->set_option(session(), RIME_ASCII_MODE, false);
     api->select_schema(session(), schema.data());
 }
 

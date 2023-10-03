@@ -13,6 +13,8 @@
 #include <memory>
 #include <rime_api.h>
 
+#define RIME_ASCII_MODE "ascii_mode"
+
 namespace fcitx {
 
 class RimeEngine;

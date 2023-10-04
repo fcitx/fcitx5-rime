@@ -48,6 +48,32 @@ parseAppOptions(rime_api_t *api, RimeConfig *config) {
     api->config_end(&appIter);
     return appOptions;
 }
+
+std::vector<std::string> getListItemPath(rime_api_t *api, RimeConfig *config,
+                                         const std::string &path) {
+    std::vector<std::string> paths;
+    RimeConfigIterator iter;
+    if (api->config_begin_list(&iter, config, path.c_str())) {
+        while (api->config_next(&iter)) {
+            paths.push_back(iter.path);
+        }
+    }
+    return paths;
+}
+
+std::vector<std::string> getListItemString(rime_api_t *api, RimeConfig *config,
+                                           const std::string &path) {
+    std::vector<std::string> values;
+    auto paths = getListItemPath(api, config, path);
+    for (const auto &path : paths) {
+        auto value = api->config_get_cstring(config, path.c_str());
+        if (!value) {
+            return {};
+        }
+        values.emplace_back(value);
+    }
+    return values;
+}
 } // namespace
 
 class IMAction : public Action {
@@ -441,34 +467,17 @@ void RimeEngine::refreshStatusArea(InputContext &ic) {
         return;
     }
     RimeConfig config{};
-    RimeConfigIterator iter;
     if (!api_ || !api_->schema_open(currentSchema.c_str(), &config)) {
         return;
     }
-    if (!api_->config_begin_list(&iter, &config, "switches")) {
-        goto fail;
-    }
-    while (api_->config_next(&iter)) {
-        RimeConfigIterator subIter;
-        std::string path = iter.path;
-        std::string statesPath = path + "/states";
-        if (!api_->config_begin_list(&subIter, &config, statesPath.c_str())) {
+    auto switchPaths = getListItemPath(api_, &config, "switches");
+    for (const auto &switchPath : switchPaths) {
+        auto labels = getListItemString(api_, &config, switchPath + "/states");
+        if (labels.size() <= 1) {
             continue;
         }
-        std::vector<std::string> labels;
-        const char *value = nullptr;
-        while (api_->config_next(&subIter)) {
-            value = api_->config_get_cstring(&config, subIter.path);
-            if (!value) {
-                break;
-            }
-            labels.emplace_back(value);
-        }
-        if (!value || labels.size() <= 1) {
-            continue;
-        }
-        std::string namePath = path + "/name";
-        const char *name = api_->config_get_cstring(&config, namePath.c_str());
+        auto namePath = switchPath + "/name";
+        auto name = api_->config_get_cstring(&config, namePath.c_str());
         if (name) {
             if (labels.size() != 2) {
                 continue;
@@ -481,22 +490,9 @@ void RimeEngine::refreshStatusArea(InputContext &ic) {
             optionActions_.emplace_back(std::make_unique<ToggleAction>(
                 this, currentSchema, optionName, labels[0], labels[1]));
         } else {
-            std::string optionsPath = path + "/options";
-            if (!api_->config_begin_list(&subIter, &config,
-                                         optionsPath.c_str())) {
-                continue;
-            }
-            std::vector<std::string> options;
-            value = nullptr;
-            while (api_->config_next(&subIter)) {
-                value = api_->config_get_cstring(&config, subIter.path);
-                if (!value) {
-                    break;
-                }
-                options.emplace_back(value);
-            }
-            if (!value || labels.size() <= 1 ||
-                labels.size() != options.size()) {
+            auto options =
+                getListItemString(api_, &config, switchPath + "/options");
+            if (labels.size() != options.size()) {
                 continue;
             }
             optionActions_.emplace_back(std::make_unique<SelectAction>(
@@ -505,8 +501,6 @@ void RimeEngine::refreshStatusArea(InputContext &ic) {
         statusArea.addAction(StatusGroup::InputMethod,
                              optionActions_.back().get());
     }
-
-fail:
     api_->config_close(&config);
 }
 

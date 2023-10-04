@@ -454,6 +454,11 @@ void RimeEngine::updateConfig() {
 }
 
 void RimeEngine::refreshStatusArea(InputContext &ic) {
+    // prevent modifying status area owned by other ime
+    // e.g. keyboard-us when typing password
+    if (instance_->inputMethodEntry(&ic)->uniqueName() != "rime") {
+        return;
+    }
     optionActions_.clear();
     auto &statusArea = ic.statusArea();
     statusArea.clearGroup(StatusGroup::InputMethod);

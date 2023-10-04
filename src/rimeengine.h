@@ -139,6 +139,7 @@ private:
     FactoryFor<RimeState> factory_;
 
     std::unique_ptr<Action> imAction_;
+    SimpleAction separatorAction_;
     SimpleAction deployAction_;
     SimpleAction syncAction_;
 

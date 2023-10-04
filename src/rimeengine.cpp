@@ -239,6 +239,7 @@ RimeEngine::RimeEngine(Instance *instance)
                                                      imAction_.get());
     imAction_->setMenu(&schemaMenu_);
     eventDispatcher_.attach(&instance_->eventLoop());
+    separatorAction_.setSeparator(true);
     deployAction_.setIcon("fcitx-rime-deploy");
     deployAction_.setShortText(_("Deploy"));
     deployAction_.connect<SimpleAction::Activated>([this](InputContext *ic) {
@@ -263,6 +264,9 @@ RimeEngine::RimeEngine(Instance *instance)
     });
     instance_->userInterfaceManager().registerAction("fcitx-rime-sync",
                                                      &syncAction_);
+    schemaMenu_.addAction(&separatorAction_);
+    schemaMenu_.addAction(&deployAction_);
+    schemaMenu_.addAction(&syncAction_);
     globalConfigReloadHandle_ = instance_->watchEvent(
         EventType::GlobalConfigReloaded, EventWatcherPhase::Default,
         [this](Event &) {
@@ -710,8 +714,6 @@ void RimeEngine::updateSchemaMenu() {
         return;
     }
 
-    schemaMenu_.addAction(&deployAction_);
-    schemaMenu_.addAction(&syncAction_);
     schemActions_.clear();
     RimeSchemaList list;
     list.size = 0;
@@ -726,7 +728,7 @@ void RimeEngine::updateSchemaMenu() {
                 imAction_->update(ic);
             });
         instance_->userInterfaceManager().registerAction(&schemActions_.back());
-        schemaMenu_.addAction(&schemActions_.back());
+        schemaMenu_.insertAction(&separatorAction_, &schemActions_.back());
         for (size_t i = 0; i < list.size; i++) {
             schemActions_.emplace_back();
             std::string schemaId = list.list[i].schema_id;
@@ -739,7 +741,7 @@ void RimeEngine::updateSchemaMenu() {
                     imAction_->update(ic);
                 });
             instance_->userInterfaceManager().registerAction(&schemaAction);
-            schemaMenu_.addAction(&schemaAction);
+            schemaMenu_.insertAction(&separatorAction_, &schemaAction);
         }
         api_->free_schema_list(&list);
     }

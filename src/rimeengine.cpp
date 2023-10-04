@@ -150,7 +150,7 @@ public:
         connect<SimpleAction::Activated>([this, option](InputContext *ic) {
             auto state = engine_->state(ic);
             auto api = engine_->api();
-            if (!state || !api) {
+            if (!state) {
                 return;
             }
             auto session = state->session();
@@ -164,7 +164,7 @@ public:
     std::string shortText(InputContext *ic) const override {
         auto state = engine_->state(ic);
         auto api = engine_->api();
-        if (!state || !api) {
+        if (!state) {
             return "";
         }
         auto session = state->session();
@@ -196,7 +196,7 @@ public:
                 [this, i](InputContext *ic) {
                     auto state = engine_->state(ic);
                     auto api = engine_->api();
-                    if (!state || !api) {
+                    if (!state) {
                         return;
                     }
                     auto session = state->session();
@@ -218,7 +218,7 @@ public:
     std::string shortText(InputContext *ic) const override {
         auto state = engine_->state(ic);
         auto api = engine_->api();
-        if (!state || !api) {
+        if (!state) {
             return "";
         }
         auto session = state->session();

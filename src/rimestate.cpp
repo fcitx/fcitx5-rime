@@ -82,7 +82,7 @@ std::string RimeState::subModeLabel() {
 
 void RimeState::setLatinMode(bool latin) {
     auto api = engine_->api();
-    if (!api || api->is_maintenance_mode()) {
+    if (api->is_maintenance_mode()) {
         return;
     }
     api->set_option(session(), RIME_ASCII_MODE, latin);
@@ -90,7 +90,7 @@ void RimeState::setLatinMode(bool latin) {
 
 void RimeState::selectSchema(const std::string &schema) {
     auto api = engine_->api();
-    if (!api || api->is_maintenance_mode()) {
+    if (api->is_maintenance_mode()) {
         return;
     }
     api->set_option(session(), RIME_ASCII_MODE, false);
@@ -99,7 +99,7 @@ void RimeState::selectSchema(const std::string &schema) {
 
 void RimeState::keyEvent(KeyEvent &event) {
     auto api = engine_->api();
-    if (!api || api->is_maintenance_mode()) {
+    if (api->is_maintenance_mode()) {
         return;
     }
     auto session = this->session();
@@ -139,7 +139,7 @@ void RimeState::keyEvent(KeyEvent &event) {
 #ifndef FCITX_RIME_NO_SELECT_CANDIDATE
 void RimeState::selectCandidate(InputContext *inputContext, int idx) {
     auto api = engine_->api();
-    if (!api || api->is_maintenance_mode()) {
+    if (api->is_maintenance_mode()) {
         return;
     }
     auto session = this->session();
@@ -159,9 +159,6 @@ void RimeState::selectCandidate(InputContext *inputContext, int idx) {
 bool RimeState::getStatus(
     const std::function<void(const RimeStatus &)> &callback) {
     auto api = engine_->api();
-    if (!api) {
-        return false;
-    }
     auto session = this->session();
     if (!session) {
         return false;
@@ -257,7 +254,7 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
 
     do {
         auto api = engine_->api();
-        if (!api || api->is_maintenance_mode()) {
+        if (api->is_maintenance_mode()) {
             return;
         }
         auto session = this->session();

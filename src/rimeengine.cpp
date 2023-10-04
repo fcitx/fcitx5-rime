@@ -255,6 +255,8 @@ RimeEngine::RimeEngine(Instance *instance)
     imAction_->setMenu(&schemaMenu_);
     eventDispatcher_.attach(&instance_->eventLoop());
     separatorAction_.setSeparator(true);
+    instance_->userInterfaceManager().registerAction("fcitx-rime-separator",
+                                                     &separatorAction_);
     deployAction_.setIcon("fcitx-rime-deploy");
     deployAction_.setShortText(_("Deploy"));
     deployAction_.connect<SimpleAction::Activated>([this](InputContext *ic) {

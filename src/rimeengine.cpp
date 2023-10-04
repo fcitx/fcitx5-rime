@@ -107,7 +107,7 @@ private:
 
 class ToggleAction : public SimpleAction {
 public:
-    ToggleAction(RimeEngine *engine, std::string option,
+    ToggleAction(RimeEngine *engine, std::string schema, std::string option,
                  std::string disabledText, std::string enabledText)
         : engine_(engine), option_(option), disabledText_(disabledText),
           enabledText_(enabledText) {
@@ -121,6 +121,8 @@ public:
             Bool oldValue = api->get_option(session, option.c_str());
             api->set_option(session, option.c_str(), !oldValue);
         });
+        engine_->instance()->userInterfaceManager().registerAction(
+            stringutils::concat("fcitx-rime-", schema, "-", option), this);
     }
 
     std::string shortText(InputContext *ic) const override {
@@ -131,9 +133,9 @@ public:
         }
         auto session = state->session();
         if (api->get_option(session, option_.c_str())) {
-            return enabledText_ + " → " + disabledText_;
+            return stringutils::concat(enabledText_, " → ", disabledText_);
         }
-        return disabledText_ + " → " + enabledText_;
+        return stringutils::concat(disabledText_, " → ", enabledText_);
     }
 
     std::string icon(InputContext *) const override { return ""; }
@@ -167,10 +169,14 @@ public:
                     }
                 });
             engine_->instance()->userInterfaceManager().registerAction(
-                "fcitx-rime-" + schema + options_[i], &actions_.back());
+                stringutils::concat("fcitx-rime-", schema, "-", options_[i]),
+                &actions_.back());
             menu_.addAction(&actions_.back());
         }
         setMenu(&menu_);
+        engine_->instance()->userInterfaceManager().registerAction(
+            stringutils::concat("fcitx-rime-", schema, "-select-", options[0]),
+            this);
     }
 
     std::string shortText(InputContext *ic) const override {
@@ -473,10 +479,7 @@ void RimeEngine::refreshStatusArea(InputContext &ic) {
                 continue;
             }
             optionActions_.emplace_back(std::make_unique<ToggleAction>(
-                this, optionName, labels[0], labels[1]));
-            instance_->userInterfaceManager().registerAction(
-                "fcitx-rime-" + currentSchema + "-" + optionName,
-                optionActions_.back().get());
+                this, currentSchema, optionName, labels[0], labels[1]));
         } else {
             std::string optionsPath = path + "/options";
             if (!api_->config_begin_list(&subIter, &config,
@@ -498,9 +501,6 @@ void RimeEngine::refreshStatusArea(InputContext &ic) {
             }
             optionActions_.emplace_back(std::make_unique<SelectAction>(
                 this, currentSchema, options, labels));
-            instance_->userInterfaceManager().registerAction(
-                "fcitx-rime-" + currentSchema + "-select-" + options[0],
-                optionActions_.back().get());
         }
         statusArea.addAction(StatusGroup::InputMethod,
                              optionActions_.back().get());

@@ -20,6 +20,7 @@
 #include <fcitx/inputpanel.h>
 #include <fcitx/userinterfacemanager.h>
 #include <rime_api.h>
+#include <stdexcept>
 
 FCITX_DEFINE_LOG_CATEGORY(rime, "rime");
 
@@ -74,6 +75,15 @@ std::vector<std::string> getListItemString(rime_api_t *api, RimeConfig *config,
     }
     return values;
 }
+
+rime_api_t *EnsureRimeApi() {
+    auto *api = rime_get_api();
+    if (!api) {
+        throw std::runtime_error("Failed to get Rime API");
+    }
+    return api;
+}
+
 } // namespace
 
 class IMAction : public Action {
@@ -231,7 +241,7 @@ private:
 };
 
 RimeEngine::RimeEngine(Instance *instance)
-    : instance_(instance), api_(rime_get_api()),
+    : instance_(instance), api_(EnsureRimeApi()),
       factory_([this](InputContext &ic) { return new RimeState(this, ic); }),
       sessionPool_(this, instance_->globalConfig().shareInputState()) {
     imAction_ = std::make_unique<IMAction>(this);
@@ -280,19 +290,13 @@ RimeEngine::RimeEngine(Instance *instance)
 RimeEngine::~RimeEngine() {
     factory_.unregister();
     try {
-        if (api_) {
-            api_->finalize();
-        }
+        api_->finalize();
     } catch (const std::exception &e) {
         RIME_ERROR() << e.what();
     }
 }
 
 void RimeEngine::rimeStart(bool fullcheck) {
-    if (!api_) {
-        return;
-    }
-
     RIME_DEBUG() << "Rime Start (fullcheck: " << fullcheck << ")";
 
     auto userDir = stringutils::joinPath(
@@ -392,12 +396,10 @@ void RimeEngine::setSubConfig(const std::string &path, const RawConfig &) {
 void RimeEngine::updateConfig() {
     RIME_DEBUG() << "Rime UpdateConfig";
     factory_.unregister();
-    if (api_) {
-        try {
-            api_->finalize();
-        } catch (const std::exception &e) {
-            RIME_ERROR() << e.what();
-        }
+    try {
+        api_->finalize();
+    } catch (const std::exception &e) {
+        RIME_ERROR() << e.what();
     }
 
 #ifdef FCITX_RIME_LOAD_PLUGIN
@@ -476,7 +478,7 @@ void RimeEngine::refreshStatusArea(InputContext &ic) {
         return;
     }
     RimeConfig config{};
-    if (!api_ || !api_->schema_open(currentSchema.c_str(), &config)) {
+    if (!api_->schema_open(currentSchema.c_str(), &config)) {
         return;
     }
     auto switchPaths = getListItemPath(api_, &config, "switches");
@@ -674,7 +676,7 @@ std::string RimeEngine::subModeLabelImpl(const InputMethodEntry &,
 std::string RimeEngine::subModeIconImpl(const InputMethodEntry &,
                                         InputContext &ic) {
     std::string result = "fcitx-rime";
-    if (!api_ || !factory_.registered()) {
+    if (!factory_.registered()) {
         return result;
     }
     auto state = this->state(&ic);
@@ -715,10 +717,6 @@ void RimeEngine::sync() {
 }
 
 void RimeEngine::updateSchemaMenu() {
-    if (!api_) {
-        return;
-    }
-
     schemActions_.clear();
     RimeSchemaList list;
     list.size = 0;

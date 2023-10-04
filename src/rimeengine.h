@@ -123,9 +123,12 @@ private:
     void deploy();
     void sync();
     void updateSchemaMenu();
-    void notify(const std::string &type, const std::string &value);
+    void notify(RimeSessionId session, const std::string &type,
+                const std::string &value);
     void releaseAllSession();
     void updateAppOptions();
+    void refreshStatusArea(InputContext &ic);
+    void refreshStatusArea(RimeSessionId session);
 
     IconTheme theme_;
     Instance *instance_;
@@ -136,6 +139,7 @@ private:
     FactoryFor<RimeState> factory_;
 
     std::unique_ptr<Action> imAction_;
+    SimpleAction separatorAction_;
     SimpleAction deployAction_;
     SimpleAction syncAction_;
 
@@ -146,6 +150,7 @@ private:
     FCITX_ADDON_DEPENDENCY_LOADER(notifications, instance_->addonManager());
 
     std::list<SimpleAction> schemActions_;
+    std::list<std::unique_ptr<Action>> optionActions_;
     Menu schemaMenu_;
 #ifdef FCITX_RIME_LOAD_PLUGIN
     std::unordered_map<std::string, Library> pluginPool_;

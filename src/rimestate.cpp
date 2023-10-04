@@ -30,8 +30,8 @@ RimeState::RimeState(RimeEngine *engine, InputContext &ic)
 
 RimeState::~RimeState() {}
 
-RimeSessionId RimeState::session() {
-    if (!session_) {
+RimeSessionId RimeState::session(bool requestNewSession) {
+    if (!session_ && requestNewSession) {
         session_ = engine_->sessionPool().requestSession(&ic_);
     }
     if (!session_) {

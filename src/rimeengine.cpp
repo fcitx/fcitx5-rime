@@ -509,7 +509,7 @@ void RimeEngine::refreshStatusArea(RimeSessionId session) {
         [this, session](InputContext *ic) {
             if (auto state = this->state(ic)) {
                 // After a deployment, param is 0, refresh all
-                if (!session || state->session() == session) {
+                if (!session || state->session(false) == session) {
                     refreshStatusArea(*ic);
                 }
             }

@@ -39,7 +39,7 @@ public:
     std::string subModeLabel();
     void setLatinMode(bool latin);
     void selectSchema(const std::string &schemaId);
-    RimeSessionId session();
+    RimeSessionId session(bool requestNewSession = true);
 
 private:
     std::string lastMode_;

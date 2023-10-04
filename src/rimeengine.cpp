@@ -437,7 +437,7 @@ void RimeEngine::refreshStatusArea(InputContext &ic) {
     rimeState->getStatus([&currentSchema](const RimeStatus &status) {
         currentSchema = status.schema_id ? status.schema_id : "";
     });
-    if (!currentSchema.length()) {
+    if (currentSchema.empty()) {
         return;
     }
     RimeConfig config{};

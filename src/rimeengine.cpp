@@ -7,6 +7,7 @@
 #include "rimeengine.h"
 #include "notifications_public.h"
 #include "rimestate.h"
+#include <cstdint>
 #include <cstring>
 #include <dirent.h>
 #include <fcitx-utils/event.h>
@@ -149,15 +150,17 @@ public:
                  std::string disabledText, std::string enabledText)
         : engine_(engine), option_(option), disabledText_(disabledText),
           enabledText_(enabledText) {
-        connect<SimpleAction::Activated>([this, option](InputContext *ic) {
+        connect<SimpleAction::Activated>([this](InputContext *ic) {
             auto state = engine_->state(ic);
             auto api = engine_->api();
             if (!state) {
                 return;
             }
+            // Do not send notification since user is explicitly select it.
+            engine_->blockNotificationFor(30000);
             auto session = state->session();
-            Bool oldValue = api->get_option(session, option.c_str());
-            api->set_option(session, option.c_str(), !oldValue);
+            Bool oldValue = api->get_option(session, option_.c_str());
+            api->set_option(session, option_.c_str(), !oldValue);
         });
         engine_->instance()->userInterfaceManager().registerAction(
             stringutils::concat("fcitx-rime-", schema, "-", option), this);
@@ -582,9 +585,13 @@ void RimeEngine::reset(const InputMethodEntry &, InputContextEvent &event) {
     inputContext->updateUserInterface(UserInterfaceComponent::InputPanel);
 }
 
+void RimeEngine::blockNotificationFor(uint64_t usec)  {
+    blockNotificationBefore_ = now(CLOCK_MONOTONIC) + usec;
+}
+
 void RimeEngine::save() {
     // Block notification for 5 sec.
-    blockNotificationBefore_ = now(CLOCK_MONOTONIC) + 5000000;
+    blockNotificationFor(5000000);
     sync();
 }
 
@@ -603,9 +610,6 @@ void RimeEngine::rimeNotificationHandler(void *context, RimeSessionId session,
 
 void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
                         const std::string &messageValue) {
-    if (now(CLOCK_MONOTONIC) < blockNotificationBefore_) {
-        return;
-    }
     const char *message = nullptr;
     const char *icon = "";
     const char *tipId = "";
@@ -656,7 +660,8 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
     }
 
     auto notifications = this->notifications();
-    if (message && notifications) {
+    if (message && notifications &&
+        now(CLOCK_MONOTONIC) > blockNotificationBefore_) {
         notifications->call<INotifications::showTip>(tipId, _("Rime"), icon,
                                                      _("Rime"), message, -1);
     }
@@ -751,6 +756,7 @@ void RimeEngine::updateSchemaMenu() {
             schemaAction.connect<SimpleAction::Activated>(
                 [this, schemaId](InputContext *ic) {
                     auto state = ic->propertyFor(&factory_);
+                    blockNotificationFor(30000);
                     state->selectSchema(schemaId);
                     imAction_->update(ic);
                 });

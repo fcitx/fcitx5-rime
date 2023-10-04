@@ -110,6 +110,8 @@ public:
     FCITX_ADDON_DEPENDENCY_LOADER(dbus, instance_->addonManager());
 #endif
 
+    void blockNotificationFor(uint64_t usec);
+
 private:
     static void rimeNotificationHandler(void *context_object,
                                         RimeSessionId session_id,

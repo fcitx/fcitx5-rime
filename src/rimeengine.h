@@ -82,10 +82,6 @@ public:
     void save() override;
     auto &factory() { return factory_; }
 
-    void updateAction(InputContext *inputContext) {
-        imAction_->update(inputContext);
-    }
-
     const Configuration *getConfig() const override { return &config_; }
     void setConfig(const RawConfig &config) override {
         config_.load(config, true);
@@ -129,6 +125,7 @@ private:
     void updateAppOptions();
     void refreshStatusArea(InputContext &ic);
     void refreshStatusArea(RimeSessionId session);
+    void updateStatusArea(RimeSessionId session);
 
     IconTheme theme_;
     Instance *instance_;

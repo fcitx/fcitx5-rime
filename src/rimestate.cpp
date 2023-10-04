@@ -250,7 +250,6 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
         inputPanel.reset();
     }
     bool oldEmptyExceptAux = emptyExceptAux(inputPanel);
-    engine_->updateAction(ic);
 
     do {
         auto api = engine_->api();

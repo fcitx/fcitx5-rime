@@ -18,6 +18,8 @@
 #include <fcitx/inputcontext.h>
 #include <fcitx/inputcontextmanager.h>
 #include <fcitx/inputpanel.h>
+#include <fcitx/statusarea.h>
+#include <fcitx/userinterface.h>
 #include <fcitx/userinterfacemanager.h>
 #include <rime_api.h>
 #include <stdexcept>
@@ -458,7 +460,7 @@ void RimeEngine::updateConfig() {
 void RimeEngine::refreshStatusArea(InputContext &ic) {
     // prevent modifying status area owned by other ime
     // e.g. keyboard-us when typing password
-    if (instance_->inputMethodEntry(&ic)->uniqueName() != "rime") {
+    if (instance_->inputMethod(&ic) != "rime") {
         return;
     }
     optionActions_.clear();
@@ -522,6 +524,23 @@ void RimeEngine::refreshStatusArea(RimeSessionId session) {
                 // After a deployment, param is 0, refresh all
                 if (!session || state->session(false) == session) {
                     refreshStatusArea(*ic);
+                }
+            }
+            return true;
+        });
+}
+
+void RimeEngine::updateStatusArea(RimeSessionId session) {
+    instance_->inputContextManager().foreachFocused(
+        [this, session](InputContext *ic) {
+            if (instance_->inputMethod(ic) != "rime") {
+                return true;;
+            }
+            if (auto state = this->state(ic)) {
+                // After a deployment, param is 0, refresh all
+                if (!session || state->session(false) == session) {
+                    // Re-read new option values.
+                    ic->updateUserInterface(UserInterfaceComponent::StatusArea);
                 }
             }
             return true;
@@ -630,6 +649,7 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
             tipId = "fcitx-rime-simplification";
             message = _("Simplified Chinese is enabled.");
         }
+        updateStatusArea(session);
     } else if (messageType == "schema") {
         // Schema is changed either via status area or shortcut
         refreshStatusArea(session);
@@ -640,15 +660,6 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
         notifications->call<INotifications::showTip>(tipId, _("Rime"), icon,
                                                      _("Rime"), message, -1);
     }
-    timeEvent_ = instance_->eventLoop().addTimeEvent(
-        CLOCK_MONOTONIC, now(CLOCK_MONOTONIC) + 1000000, 0,
-        [this](EventSourceTime *, uint64_t) {
-            if (auto *ic = instance_->lastFocusedInputContext()) {
-                imAction_->update(ic);
-                ic->updateUserInterface(UserInterfaceComponent::StatusArea);
-            }
-            return true;
-        });
 }
 
 RimeState *RimeEngine::state(InputContext *ic) {

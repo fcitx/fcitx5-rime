@@ -595,6 +595,7 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
         } else if (messageValue == "success") {
             message = _("Rime is ready.");
             updateSchemaMenu();
+            refreshStatusArea(0);
             if (!api_->is_maintenance_mode()) {
                 api_->deploy_config_file("fcitx5.yaml", "config_version");
                 updateAppOptions();
@@ -777,8 +778,6 @@ void RimeEngine::updateSchemaMenu() {
         }
         api_->free_schema_list(&list);
     }
-
-    refreshStatusArea(0);
 }
 
 } // namespace fcitx

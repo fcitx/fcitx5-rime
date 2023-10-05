@@ -28,7 +28,7 @@ public:
     void clear();
     void keyEvent(KeyEvent &event);
 #ifndef FCITX_RIME_NO_SELECT_CANDIDATE
-    void selectCandidate(InputContext *inputContext, int idx);
+    void selectCandidate(InputContext *inputContext, int idx, bool global);
 #endif
     bool getStatus(const std::function<void(const RimeStatus &)> &);
     void updatePreedit(InputContext *ic, const RimeContext &context);

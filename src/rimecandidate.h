@@ -9,6 +9,9 @@
 #include "rimeengine.h"
 #include "rimestate.h"
 #include <fcitx/candidatelist.h>
+#include <limits>
+#include <memory>
+#include <vector>
 
 namespace fcitx {
 
@@ -25,8 +28,27 @@ private:
     int idx_;
 };
 
+#ifndef FCITX_RIME_NO_SELECT_CANDIDATE
+class RimeGlobalCandidateWord : public CandidateWord {
+public:
+    RimeGlobalCandidateWord(RimeEngine *engine, const RimeCandidate &candidate,
+                            int idx);
+
+    void select(InputContext *inputContext) const override;
+
+private:
+    RimeEngine *engine_;
+    int idx_;
+};
+#endif
+
 class RimeCandidateList final : public CandidateList,
-                                public PageableCandidateList {
+                                public PageableCandidateList
+#ifndef FCITX_RIME_NO_SELECT_CANDIDATE
+    ,
+                                public BulkCandidateList
+#endif
+{
 public:
     RimeCandidateList(RimeEngine *engine, InputContext *ic,
                       const RimeContext &context);
@@ -63,6 +85,11 @@ public:
 
     bool usedNextBefore() const override { return true; }
 
+#ifndef FCITX_RIME_NO_SELECT_CANDIDATE
+    const CandidateWord &candidateFromAll(int idx) const override;
+    int totalSize() const override;
+#endif
+
 private:
     void checkIndex(int idx) const {
         if (idx < 0 && idx >= size()) {
@@ -77,7 +104,12 @@ private:
     bool hasNext_ = false;
     CandidateLayoutHint layout_ = CandidateLayoutHint::NotSet;
     int cursor_ = -1;
+
     std::vector<std::unique_ptr<CandidateWord>> candidateWords_;
+
+    mutable size_t maxSize_ = std::numeric_limits<size_t>::max();
+    mutable std::vector<std::unique_ptr<RimeGlobalCandidateWord>>
+        globalCandidateWords_;
 };
 } // namespace fcitx
 

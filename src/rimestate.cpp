@@ -137,7 +137,8 @@ void RimeState::keyEvent(KeyEvent &event) {
 }
 
 #ifndef FCITX_RIME_NO_SELECT_CANDIDATE
-void RimeState::selectCandidate(InputContext *inputContext, int idx) {
+void RimeState::selectCandidate(InputContext *inputContext, int idx,
+                                bool global) {
     auto api = engine_->api();
     if (api->is_maintenance_mode()) {
         return;
@@ -146,7 +147,11 @@ void RimeState::selectCandidate(InputContext *inputContext, int idx) {
     if (!session) {
         return;
     }
-    api->select_candidate_on_current_page(session, idx);
+    if (global) {
+        api->select_candidate(session, idx);
+    } else {
+        api->select_candidate_on_current_page(session, idx);
+    }
     RIME_STRUCT(RimeCommit, commit);
     if (api->get_commit(session, &commit)) {
         inputContext->commitString(commit.text);

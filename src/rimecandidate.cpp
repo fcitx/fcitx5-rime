@@ -5,7 +5,13 @@
  */
 
 #include "rimecandidate.h"
+#include "rimeengine.h"
 #include <cstring>
+#include <fcitx-utils/log.h>
+#include <fcitx/candidatelist.h>
+#include <memory>
+#include <rime_api.h>
+#include <stdexcept>
 
 namespace fcitx {
 
@@ -25,7 +31,7 @@ RimeCandidateWord::RimeCandidateWord(RimeEngine *engine,
 void RimeCandidateWord::select(InputContext *inputContext) const {
     if (auto state = engine_->state(inputContext)) {
 #ifndef FCITX_RIME_NO_SELECT_CANDIDATE
-        state->selectCandidate(inputContext, idx_);
+        state->selectCandidate(inputContext, idx_, /*global=*/false);
 #else
         // Simulate the selection with a fake key event.
         KeyEvent event(inputContext, Key(sym_));
@@ -34,11 +40,34 @@ void RimeCandidateWord::select(InputContext *inputContext) const {
     }
 }
 
+#ifndef FCITX_RIME_NO_SELECT_CANDIDATE
+RimeGlobalCandidateWord::RimeGlobalCandidateWord(RimeEngine *engine,
+                                                 const RimeCandidate &candidate,
+                                                 int idx)
+    : CandidateWord(), engine_(engine), idx_(idx) {
+    Text text;
+    text.append(std::string(candidate.text));
+    if (candidate.comment && strlen(candidate.comment)) {
+        text.append(" ");
+        text.append(std::string(candidate.comment));
+    }
+    setText(text);
+}
+
+void RimeGlobalCandidateWord::select(InputContext *inputContext) const {
+    if (auto state = engine_->state(inputContext)) {
+        state->selectCandidate(inputContext, idx_, /*global=*/true);
+    }
+}
+
+#endif
+
 RimeCandidateList::RimeCandidateList(RimeEngine *engine, InputContext *ic,
                                      const RimeContext &context)
     : engine_(engine), ic_(ic), hasPrev_(context.menu.page_no != 0),
       hasNext_(!context.menu.is_last_page) {
     setPageable(this);
+    setBulk(this);
 
     const auto &menu = context.menu;
 
@@ -73,4 +102,48 @@ RimeCandidateList::RimeCandidateList(RimeEngine *engine, InputContext *ic,
         }
     }
 }
+
+const CandidateWord &RimeCandidateList::candidateFromAll(int idx) const {
+    if (idx < 0 || empty()) {
+        throw std::invalid_argument("Invalid global index");
+    }
+
+    auto session = engine_->state(ic_)->session(false);
+    if (!session) {
+        throw std::invalid_argument("Invalid session");
+    }
+
+    size_t index = static_cast<size_t>(idx);
+    FCITX_INFO() << "index" << idx;
+
+    auto api = engine_->api();
+
+    RimeCandidateListIterator iter;
+    if (index >= globalCandidateWords_.size()) {
+        if (index >= maxSize_) {
+            throw std::invalid_argument("Invalid global index");
+        }
+    } else {
+        if (globalCandidateWords_[index]) {
+            return *globalCandidateWords_[index];
+        }
+    }
+
+    FCITX_INFO() << "index2" << idx;
+    if (!api->candidate_list_from_index(session, &iter, idx) ||
+        !api->candidate_list_next(&iter)) {
+        maxSize_ = std::min(index, maxSize_);
+        throw std::invalid_argument("Invalid global index");
+    }
+
+    if (index >= globalCandidateWords_.size()) {
+        globalCandidateWords_.resize(index + 1);
+    }
+    globalCandidateWords_[index] =
+        std::make_unique<RimeGlobalCandidateWord>(engine_, iter.candidate, idx);
+    api->candidate_list_end(&iter);
+    return *globalCandidateWords_[index];
+}
+
+int RimeCandidateList::totalSize() const { return -1; }
 } // namespace fcitx

@@ -6,9 +6,6 @@
 #ifndef _FCITX_RIMEENGINE_H_
 #define _FCITX_RIMEENGINE_H_
 
-#ifndef FCITX_RIME_NO_DBUS
-#include "rimeservice.h"
-#endif
 #include "rimesession.h"
 #include "rimestate.h"
 #include <fcitx-config/configuration.h>
@@ -29,6 +26,11 @@
 #include <fcitx/menu.h>
 #include <memory>
 #include <rime_api.h>
+#include <unordered_map>
+
+#ifndef FCITX_RIME_NO_DBUS
+#include "rimeservice.h"
+#endif
 
 namespace fcitx {
 
@@ -121,6 +123,7 @@ private:
     void deploy();
     void sync();
     void updateSchemaMenu();
+    void updateActionsForSchema(const std::string &schema);
     void notify(RimeSessionId session, const std::string &type,
                 const std::string &value);
     void releaseAllSession();
@@ -149,7 +152,8 @@ private:
     FCITX_ADDON_DEPENDENCY_LOADER(notifications, instance_->addonManager());
 
     std::list<SimpleAction> schemActions_;
-    std::list<std::unique_ptr<Action>> optionActions_;
+    std::unordered_map<std::string, std::list<std::unique_ptr<Action>>>
+        optionActions_;
     Menu schemaMenu_;
 #ifdef FCITX_RIME_LOAD_PLUGIN
     std::unordered_map<std::string, Library> pluginPool_;

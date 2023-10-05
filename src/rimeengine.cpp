@@ -24,6 +24,7 @@
 #include <fcitx/userinterfacemanager.h>
 #include <rime_api.h>
 #include <stdexcept>
+#include <string>
 
 FCITX_DEFINE_LOG_CATEGORY(rime, "rime");
 
@@ -468,7 +469,6 @@ void RimeEngine::refreshStatusArea(InputContext &ic) {
     if (instance_->inputMethod(&ic) != "rime") {
         return;
     }
-    optionActions_.clear();
     auto &statusArea = ic.statusArea();
     statusArea.clearGroup(StatusGroup::InputMethod);
     statusArea.addAction(StatusGroup::InputMethod, imAction_.get());
@@ -484,42 +484,13 @@ void RimeEngine::refreshStatusArea(InputContext &ic) {
     if (currentSchema.empty()) {
         return;
     }
-    RimeConfig config{};
-    if (!api_->schema_open(currentSchema.c_str(), &config)) {
-        return;
-    }
-    auto switchPaths = getListItemPath(api_, &config, "switches");
-    for (const auto &switchPath : switchPaths) {
-        auto labels = getListItemString(api_, &config, switchPath + "/states");
-        if (labels.size() <= 1) {
-            continue;
+
+    if (auto iter = optionActions_.find(currentSchema);
+        iter != optionActions_.end()) {
+        for (const auto &action : iter->second) {
+            statusArea.addAction(StatusGroup::InputMethod, action.get());
         }
-        auto namePath = switchPath + "/name";
-        auto name = api_->config_get_cstring(&config, namePath.c_str());
-        if (name) {
-            if (labels.size() != 2) {
-                continue;
-            }
-            std::string optionName = name;
-            if (optionName == RIME_ASCII_MODE) {
-                // imAction_ has latin mode that does the same
-                continue;
-            }
-            optionActions_.emplace_back(std::make_unique<ToggleAction>(
-                this, currentSchema, optionName, labels[0], labels[1]));
-        } else {
-            auto options =
-                getListItemString(api_, &config, switchPath + "/options");
-            if (labels.size() != options.size()) {
-                continue;
-            }
-            optionActions_.emplace_back(std::make_unique<SelectAction>(
-                this, currentSchema, options, labels));
-        }
-        statusArea.addAction(StatusGroup::InputMethod,
-                             optionActions_.back().get());
     }
-    api_->config_close(&config);
 }
 
 void RimeEngine::refreshStatusArea(RimeSessionId session) {
@@ -624,11 +595,9 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
         } else if (messageValue == "success") {
             message = _("Rime is ready.");
             updateSchemaMenu();
-            refreshStatusArea(session);
             if (!api_->is_maintenance_mode()) {
                 api_->deploy_config_file("fcitx5.yaml", "config_version");
                 updateAppOptions();
-                releaseAllSession();
             }
         } else if (messageValue == "failure") {
             message = _("Rime has encountered an error. "
@@ -734,8 +703,48 @@ void RimeEngine::sync() {
     releaseAllSession();
 }
 
+void RimeEngine::updateActionsForSchema(const std::string &schema) {
+    RimeConfig config{};
+
+    if (!api_->schema_open(schema.c_str(), &config)) {
+        return;
+    }
+    auto switchPaths = getListItemPath(api_, &config, "switches");
+    for (const auto &switchPath : switchPaths) {
+        auto labels = getListItemString(api_, &config, switchPath + "/states");
+        if (labels.size() <= 1) {
+            continue;
+        }
+        auto namePath = switchPath + "/name";
+        auto name = api_->config_get_cstring(&config, namePath.c_str());
+        if (name) {
+            if (labels.size() != 2) {
+                continue;
+            }
+            std::string optionName = name;
+            if (optionName == RIME_ASCII_MODE) {
+                // imAction_ has latin mode that does the same
+                continue;
+            }
+
+            optionActions_[schema].emplace_back(std::make_unique<ToggleAction>(
+                this, schema, optionName, labels[0], labels[1]));
+        } else {
+            auto options =
+                getListItemString(api_, &config, switchPath + "/options");
+            if (labels.size() != options.size()) {
+                continue;
+            }
+            optionActions_[schema].emplace_back(
+                std::make_unique<SelectAction>(this, schema, options, labels));
+        }
+    }
+    api_->config_close(&config);
+}
+
 void RimeEngine::updateSchemaMenu() {
     schemActions_.clear();
+    optionActions_.clear();
     RimeSchemaList list;
     list.size = 0;
     if (api_->get_schema_list(&list)) {
@@ -764,9 +773,12 @@ void RimeEngine::updateSchemaMenu() {
                 });
             instance_->userInterfaceManager().registerAction(&schemaAction);
             schemaMenu_.insertAction(&separatorAction_, &schemaAction);
+            updateActionsForSchema(schemaId);
         }
         api_->free_schema_list(&list);
     }
+
+    refreshStatusArea(0);
 }
 
 } // namespace fcitx

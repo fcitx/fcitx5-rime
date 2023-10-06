@@ -114,7 +114,6 @@ const CandidateWord &RimeCandidateList::candidateFromAll(int idx) const {
     }
 
     size_t index = static_cast<size_t>(idx);
-    FCITX_INFO() << "index" << idx;
 
     auto api = engine_->api();
 
@@ -129,7 +128,6 @@ const CandidateWord &RimeCandidateList::candidateFromAll(int idx) const {
         }
     }
 
-    FCITX_INFO() << "index2" << idx;
     if (!api->candidate_list_from_index(session, &iter, idx) ||
         !api->candidate_list_next(&iter)) {
         maxSize_ = std::min(index, maxSize_);

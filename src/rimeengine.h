@@ -132,6 +132,7 @@ private:
     void refreshStatusArea(RimeSessionId session);
     void updateStatusArea(RimeSessionId session);
 
+    std::string sharedDataDir_;
     IconTheme theme_;
     Instance *instance_;
     EventDispatcher eventDispatcher_;

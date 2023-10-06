@@ -13,7 +13,12 @@ find_package(Gettext REQUIRED)
 find_package(Fcitx5Core 5.1.2 REQUIRED)
 find_package(Fcitx5Module REQUIRED COMPONENTS Notifications)
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(Rime REQUIRED IMPORTED_TARGET "rime>=1.0.0")
+
+if (NOT DEFINED RIME_TARGET)
+    pkg_check_modules(Rime REQUIRED IMPORTED_TARGET "rime>=1.0.0")
+    set(RIME_TARGET PkgConfig::Rime)
+endif()
+
 if ("${Rime_VERSION}" VERSION_LESS "1.7.0")
     add_definitions(-DFCITX_RIME_LOAD_PLUGIN)
 endif()

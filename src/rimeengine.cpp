@@ -250,6 +250,17 @@ RimeEngine::RimeEngine(Instance *instance)
     : instance_(instance), api_(EnsureRimeApi()),
       factory_([this](InputContext &ic) { return new RimeState(this, ic); }),
       sessionPool_(this, instance_->globalConfig().shareInputState()) {
+#ifdef __ANDROID__
+    const auto &sp = fcitx::StandardPath::global();
+    std::string defaultYaml =
+        sp.locate(fcitx::StandardPath::Type::Data, "rime-data/default.yaml");
+    if (defaultYaml.empty()) {
+        throw std::runtime_error("Fail to locate shared data directory");
+    }
+    sharedDataDir_ = fcitx::fs::dirName(defaultYaml);
+#else
+    sharedDataDir_ = RIME_DATA_DIR;
+#endif
     imAction_ = std::make_unique<IMAction>(this);
     instance_->userInterfaceManager().registerAction("fcitx-rime-im",
                                                      imAction_.get());
@@ -316,10 +327,9 @@ void RimeEngine::rimeStart(bool fullcheck) {
             RIME_ERROR() << "Failed to create user directory: " << userDir;
         }
     }
-    const char *sharedDataDir = RIME_DATA_DIR;
 
     RIME_STRUCT(RimeTraits, fcitx_rime_traits);
-    fcitx_rime_traits.shared_data_dir = sharedDataDir;
+    fcitx_rime_traits.shared_data_dir = sharedDataDir_.c_str();
     fcitx_rime_traits.app_name = "rime.fcitx-rime";
     fcitx_rime_traits.user_data_dir = userDir.c_str();
     fcitx_rime_traits.distribution_name = "Rime";
@@ -510,7 +520,7 @@ void RimeEngine::updateStatusArea(RimeSessionId session) {
     instance_->inputContextManager().foreachFocused(
         [this, session](InputContext *ic) {
             if (instance_->inputMethod(ic) != "rime") {
-                return true;;
+                return true;
             }
             if (auto state = this->state(ic)) {
                 // After a deployment, param is 0, refresh all
@@ -558,7 +568,7 @@ void RimeEngine::reset(const InputMethodEntry &, InputContextEvent &event) {
     inputContext->updateUserInterface(UserInterfaceComponent::InputPanel);
 }
 
-void RimeEngine::blockNotificationFor(uint64_t usec)  {
+void RimeEngine::blockNotificationFor(uint64_t usec) {
     blockNotificationBefore_ = now(CLOCK_MONOTONIC) + usec;
 }
 

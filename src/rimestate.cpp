@@ -237,16 +237,22 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
         preedit.setCursor(context.composition.cursor_pos);
     } while (0);
 
-    if (engine_->config().showPreeditInApplication.value() &&
-        ic->capabilityFlags().test(CapabilityFlag::Preedit)) {
-        clientPreedit = preedit;
+    if (ic->capabilityFlags().test(CapabilityFlag::Preedit)) {
+        if (engine_->config().showPreeditInApplication.value()) {
+            if (engine_->config().preeditCursorPositionAtBeginning.value()) {
+                preedit.setCursor(0);
+            }
+            ic->inputPanel().setClientPreedit(preedit);
+        } else {
+            if (engine_->config().preeditCursorPositionAtBeginning.value()) {
+                clientPreedit.setCursor(0);
+            }
+            ic->inputPanel().setPreedit(preedit);
+            ic->inputPanel().setClientPreedit(clientPreedit);
+        }
     } else {
         ic->inputPanel().setPreedit(preedit);
     }
-    if (engine_->config().preeditCursorPositionAtBeginning.value()) {
-        clientPreedit.setCursor(0);
-    }
-    ic->inputPanel().setClientPreedit(clientPreedit);
 }
 
 void RimeState::updateUI(InputContext *ic, bool keyRelease) {

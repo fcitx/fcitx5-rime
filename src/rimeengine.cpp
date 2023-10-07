@@ -14,6 +14,7 @@
 #include <fcitx-utils/fs.h>
 #include <fcitx-utils/i18n.h>
 #include <fcitx-utils/log.h>
+#include <fcitx-utils/macros.h>
 #include <fcitx-utils/standardpath.h>
 #include <fcitx/candidatelist.h>
 #include <fcitx/inputcontext.h>
@@ -27,6 +28,15 @@
 #include <string>
 
 FCITX_DEFINE_LOG_CATEGORY(rime, "rime");
+
+#ifdef FCITX_RIME_STATIC_PLUGINS
+#define FCITX_RIME_REQUIRE_MODULE(NAME)         \
+    extern void rime_require_module_##NAME();   \
+    rime_require_module_##NAME();
+static void fcitx_rime_load_static_plugins() {
+    FCITX_FOR_EACH(FCITX_RIME_REQUIRE_MODULE, FCITX_RIME_STATIC_PLUGINS)
+}
+#endif
 
 namespace fcitx {
 
@@ -250,6 +260,9 @@ RimeEngine::RimeEngine(Instance *instance)
     : instance_(instance), api_(EnsureRimeApi()),
       factory_([this](InputContext &ic) { return new RimeState(this, ic); }),
       sessionPool_(this, instance_->globalConfig().shareInputState()) {
+#ifdef FCITX_RIME_STATIC_PLUGINS
+    fcitx_rime_load_static_plugins();
+#endif
 #ifdef __ANDROID__
     const auto &sp = fcitx::StandardPath::global();
     std::string defaultYaml =

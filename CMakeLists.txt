@@ -36,6 +36,11 @@ message(STATUS "Precompiler macro RIME_DATA_DIR is set to \"${RIME_DATA_DIR}\"")
 add_definitions(-DRIME_DATA_DIR="${RIME_DATA_DIR}")
 add_definitions(-DFCITX_GETTEXT_DOMAIN=\"fcitx5-rime\")
 add_definitions(-DFCITX_RIME_VERSION=\"${PROJECT_VERSION}\")
+# allow loading plugins in librime static library.
+# should be a comma separated list. eg. lua,octagram
+if (DEFINED FCITX_RIME_STATIC_PLUGINS)
+    add_definitions(-DFCITX_RIME_STATIC_PLUGINS=${FCITX_RIME_STATIC_PLUGINS})
+endif()
 fcitx5_add_i18n_definition()
 
 include("${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cmake")

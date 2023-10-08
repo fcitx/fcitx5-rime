@@ -136,7 +136,7 @@ private:
     void updateActionsForSchema(const std::string &schema);
     void notify(RimeSessionId session, const std::string &type,
                 const std::string &value);
-    void releaseAllSession();
+    void releaseAllSession(const bool snapshot = false);
     void updateAppOptions();
     void refreshStatusArea(InputContext &ic);
     void refreshStatusArea(RimeSessionId session);

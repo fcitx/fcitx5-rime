@@ -689,9 +689,12 @@ std::string RimeEngine::subModeIconImpl(const InputMethodEntry &,
     return result;
 }
 
-void RimeEngine::releaseAllSession() {
-    instance_->inputContextManager().foreach([this](InputContext *ic) {
+void RimeEngine::releaseAllSession(const bool snapshot) {
+    instance_->inputContextManager().foreach([&](InputContext *ic) {
         if (auto state = this->state(ic)) {
+            if (snapshot) {
+                state->snapshot();
+            }
             state->release();
         }
         return true;
@@ -707,16 +710,8 @@ void RimeEngine::deploy() {
 
 void RimeEngine::sync() {
     RIME_DEBUG() << "Rime Sync user data";
-
-    instance_->inputContextManager().foreach([this](InputContext *ic) {
-        if (auto state = this->state(ic)) {
-            state->snapshot();
-            state->release();
-        }
-        return true;
-    });
+    releaseAllSession(true);
     api_->sync_user_data();
-    releaseAllSession();
 }
 
 void RimeEngine::updateActionsForSchema(const std::string &schema) {

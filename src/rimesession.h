@@ -43,6 +43,7 @@ class RimeSessionPool {
 public:
     RimeSessionPool(RimeEngine *engine, PropertyPropagatePolicy initialPolicy);
 
+    PropertyPropagatePolicy propertyPropagatePolicy() const { return policy_; }
     void setPropertyPropagatePolicy(PropertyPropagatePolicy policy);
 
     std::shared_ptr<RimeSessionHolder> requestSession(InputContext *ic);

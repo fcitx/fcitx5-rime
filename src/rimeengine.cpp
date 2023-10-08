@@ -249,7 +249,7 @@ private:
 RimeEngine::RimeEngine(Instance *instance)
     : instance_(instance), api_(EnsureRimeApi()),
       factory_([this](InputContext &ic) { return new RimeState(this, ic); }),
-      sessionPool_(this, instance_->globalConfig().shareInputState()) {
+      sessionPool_(this, getSharedStatePolicy()) {
 #ifdef __ANDROID__
     const auto &sp = fcitx::StandardPath::global();
     std::string defaultYaml =
@@ -298,11 +298,7 @@ RimeEngine::RimeEngine(Instance *instance)
     schemaMenu_.addAction(&syncAction_);
     globalConfigReloadHandle_ = instance_->watchEvent(
         EventType::GlobalConfigReloaded, EventWatcherPhase::Default,
-        [this](Event &) {
-            releaseAllSession();
-            sessionPool_.setPropertyPropagatePolicy(
-                instance_->globalConfig().shareInputState());
-        });
+        [this](Event &) { refreshSessionPoolPolicy(); });
     reloadConfig();
 }
 
@@ -471,6 +467,7 @@ void RimeEngine::updateConfig() {
     rimeStart(false);
     instance_->inputContextManager().registerProperty("rimeState", &factory_);
     updateSchemaMenu();
+    refreshSessionPoolPolicy();
 }
 
 void RimeEngine::refreshStatusArea(InputContext &ic) {
@@ -787,6 +784,28 @@ void RimeEngine::updateSchemaMenu() {
             updateActionsForSchema(schemaId);
         }
         api_->free_schema_list(&list);
+    }
+}
+
+void RimeEngine::refreshSessionPoolPolicy() {
+    auto newPolicy = getSharedStatePolicy();
+    if (sessionPool_.propertyPropagatePolicy() != newPolicy) {
+        releaseAllSession();
+        sessionPool_.setPropertyPropagatePolicy(newPolicy);
+    }
+}
+
+PropertyPropagatePolicy RimeEngine::getSharedStatePolicy() {
+    switch (*config_.sharedStatePolicy) {
+    case SharedStatePolicy::All:
+        return PropertyPropagatePolicy::All;
+    case SharedStatePolicy::Program:
+        return PropertyPropagatePolicy::Program;
+    case SharedStatePolicy::No:
+        return PropertyPropagatePolicy::No;
+    case SharedStatePolicy::FollowGlobalConfig:
+    default:
+        return instance_->globalConfig().shareInputState();
     }
 }
 

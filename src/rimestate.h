@@ -41,6 +41,9 @@ public:
     void selectSchema(const std::string &schemaId);
     RimeSessionId session(bool requestNewSession = true);
 
+    void snapshot();
+    void restore();
+
 private:
     std::string lastMode_;
     RimeEngine *engine_;

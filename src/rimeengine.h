@@ -36,11 +36,19 @@ namespace fcitx {
 
 class RimeState;
 
+enum class SharedStatePolicy { FollowGlobalConfig, All, Program, No };
+
+FCITX_CONFIG_ENUM_NAME_WITH_I18N(SharedStatePolicy,
+                                 N_("Follow Global Configuration"), N_("All"),
+                                 N_("Program"), N_("No"));
+
 FCITX_CONFIGURATION(
     RimeEngineConfig,
     Option<bool> showPreeditInApplication{this, "PreeditInApplication",
                                           _("Show preedit within application"),
                                           true};
+    Option<SharedStatePolicy> sharedStatePolicy{
+        this, "InputState", _("Shared Input State"), SharedStatePolicy::All};
     Option<bool> preeditCursorPositionAtBeginning{
         this, "PreeditCursorPositionAtBeginning",
         _("Fix embedded preedit cursor at the beginning of the preedit"), true};
@@ -131,6 +139,8 @@ private:
     void refreshStatusArea(InputContext &ic);
     void refreshStatusArea(RimeSessionId session);
     void updateStatusArea(RimeSessionId session);
+    void refreshSessionPoolPolicy();
+    PropertyPropagatePolicy getSharedStatePolicy();
 
     std::string sharedDataDir_;
     IconTheme theme_;

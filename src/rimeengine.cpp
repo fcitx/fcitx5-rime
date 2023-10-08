@@ -601,15 +601,15 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
                         "seconds. Please wait until it is finished...");
         } else if (messageValue == "success") {
             message = _("Rime is ready.");
-            updateSchemaMenu();
-            refreshStatusArea(0);
             if (!api_->is_maintenance_mode()) {
                 api_->deploy_config_file("fcitx5.yaml", "config_version");
                 updateAppOptions();
             }
+            updateSchemaMenu();
+            refreshStatusArea(0);
         } else if (messageValue == "failure") {
             message = _("Rime has encountered an error. "
-                        "See /tmp/rime.fcitx.ERROR for details.");
+                        "See log for details.");
         }
     } else if (messageType == "option") {
         icon = "fcitx-rime";

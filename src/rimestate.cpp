@@ -32,7 +32,14 @@ RimeState::~RimeState() {}
 
 RimeSessionId RimeState::session(bool requestNewSession) {
     if (!session_ && requestNewSession) {
-        session_ = engine_->sessionPool().requestSession(&ic_);
+        auto [sessionHolder, isNewSession] =
+            engine_->sessionPool().requestSession(&ic_);
+        session_ = sessionHolder;
+        if (isNewSession) {
+            restore();
+        } else {
+            savedCurrentSchema_.clear();
+        }
     }
     if (!session_) {
         return 0;
@@ -318,4 +325,29 @@ void RimeState::commitPreedit(InputContext *ic) {
         api->free_context(&context);
     }
 }
+
+void RimeState::snapshot() {
+    if (!session(false)) {
+        return;
+    }
+    getStatus([this](const RimeStatus &status) {
+        if (status.schema_id) {
+            savedCurrentSchema_ = status.schema_id;
+        }
+    });
+}
+
+void RimeState::restore() {
+    if (savedCurrentSchema_.empty()) {
+        return;
+    }
+    FCITX_INFO() << engine_->schemas();
+    if (!engine_->schemas().count(savedCurrentSchema_)) {
+        return;
+    }
+
+    selectSchema(savedCurrentSchema_);
+    savedCurrentSchema_ = std::string();
+}
+
 } // namespace fcitx

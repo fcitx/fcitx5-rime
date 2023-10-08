@@ -49,6 +49,8 @@ private:
     RimeEngine *engine_;
     InputContext &ic_;
     std::shared_ptr<RimeSessionHolder> session_;
+
+    std::string savedCurrentSchema_;
 };
 } // namespace fcitx
 

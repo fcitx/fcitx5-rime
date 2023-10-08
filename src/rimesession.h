@@ -46,7 +46,8 @@ public:
     PropertyPropagatePolicy propertyPropagatePolicy() const { return policy_; }
     void setPropertyPropagatePolicy(PropertyPropagatePolicy policy);
 
-    std::shared_ptr<RimeSessionHolder> requestSession(InputContext *ic);
+    std::tuple<std::shared_ptr<RimeSessionHolder>, bool>
+    requestSession(InputContext *ic);
 
     RimeEngine *engine() const { return engine_; }
 

@@ -707,6 +707,14 @@ void RimeEngine::deploy() {
 
 void RimeEngine::sync() {
     RIME_DEBUG() << "Rime Sync user data";
+
+    instance_->inputContextManager().foreach([this](InputContext *ic) {
+        if (auto state = this->state(ic)) {
+            state->snapshot();
+            state->release();
+        }
+        return true;
+    });
     api_->sync_user_data();
     releaseAllSession();
 }
@@ -751,6 +759,7 @@ void RimeEngine::updateActionsForSchema(const std::string &schema) {
 }
 
 void RimeEngine::updateSchemaMenu() {
+    schemas_.clear();
     schemActions_.clear();
     optionActions_.clear();
     RimeSchemaList list;
@@ -782,6 +791,7 @@ void RimeEngine::updateSchemaMenu() {
             instance_->userInterfaceManager().registerAction(&schemaAction);
             schemaMenu_.insertAction(&separatorAction_, &schemaAction);
             updateActionsForSchema(schemaId);
+            schemas_.insert(schemaId);
         }
         api_->free_schema_list(&list);
     }

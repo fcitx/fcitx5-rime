@@ -86,11 +86,8 @@ std::string uuidKey(InputContext *ic) {
     return key;
 }
 
-std::shared_ptr<RimeSessionHolder>
+std::tuple<std::shared_ptr<RimeSessionHolder>, bool>
 RimeSessionPool::requestSession(InputContext *ic) {
-    if (!engine_->api()) {
-        return nullptr;
-    }
     std::string key;
     switch (policy_) {
     case PropertyPropagatePolicy::No:
@@ -109,16 +106,16 @@ RimeSessionPool::requestSession(InputContext *ic) {
     }
     auto iter = sessions_.find(key);
     if (iter != sessions_.end()) {
-        return iter->second.lock();
+        return {iter->second.lock(), false};
     }
     try {
         auto newSession =
             std::make_shared<RimeSessionHolder>(this, ic->program());
         registerSession(key, newSession);
-        return newSession;
+        return {newSession, true};
     } catch (...) {
     }
-    return nullptr;
+    return {nullptr, false};
 }
 
 void RimeSessionPool::registerSession(

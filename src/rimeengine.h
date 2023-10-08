@@ -26,6 +26,7 @@
 #include <fcitx/menu.h>
 #include <memory>
 #include <rime_api.h>
+#include <string>
 #include <unordered_map>
 
 #ifndef FCITX_RIME_NO_DBUS
@@ -121,6 +122,7 @@ public:
 #endif
 
     void blockNotificationFor(uint64_t usec);
+    const auto &schemas() const { return schemas_; }
 
 private:
     static void rimeNotificationHandler(void *context_object,
@@ -162,6 +164,7 @@ private:
 
     FCITX_ADDON_DEPENDENCY_LOADER(notifications, instance_->addonManager());
 
+    std::unordered_set<std::string> schemas_;
     std::list<SimpleAction> schemActions_;
     std::unordered_map<std::string, std::list<std::unique_ptr<Action>>>
         optionActions_;

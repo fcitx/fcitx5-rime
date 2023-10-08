@@ -310,7 +310,9 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
     }
 }
 
-void RimeState::release() { session_.reset(); }
+void RimeState::release() {
+    session_.reset();
+}
 
 void RimeState::commitPreedit(InputContext *ic) {
     if (auto api = engine_->api()) {
@@ -341,7 +343,6 @@ void RimeState::restore() {
     if (savedCurrentSchema_.empty()) {
         return;
     }
-    FCITX_INFO() << engine_->schemas();
     if (!engine_->schemas().count(savedCurrentSchema_)) {
         return;
     }

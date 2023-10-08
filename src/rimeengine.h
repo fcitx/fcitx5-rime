@@ -159,7 +159,6 @@ private:
 #ifdef FCITX_RIME_LOAD_PLUGIN
     std::unordered_map<std::string, Library> pluginPool_;
 #endif
-    std::unique_ptr<EventSourceTime> timeEvent_;
     std::unique_ptr<HandlerTableEntry<EventHandler>> globalConfigReloadHandle_;
 
 #ifndef FCITX_RIME_NO_DBUS

@@ -4,14 +4,15 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2023
+# rocka, 2023
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2023-10-08 20:24+0000\n"
+"POT-Creation-Date: 2023-10-11 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: csslayer <wengxt@gmail.com>, 2023\n"
+"Last-Translator: rocka, 2023\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/fcitx/teams/12005/"
 "zh_CN/)\n"
 "Language: zh_CN\n"
@@ -22,7 +23,7 @@ msgstr ""
 
 #: src/rimeengine.h:43
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 #: src/rimeengine.h:58
 msgid "Commit current text when deactivating"
@@ -38,7 +39,7 @@ msgstr "固定嵌入预编辑文本光标在预编辑的开头"
 
 #: src/rimeengine.h:43
 msgid "Follow Global Configuration"
-msgstr ""
+msgstr "跟随全局选项"
 
 #: src/rimeengine.cpp:621
 msgid "Full Shape is enabled."
@@ -62,7 +63,7 @@ msgstr "模块"
 
 #: src/rimeengine.h:44
 msgid "No"
-msgstr ""
+msgstr "否"
 
 #: src/rimeengine.h:73
 msgid "Plugins"
@@ -70,7 +71,7 @@ msgstr "插件"
 
 #: src/rimeengine.h:44
 msgid "Program"
-msgstr ""
+msgstr "程序"
 
 #: src/rimeengine.cpp:627
 msgid "Punctuation conversion is disabled."
@@ -95,7 +96,7 @@ msgstr "Fcitx 5 的中州韵支持"
 
 #: src/rimeengine.cpp:611
 msgid "Rime has encountered an error. See log for details."
-msgstr ""
+msgstr "Rime 出现了一个错误。详细信息请参阅日志。"
 
 #: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:8
 msgid "Rime input method"
@@ -113,7 +114,7 @@ msgstr "Rime 正在进行维护程序。可能需要几秒钟。请等待完成�
 
 #: src/rimeengine.h:52
 msgid "Shared Input State"
-msgstr ""
+msgstr "共享输入状态"
 
 #: src/rimeengine.h:49
 msgid "Show preedit within application"

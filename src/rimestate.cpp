@@ -100,6 +100,7 @@ void RimeState::selectSchema(const std::string &schema) {
     if (api->is_maintenance_mode()) {
         return;
     }
+    engine_->blockNotificationFor(30000);
     api->set_option(session(), RIME_ASCII_MODE, false);
     api->select_schema(session(), schema.data());
 }
@@ -301,6 +302,7 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
         inputPanel.setAuxDown(Text());
     }
     if (newEmptyExceptAux && lastMode_ != subMode()) {
+        engine_->blockNotificationFor(30000);
         engine_->instance()->showInputMethodInformation(ic);
         ic->updateUserInterface(UserInterfaceComponent::StatusArea);
     }
@@ -310,9 +312,7 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
     }
 }
 
-void RimeState::release() {
-    session_.reset();
-}
+void RimeState::release() { session_.reset(); }
 
 void RimeState::commitPreedit(InputContext *ic) {
     if (auto api = engine_->api()) {

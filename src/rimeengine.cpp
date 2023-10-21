@@ -246,6 +246,8 @@ private:
     Menu menu_;
 };
 
+bool RimeEngine::firstRun_ = true;
+
 RimeEngine::RimeEngine(Instance *instance)
     : instance_(instance), api_(EnsureRimeApi()),
       factory_([this](InputContext &ic) { return new RimeState(this, ic); }),

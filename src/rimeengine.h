@@ -149,7 +149,7 @@ private:
     Instance *instance_;
     EventDispatcher eventDispatcher_;
     rime_api_t *api_;
-    bool firstRun_ = true;
+    static bool firstRun_;
     uint64_t blockNotificationBefore_ = 0;
     FactoryFor<RimeState> factory_;
 

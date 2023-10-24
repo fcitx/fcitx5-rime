@@ -334,6 +334,9 @@ void RimeEngine::rimeStart(bool fullcheck) {
     fcitx_rime_traits.distribution_code_name = "fcitx-rime";
     fcitx_rime_traits.distribution_version = FCITX_RIME_VERSION;
 #ifndef FCITX_RIME_NO_LOG_LEVEL
+    // make librime only log to stderr
+    // https://github.com/rime/librime/commit/6d1b9b65de4e7784a68a17d10a3e5c900e4fd511
+    fcitx_rime_traits.log_dir = "";
     switch (rime().logLevel()) {
     case NoLog:
         fcitx_rime_traits.min_log_level = 4;

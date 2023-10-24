@@ -473,6 +473,7 @@ void RimeEngine::updateConfig() {
     instance_->inputContextManager().registerProperty("rimeState", &factory_);
     updateSchemaMenu();
     refreshSessionPoolPolicy();
+    refreshStatusArea(0);
 }
 
 void RimeEngine::refreshStatusArea(InputContext &ic) {

@@ -206,16 +206,15 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
             break;
         }
 
+        if (context.commit_text_preview) {
+            clientPreedit.append(context.commit_text_preview, flag);
+        }
+
         /* converted text */
         if (context.composition.sel_start > 0) {
             preedit.append(std::string(context.composition.preedit,
                                        context.composition.sel_start),
                            flag);
-            if (context.commit_text_preview) {
-                clientPreedit.append(std::string(context.commit_text_preview,
-                                                 context.composition.sel_start),
-                                     flag);
-            }
         }
 
         /* converting candidate */
@@ -225,12 +224,6 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
                     &context.composition.preedit[context.composition.sel_start],
                     &context.composition.preedit[context.composition.sel_end]),
                 flag | TextFormatFlag::HighLight);
-            if (context.commit_text_preview) {
-                clientPreedit.append(
-                    std::string(&context.commit_text_preview[context.composition
-                                                                 .sel_start]),
-                    flag | TextFormatFlag::HighLight);
-            }
         }
 
         /* remaining input to convert */

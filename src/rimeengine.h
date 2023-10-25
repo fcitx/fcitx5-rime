@@ -45,9 +45,9 @@ FCITX_CONFIG_ENUM_NAME_WITH_I18N(SharedStatePolicy,
 
 FCITX_CONFIGURATION(
     RimeEngineConfig,
-    Option<bool> showPreeditInApplication{this, "PreeditInApplication",
-                                          _("Show preedit within application"),
-                                          true};
+    Option<bool> commitPreviewAsPreedit{this, "CommitPreviewAsPreedit",
+                                        _("Use commit preview text as preedit"),
+                                        true};
     Option<SharedStatePolicy> sharedStatePolicy{
         this, "InputState", _("Shared Input State"), SharedStatePolicy::All};
     Option<bool> preeditCursorPositionAtBeginning{

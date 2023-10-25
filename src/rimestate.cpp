@@ -6,6 +6,7 @@
 
 #include "rimestate.h"
 #include "rimecandidate.h"
+#include <fcitx-utils/textformatflags.h>
 #include <fcitx-utils/utf8.h>
 #include <fcitx/candidatelist.h>
 #include <fcitx/inputcontext.h>
@@ -185,15 +186,9 @@ bool RimeState::getStatus(
     return true;
 }
 
-void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
+Text preeditFromRimeContext(const RimeContext &context, TextFormatFlags flag) {
     Text preedit;
-    Text clientPreedit;
 
-    TextFormatFlags flag;
-    if (engine_->config().showPreeditInApplication.value() &&
-        ic->capabilityFlags().test(CapabilityFlag::Preedit)) {
-        flag = TextFormatFlag::Underline;
-    }
     do {
         if (context.composition.length == 0) {
             break;
@@ -204,10 +199,6 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
               context.composition.sel_start <= context.composition.sel_end &&
               context.composition.sel_end <= context.composition.length)) {
             break;
-        }
-
-        if (context.commit_text_preview) {
-            clientPreedit.append(context.commit_text_preview, flag);
         }
 
         /* converted text */
@@ -238,16 +229,49 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
         preedit.setCursor(context.composition.cursor_pos);
     } while (0);
 
-    if (engine_->config().showPreeditInApplication.value() &&
-        ic->capabilityFlags().test(CapabilityFlag::Preedit)) {
-        clientPreedit = preedit;
+    return preedit;
+}
+
+void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
+    enum {
+        PreeditStyle_No,
+        PreeditStyle_CommitPreview,
+        PreeditStyle_Preedit,
+    } style;
+
+    if (!ic->capabilityFlags().test(CapabilityFlag::Preedit)) {
+        style = PreeditStyle_No;
+    } else if (engine_->config().commitPreviewAsPreedit.value()) {
+        style = PreeditStyle_CommitPreview;
     } else {
-        ic->inputPanel().setPreedit(preedit);
+        style = PreeditStyle_Preedit;
     }
-    if (engine_->config().preeditCursorPositionAtBeginning.value()) {
-        clientPreedit.setCursor(0);
+
+    switch (style) {
+    case PreeditStyle_No:
+        ic->inputPanel().setPreedit(
+            preeditFromRimeContext(context, TextFormatFlag::NoFlag));
+        break;
+    case PreeditStyle_CommitPreview: {
+        ic->inputPanel().setPreedit(
+            preeditFromRimeContext(context, TextFormatFlag::NoFlag));
+        if (context.commit_text_preview) {
+            Text clientPreedit;
+            clientPreedit.append(context.commit_text_preview,
+                                 TextFormatFlag::Underline);
+            clientPreedit.setCursor(0);
+            ic->inputPanel().setClientPreedit(clientPreedit);
+        }
+    } break;
+    case PreeditStyle_Preedit: {
+        Text clientPreedit =
+            preeditFromRimeContext(context, TextFormatFlag::Underline);
+        if (*engine_->config().preeditCursorPositionAtBeginning) {
+            clientPreedit.setCursor(0);
+        }
+        ic->inputPanel().setClientPreedit(clientPreedit);
+    } break;
     }
-    ic->inputPanel().setClientPreedit(clientPreedit);
 }
 
 void RimeState::updateUI(InputContext *ic, bool keyRelease) {

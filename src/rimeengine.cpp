@@ -302,6 +302,7 @@ RimeEngine::RimeEngine(Instance *instance)
         EventType::GlobalConfigReloaded, EventWatcherPhase::Default,
         [this](Event &) { refreshSessionPoolPolicy(); });
     reloadConfig();
+    constructed_ = true;
 }
 
 RimeEngine::~RimeEngine() {
@@ -473,7 +474,10 @@ void RimeEngine::updateConfig() {
     instance_->inputContextManager().registerProperty("rimeState", &factory_);
     updateSchemaMenu();
     refreshSessionPoolPolicy();
-    refreshStatusArea(0);
+
+    if (constructed_) {
+        refreshStatusArea(0);
+    }
 }
 
 void RimeEngine::refreshStatusArea(InputContext &ic) {

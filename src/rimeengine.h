@@ -144,6 +144,7 @@ private:
     void refreshSessionPoolPolicy();
     PropertyPropagatePolicy getSharedStatePolicy();
 
+    bool constructed_ = false;
     std::string sharedDataDir_;
     IconTheme theme_;
     Instance *instance_;

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2023-10-09 20:36+0000\n"
+"POT-Creation-Date: 2023-10-25 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Dmitry <dmitrydmitry761@gmail.com>, 2023\n"
 "Language-Team: Russian (https://app.transifex.com/fcitx/teams/12005/ru/)\n"
@@ -30,7 +30,7 @@ msgstr "Все"
 msgid "Commit current text when deactivating"
 msgstr "Зафиксировать текущий текст при деактивации"
 
-#: src/rimeengine.cpp:273
+#: src/rimeengine.cpp:275
 msgid "Deploy"
 msgstr "Развернуть"
 
@@ -44,15 +44,15 @@ msgstr ""
 msgid "Follow Global Configuration"
 msgstr "Следовать глобальной конфигурации"
 
-#: src/rimeengine.cpp:621
+#: src/rimeengine.cpp:631
 msgid "Full Shape is enabled."
 msgstr "Полноширинная форма включена."
 
-#: src/rimeengine.cpp:618
+#: src/rimeengine.cpp:628
 msgid "Half Shape is enabled."
 msgstr "Полуширинная форма включена."
 
-#: src/rimestate.cpp:62 src/rimeengine.cpp:765
+#: src/rimestate.cpp:63 src/rimeengine.cpp:775
 msgid "Latin Mode"
 msgstr "Режим Латиницы"
 
@@ -76,15 +76,15 @@ msgstr "Плагины"
 msgid "Program"
 msgstr "Программа"
 
-#: src/rimeengine.cpp:627
+#: src/rimeengine.cpp:637
 msgid "Punctuation conversion is disabled."
 msgstr "Преобразование знаков препинания отключено."
 
-#: src/rimeengine.cpp:624
+#: src/rimeengine.cpp:634
 msgid "Punctuation conversion is enabled."
 msgstr "Преобразование знаков препинания включено."
 
-#: src/rimeengine.cpp:644 src/rimeengine.cpp:645 src/rime.conf.in:3
+#: src/rimeengine.cpp:654 src/rimeengine.cpp:655 src/rime.conf.in:3
 #: src/rime-addon.conf.in.in:3
 msgid "Rime"
 msgstr "Rime"
@@ -97,7 +97,7 @@ msgstr "Обертка Rime для Fcitx"
 msgid "Rime for Fcitx 5"
 msgstr "Rime для Fcitx 5"
 
-#: src/rimeengine.cpp:611
+#: src/rimeengine.cpp:621
 msgid "Rime has encountered an error. See log for details."
 msgstr "Rime обнаружил ошибку. Подробности смотрите в журнале."
 
@@ -105,11 +105,11 @@ msgstr "Rime обнаружил ошибку. Подробности смотр�
 msgid "Rime input method"
 msgstr "Метод ввода Rime"
 
-#: src/rimeengine.cpp:603
+#: src/rimeengine.cpp:613
 msgid "Rime is ready."
 msgstr "Rime готов."
 
-#: src/rimeengine.cpp:600
+#: src/rimeengine.cpp:610
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -121,21 +121,21 @@ msgstr ""
 msgid "Shared Input State"
 msgstr "Общее состояние ввода"
 
-#: src/rimeengine.h:49
-msgid "Show preedit within application"
-msgstr "Показать предварительное редактирование в приложении"
-
-#: src/rimeengine.cpp:633
+#: src/rimeengine.cpp:643
 msgid "Simplified Chinese is enabled."
 msgstr "Упрощенный Китайский включен."
 
-#: src/rimeengine.cpp:285
+#: src/rimeengine.cpp:287
 msgid "Synchronize"
 msgstr "Синхронизировать"
 
-#: src/rimeengine.cpp:630
+#: src/rimeengine.cpp:640
 msgid "Traditional Chinese is enabled."
 msgstr "Традиционный Китайский включен."
+
+#: src/rimeengine.h:49
+msgid "Use commit preview text as preedit"
+msgstr ""
 
 #: src/rimeengine.h:60
 msgid "User data dir"

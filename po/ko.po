@@ -4,15 +4,15 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
-# JungHee Lee <daemul72@gmail.com>, 2022
+# Junghee Lee <daemul72@gmail.com>, 2022
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2023-10-08 20:24+0000\n"
+"POT-Creation-Date: 2023-10-25 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: JungHee Lee <daemul72@gmail.com>, 2022\n"
+"Last-Translator: Junghee Lee <daemul72@gmail.com>, 2022\n"
 "Language-Team: Korean (https://app.transifex.com/fcitx/teams/12005/ko/)\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr ""
 msgid "Commit current text when deactivating"
 msgstr "비활성화할 때 현재 텍스트 입력완료"
 
-#: src/rimeengine.cpp:273
+#: src/rimeengine.cpp:275
 msgid "Deploy"
 msgstr "배치"
 
@@ -40,15 +40,15 @@ msgstr "사전편집 시작 부분에 포함된 사전편집 커서 수정"
 msgid "Follow Global Configuration"
 msgstr ""
 
-#: src/rimeengine.cpp:621
+#: src/rimeengine.cpp:631
 msgid "Full Shape is enabled."
 msgstr "전각이 활성화되었습니다."
 
-#: src/rimeengine.cpp:618
+#: src/rimeengine.cpp:628
 msgid "Half Shape is enabled."
 msgstr "반각이 활성화되었습니다."
 
-#: src/rimestate.cpp:62 src/rimeengine.cpp:765
+#: src/rimestate.cpp:63 src/rimeengine.cpp:775
 msgid "Latin Mode"
 msgstr "로마자 모드"
 
@@ -72,15 +72,15 @@ msgstr "플러그인"
 msgid "Program"
 msgstr ""
 
-#: src/rimeengine.cpp:627
+#: src/rimeengine.cpp:637
 msgid "Punctuation conversion is disabled."
 msgstr ""
 
-#: src/rimeengine.cpp:624
+#: src/rimeengine.cpp:634
 msgid "Punctuation conversion is enabled."
 msgstr ""
 
-#: src/rimeengine.cpp:644 src/rimeengine.cpp:645 src/rime.conf.in:3
+#: src/rimeengine.cpp:654 src/rimeengine.cpp:655 src/rime.conf.in:3
 #: src/rime-addon.conf.in.in:3
 msgid "Rime"
 msgstr "Rime"
@@ -93,7 +93,7 @@ msgstr "Fcitx용 Rime 래퍼"
 msgid "Rime for Fcitx 5"
 msgstr "Fcitx5용 Rime"
 
-#: src/rimeengine.cpp:611
+#: src/rimeengine.cpp:621
 msgid "Rime has encountered an error. See log for details."
 msgstr ""
 
@@ -101,11 +101,11 @@ msgstr ""
 msgid "Rime input method"
 msgstr "Rime 입력 방식"
 
-#: src/rimeengine.cpp:603
+#: src/rimeengine.cpp:613
 msgid "Rime is ready."
 msgstr "Rime이 준비되었습니다."
 
-#: src/rimeengine.cpp:600
+#: src/rimeengine.cpp:610
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -117,21 +117,21 @@ msgstr ""
 msgid "Shared Input State"
 msgstr ""
 
-#: src/rimeengine.h:49
-msgid "Show preedit within application"
-msgstr "응용프로그램 내에서 사전편집 표시"
-
-#: src/rimeengine.cpp:633
+#: src/rimeengine.cpp:643
 msgid "Simplified Chinese is enabled."
 msgstr "간화자가 활성화되었습니다."
 
-#: src/rimeengine.cpp:285
+#: src/rimeengine.cpp:287
 msgid "Synchronize"
 msgstr "동기화"
 
-#: src/rimeengine.cpp:630
+#: src/rimeengine.cpp:640
 msgid "Traditional Chinese is enabled."
 msgstr "정체자가 활성화되었습니다."
+
+#: src/rimeengine.h:49
+msgid "Use commit preview text as preedit"
+msgstr ""
 
 #: src/rimeengine.h:60
 msgid "User data dir"

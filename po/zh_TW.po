@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2023-10-25 20:24+0000\n"
+"POT-Creation-Date: 2023-10-26 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Lau YeeYu, 2023\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/fcitx/teams/12005/"
@@ -134,7 +134,7 @@ msgstr "已啟用繁體中文。"
 
 #: src/rimeengine.h:49
 msgid "Use commit preview text as preedit"
-msgstr ""
+msgstr "將提交預覽文字作為預編輯"
 
 #: src/rimeengine.h:60
 msgid "User data dir"

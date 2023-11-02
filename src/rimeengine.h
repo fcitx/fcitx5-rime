@@ -8,6 +8,7 @@
 
 #include "rimesession.h"
 #include "rimestate.h"
+#include <cstdint>
 #include <fcitx-config/configuration.h>
 #include <fcitx-config/iniparser.h>
 #include <fcitx-utils/event.h>
@@ -152,6 +153,7 @@ private:
     rime_api_t *api_;
     static bool firstRun_;
     uint64_t blockNotificationBefore_ = 0;
+    uint64_t lastKeyEventTime_ = 0;
     FactoryFor<RimeState> factory_;
 
     std::unique_ptr<Action> imAction_;

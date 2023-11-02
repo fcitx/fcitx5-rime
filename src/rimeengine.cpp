@@ -9,11 +9,13 @@
 #include "rimestate.h"
 #include <cstdint>
 #include <cstring>
+#include <ctime>
 #include <dirent.h>
 #include <fcitx-utils/event.h>
 #include <fcitx-utils/fs.h>
 #include <fcitx-utils/i18n.h>
 #include <fcitx-utils/log.h>
+#include <fcitx-utils/misc.h>
 #include <fcitx-utils/standardpath.h>
 #include <fcitx/candidatelist.h>
 #include <fcitx/inputcontext.h>
@@ -558,6 +560,7 @@ void RimeEngine::deactivate(const InputMethodEntry &entry,
 
 void RimeEngine::keyEvent(const InputMethodEntry &entry, KeyEvent &event) {
     FCITX_UNUSED(entry);
+    lastKeyEventTime_ = now(CLOCK_MONOTONIC);
     RIME_DEBUG() << "Rime receive key: " << event.rawKey() << " "
                  << event.isRelease();
     auto inputContext = event.inputContext();
@@ -622,25 +625,28 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
                         "See log for details.");
         }
     } else if (messageType == "option") {
-        icon = "fcitx-rime";
-        if (messageValue == "!full_shape") {
-            tipId = "fcitx-rime-full-shape";
-            message = _("Half Shape is enabled.");
-        } else if (messageValue == "full_shape") {
-            tipId = "fcitx-rime-full-shape";
-            message = _("Full Shape is enabled.");
-        } else if (messageValue == "!ascii_punct") {
-            tipId = "fcitx-rime-ascii-punct";
-            message = _("Punctuation conversion is enabled.");
-        } else if (messageValue == "ascii_punct") {
-            tipId = "fcitx-rime-ascii-punct";
-            message = _("Punctuation conversion is disabled.");
-        } else if (messageValue == "!simplification") {
-            tipId = "fcitx-rime-simplification";
-            message = _("Traditional Chinese is enabled.");
-        } else if (messageValue == "simplification") {
-            tipId = "fcitx-rime-simplification";
-            message = _("Simplified Chinese is enabled.");
+        // Only show option notification triggered by key event.
+        if (!isAndroid() && lastKeyEventTime_ + 30000 > now(CLOCK_MONOTONIC)) {
+            icon = "fcitx-rime";
+            if (messageValue == "!full_shape") {
+                tipId = "fcitx-rime-full-shape";
+                message = _("Half Shape is enabled.");
+            } else if (messageValue == "full_shape") {
+                tipId = "fcitx-rime-full-shape";
+                message = _("Full Shape is enabled.");
+            } else if (messageValue == "!ascii_punct") {
+                tipId = "fcitx-rime-ascii-punct";
+                message = _("Punctuation conversion is enabled.");
+            } else if (messageValue == "ascii_punct") {
+                tipId = "fcitx-rime-ascii-punct";
+                message = _("Punctuation conversion is disabled.");
+            } else if (messageValue == "!simplification") {
+                tipId = "fcitx-rime-simplification";
+                message = _("Traditional Chinese is enabled.");
+            } else if (messageValue == "simplification") {
+                tipId = "fcitx-rime-simplification";
+                message = _("Simplified Chinese is enabled.");
+            }
         }
         updateStatusArea(session);
     } else if (messageType == "schema") {

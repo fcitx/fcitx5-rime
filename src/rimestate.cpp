@@ -6,6 +6,7 @@
 
 #include "rimestate.h"
 #include "rimecandidate.h"
+#include <fcitx-utils/stringutils.h>
 #include <fcitx-utils/textformatflags.h>
 #include <fcitx-utils/utf8.h>
 #include <fcitx/candidatelist.h>
@@ -350,8 +351,23 @@ void RimeState::snapshot() {
         return;
     }
     getStatus([this](const RimeStatus &status) {
-        if (status.schema_id) {
-            savedCurrentSchema_ = status.schema_id;
+        if (!status.schema_id) {
+            return;
+        }
+        savedCurrentSchema_ = status.schema_id;
+        savedOptions_.clear();
+        if (savedCurrentSchema_.empty()) {
+            return;
+        }
+        auto &optionActions = engine_->optionActions();
+        auto iter = optionActions.find(savedCurrentSchema_);
+        if (iter == optionActions.end()) {
+            return;
+        }
+        for (const auto &option : iter->second) {
+            if (auto savedOption = option->snapshotOption(&ic_)) {
+                savedOptions_.push_back(std::move(*savedOption));
+            }
         }
     });
 }
@@ -366,6 +382,14 @@ void RimeState::restore() {
 
     selectSchema(savedCurrentSchema_);
     savedCurrentSchema_ = std::string();
+    for (const auto &option : savedOptions_) {
+        if (stringutils::startsWith(option, "!")) {
+            engine_->api()->set_option(session(), option.c_str() + 1, false);
+        } else {
+            engine_->api()->set_option(session(), option.c_str(), true);
+        }
+    }
+    savedOptions_.clear();
 }
 
 } // namespace fcitx

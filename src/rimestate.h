@@ -51,6 +51,7 @@ private:
     std::shared_ptr<RimeSessionHolder> session_;
 
     std::string savedCurrentSchema_;
+    std::vector<std::string> savedOptions_;
 };
 } // namespace fcitx
 

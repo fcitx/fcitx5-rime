@@ -17,6 +17,7 @@
 #include <fcitx-utils/log.h>
 #include <fcitx-utils/misc.h>
 #include <fcitx-utils/standardpath.h>
+#include <fcitx-utils/stringutils.h>
 #include <fcitx/candidatelist.h>
 #include <fcitx/inputcontext.h>
 #include <fcitx/inputcontextmanager.h>
@@ -24,6 +25,7 @@
 #include <fcitx/statusarea.h>
 #include <fcitx/userinterface.h>
 #include <fcitx/userinterfacemanager.h>
+#include <optional>
 #include <rime_api.h>
 #include <stdexcept>
 #include <string>
@@ -147,26 +149,27 @@ private:
     RimeEngine *engine_;
 };
 
-class ToggleAction : public SimpleAction {
+class ToggleAction : public RimeOptionAction {
 public:
     ToggleAction(RimeEngine *engine, std::string schema, std::string option,
                  std::string disabledText, std::string enabledText)
         : engine_(engine), option_(option), disabledText_(disabledText),
           enabledText_(enabledText) {
-        connect<SimpleAction::Activated>([this](InputContext *ic) {
-            auto state = engine_->state(ic);
-            auto api = engine_->api();
-            if (!state) {
-                return;
-            }
-            // Do not send notification since user is explicitly select it.
-            engine_->blockNotificationFor(30000);
-            auto session = state->session();
-            Bool oldValue = api->get_option(session, option_.c_str());
-            api->set_option(session, option_.c_str(), !oldValue);
-        });
         engine_->instance()->userInterfaceManager().registerAction(
             stringutils::concat("fcitx-rime-", schema, "-", option), this);
+    }
+
+    void activate(InputContext *ic) override {
+        auto state = engine_->state(ic);
+        auto api = engine_->api();
+        if (!state) {
+            return;
+        }
+        // Do not send notification since user is explicitly select it.
+        engine_->blockNotificationFor(30000);
+        auto session = state->session();
+        Bool oldValue = api->get_option(session, option_.c_str());
+        api->set_option(session, option_.c_str(), !oldValue);
     }
 
     std::string shortText(InputContext *ic) const override {
@@ -184,6 +187,22 @@ public:
 
     std::string icon(InputContext *) const override { return ""; }
 
+    std::optional<std::string> snapshotOption(InputContext *ic) override {
+        auto state = engine_->state(ic);
+        auto api = engine_->api();
+        if (!state) {
+            return std::nullopt;
+        }
+        auto session = state->session(false);
+        if (!session) {
+            return std::nullopt;
+        }
+        if (!api->get_option(session, option_.c_str())) {
+            return stringutils::concat("!", option_);
+        }
+        return option_;
+    }
+
 private:
     RimeEngine *engine_;
     std::string option_;
@@ -191,7 +210,7 @@ private:
     std::string enabledText_;
 };
 
-class SelectAction : public Action {
+class SelectAction : public RimeOptionAction {
 public:
     SelectAction(RimeEngine *engine, std::string schema,
                  std::vector<std::string> options,
@@ -239,6 +258,24 @@ public:
     }
 
     std::string icon(InputContext *) const override { return ""; }
+
+    std::optional<std::string> snapshotOption(InputContext *ic) override {
+        auto state = engine_->state(ic);
+        auto api = engine_->api();
+        if (!state) {
+            return std::nullopt;
+        }
+        auto session = state->session(false);
+        if (!session) {
+            return std::nullopt;
+        }
+        for (size_t i = 0; i < options_.size(); ++i) {
+            if (api->get_option(session, options_[i].c_str())) {
+                return options_[i];
+            }
+        }
+        return std::nullopt;
+    }
 
 private:
     RimeEngine *engine_;

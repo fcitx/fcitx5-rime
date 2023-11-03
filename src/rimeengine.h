@@ -78,6 +78,12 @@ FCITX_CONFIGURATION(
 #endif
 );
 
+class RimeOptionAction : public Action {
+public:
+    // This is used to save the option when we need to release the session.
+    virtual std::optional<std::string> snapshotOption(InputContext *ic) = 0;
+};
+
 class RimeEngine final : public InputMethodEngineV2 {
 public:
     RimeEngine(Instance *instance);
@@ -124,6 +130,7 @@ public:
 
     void blockNotificationFor(uint64_t usec);
     const auto &schemas() const { return schemas_; }
+    const auto &optionActions() const { return optionActions_; };
 
 private:
     static void rimeNotificationHandler(void *context_object,
@@ -169,7 +176,8 @@ private:
 
     std::unordered_set<std::string> schemas_;
     std::list<SimpleAction> schemActions_;
-    std::unordered_map<std::string, std::list<std::unique_ptr<Action>>>
+    std::unordered_map<std::string,
+                       std::list<std::unique_ptr<RimeOptionAction>>>
         optionActions_;
     Menu schemaMenu_;
 #ifdef FCITX_RIME_LOAD_PLUGIN

@@ -643,6 +643,7 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
     const char *message = nullptr;
     const char *icon = "";
     const char *tipId = "";
+    int timeout = 3000;
     if (messageType == "deploy") {
         tipId = "fcitx-rime-deploy";
         icon = "fcitx-rime-deploy";
@@ -685,6 +686,7 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
                 message = _("Simplified Chinese is enabled.");
             }
         }
+        timeout = 1000;
         updateStatusArea(session);
     } else if (messageType == "schema") {
         // Schema is changed either via status area or shortcut
@@ -694,8 +696,8 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
     auto notifications = this->notifications();
     if (message && notifications &&
         now(CLOCK_MONOTONIC) > blockNotificationBefore_) {
-        notifications->call<INotifications::showTip>(tipId, _("Rime"), icon,
-                                                     _("Rime"), message, -1);
+        notifications->call<INotifications::showTip>(
+            tipId, _("Rime"), icon, _("Rime"), message, timeout);
     }
 }
 

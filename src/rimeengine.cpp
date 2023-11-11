@@ -454,6 +454,9 @@ void RimeEngine::setSubConfig(const std::string &path, const RawConfig &) {
 
 void RimeEngine::updateConfig() {
     RIME_DEBUG() << "Rime UpdateConfig";
+    if (constructed_ && factory_.registered()) {
+        releaseAllSession(true);
+    }
     factory_.unregister();
     try {
         api_->finalize();
@@ -758,7 +761,7 @@ void RimeEngine::releaseAllSession(const bool snapshot) {
 
 void RimeEngine::deploy() {
     RIME_DEBUG() << "Rime Deploy";
-    releaseAllSession();
+    releaseAllSession(true);
     api_->finalize();
     rimeStart(true);
 }
@@ -850,7 +853,7 @@ void RimeEngine::updateSchemaMenu() {
 void RimeEngine::refreshSessionPoolPolicy() {
     auto newPolicy = getSharedStatePolicy();
     if (sessionPool_.propertyPropagatePolicy() != newPolicy) {
-        releaseAllSession();
+        releaseAllSession(constructed_);
         sessionPool_.setPropertyPropagatePolicy(newPolicy);
     }
 }

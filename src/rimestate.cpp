@@ -41,6 +41,7 @@ RimeSessionId RimeState::session(bool requestNewSession) {
             restore();
         } else {
             savedCurrentSchema_.clear();
+            savedOptions_.clear();
         }
     }
     if (!session_) {

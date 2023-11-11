@@ -457,7 +457,6 @@ void RimeEngine::updateConfig() {
     if (constructed_ && factory_.registered()) {
         releaseAllSession(true);
     }
-    factory_.unregister();
     try {
         api_->finalize();
     } catch (const std::exception &e) {

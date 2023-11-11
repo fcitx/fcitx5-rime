@@ -39,14 +39,15 @@ RimeSessionId RimeState::session(bool requestNewSession) {
         session_ = sessionHolder;
         if (isNewSession) {
             restore();
+        } else {
+            savedCurrentSchema_.clear();
+            savedOptions_.clear();
         }
     }
     if (!session_) {
         return 0;
     }
 
-    savedCurrentSchema_.clear();
-    savedOptions_.clear();
     return session_->id();
 }
 

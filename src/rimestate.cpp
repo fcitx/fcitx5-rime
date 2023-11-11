@@ -39,14 +39,14 @@ RimeSessionId RimeState::session(bool requestNewSession) {
         session_ = sessionHolder;
         if (isNewSession) {
             restore();
-        } else {
-            savedCurrentSchema_.clear();
-            savedOptions_.clear();
         }
     }
     if (!session_) {
         return 0;
     }
+
+    savedCurrentSchema_.clear();
+    savedOptions_.clear();
     return session_->id();
 }
 
@@ -382,7 +382,6 @@ void RimeState::restore() {
     }
 
     selectSchema(savedCurrentSchema_);
-    savedCurrentSchema_ = std::string();
     for (const auto &option : savedOptions_) {
         if (stringutils::startsWith(option, "!")) {
             engine_->api()->set_option(session(), option.c_str() + 1, false);
@@ -390,7 +389,6 @@ void RimeState::restore() {
             engine_->api()->set_option(session(), option.c_str(), true);
         }
     }
-    savedOptions_.clear();
 }
 
 } // namespace fcitx

@@ -6,6 +6,7 @@
 
 #include "rimestate.h"
 #include "rimecandidate.h"
+#include "rimeengine.h"
 #include <fcitx-utils/stringutils.h>
 #include <fcitx-utils/textformatflags.h>
 #include <fcitx-utils/utf8.h>
@@ -236,26 +237,16 @@ Text preeditFromRimeContext(const RimeContext &context, TextFormatFlags flag) {
 }
 
 void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
-    enum {
-        PreeditStyle_No,
-        PreeditStyle_CommitPreview,
-        PreeditStyle_Preedit,
-    } style;
+    PreeditMode mode = ic->capabilityFlags().test(CapabilityFlag::Preedit)
+                           ? *engine_->config().preeditMode
+                           : PreeditMode::No;
 
-    if (!ic->capabilityFlags().test(CapabilityFlag::Preedit)) {
-        style = PreeditStyle_No;
-    } else if (engine_->config().commitPreviewAsPreedit.value()) {
-        style = PreeditStyle_CommitPreview;
-    } else {
-        style = PreeditStyle_Preedit;
-    }
-
-    switch (style) {
-    case PreeditStyle_No:
+    switch (mode) {
+    case PreeditMode::No:
         ic->inputPanel().setPreedit(
             preeditFromRimeContext(context, TextFormatFlag::NoFlag));
         break;
-    case PreeditStyle_CommitPreview: {
+    case PreeditMode::CommitPreview: {
         ic->inputPanel().setPreedit(
             preeditFromRimeContext(context, TextFormatFlag::NoFlag));
         if (context.commit_text_preview) {
@@ -266,7 +257,7 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
             ic->inputPanel().setClientPreedit(clientPreedit);
         }
     } break;
-    case PreeditStyle_Preedit: {
+    case PreeditMode::ComposingText: {
         Text clientPreedit =
             preeditFromRimeContext(context, TextFormatFlag::Underline);
         if (*engine_->config().preeditCursorPositionAtBeginning) {

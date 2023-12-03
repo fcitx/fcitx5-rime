@@ -44,11 +44,16 @@ FCITX_CONFIG_ENUM_NAME_WITH_I18N(SharedStatePolicy,
                                  N_("Follow Global Configuration"), N_("All"),
                                  N_("Program"), N_("No"));
 
+enum class PreeditMode { No, ComposingText, CommitPreview };
+
+FCITX_CONFIG_ENUM_NAME_WITH_I18N(PreeditMode, N_("Do not show"),
+                                 N_("Composing text"), N_("Commit preview"))
+
 FCITX_CONFIGURATION(
     RimeEngineConfig,
-    Option<bool> commitPreviewAsPreedit{this, "CommitPreviewAsPreedit",
-                                        _("Use commit preview text as preedit"),
-                                        true};
+    OptionWithAnnotation<PreeditMode, PreeditModeI18NAnnotation> preeditMode{
+        this, "PreeditMode", _("Preedit Mode"),
+        isAndroid() ? PreeditMode::No : PreeditMode::ComposingText};
     Option<SharedStatePolicy> sharedStatePolicy{
         this, "InputState", _("Shared Input State"), SharedStatePolicy::All};
     Option<bool> preeditCursorPositionAtBeginning{

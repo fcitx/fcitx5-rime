@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2023-12-03 20:24+0000\n"
+"POT-Creation-Date: 2023-12-04 20:25+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Dmitry <dmitrydmitry761@gmail.com>, 2023\n"
 "Language-Team: Russian (https://app.transifex.com/fcitx/teams/12005/ru/)\n"
@@ -32,11 +32,11 @@ msgstr "Зафиксировать текущий текст при деакти
 
 #: src/rimeengine.h:50
 msgid "Commit preview"
-msgstr ""
+msgstr "Предварительный просмотр фиксации"
 
 #: src/rimeengine.h:50
 msgid "Composing text"
-msgstr ""
+msgstr "Составление текста"
 
 #: src/rimeengine.cpp:314
 msgid "Deploy"
@@ -44,7 +44,7 @@ msgstr "Развернуть"
 
 #: src/rimeengine.h:49
 msgid "Do not show"
-msgstr ""
+msgstr "Не показывать"
 
 #: src/rimeengine.h:61
 msgid "Fix embedded preedit cursor at the beginning of the preedit"
@@ -85,7 +85,7 @@ msgstr "Плагины"
 
 #: src/rimeengine.h:55
 msgid "Preedit Mode"
-msgstr ""
+msgstr "Режим Предварительного Редактирования"
 
 #: src/rimeengine.h:45
 msgid "Program"

@@ -142,7 +142,7 @@ public:
         if (isDisabled) {
             return "fcitx-rime-disabled";
         }
-        return "fcitx-rime-im";
+        return "";
     }
 
 private:

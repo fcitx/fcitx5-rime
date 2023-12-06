@@ -140,9 +140,9 @@ public:
             });
         }
         if (isDisabled) {
-            return "fcitx-rime-disabled";
+            return "fcitx_rime_disabled";
         }
-        return "";
+        return "fcitx_rime_im";
     }
 
 private:
@@ -310,7 +310,7 @@ RimeEngine::RimeEngine(Instance *instance)
     separatorAction_.setSeparator(true);
     instance_->userInterfaceManager().registerAction("fcitx-rime-separator",
                                                      &separatorAction_);
-    deployAction_.setIcon("fcitx-rime-deploy");
+    deployAction_.setIcon("fcitx_rime_deploy");
     deployAction_.setShortText(_("Deploy"));
     deployAction_.connect<SimpleAction::Activated>([this](InputContext *ic) {
         deploy();
@@ -322,7 +322,7 @@ RimeEngine::RimeEngine(Instance *instance)
     instance_->userInterfaceManager().registerAction("fcitx-rime-deploy",
                                                      &deployAction_);
 
-    syncAction_.setIcon("fcitx-rime-sync");
+    syncAction_.setIcon("fcitx_rime_sync");
     syncAction_.setShortText(_("Synchronize"));
 
     syncAction_.connect<SimpleAction::Activated>([this](InputContext *ic) {
@@ -648,7 +648,7 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
     int timeout = 3000;
     if (messageType == "deploy") {
         tipId = "fcitx-rime-deploy";
-        icon = "fcitx-rime-deploy";
+        icon = "fcitx_rime_deploy";
         if (messageValue == "start") {
             message = _("Rime is under maintenance. It may take a few "
                         "seconds. Please wait until it is finished...");
@@ -735,9 +735,9 @@ std::string RimeEngine::subModeIconImpl(const InputMethodEntry &,
     if (state) {
         state->getStatus([&result](const RimeStatus &status) {
             if (status.is_disabled) {
-                result = "fcitx-rime-disable";
+                result = "fcitx_rime_disable";
             } else if (status.is_ascii_mode) {
-                result = "fcitx-rime-latin";
+                result = "fcitx_rime_latin";
             } else {
                 result = "fcitx-rime";
             }

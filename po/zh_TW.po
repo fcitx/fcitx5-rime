@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2023-12-03 20:24+0000\n"
+"POT-Creation-Date: 2023-12-09 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Lau YeeYu, 2023\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/fcitx/teams/12005/"
@@ -35,11 +35,11 @@ msgstr "取消啟用輸入法時提交目前文字"
 
 #: src/rimeengine.h:50
 msgid "Commit preview"
-msgstr ""
+msgstr "提交預覽"
 
 #: src/rimeengine.h:50
 msgid "Composing text"
-msgstr ""
+msgstr "編輯中文本"
 
 #: src/rimeengine.cpp:314
 msgid "Deploy"
@@ -47,7 +47,7 @@ msgstr "重新部署"
 
 #: src/rimeengine.h:49
 msgid "Do not show"
-msgstr ""
+msgstr "不顯示"
 
 #: src/rimeengine.h:61
 msgid "Fix embedded preedit cursor at the beginning of the preedit"
@@ -87,7 +87,7 @@ msgstr "插件"
 
 #: src/rimeengine.h:55
 msgid "Preedit Mode"
-msgstr ""
+msgstr "預編輯模式"
 
 #: src/rimeengine.h:45
 msgid "Program"

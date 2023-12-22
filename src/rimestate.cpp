@@ -250,10 +250,14 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
         ic->inputPanel().setPreedit(
             preeditFromRimeContext(context, TextFormatFlag::NoFlag));
         if (context.commit_text_preview) {
+            std::string preview(context.commit_text_preview);
             Text clientPreedit;
-            clientPreedit.append(context.commit_text_preview,
-                                 TextFormatFlag::Underline);
-            clientPreedit.setCursor(0);
+            clientPreedit.append(preview, TextFormatFlag::Underline);
+            if (*engine_->config().preeditCursorPositionAtBeginning) {
+                clientPreedit.setCursor(0);
+            } else {
+                clientPreedit.setCursor(static_cast<int>(preview.size()));
+            }
             ic->inputPanel().setClientPreedit(clientPreedit);
         }
     } break;

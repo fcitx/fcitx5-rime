@@ -256,7 +256,7 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
             if (*engine_->config().preeditCursorPositionAtBeginning) {
                 clientPreedit.setCursor(0);
             } else {
-                clientPreedit.setCursor(static_cast<int>(preview.size()));
+                clientPreedit.setCursor(clientPreedit.textLength());
             }
             ic->inputPanel().setClientPreedit(clientPreedit);
         }

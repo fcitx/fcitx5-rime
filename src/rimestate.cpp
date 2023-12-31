@@ -253,7 +253,11 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
             Text clientPreedit;
             clientPreedit.append(context.commit_text_preview,
                                  TextFormatFlag::Underline);
-            clientPreedit.setCursor(0);
+            if (*engine_->config().preeditCursorPositionAtBeginning) {
+                clientPreedit.setCursor(0);
+            } else {
+                clientPreedit.setCursor(clientPreedit.textLength());
+            }
             ic->inputPanel().setClientPreedit(clientPreedit);
         }
     } break;

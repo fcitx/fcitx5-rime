@@ -291,7 +291,7 @@ RimeEngine::RimeEngine(Instance *instance)
     : instance_(instance), api_(EnsureRimeApi()),
       factory_([this](InputContext &ic) { return new RimeState(this, ic); }),
       sessionPool_(this, getSharedStatePolicy()) {
-    if constexpr (isAndroid()) {
+    if constexpr (isAndroid() || isApple()) {
         const auto &sp = fcitx::StandardPath::global();
         std::string defaultYaml = sp.locate(fcitx::StandardPath::Type::Data,
                                             "rime-data/default.yaml");

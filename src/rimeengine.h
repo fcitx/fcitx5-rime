@@ -167,6 +167,7 @@ private:
     uint64_t blockNotificationBefore_ = 0;
     uint64_t lastKeyEventTime_ = 0;
     FactoryFor<RimeState> factory_;
+    bool needRefreshAppOption_ = false;
 
     std::unique_ptr<Action> imAction_;
     SimpleAction separatorAction_;

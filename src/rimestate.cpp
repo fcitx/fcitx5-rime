@@ -200,7 +200,8 @@ bool RimeState::getStatus(
     return true;
 }
 
-Text preeditFromRimeContext(const RimeContext &context, TextFormatFlags flag) {
+Text preeditFromRimeContext(const RimeContext &context, TextFormatFlags flag,
+                            TextFormatFlags highlightFlag) {
     Text preedit;
 
     do {
@@ -228,7 +229,7 @@ Text preeditFromRimeContext(const RimeContext &context, TextFormatFlags flag) {
                 std::string(
                     &context.composition.preedit[context.composition.sel_start],
                     &context.composition.preedit[context.composition.sel_end]),
-                flag | TextFormatFlag::HighLight);
+                flag | highlightFlag);
         }
 
         /* remaining input to convert */
@@ -253,12 +254,12 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
 
     switch (mode) {
     case PreeditMode::No:
-        ic->inputPanel().setPreedit(
-            preeditFromRimeContext(context, TextFormatFlag::NoFlag));
+        ic->inputPanel().setPreedit(preeditFromRimeContext(
+            context, TextFormatFlag::NoFlag, TextFormatFlag::NoFlag));
         break;
     case PreeditMode::CommitPreview: {
-        ic->inputPanel().setPreedit(
-            preeditFromRimeContext(context, TextFormatFlag::NoFlag));
+        ic->inputPanel().setPreedit(preeditFromRimeContext(
+            context, TextFormatFlag::NoFlag, TextFormatFlag::NoFlag));
         if (context.commit_text_preview) {
             Text clientPreedit;
             clientPreedit.append(context.commit_text_preview,
@@ -272,8 +273,12 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
         }
     } break;
     case PreeditMode::ComposingText: {
-        Text clientPreedit =
-            preeditFromRimeContext(context, TextFormatFlag::Underline);
+        const TextFormatFlag highlightFlag =
+            *engine_->config().preeditCursorPositionAtBeginning
+                ? TextFormatFlag::HighLight
+                : TextFormatFlag::NoFlag;
+        Text clientPreedit = preeditFromRimeContext(
+            context, TextFormatFlag::Underline, highlightFlag);
         if (*engine_->config().preeditCursorPositionAtBeginning) {
             clientPreedit.setCursor(0);
         }

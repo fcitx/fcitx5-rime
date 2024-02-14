@@ -37,6 +37,7 @@ public:
     void commitPreedit(InputContext *ic);
     std::string subMode();
     std::string subModeLabel();
+    void toggleLatinMode();
     void setLatinMode(bool latin);
     void selectSchema(const std::string &schemaId);
     RimeSessionId session(bool requestNewSession = true);

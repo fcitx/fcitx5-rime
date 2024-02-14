@@ -92,6 +92,16 @@ std::string RimeState::subModeLabel() {
     return result;
 }
 
+void RimeState::toggleLatinMode() {
+    auto api = engine_->api();
+    if (api->is_maintenance_mode()) {
+        return;
+    }
+
+    Bool oldValue = api->get_option(session(), RIME_ASCII_MODE);
+    api->set_option(session(), RIME_ASCII_MODE, !oldValue);
+}
+
 void RimeState::setLatinMode(bool latin) {
     auto api = engine_->api();
     if (api->is_maintenance_mode()) {

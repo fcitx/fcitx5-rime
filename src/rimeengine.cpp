@@ -829,7 +829,7 @@ void RimeEngine::updateSchemaMenu() {
         schemActions_.back().connect<SimpleAction::Activated>(
             [this](InputContext *ic) {
                 auto state = ic->propertyFor(&factory_);
-                state->setLatinMode(true);
+                state->toggleLatinMode();
                 imAction_->update(ic);
             });
         instance_->userInterfaceManager().registerAction(&schemActions_.back());

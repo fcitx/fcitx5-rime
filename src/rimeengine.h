@@ -58,7 +58,8 @@ FCITX_CONFIGURATION(
         this, "InputState", _("Shared Input State"), SharedStatePolicy::All};
     Option<bool> preeditCursorPositionAtBeginning{
         this, "PreeditCursorPositionAtBeginning",
-        _("Fix embedded preedit cursor at the beginning of the preedit"), !isAndroid()};
+        _("Fix embedded preedit cursor at the beginning of the preedit"),
+        !isAndroid()};
     Option<bool> commitWhenDeactivate{
         this, "Commit when deactivate",
         _("Commit current text when deactivating"), true};

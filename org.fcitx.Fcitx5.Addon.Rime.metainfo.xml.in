@@ -6,8 +6,12 @@
   <project_license>LGPL-2.1+</project_license>
   <name>Rime for Fcitx 5</name>
   <summary>Rime input method</summary>
+  <developer id="org.fcitx-im">
+      <name>The Fcitx Team</name>
+  </developer>
   <url type="homepage">https://fcitx-im.org</url>
   <url type="bugtracker">https://github.com/fcitx/fcitx5-rime/issues</url>
+  <url type="vcs-browser">https://github.com/fcitx/fcitx5-rime</url>
   <project_group>Fcitx</project_group>
   <releases>
     <release version="5.1.5" date="2024-02-28"/>

@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Install dependencies
         run: |
-          pacman -Syu --noconfirm base-devel clang cmake ninja extra-cmake-modules fmt libuv librime rime-data
+          pacman -Syu --noconfirm base-devel clang cmake ninja extra-cmake-modules fmt libuv librime librime-data
       - uses: actions/checkout@v4
         with:
           repository: fcitx/fcitx5

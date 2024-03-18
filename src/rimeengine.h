@@ -56,10 +56,13 @@ FCITX_CONFIGURATION(
         isAndroid() ? PreeditMode::No : PreeditMode::ComposingText};
     Option<SharedStatePolicy> sharedStatePolicy{
         this, "InputState", _("Shared Input State"), SharedStatePolicy::All};
+    // On Linux only cursor position is available so this pins candidate window
+    // while typing. On macOS any position within embedded preedit is available
+    // so this is unnecessary. On Android there is no candidate window yet.
     Option<bool> preeditCursorPositionAtBeginning{
         this, "PreeditCursorPositionAtBeginning",
         _("Fix embedded preedit cursor at the beginning of the preedit"),
-        !isAndroid()};
+        !isAndroid() && !isApple()};
     Option<bool> commitWhenDeactivate{
         this, "Commit when deactivate",
         _("Commit current text when deactivating"), true};

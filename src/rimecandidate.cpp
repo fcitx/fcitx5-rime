@@ -19,13 +19,9 @@ RimeCandidateWord::RimeCandidateWord(RimeEngine *engine,
                                      const RimeCandidate &candidate, KeySym sym,
                                      int idx)
     : CandidateWord(), engine_(engine), sym_(sym), idx_(idx) {
-    Text text;
-    text.append(std::string(candidate.text));
-    setText(text);
-    if (candidate.comment && strlen(candidate.comment)) {
-        Text comment;
-        comment.append(std::string(candidate.comment));
-        setComment(comment);
+    setText(Text{candidate.text});
+    if (candidate.comment && candidate.comment[0]) {
+        setComment(Text{candidate.comment});
     }
 }
 
@@ -46,13 +42,10 @@ RimeGlobalCandidateWord::RimeGlobalCandidateWord(RimeEngine *engine,
                                                  const RimeCandidate &candidate,
                                                  int idx)
     : CandidateWord(), engine_(engine), idx_(idx) {
-    Text text;
-    text.append(std::string(candidate.text));
-    if (candidate.comment && strlen(candidate.comment)) {
-        text.append(" ");
-        text.append(std::string(candidate.comment));
+    setText(Text{candidate.text});
+    if (candidate.comment && candidate.comment[0]) {
+        setComment(Text{candidate.comment});
     }
-    setText(text);
 }
 
 void RimeGlobalCandidateWord::select(InputContext *inputContext) const {

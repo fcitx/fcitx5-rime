@@ -10,7 +10,7 @@ include(ECMSetupVersion)
 include(ECMUninstallTarget)
 
 find_package(Gettext REQUIRED)
-find_package(Fcitx5Core 5.1.7 REQUIRED)
+find_package(Fcitx5Core 5.1.8 REQUIRED)
 find_package(Fcitx5Module REQUIRED COMPONENTS Notifications)
 find_package(PkgConfig REQUIRED)
 

@@ -21,11 +21,12 @@ RimeCandidateWord::RimeCandidateWord(RimeEngine *engine,
     : CandidateWord(), engine_(engine), sym_(sym), idx_(idx) {
     Text text;
     text.append(std::string(candidate.text));
-    if (candidate.comment && strlen(candidate.comment)) {
-        text.append(" ");
-        text.append(std::string(candidate.comment));
-    }
     setText(text);
+    if (candidate.comment && strlen(candidate.comment)) {
+        Text comment;
+        comment.append(std::string(candidate.comment));
+        setComment(comment);
+    }
 }
 
 void RimeCandidateWord::select(InputContext *inputContext) const {

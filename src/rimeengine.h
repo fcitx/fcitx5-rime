@@ -54,7 +54,7 @@ FCITX_CONFIGURATION(
     OptionWithAnnotation<PreeditMode, PreeditModeI18NAnnotation> preeditMode{
         this, "PreeditMode", _("Preedit Mode"),
         isAndroid() ? PreeditMode::No : PreeditMode::ComposingText};
-    Option<SharedStatePolicy> sharedStatePolicy{
+    OptionWithAnnotation<SharedStatePolicy, SharedStatePolicyI18NAnnotation> sharedStatePolicy{
         this, "InputState", _("Shared Input State"), SharedStatePolicy::All};
     // On Linux only cursor position is available so this pins candidate window
     // while typing. On macOS any position within embedded preedit is available

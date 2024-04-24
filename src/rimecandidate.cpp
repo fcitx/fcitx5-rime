@@ -18,7 +18,7 @@ namespace fcitx {
 RimeCandidateWord::RimeCandidateWord(RimeEngine *engine,
                                      const RimeCandidate &candidate, KeySym sym,
                                      int idx)
-    : CandidateWord(), engine_(engine), sym_(sym), idx_(idx) {
+    : engine_(engine), sym_(sym), idx_(idx) {
     setText(Text{candidate.text});
     if (candidate.comment && candidate.comment[0]) {
         setComment(Text{candidate.comment});
@@ -26,7 +26,7 @@ RimeCandidateWord::RimeCandidateWord(RimeEngine *engine,
 }
 
 void RimeCandidateWord::select(InputContext *inputContext) const {
-    if (auto state = engine_->state(inputContext)) {
+    if (auto *state = engine_->state(inputContext)) {
 #ifndef FCITX_RIME_NO_SELECT_CANDIDATE
         state->selectCandidate(inputContext, idx_, /*global=*/false);
 #else
@@ -41,7 +41,7 @@ void RimeCandidateWord::select(InputContext *inputContext) const {
 RimeGlobalCandidateWord::RimeGlobalCandidateWord(RimeEngine *engine,
                                                  const RimeCandidate &candidate,
                                                  int idx)
-    : CandidateWord(), engine_(engine), idx_(idx) {
+    : engine_(engine), idx_(idx) {
     setText(Text{candidate.text});
     if (candidate.comment && candidate.comment[0]) {
         setComment(Text{candidate.comment});
@@ -49,7 +49,7 @@ RimeGlobalCandidateWord::RimeGlobalCandidateWord(RimeEngine *engine,
 }
 
 void RimeGlobalCandidateWord::select(InputContext *inputContext) const {
-    if (auto state = engine_->state(inputContext)) {
+    if (auto *state = engine_->state(inputContext)) {
         state->selectCandidate(inputContext, idx_, /*global=*/true);
     }
 }
@@ -107,9 +107,9 @@ const CandidateWord &RimeCandidateList::candidateFromAll(int idx) const {
         throw std::invalid_argument("Invalid session");
     }
 
-    size_t index = static_cast<size_t>(idx);
+    auto index = static_cast<size_t>(idx);
 
-    auto api = engine_->api();
+    auto *api = engine_->api();
 
     RimeCandidateListIterator iter;
     if (index >= globalCandidateWords_.size()) {

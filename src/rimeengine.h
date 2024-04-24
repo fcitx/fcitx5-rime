@@ -116,14 +116,16 @@ public:
         safeSaveAsIni(config_, "conf/rime.conf");
         updateConfig();
     }
-    void setSubConfig(const std::string &path, const RawConfig &) override;
+    void setSubConfig(const std::string &path,
+                      const RawConfig & /*unused*/) override;
     void updateConfig();
 
-    std::string subMode(const InputMethodEntry &, InputContext &) override;
-    std::string subModeIconImpl(const InputMethodEntry &,
-                                InputContext &) override;
-    std::string subModeLabelImpl(const InputMethodEntry &,
-                                 InputContext &) override;
+    std::string subMode(const InputMethodEntry & /*entry*/,
+                        InputContext & /*inputContext*/) override;
+    std::string subModeIconImpl(const InputMethodEntry & /*unused*/,
+                                InputContext & /*unused*/) override;
+    std::string subModeLabelImpl(const InputMethodEntry & /*unused*/,
+                                 InputContext & /*unused*/) override;
     const RimeEngineConfig &config() const { return config_; }
 
     rime_api_t *api() { return api_; }
@@ -143,10 +145,9 @@ public:
     const auto &optionActions() const { return optionActions_; };
 
 private:
-    static void rimeNotificationHandler(void *context_object,
-                                        RimeSessionId session_id,
-                                        const char *message_type,
-                                        const char *message_value);
+    static void rimeNotificationHandler(void *context, RimeSessionId session,
+                                        const char *messageTypee,
+                                        const char *messageValue);
 
     void deploy();
     void sync();
@@ -154,7 +155,7 @@ private:
     void updateActionsForSchema(const std::string &schema);
     void notify(RimeSessionId session, const std::string &type,
                 const std::string &value);
-    void releaseAllSession(const bool snapshot = false);
+    void releaseAllSession(bool snapshot = false);
     void updateAppOptions();
     void refreshStatusArea(InputContext &ic);
     void refreshStatusArea(RimeSessionId session);

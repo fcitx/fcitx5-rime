@@ -42,19 +42,21 @@ parseAppOptions(rime_api_t *api, RimeConfig *config) {
         appOptions;
     RimeConfigIterator appIter;
     RimeConfigIterator optionIter;
-    api->config_begin_map(&appIter, config, "app_options");
-    while (api->config_next(&appIter)) {
-        auto &options = appOptions[appIter.key];
-        api->config_begin_map(&optionIter, config, appIter.path);
-        while (api->config_next(&optionIter)) {
-            Bool value = False;
-            if (api->config_get_bool(config, optionIter.path, &value)) {
-                options[optionIter.key] = !!value;
+    if (api->config_begin_map(&appIter, config, "app_options")) {
+        while (api->config_next(&appIter)) {
+            auto &options = appOptions[appIter.key];
+            if (api->config_begin_map(&optionIter, config, appIter.path)) {
+                while (api->config_next(&optionIter)) {
+                    Bool value = False;
+                    if (api->config_get_bool(config, optionIter.path, &value)) {
+                        options[optionIter.key] = !!value;
+                    }
+                }
+                api->config_end(&optionIter);
             }
         }
-        api->config_end(&optionIter);
+        api->config_end(&appIter);
     }
-    api->config_end(&appIter);
     return appOptions;
 }
 
@@ -66,6 +68,7 @@ std::vector<std::string> getListItemPath(rime_api_t *api, RimeConfig *config,
         while (api->config_next(&iter)) {
             paths.push_back(iter.path);
         }
+        api->config_end(&iter);
     }
     return paths;
 }
@@ -75,7 +78,7 @@ std::vector<std::string> getListItemString(rime_api_t *api, RimeConfig *config,
     std::vector<std::string> values;
     auto paths = getListItemPath(api, config, path);
     for (const auto &path : paths) {
-        auto value = api->config_get_cstring(config, path.c_str());
+        const auto *value = api->config_get_cstring(config, path.c_str());
         if (!value) {
             return {};
         }
@@ -100,7 +103,7 @@ public:
 
     std::string shortText(InputContext *ic) const override {
         std::string result;
-        auto state = engine_->state(ic);
+        auto *state = engine_->state(ic);
         if (state) {
             state->getStatus([&result](const RimeStatus &status) {
                 result = status.schema_id ? status.schema_id : "";
@@ -122,7 +125,7 @@ public:
 
     std::string longText(InputContext *ic) const override {
         std::string result;
-        auto state = engine_->state(ic);
+        auto *state = engine_->state(ic);
         if (state) {
             state->getStatus([&result](const RimeStatus &status) {
                 result = status.schema_name ? status.schema_name : "";
@@ -133,7 +136,7 @@ public:
 
     std::string icon(InputContext *ic) const override {
         bool isDisabled = false;
-        auto state = engine_->state(ic);
+        auto *state = engine_->state(ic);
         if (state) {
             state->getStatus([&isDisabled](const RimeStatus &status) {
                 isDisabled = status.is_disabled;
@@ -151,17 +154,19 @@ private:
 
 class ToggleAction : public RimeOptionAction {
 public:
-    ToggleAction(RimeEngine *engine, std::string schema, std::string option,
-                 std::string disabledText, std::string enabledText)
-        : engine_(engine), option_(option), disabledText_(disabledText),
-          enabledText_(enabledText) {
+    ToggleAction(RimeEngine *engine, std::string_view schema,
+                 std::string_view option, std::string disabledText,
+                 std::string enabledText)
+        : engine_(engine), option_(option),
+          disabledText_(std::move(disabledText)),
+          enabledText_(std::move(enabledText)) {
         engine_->instance()->userInterfaceManager().registerAction(
             stringutils::concat("fcitx-rime-", schema, "-", option), this);
     }
 
     void activate(InputContext *ic) override {
-        auto state = engine_->state(ic);
-        auto api = engine_->api();
+        auto *state = engine_->state(ic);
+        auto *api = engine_->api();
         if (!state) {
             return;
         }
@@ -173,8 +178,8 @@ public:
     }
 
     std::string shortText(InputContext *ic) const override {
-        auto state = engine_->state(ic);
-        auto api = engine_->api();
+        auto *state = engine_->state(ic);
+        auto *api = engine_->api();
         if (!state) {
             return "";
         }
@@ -185,11 +190,11 @@ public:
         return stringutils::concat(disabledText_, " → ", enabledText_);
     }
 
-    std::string icon(InputContext *) const override { return ""; }
+    std::string icon(InputContext * /*unused*/) const override { return ""; }
 
     std::optional<std::string> snapshotOption(InputContext *ic) override {
-        auto state = engine_->state(ic);
-        auto api = engine_->api();
+        auto *state = engine_->state(ic);
+        auto *api = engine_->api();
         if (!state) {
             return std::nullopt;
         }
@@ -212,17 +217,17 @@ private:
 
 class SelectAction : public RimeOptionAction {
 public:
-    SelectAction(RimeEngine *engine, std::string schema,
+    SelectAction(RimeEngine *engine, std::string_view schema,
                  std::vector<std::string> options,
                  std::vector<std::string> texts)
-        : engine_(engine), options_(options), texts_(texts) {
+        : engine_(engine), options_(options), texts_(std::move(texts)) {
         for (size_t i = 0; i < options.size(); ++i) {
             actions_.emplace_back();
             actions_.back().setShortText(texts_[i]);
             actions_.back().connect<SimpleAction::Activated>(
                 [this, i](InputContext *ic) {
-                    auto state = engine_->state(ic);
-                    auto api = engine_->api();
+                    auto *state = engine_->state(ic);
+                    auto *api = engine_->api();
                     if (!state) {
                         return;
                     }
@@ -243,8 +248,8 @@ public:
     }
 
     std::string shortText(InputContext *ic) const override {
-        auto state = engine_->state(ic);
-        auto api = engine_->api();
+        auto *state = engine_->state(ic);
+        auto *api = engine_->api();
         if (!state) {
             return "";
         }
@@ -257,11 +262,11 @@ public:
         return "";
     }
 
-    std::string icon(InputContext *) const override { return ""; }
+    std::string icon(InputContext * /*unused*/) const override { return ""; }
 
     std::optional<std::string> snapshotOption(InputContext *ic) override {
-        auto state = engine_->state(ic);
-        auto api = engine_->api();
+        auto *state = engine_->state(ic);
+        auto *api = engine_->api();
         if (!state) {
             return std::nullopt;
         }
@@ -314,7 +319,7 @@ RimeEngine::RimeEngine(Instance *instance)
     deployAction_.setShortText(_("Deploy"));
     deployAction_.connect<SimpleAction::Activated>([this](InputContext *ic) {
         deploy();
-        auto state = this->state(ic);
+        auto *state = this->state(ic);
         if (state && ic->hasFocus()) {
             state->updateUI(ic, false);
         }
@@ -327,7 +332,7 @@ RimeEngine::RimeEngine(Instance *instance)
 
     syncAction_.connect<SimpleAction::Activated>([this](InputContext *ic) {
         sync();
-        auto state = this->state(ic);
+        auto *state = this->state(ic);
         if (state && ic->hasFocus()) {
             state->updateUI(ic, false);
         }
@@ -446,7 +451,8 @@ void RimeEngine::reloadConfig() {
     updateConfig();
 }
 
-void RimeEngine::setSubConfig(const std::string &path, const RawConfig &) {
+void RimeEngine::setSubConfig(const std::string &path,
+                              const RawConfig & /*unused*/) {
     if (path == "deploy") {
         deploy();
     } else if (path == "sync") {
@@ -533,7 +539,7 @@ void RimeEngine::refreshStatusArea(InputContext &ic) {
     statusArea.clearGroup(StatusGroup::InputMethod);
     statusArea.addAction(StatusGroup::InputMethod, imAction_.get());
 
-    auto rimeState = state(&ic);
+    auto *rimeState = state(&ic);
     std::string currentSchema;
     if (!rimeState) {
         return;
@@ -556,7 +562,7 @@ void RimeEngine::refreshStatusArea(InputContext &ic) {
 void RimeEngine::refreshStatusArea(RimeSessionId session) {
     instance_->inputContextManager().foreachFocused(
         [this, session](InputContext *ic) {
-            if (auto state = this->state(ic)) {
+            if (auto *state = this->state(ic)) {
                 // After a deployment, param is 0, refresh all
                 if (!session || state->session(false) == session) {
                     refreshStatusArea(*ic);
@@ -572,7 +578,7 @@ void RimeEngine::updateStatusArea(RimeSessionId session) {
             if (instance_->inputMethod(ic) != "rime") {
                 return true;
             }
-            if (auto state = this->state(ic)) {
+            if (auto *state = this->state(ic)) {
                 // After a deployment, param is 0, refresh all
                 if (!session || state->session(false) == session) {
                     // Re-read new option values.
@@ -583,8 +589,9 @@ void RimeEngine::updateStatusArea(RimeSessionId session) {
         });
 }
 
-void RimeEngine::activate(const InputMethodEntry &, InputContextEvent &event) {
-    auto ic = event.inputContext();
+void RimeEngine::activate(const InputMethodEntry & /*entry*/,
+                          InputContextEvent &event) {
+    auto *ic = event.inputContext();
     refreshStatusArea(*ic);
 }
 
@@ -592,8 +599,8 @@ void RimeEngine::deactivate(const InputMethodEntry &entry,
                             InputContextEvent &event) {
     if (event.type() == EventType::InputContextSwitchInputMethod &&
         *config_.commitWhenDeactivate) {
-        auto inputContext = event.inputContext();
-        auto state = inputContext->propertyFor(&factory_);
+        auto *inputContext = event.inputContext();
+        auto *state = this->state(inputContext);
         state->commitPreedit(inputContext);
     }
     reset(entry, event);
@@ -604,15 +611,15 @@ void RimeEngine::keyEvent(const InputMethodEntry &entry, KeyEvent &event) {
     lastKeyEventTime_ = now(CLOCK_MONOTONIC);
     RIME_DEBUG() << "Rime receive key: " << event.rawKey() << " "
                  << event.isRelease();
-    auto inputContext = event.inputContext();
-    auto state = inputContext->propertyFor(&factory_);
+    auto *inputContext = event.inputContext();
+    auto *state = this->state(inputContext);
     state->keyEvent(event);
 }
 
-void RimeEngine::reset(const InputMethodEntry &, InputContextEvent &event) {
-    auto inputContext = event.inputContext();
-
-    auto state = inputContext->propertyFor(&factory_);
+void RimeEngine::reset(const InputMethodEntry & /*entry*/,
+                       InputContextEvent &event) {
+    auto *inputContext = event.inputContext();
+    auto *state = this->state(inputContext);
     state->clear();
     inputContext->inputPanel().reset();
     inputContext->updatePreedit();
@@ -701,7 +708,7 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
         refreshStatusArea(session);
     }
 
-    auto notifications = this->notifications();
+    auto *notifications = this->notifications();
     if (message && notifications &&
         now(CLOCK_MONOTONIC) > blockNotificationBefore_) {
         notifications->call<INotifications::showTip>(
@@ -716,28 +723,28 @@ RimeState *RimeEngine::state(InputContext *ic) {
     return ic->propertyFor(&factory_);
 }
 
-std::string RimeEngine::subMode(const InputMethodEntry &, InputContext &ic) {
-    if (auto rimeState = state(&ic)) {
+std::string RimeEngine::subMode(const InputMethodEntry & /*entry*/, InputContext &ic) {
+    if (auto *rimeState = state(&ic)) {
         return rimeState->subMode();
     }
     return "";
 }
 
-std::string RimeEngine::subModeLabelImpl(const InputMethodEntry &,
+std::string RimeEngine::subModeLabelImpl(const InputMethodEntry & /*unused*/,
                                          InputContext &ic) {
-    if (auto rimeState = state(&ic)) {
+    if (auto *rimeState = state(&ic)) {
         return rimeState->subModeLabel();
     }
     return "";
 }
 
-std::string RimeEngine::subModeIconImpl(const InputMethodEntry &,
+std::string RimeEngine::subModeIconImpl(const InputMethodEntry & /*unused*/,
                                         InputContext &ic) {
     std::string result = "fcitx-rime";
     if (!factory_.registered()) {
         return result;
     }
-    auto state = this->state(&ic);
+    auto *state = this->state(&ic);
     if (state) {
         state->getStatus([&result](const RimeStatus &status) {
             if (status.is_disabled) {
@@ -752,9 +759,9 @@ std::string RimeEngine::subModeIconImpl(const InputMethodEntry &,
     return result;
 }
 
-void RimeEngine::releaseAllSession(const bool snapshot) {
+void RimeEngine::releaseAllSession(bool snapshot) {
     instance_->inputContextManager().foreach([&](InputContext *ic) {
-        if (auto state = this->state(ic)) {
+        if (auto *state = this->state(ic)) {
             if (snapshot) {
                 state->snapshot();
             }
@@ -790,7 +797,7 @@ void RimeEngine::updateActionsForSchema(const std::string &schema) {
             continue;
         }
         auto namePath = switchPath + "/name";
-        auto name = api_->config_get_cstring(&config, namePath.c_str());
+        const auto *name = api_->config_get_cstring(&config, namePath.c_str());
         if (name) {
             if (labels.size() != 2) {
                 continue;
@@ -828,7 +835,7 @@ void RimeEngine::updateSchemaMenu() {
         schemActions_.back().setShortText(_("Latin Mode"));
         schemActions_.back().connect<SimpleAction::Activated>(
             [this](InputContext *ic) {
-                auto state = ic->propertyFor(&factory_);
+                auto *state = this->state(ic);
                 state->toggleLatinMode();
                 imAction_->update(ic);
             });
@@ -841,7 +848,7 @@ void RimeEngine::updateSchemaMenu() {
             schemaAction.setShortText(list.list[i].name);
             schemaAction.connect<SimpleAction::Activated>(
                 [this, schemaId](InputContext *ic) {
-                    auto state = ic->propertyFor(&factory_);
+                    auto *state = this->state(ic);
                     blockNotificationFor(30000);
                     state->selectSchema(schemaId);
                     imAction_->update(ic);

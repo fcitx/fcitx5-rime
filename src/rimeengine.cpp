@@ -66,6 +66,7 @@ std::vector<std::string> getListItemPath(rime_api_t *api, RimeConfig *config,
         while (api->config_next(&iter)) {
             paths.push_back(iter.path);
         }
+        api->config_end(&iter);
     }
     return paths;
 }

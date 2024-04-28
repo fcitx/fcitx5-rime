@@ -258,8 +258,20 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
             context, TextFormatFlag::NoFlag, TextFormatFlag::NoFlag));
         break;
     case PreeditMode::CommitPreview: {
-        ic->inputPanel().setPreedit(preeditFromRimeContext(
-            context, TextFormatFlag::NoFlag, TextFormatFlag::NoFlag));
+        Text composingPreedit = preeditFromRimeContext(
+            context, TextFormatFlag::NoFlag, TextFormatFlag::NoFlag);
+        ic->inputPanel().setPreedit(composingPreedit);
+        /*
+         * librime sometimes does not clear commit_text_preview after clearing
+         * composition, so we need to check if the composition is empty.
+         * However, the procedure can be simplifed, as composingPreedit will
+         * also be empty in such a case, so we can safely check its emptiness
+         * and use it as the empty preedit we expect.
+         */
+        if (composingPreedit.empty()) {
+            ic->inputPanel().setClientPreedit(composingPreedit);
+            break;
+        }
         if (context.commit_text_preview) {
             Text clientPreedit;
             clientPreedit.append(context.commit_text_preview,

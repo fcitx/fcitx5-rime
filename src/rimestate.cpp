@@ -256,11 +256,12 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
     case PreeditMode::No:
         ic->inputPanel().setPreedit(preeditFromRimeContext(
             context, TextFormatFlag::NoFlag, TextFormatFlag::NoFlag));
+        ic->inputPanel().setClientPreedit(Text());
         break;
     case PreeditMode::CommitPreview: {
         ic->inputPanel().setPreedit(preeditFromRimeContext(
             context, TextFormatFlag::NoFlag, TextFormatFlag::NoFlag));
-        if (context.commit_text_preview) {
+        if (context.composition.length > 0 && context.commit_text_preview) {
             Text clientPreedit;
             clientPreedit.append(context.commit_text_preview,
                                  TextFormatFlag::Underline);
@@ -270,6 +271,8 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
                 clientPreedit.setCursor(clientPreedit.textLength());
             }
             ic->inputPanel().setClientPreedit(clientPreedit);
+        } else {
+            ic->inputPanel().setClientPreedit(Text());
         }
     } break;
     case PreeditMode::ComposingText: {
@@ -351,7 +354,7 @@ void RimeState::commitPreedit(InputContext *ic) {
         if (!api->get_context(session, &context)) {
             return;
         }
-        if (context.commit_text_preview) {
+        if (context.composition.length > 0 && context.commit_text_preview) {
             ic->commitString(context.commit_text_preview);
         }
         api->free_context(&context);

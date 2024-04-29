@@ -723,7 +723,8 @@ RimeState *RimeEngine::state(InputContext *ic) {
     return ic->propertyFor(&factory_);
 }
 
-std::string RimeEngine::subMode(const InputMethodEntry & /*entry*/, InputContext &ic) {
+std::string RimeEngine::subMode(const InputMethodEntry & /*entry*/,
+                                InputContext &ic) {
     if (auto *rimeState = state(&ic)) {
         return rimeState->subMode();
     }

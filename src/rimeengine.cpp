@@ -621,6 +621,7 @@ void RimeEngine::reset(const InputMethodEntry & /*entry*/,
     auto *inputContext = event.inputContext();
     auto *state = this->state(inputContext);
     state->clear();
+    instance_->resetCompose(inputContext);
     inputContext->inputPanel().reset();
     inputContext->updatePreedit();
     inputContext->updateUserInterface(UserInterfaceComponent::InputPanel);

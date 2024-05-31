@@ -7,13 +7,27 @@
 #include "rimestate.h"
 #include "rimecandidate.h"
 #include "rimeengine.h"
+#include <cstdint>
+#include <fcitx-utils/capabilityflags.h>
+#include <fcitx-utils/i18n.h>
+#include <fcitx-utils/key.h>
+#include <fcitx-utils/keysym.h>
 #include <fcitx-utils/stringutils.h>
 #include <fcitx-utils/textformatflags.h>
 #include <fcitx-utils/utf8.h>
 #include <fcitx/candidatelist.h>
+#include <fcitx/event.h>
 #include <fcitx/inputcontext.h>
 #include <fcitx/inputpanel.h>
+#include <fcitx/text.h>
+#include <fcitx/userinterface.h>
+#include <functional>
+#include <iterator>
+#include <memory>
+#include <optional>
 #include <rime_api.h>
+#include <string>
+#include <utility>
 
 namespace fcitx {
 
@@ -21,10 +35,8 @@ namespace {
 
 bool emptyExceptAux(const InputPanel &inputPanel) {
 
-    return inputPanel.preedit().size() == 0 &&
-           inputPanel.preedit().size() == 0 &&
-           (!inputPanel.candidateList() ||
-            inputPanel.candidateList()->size() == 0);
+    return inputPanel.preedit().empty() && inputPanel.preedit().empty() &&
+           (!inputPanel.candidateList() || inputPanel.candidateList()->empty());
 }
 } // namespace
 
@@ -93,7 +105,7 @@ std::string RimeState::subModeLabel() {
 }
 
 void RimeState::toggleLatinMode() {
-    auto api = engine_->api();
+    auto *api = engine_->api();
     if (api->is_maintenance_mode()) {
         return;
     }
@@ -103,7 +115,7 @@ void RimeState::toggleLatinMode() {
 }
 
 void RimeState::setLatinMode(bool latin) {
-    auto api = engine_->api();
+    auto *api = engine_->api();
     if (api->is_maintenance_mode()) {
         return;
     }
@@ -111,7 +123,7 @@ void RimeState::setLatinMode(bool latin) {
 }
 
 void RimeState::selectSchema(const std::string &schema) {
-    auto api = engine_->api();
+    auto *api = engine_->api();
     if (api->is_maintenance_mode()) {
         return;
     }
@@ -121,7 +133,20 @@ void RimeState::selectSchema(const std::string &schema) {
 }
 
 void RimeState::keyEvent(KeyEvent &event) {
-    auto api = engine_->api();
+    auto *ic = event.inputContext();
+    std::optional<std::string> compose;
+    if (!event.key().states().testAny(
+            KeyStates{KeyState::Ctrl, KeyState::Super}) &&
+        !event.isRelease()) {
+        compose =
+            engine_->instance()->processComposeString(&ic_, event.key().sym());
+        if (!compose) {
+            event.filterAndAccept();
+            return;
+        }
+    }
+
+    auto *api = engine_->api();
     if (api->is_maintenance_mode()) {
         return;
     }
@@ -143,26 +168,44 @@ void RimeState::keyEvent(KeyEvent &event) {
         // IBUS_RELEASE_MASK
         intStates |= (1 << 30);
     }
-    auto result = api->process_key(session, event.rawKey().sym(), intStates);
+    if (!compose->empty()) {
+        event.filterAndAccept();
+        auto length = utf8::lengthValidated(*compose);
+        bool result = false;
+        if (length == 1) {
+            auto c = utf8::getChar(*compose);
+            auto sym = Key::keySymFromUnicode(c);
+            if (sym != FcitxKey_None) {
+                result = api->process_key(session, sym, intStates);
+            }
+        }
+        if (!result) {
+            commitPreedit(ic);
+            ic->commitString(*compose);
+            clear();
+        }
+    } else {
+        auto result =
+            api->process_key(session, event.rawKey().sym(), intStates);
+        if (result) {
+            event.filterAndAccept();
+        }
+    }
 
-    auto ic = event.inputContext();
     RIME_STRUCT(RimeCommit, commit);
     if (api->get_commit(session, &commit)) {
         ic->commitString(commit.text);
         api->free_commit(&commit);
+        engine_->instance()->resetCompose(ic);
     }
 
     updateUI(ic, event.isRelease());
-
-    if (result) {
-        event.filterAndAccept();
-    }
 }
 
 #ifndef FCITX_RIME_NO_SELECT_CANDIDATE
 void RimeState::selectCandidate(InputContext *inputContext, int idx,
                                 bool global) {
-    auto api = engine_->api();
+    auto *api = engine_->api();
     if (api->is_maintenance_mode()) {
         return;
     }
@@ -186,7 +229,7 @@ void RimeState::selectCandidate(InputContext *inputContext, int idx,
 
 bool RimeState::getStatus(
     const std::function<void(const RimeStatus &)> &callback) {
-    auto api = engine_->api();
+    auto *api = engine_->api();
     auto session = this->session();
     if (!session) {
         return false;
@@ -298,7 +341,7 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
     bool oldEmptyExceptAux = emptyExceptAux(inputPanel);
 
     do {
-        auto api = engine_->api();
+        auto *api = engine_->api();
         if (api->is_maintenance_mode()) {
             return;
         }
@@ -348,7 +391,7 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
 void RimeState::release() { session_.reset(); }
 
 void RimeState::commitPreedit(InputContext *ic) {
-    if (auto api = engine_->api()) {
+    if (auto *api = engine_->api()) {
         RIME_STRUCT(RimeContext, context);
         auto session = this->session();
         if (!api->get_context(session, &context)) {
@@ -374,7 +417,7 @@ void RimeState::snapshot() {
         if (savedCurrentSchema_.empty()) {
             return;
         }
-        auto &optionActions = engine_->optionActions();
+        const auto &optionActions = engine_->optionActions();
         auto iter = optionActions.find(savedCurrentSchema_);
         if (iter == optionActions.end()) {
             return;

@@ -134,16 +134,19 @@ void RimeState::selectSchema(const std::string &schema) {
 
 void RimeState::keyEvent(KeyEvent &event) {
     auto *ic = event.inputContext();
-    std::optional<std::string> compose;
+    // For key-release, composeResult will always be empty string, which feed
+    // into engine directly.
+    std::string composeResult;
     if (!event.key().states().testAny(
             KeyStates{KeyState::Ctrl, KeyState::Super}) &&
         !event.isRelease()) {
-        compose =
+        auto compose =
             engine_->instance()->processComposeString(&ic_, event.key().sym());
         if (!compose) {
             event.filterAndAccept();
             return;
         }
+        composeResult = *compose;
     }
 
     auto *api = engine_->api();
@@ -168,12 +171,12 @@ void RimeState::keyEvent(KeyEvent &event) {
         // IBUS_RELEASE_MASK
         intStates |= (1 << 30);
     }
-    if (!compose->empty()) {
+    if (!composeResult.empty()) {
         event.filterAndAccept();
-        auto length = utf8::lengthValidated(*compose);
+        auto length = utf8::lengthValidated(composeResult);
         bool result = false;
         if (length == 1) {
-            auto c = utf8::getChar(*compose);
+            auto c = utf8::getChar(composeResult);
             auto sym = Key::keySymFromUnicode(c);
             if (sym != FcitxKey_None) {
                 result = api->process_key(session, sym, intStates);
@@ -181,7 +184,7 @@ void RimeState::keyEvent(KeyEvent &event) {
         }
         if (!result) {
             commitPreedit(ic);
-            ic->commitString(*compose);
+            ic->commitString(composeResult);
             clear();
         }
     } else {

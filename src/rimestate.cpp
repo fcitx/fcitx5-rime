@@ -7,6 +7,7 @@
 #include "rimestate.h"
 #include "rimecandidate.h"
 #include "rimeengine.h"
+#include "rimesession.h"
 #include <cstdint>
 #include <fcitx-utils/capabilityflags.h>
 #include <fcitx-utils/i18n.h>
@@ -18,6 +19,7 @@
 #include <fcitx/candidatelist.h>
 #include <fcitx/event.h>
 #include <fcitx/inputcontext.h>
+#include <fcitx/inputcontextmanager.h>
 #include <fcitx/inputpanel.h>
 #include <fcitx/text.h>
 #include <fcitx/userinterface.h>
@@ -69,6 +71,8 @@ void RimeState::clear() {
         engine_->api()->clear_composition(session);
     }
 }
+
+void RimeState::activate() { maybeSyncProgramNameToSession(); }
 
 std::string RimeState::subMode() {
     std::string result;
@@ -158,6 +162,7 @@ void RimeState::keyEvent(KeyEvent &event) {
         return;
     }
 
+    maybeSyncProgramNameToSession();
     lastMode_ = subMode();
     auto states = event.rawKey().states() &
                   KeyStates{KeyState::Mod1, KeyState::CapsLock, KeyState::Shift,
@@ -467,6 +472,19 @@ void RimeState::restore() {
         } else {
             engine_->api()->set_option(session(), option.c_str(), true);
         }
+    }
+}
+
+void RimeState::maybeSyncProgramNameToSession() {
+    // The program name is guranteed to be const through the Input Context
+    // lifetime. There is no need to update it if the policy is not "All".
+    if (engine_->sessionPool().propertyPropagatePolicy() !=
+        PropertyPropagatePolicy::All) {
+        return;
+    }
+
+    if (session_) {
+        session_->setProgramName(ic_.program());
     }
 }
 

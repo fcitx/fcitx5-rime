@@ -7,11 +7,15 @@
 #define _FCITX_RIMESTATE_H_
 
 #include "rimesession.h"
+#include <fcitx/event.h>
 #include <fcitx/globalconfig.h>
 #include <fcitx/inputcontextmanager.h>
 #include <fcitx/inputcontextproperty.h>
+#include <functional>
 #include <memory>
 #include <rime_api.h>
+#include <string>
+#include <vector>
 
 #define RIME_ASCII_MODE "ascii_mode"
 
@@ -26,6 +30,7 @@ public:
     virtual ~RimeState();
 
     void clear();
+    void activate();
     void keyEvent(KeyEvent &event);
 #ifndef FCITX_RIME_NO_SELECT_CANDIDATE
     void selectCandidate(InputContext *inputContext, int idx, bool global);
@@ -49,6 +54,8 @@ public:
     void restore();
 
 private:
+    void maybeSyncProgramNameToSession();
+
     std::string lastMode_;
     RimeEngine *engine_;
     InputContext &ic_;

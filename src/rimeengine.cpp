@@ -11,24 +11,40 @@
 #include <cstring>
 #include <ctime>
 #include <dirent.h>
+#include <exception>
+#include <fcitx-config/iniparser.h>
+#include <fcitx-config/rawconfig.h>
 #include <fcitx-utils/event.h>
 #include <fcitx-utils/fs.h>
 #include <fcitx-utils/i18n.h>
 #include <fcitx-utils/log.h>
+#include <fcitx-utils/macros.h>
 #include <fcitx-utils/misc.h>
 #include <fcitx-utils/standardpath.h>
 #include <fcitx-utils/stringutils.h>
+#include <fcitx/action.h>
+#include <fcitx/addoninstance.h>
 #include <fcitx/candidatelist.h>
+#include <fcitx/event.h>
 #include <fcitx/inputcontext.h>
 #include <fcitx/inputcontextmanager.h>
+#include <fcitx/inputmethodentry.h>
 #include <fcitx/inputpanel.h>
+#include <fcitx/instance.h>
+#include <fcitx/menu.h>
 #include <fcitx/statusarea.h>
 #include <fcitx/userinterface.h>
 #include <fcitx/userinterfacemanager.h>
+#include <list>
+#include <memory>
 #include <optional>
 #include <rime_api.h>
 #include <stdexcept>
 #include <string>
+#include <string_view>
+#include <unordered_map>
+#include <utility>
+#include <vector>
 
 FCITX_DEFINE_LOG_CATEGORY(rime, "rime");
 
@@ -593,6 +609,9 @@ void RimeEngine::activate(const InputMethodEntry & /*entry*/,
                           InputContextEvent &event) {
     auto *ic = event.inputContext();
     refreshStatusArea(*ic);
+    if (auto *state = this->state(ic)) {
+        state->activate();
+    }
 }
 
 void RimeEngine::deactivate(const InputMethodEntry &entry,

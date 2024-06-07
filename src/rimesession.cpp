@@ -6,8 +6,10 @@
  */
 #include "rimesession.h"
 #include "rimeengine.h"
+#include <cassert>
 #include <fcitx-utils/charutils.h>
 #include <fcitx-utils/log.h>
+#include <fcitx-utils/macros.h>
 #include <fcitx-utils/stringutils.h>
 #include <fcitx/inputcontext.h>
 #include <fcitx/inputcontextmanager.h>
@@ -30,6 +32,8 @@ RimeSessionHolder::RimeSessionHolder(RimeSessionPool *pool,
         throw std::runtime_error("Failed to create session.");
     }
 
+    setProgramName(program);
+
     if (program.empty()) {
         return;
     }
@@ -51,6 +55,17 @@ RimeSessionHolder::~RimeSessionHolder() {
     if (!key_.empty()) {
         pool_->unregisterSession(key_);
     }
+}
+
+void RimeSessionHolder::setProgramName(const std::string &program) {
+    // set_property will trigger property change notification, which is a little
+    // bit annoying, so don't set it, if the value is not changed.
+    if (program == currentProgram_) {
+        return;
+    }
+
+    currentProgram_ = program;
+    pool_->engine()->api()->set_property(id_, "client_app", program.data());
 }
 
 #if 0

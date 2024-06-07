@@ -9,10 +9,13 @@
 
 #include <fcitx-utils/log.h>
 #include <fcitx-utils/macros.h>
+#include <fcitx/inputcontext.h>
 #include <fcitx/inputcontextmanager.h>
 #include <memory>
 #include <rime_api.h>
 #include <string>
+#include <tuple>
+#include <unordered_map>
 
 namespace fcitx {
 
@@ -31,10 +34,13 @@ public:
 
     RimeSessionId id() const { return id_; }
 
+    void setProgramName(const std::string &program);
+
 private:
     RimeSessionPool *pool_;
     RimeSessionId id_ = 0;
     std::string key_;
+    std::string currentProgram_;
 };
 
 class RimeSessionPool {

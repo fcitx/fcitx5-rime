@@ -30,6 +30,9 @@ public:
 #ifndef FCITX_RIME_NO_SELECT_CANDIDATE
     void selectCandidate(InputContext *inputContext, int idx, bool global);
 #endif
+#ifndef FCITX_RIME_NO_DELETE_CANDIDATE
+    void deleteCandidate(int idx, bool global);
+#endif
     bool getStatus(const std::function<void(const RimeStatus &)> &);
     void updatePreedit(InputContext *ic, const RimeContext &context);
     void updateUI(InputContext *ic, bool keyRelease);

@@ -10,7 +10,7 @@ include(ECMSetupVersion)
 include(ECMUninstallTarget)
 
 find_package(Gettext REQUIRED)
-find_package(Fcitx5Core 5.1.9 REQUIRED)
+find_package(Fcitx5Core 5.1.10 REQUIRED)
 find_package(Fcitx5Module REQUIRED COMPONENTS Notifications)
 find_package(PkgConfig REQUIRED)
 
@@ -19,6 +19,9 @@ if (NOT DEFINED RIME_TARGET)
     set(RIME_TARGET PkgConfig::Rime)
 endif()
 
+if ("${Rime_VERSION}" VERSION_LESS "1.8.0")
+    add_definitions(-DFCITX_RIME_NO_DELETE_CANDIDATE)
+endif()
 if ("${Rime_VERSION}" VERSION_LESS "1.7.0")
     add_definitions(-DFCITX_RIME_LOAD_PLUGIN)
 endif()

@@ -230,6 +230,25 @@ void RimeState::selectCandidate(InputContext *inputContext, int idx,
 }
 #endif
 
+#ifndef FCITX_RIME_NO_DELETE_CANDIDATE
+void RimeState::deleteCandidate(int idx, bool global) {
+    auto *api = engine_->api();
+    if (api->is_maintenance_mode()) {
+        return;
+    }
+    auto session = this->session();
+    if (!session) {
+        return;
+    }
+    if (global) {
+        api->delete_candidate(session, idx);
+    } else {
+        api->delete_candidate_on_current_page(session, idx);
+    }
+    updateUI(&ic_, false);
+}
+#endif
+
 bool RimeState::getStatus(
     const std::function<void(const RimeStatus &)> &callback) {
     auto *api = engine_->api();

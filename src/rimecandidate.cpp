@@ -37,6 +37,12 @@ void RimeCandidateWord::select(InputContext *inputContext) const {
     }
 }
 
+void RimeCandidateWord::forget(RimeState *state) const {
+#ifndef FCITX_RIME_NO_DELETE_CANDIDATE
+    state->deleteCandidate(idx_, /*global=*/false);
+#endif
+}
+
 #ifndef FCITX_RIME_NO_SELECT_CANDIDATE
 RimeGlobalCandidateWord::RimeGlobalCandidateWord(RimeEngine *engine,
                                                  const RimeCandidate &candidate,
@@ -54,6 +60,12 @@ void RimeGlobalCandidateWord::select(InputContext *inputContext) const {
     }
 }
 
+void RimeGlobalCandidateWord::forget(RimeState *state) const {
+#ifndef FCITX_RIME_NO_DELETE_CANDIDATE
+    state->deleteCandidate(idx_, /*global=*/true);
+#endif
+}
+
 #endif
 
 RimeCandidateList::RimeCandidateList(RimeEngine *engine, InputContext *ic,
@@ -62,6 +74,7 @@ RimeCandidateList::RimeCandidateList(RimeEngine *engine, InputContext *ic,
       hasNext_(!context.menu.is_last_page) {
     setPageable(this);
     setBulk(this);
+    setActionable(this);
 
     const auto &menu = context.menu;
 
@@ -138,4 +151,40 @@ const CandidateWord &RimeCandidateList::candidateFromAll(int idx) const {
 }
 
 int RimeCandidateList::totalSize() const { return -1; }
+
+bool RimeCandidateList::hasAction(const CandidateWord &candidate) const {
+#ifndef FCITX_RIME_NO_DELETE_CANDIDATE
+    // We can always reset rime candidate's frequency.
+    return true;
+#else
+    return false;
+#endif
+}
+
+std::vector<CandidateAction>
+RimeCandidateList::candidateActions(const CandidateWord &candidate) const {
+    std::vector<CandidateAction> actions;
+#ifndef FCITX_RIME_NO_DELETE_CANDIDATE
+    CandidateAction action;
+    action.setId(0);
+    action.setText(_("Forget word"));
+    actions.push_back(std::move(action));
+#endif
+    return actions;
+}
+
+void RimeCandidateList::triggerAction(const CandidateWord &candidate, int id) {
+    if (id != 0) {
+        return;
+    }
+    if (auto state = engine_->state(ic_)) {
+        if (const auto *rimeCandidate =
+                dynamic_cast<const RimeGlobalCandidateWord *>(&candidate)) {
+            rimeCandidate->forget(state);
+        } else if (const auto *rimeCandidate =
+                       dynamic_cast<const RimeCandidateWord *>(&candidate)) {
+            rimeCandidate->forget(state);
+        }
+    }
+}
 } // namespace fcitx

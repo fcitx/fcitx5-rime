@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2024-03-05 20:24+0000\n"
+"POT-Creation-Date: 2024-06-08 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: 63f334ffc0709ba0fc2361b80bf3c0f0_00ffd1e "
 "<ab96c93ca0ac55ba7fa06385427e60dd_878890>, 2020\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: src/rimeengine.h:65
+#: src/rimeengine.h:69
 msgid "Commit current text when deactivating"
 msgstr ""
 
@@ -37,7 +37,7 @@ msgstr ""
 msgid "Composing text"
 msgstr ""
 
-#: src/rimeengine.cpp:314
+#: src/rimeengine.cpp:335
 msgid "Deploy"
 msgstr ""
 
@@ -45,7 +45,7 @@ msgstr ""
 msgid "Do not show"
 msgstr ""
 
-#: src/rimeengine.h:61
+#: src/rimeengine.h:65
 msgid "Fix embedded preedit cursor at the beginning of the preedit"
 msgstr ""
 
@@ -53,23 +53,27 @@ msgstr ""
 msgid "Follow Global Configuration"
 msgstr ""
 
-#: src/rimeengine.cpp:682
+#: src/rimecandidate.cpp:170
+msgid "Forget word"
+msgstr ""
+
+#: src/rimeengine.cpp:709
 msgid "Full Shape is enabled."
 msgstr ""
 
-#: src/rimeengine.cpp:679
+#: src/rimeengine.cpp:706
 msgid "Half Shape is enabled."
 msgstr ""
 
-#: src/rimestate.cpp:67 src/rimeengine.cpp:828
+#: src/rimestate.cpp:83 src/rimeengine.cpp:856
 msgid "Latin Mode"
 msgstr ""
 
-#: src/rimeengine.h:78
+#: src/rimeengine.h:82
 msgid "Load available plugins automatically"
 msgstr ""
 
-#: src/rimeengine.h:82
+#: src/rimeengine.h:86
 msgid "Modules"
 msgstr ""
 
@@ -77,7 +81,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: src/rimeengine.h:80
+#: src/rimeengine.h:84
 msgid "Plugins"
 msgstr ""
 
@@ -89,15 +93,15 @@ msgstr ""
 msgid "Program"
 msgstr ""
 
-#: src/rimeengine.cpp:688
+#: src/rimeengine.cpp:715
 msgid "Punctuation conversion is disabled."
 msgstr ""
 
-#: src/rimeengine.cpp:685
+#: src/rimeengine.cpp:712
 msgid "Punctuation conversion is enabled."
 msgstr ""
 
-#: src/rimeengine.cpp:708 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
+#: src/rimeengine.cpp:735 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
 msgid "Rime"
 msgstr ""
 
@@ -109,7 +113,7 @@ msgstr ""
 msgid "Rime for Fcitx 5"
 msgstr ""
 
-#: src/rimeengine.cpp:670
+#: src/rimeengine.cpp:697
 msgid "Rime has encountered an error. See log for details."
 msgstr ""
 
@@ -117,11 +121,11 @@ msgstr ""
 msgid "Rime input method"
 msgstr ""
 
-#: src/rimeengine.cpp:658
+#: src/rimeengine.cpp:685
 msgid "Rime is ready."
 msgstr ""
 
-#: src/rimeengine.cpp:655
+#: src/rimeengine.cpp:682
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -131,18 +135,18 @@ msgstr ""
 msgid "Shared Input State"
 msgstr ""
 
-#: src/rimeengine.cpp:694
+#: src/rimeengine.cpp:721
 msgid "Simplified Chinese is enabled."
 msgstr ""
 
-#: src/rimeengine.cpp:326
+#: src/rimeengine.cpp:347
 msgid "Synchronize"
 msgstr "סנכרון"
 
-#: src/rimeengine.cpp:691
+#: src/rimeengine.cpp:718
 msgid "Traditional Chinese is enabled."
 msgstr ""
 
-#: src/rimeengine.h:67
+#: src/rimeengine.h:71
 msgid "User data dir"
 msgstr ""

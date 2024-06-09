@@ -3,6 +3,7 @@ set(RIME_SOURCES
     rimeengine.cpp
     rimecandidate.cpp
     rimesession.cpp
+    rimeaction.cpp
 )
 
 set(RIME_LINK_LIBRARIES
@@ -10,6 +11,7 @@ set(RIME_LINK_LIBRARIES
     Fcitx5::Config
     ${RIME_TARGET}
     Fcitx5::Module::Notifications
+    Pthread::Pthread
 )
 
 find_package(Fcitx5ModuleDBus QUIET)

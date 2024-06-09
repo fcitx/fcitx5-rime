@@ -6,6 +6,7 @@
 
 #include "rimeengine.h"
 #include "notifications_public.h"
+#include "rimeaction.h"
 #include "rimestate.h"
 #include <cstdint>
 #include <cstring>
@@ -42,6 +43,7 @@
 #include <stdexcept>
 #include <string>
 #include <string_view>
+#include <thread>
 #include <unordered_map>
 #include <utility>
 #include <vector>
@@ -166,144 +168,6 @@ public:
 
 private:
     RimeEngine *engine_;
-};
-
-class ToggleAction : public RimeOptionAction {
-public:
-    ToggleAction(RimeEngine *engine, std::string_view schema,
-                 std::string_view option, std::string disabledText,
-                 std::string enabledText)
-        : engine_(engine), option_(option),
-          disabledText_(std::move(disabledText)),
-          enabledText_(std::move(enabledText)) {
-        engine_->instance()->userInterfaceManager().registerAction(
-            stringutils::concat("fcitx-rime-", schema, "-", option), this);
-    }
-
-    void activate(InputContext *ic) override {
-        auto *state = engine_->state(ic);
-        auto *api = engine_->api();
-        if (!state) {
-            return;
-        }
-        // Do not send notification since user is explicitly select it.
-        engine_->blockNotificationFor(30000);
-        auto session = state->session();
-        Bool oldValue = api->get_option(session, option_.c_str());
-        api->set_option(session, option_.c_str(), !oldValue);
-    }
-
-    std::string shortText(InputContext *ic) const override {
-        auto *state = engine_->state(ic);
-        auto *api = engine_->api();
-        if (!state) {
-            return "";
-        }
-        auto session = state->session();
-        if (api->get_option(session, option_.c_str())) {
-            return stringutils::concat(enabledText_, " → ", disabledText_);
-        }
-        return stringutils::concat(disabledText_, " → ", enabledText_);
-    }
-
-    std::string icon(InputContext * /*unused*/) const override { return ""; }
-
-    std::optional<std::string> snapshotOption(InputContext *ic) override {
-        auto *state = engine_->state(ic);
-        auto *api = engine_->api();
-        if (!state) {
-            return std::nullopt;
-        }
-        auto session = state->session(false);
-        if (!session) {
-            return std::nullopt;
-        }
-        if (!api->get_option(session, option_.c_str())) {
-            return stringutils::concat("!", option_);
-        }
-        return option_;
-    }
-
-private:
-    RimeEngine *engine_;
-    std::string option_;
-    std::string disabledText_;
-    std::string enabledText_;
-};
-
-class SelectAction : public RimeOptionAction {
-public:
-    SelectAction(RimeEngine *engine, std::string_view schema,
-                 std::vector<std::string> options,
-                 std::vector<std::string> texts)
-        : engine_(engine), options_(options), texts_(std::move(texts)) {
-        for (size_t i = 0; i < options.size(); ++i) {
-            actions_.emplace_back();
-            actions_.back().setShortText(texts_[i]);
-            actions_.back().connect<SimpleAction::Activated>(
-                [this, i](InputContext *ic) {
-                    auto *state = engine_->state(ic);
-                    auto *api = engine_->api();
-                    if (!state) {
-                        return;
-                    }
-                    auto session = state->session();
-                    for (size_t j = 0; j < options_.size(); ++j) {
-                        api->set_option(session, options_[j].c_str(), i == j);
-                    }
-                });
-            engine_->instance()->userInterfaceManager().registerAction(
-                stringutils::concat("fcitx-rime-", schema, "-", options_[i]),
-                &actions_.back());
-            menu_.addAction(&actions_.back());
-        }
-        setMenu(&menu_);
-        engine_->instance()->userInterfaceManager().registerAction(
-            stringutils::concat("fcitx-rime-", schema, "-select-", options[0]),
-            this);
-    }
-
-    std::string shortText(InputContext *ic) const override {
-        auto *state = engine_->state(ic);
-        auto *api = engine_->api();
-        if (!state) {
-            return "";
-        }
-        auto session = state->session();
-        for (size_t i = 0; i < options_.size(); ++i) {
-            if (api->get_option(session, options_[i].c_str())) {
-                return texts_[i];
-            }
-        }
-        return "";
-    }
-
-    std::string icon(InputContext * /*unused*/) const override { return ""; }
-
-    std::optional<std::string> snapshotOption(InputContext *ic) override {
-        auto *state = engine_->state(ic);
-        auto *api = engine_->api();
-        if (!state) {
-            return std::nullopt;
-        }
-        auto session = state->session(false);
-        if (!session) {
-            return std::nullopt;
-        }
-        for (size_t i = 0; i < options_.size(); ++i) {
-            if (api->get_option(session, options_[i].c_str())) {
-                return options_[i];
-            }
-        }
-        return std::nullopt;
-    }
-
-private:
-    RimeEngine *engine_;
-    std::vector<std::string> options_;
-    std::vector<std::string> texts_;
-    std::list<SimpleAction> actions_;
-    Menu menu_;
 };
 
 bool RimeEngine::firstRun_ = true;
@@ -632,7 +496,9 @@ void RimeEngine::keyEvent(const InputMethodEntry &entry, KeyEvent &event) {
                  << event.isRelease();
     auto *inputContext = event.inputContext();
     auto *state = this->state(inputContext);
+    currentKeyEventState_ = state;
     state->keyEvent(event);
+    currentKeyEventState_ = nullptr;
 }
 
 void RimeEngine::reset(const InputMethodEntry & /*entry*/,
@@ -661,12 +527,28 @@ void RimeEngine::rimeNotificationHandler(void *context, RimeSessionId session,
                                          const char *messageValue) {
     RIME_DEBUG() << "Notification: " << session << " " << messageType << " "
                  << messageValue;
-    RimeEngine *that = static_cast<RimeEngine *>(context);
+    auto *that = static_cast<RimeEngine *>(context);
+    if (that->mainThreadId_ == std::this_thread::get_id()) {
+        that->notifyImmediately(session, messageType, messageValue);
+    }
     that->eventDispatcher_.schedule(
         [that, session, messageType = std::string(messageType),
          messageValue = std::string(messageValue)]() {
             that->notify(session, messageType, messageValue);
         });
+}
+
+void RimeEngine::notifyImmediately(RimeSessionId session,
+                                   std::string_view messageType,
+                                   std::string_view messageValue) {
+    if (messageType != "option") {
+        return;
+    }
+    if (!currentKeyEventState_ ||
+        currentKeyEventState_->session(false) != session) {
+        return;
+    }
+    currentKeyEventState_->addChangedOption(messageValue);
 }
 
 void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
@@ -698,30 +580,6 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
                         "See log for details.");
         }
     } else if (messageType == "option") {
-        // Only show option notification triggered by key event.
-        if (!isAndroid() && lastKeyEventTime_ + 30000 > now(CLOCK_MONOTONIC)) {
-            icon = "fcitx-rime";
-            if (messageValue == "!full_shape") {
-                tipId = "fcitx-rime-full-shape";
-                message = _("Half Shape is enabled.");
-            } else if (messageValue == "full_shape") {
-                tipId = "fcitx-rime-full-shape";
-                message = _("Full Shape is enabled.");
-            } else if (messageValue == "!ascii_punct") {
-                tipId = "fcitx-rime-ascii-punct";
-                message = _("Punctuation conversion is enabled.");
-            } else if (messageValue == "ascii_punct") {
-                tipId = "fcitx-rime-ascii-punct";
-                message = _("Punctuation conversion is disabled.");
-            } else if (messageValue == "!simplification") {
-                tipId = "fcitx-rime-simplification";
-                message = _("Traditional Chinese is enabled.");
-            } else if (messageValue == "simplification") {
-                tipId = "fcitx-rime-simplification";
-                message = _("Simplified Chinese is enabled.");
-            }
-        }
-        timeout = 1000;
         updateStatusArea(session);
     } else if (messageType == "schema") {
         // Schema is changed either via status area or shortcut

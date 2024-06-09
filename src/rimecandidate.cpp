@@ -152,7 +152,7 @@ const CandidateWord &RimeCandidateList::candidateFromAll(int idx) const {
 
 int RimeCandidateList::totalSize() const { return -1; }
 
-bool RimeCandidateList::hasAction(const CandidateWord &candidate) const {
+bool RimeCandidateList::hasAction(const CandidateWord & /*candidate*/) const {
 #ifndef FCITX_RIME_NO_DELETE_CANDIDATE
     // We can always reset rime candidate's frequency.
     return true;
@@ -162,7 +162,7 @@ bool RimeCandidateList::hasAction(const CandidateWord &candidate) const {
 }
 
 std::vector<CandidateAction>
-RimeCandidateList::candidateActions(const CandidateWord &candidate) const {
+RimeCandidateList::candidateActions(const CandidateWord & /*candidate*/) const {
     std::vector<CandidateAction> actions;
 #ifndef FCITX_RIME_NO_DELETE_CANDIDATE
     CandidateAction action;

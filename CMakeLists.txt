@@ -10,9 +10,10 @@ include(ECMSetupVersion)
 include(ECMUninstallTarget)
 
 find_package(Gettext REQUIRED)
-find_package(Fcitx5Core 5.1.10 REQUIRED)
+find_package(Fcitx5Core 5.1.11 REQUIRED)
 find_package(Fcitx5Module REQUIRED COMPONENTS Notifications)
 find_package(PkgConfig REQUIRED)
+find_package(Pthread REQUIRED)
 
 if (NOT DEFINED RIME_TARGET)
     pkg_check_modules(Rime REQUIRED IMPORTED_TARGET "rime>=1.0.0")

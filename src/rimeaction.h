@@ -24,7 +24,7 @@ public:
     // This is used to save the option when we need to release the session.
     virtual std::optional<std::string> snapshotOption(InputContext *ic) = 0;
     // Return the label of current option.
-    virtual std::string optionLabel(InputContext* ic) = 0;
+    virtual std::string optionLabel(InputContext *ic) = 0;
     // Check whether a option name belongs to the action.
     virtual bool checkOptionName(std::string_view name) const = 0;
 };

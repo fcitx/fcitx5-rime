@@ -29,9 +29,9 @@ RimeState *RimeService::currentState() {
 }
 
 void RimeService::setAsciiMode(bool ascii) {
-    if (auto state = currentState()) {
+    if (auto *state = currentState()) {
         state->setLatinMode(ascii);
-        if (auto ic = engine_->instance()->mostRecentInputContext();
+        if (auto *ic = engine_->instance()->mostRecentInputContext();
             ic && ic->hasFocus()) {
             engine_->instance()->showInputMethodInformation(ic);
         }
@@ -40,7 +40,7 @@ void RimeService::setAsciiMode(bool ascii) {
 
 bool RimeService::isAsciiMode() {
     bool isAscii = false;
-    if (auto state = currentState()) {
+    if (auto *state = currentState()) {
         state->getStatus([&isAscii](const RimeStatus &status) {
             isAscii = status.is_ascii_mode;
         });

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2024-06-08 20:24+0000\n"
+"POT-Creation-Date: 2024-06-09 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Dmitry <dmitrydmitry761@gmail.com>, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/fcitx/teams/12005/ru/)\n"
@@ -22,36 +22,36 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: src/rimeengine.h:44
+#: src/rimeengine.h:58
 msgid "All"
 msgstr "Все"
 
-#: src/rimeengine.h:69
+#: src/rimeengine.h:83
 msgid "Commit current text when deactivating"
 msgstr "Зафиксировать текущий текст при деактивации"
 
-#: src/rimeengine.h:50
+#: src/rimeengine.h:64
 msgid "Commit preview"
 msgstr "Отправить превью"
 
-#: src/rimeengine.h:50
+#: src/rimeengine.h:64
 msgid "Composing text"
 msgstr "Составление текста"
 
-#: src/rimeengine.cpp:335
+#: src/rimeengine.cpp:198
 msgid "Deploy"
 msgstr "Развернуть"
 
-#: src/rimeengine.h:49
+#: src/rimeengine.h:63
 msgid "Do not show"
 msgstr "Не показывать"
 
-#: src/rimeengine.h:65
+#: src/rimeengine.h:79
 msgid "Fix embedded preedit cursor at the beginning of the preedit"
 msgstr ""
 "Зафиксировать встроенный курсор предварительного редактирования в начале."
 
-#: src/rimeengine.h:44
+#: src/rimeengine.h:58
 msgid "Follow Global Configuration"
 msgstr "Следовать глобальной конфигурации"
 
@@ -59,51 +59,35 @@ msgstr "Следовать глобальной конфигурации"
 msgid "Forget word"
 msgstr ""
 
-#: src/rimeengine.cpp:709
-msgid "Full Shape is enabled."
-msgstr "Полноширинная форма включена."
-
-#: src/rimeengine.cpp:706
-msgid "Half Shape is enabled."
-msgstr "Полуширинная форма включена."
-
-#: src/rimestate.cpp:83 src/rimeengine.cpp:856
+#: src/rimestate.cpp:90 src/rimeengine.cpp:713
 msgid "Latin Mode"
 msgstr "Режим Латиницы"
 
-#: src/rimeengine.h:82
+#: src/rimeengine.h:96
 msgid "Load available plugins automatically"
 msgstr "Автоматически загружать доступные плагины"
 
-#: src/rimeengine.h:86
+#: src/rimeengine.h:100
 msgid "Modules"
 msgstr "Модули"
 
-#: src/rimeengine.h:45
+#: src/rimeengine.h:59
 msgid "No"
 msgstr "Нет"
 
-#: src/rimeengine.h:84
+#: src/rimeengine.h:98
 msgid "Plugins"
 msgstr "Плагины"
 
-#: src/rimeengine.h:55
+#: src/rimeengine.h:69
 msgid "Preedit Mode"
 msgstr "Режим Предварительного Редактирования"
 
-#: src/rimeengine.h:45
+#: src/rimeengine.h:59
 msgid "Program"
 msgstr "Программа"
 
-#: src/rimeengine.cpp:715
-msgid "Punctuation conversion is disabled."
-msgstr "Преобразование знаков препинания отключено."
-
-#: src/rimeengine.cpp:712
-msgid "Punctuation conversion is enabled."
-msgstr "Преобразование знаков препинания включено."
-
-#: src/rimeengine.cpp:735 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
+#: src/rimeengine.cpp:592 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
 msgid "Rime"
 msgstr "Rime"
 
@@ -115,7 +99,7 @@ msgstr "Обертка Rime для Fcitx"
 msgid "Rime for Fcitx 5"
 msgstr "Rime для Fcitx 5"
 
-#: src/rimeengine.cpp:697
+#: src/rimeengine.cpp:578
 msgid "Rime has encountered an error. See log for details."
 msgstr "Rime обнаружил ошибку. Подробности смотрите в журнале."
 
@@ -123,11 +107,11 @@ msgstr "Rime обнаружил ошибку. Подробности смотр�
 msgid "Rime input method"
 msgstr "Метод ввода Rime"
 
-#: src/rimeengine.cpp:685
+#: src/rimeengine.cpp:566
 msgid "Rime is ready."
 msgstr "Rime готов."
 
-#: src/rimeengine.cpp:682
+#: src/rimeengine.cpp:563
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -135,22 +119,14 @@ msgstr ""
 "Rime находится на техническом обслуживании. Это может занять несколько "
 "секунд. Пожалуйста, дождитесь окончания..."
 
-#: src/rimeengine.h:58
+#: src/rimeengine.h:72
 msgid "Shared Input State"
 msgstr "Общее состояние ввода"
 
-#: src/rimeengine.cpp:721
-msgid "Simplified Chinese is enabled."
-msgstr "Упрощенный Китайский включен."
-
-#: src/rimeengine.cpp:347
+#: src/rimeengine.cpp:210
 msgid "Synchronize"
 msgstr "Синхронизировать"
 
-#: src/rimeengine.cpp:718
-msgid "Traditional Chinese is enabled."
-msgstr "Традиционный Китайский включен."
-
-#: src/rimeengine.h:71
+#: src/rimeengine.h:85
 msgid "User data dir"
 msgstr "Каталог пользовательских данных"

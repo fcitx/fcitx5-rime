@@ -100,7 +100,12 @@ FCITX_CONFIGURATION(
     Option<std::vector<std::string>> modules{this, "Modules", _("Modules"),
                                              std::vector<std::string>()};
 #endif
-);
+    fcitx::Option<fcitx::KeyList> deploy{
+        this, "Deploy", _("Deploy"),
+        isApple() ? fcitx::KeyList{fcitx::Key("Control+Alt+grave")}
+                  : fcitx::KeyList{}};
+    fcitx::Option<fcitx::KeyList> synchronize{
+        this, "Synchronize", _("Synchronize"), {}};);
 
 class RimeEngine final : public InputMethodEngineV2 {
 public:

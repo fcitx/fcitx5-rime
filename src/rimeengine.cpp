@@ -38,7 +38,6 @@
 #include <fcitx/userinterfacemanager.h>
 #include <list>
 #include <memory>
-#include <optional>
 #include <rime_api.h>
 #include <stdexcept>
 #include <string>

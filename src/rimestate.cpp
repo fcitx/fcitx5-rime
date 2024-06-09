@@ -584,18 +584,14 @@ void RimeState::showChangedOptions() {
 
     for (auto *action : actionList) {
         // Snapshot again, so SelectAction will return the current active value.
-        auto snapshot = action->snapshotOption(&ic_);
-        if (!snapshot) {
+        auto label = action->optionLabel(&ic_);
+        if (label.empty()) {
             continue;
         }
-        std::string_view option = *snapshot;
-        const bool state = extractOptionName(option);
-        auto label = engine_->api()->get_state_label_abbreviated(
-            session(), option.data(), state, true);
-        if (!label.str || label.length <= 0) {
-            continue;
+        if (!labels.empty()) {
+            labels.append("|");
         }
-        labels.append(label.str, label.length);
+        labels.append(label);
     }
     if (!labels.empty()) {
         engine_->instance()->showCustomInputMethodInformation(&ic_, labels);

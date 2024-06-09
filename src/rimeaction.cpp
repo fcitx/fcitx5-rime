@@ -9,6 +9,7 @@
 #include <cstddef>
 #include <fcitx-utils/stringutils.h>
 #include <fcitx/action.h>
+#include <fcitx/inputcontext.h>
 #include <fcitx/userinterfacemanager.h>
 #include <optional>
 #include <rime_api.h>
@@ -18,6 +19,24 @@
 #include <vector>
 
 namespace fcitx {
+
+namespace {
+
+std::optional<bool> optionValue(RimeEngine *engine, InputContext *ic,
+                                bool requestSession,
+                                const std::string &option) {
+    auto *state = engine->state(ic);
+    auto *api = engine->api();
+    if (!state) {
+        return std::nullopt;
+    }
+    auto session = state->session(requestSession);
+    if (!session) {
+        return std::nullopt;
+    }
+    return bool(api->get_option(session, option.c_str()));
+}
+} // namespace
 
 ToggleAction::ToggleAction(RimeEngine *engine, std::string_view schema,
                            std::string_view option, std::string disabledText,
@@ -42,36 +61,34 @@ void ToggleAction::activate(InputContext *ic) {
 }
 
 std::string ToggleAction::shortText(InputContext *ic) const {
-    auto *state = engine_->state(ic);
-    auto *api = engine_->api();
-    if (!state) {
+    auto value = optionValue(engine_, ic, /*requestSession=*/true, option_);
+    if (!value.has_value()) {
         return "";
     }
-    auto session = state->session();
-    if (api->get_option(session, option_.c_str())) {
+    if (*value) {
         return stringutils::concat(enabledText_, " → ", disabledText_);
     }
     return stringutils::concat(disabledText_, " → ", enabledText_);
 }
 
 std::optional<std::string> ToggleAction::snapshotOption(InputContext *ic) {
-    auto *state = engine_->state(ic);
-    auto *api = engine_->api();
-    if (!state) {
+    auto value = optionValue(engine_, ic, /*requestSession=*/false, option_);
+    if (!value.has_value()) {
         return std::nullopt;
     }
-    auto session = state->session(false);
-    if (!session) {
-        return std::nullopt;
-    }
-    if (!api->get_option(session, option_.c_str())) {
-        return stringutils::concat("!", option_);
-    }
-    return option_;
+    return *value ? option_ : stringutils::concat("!", option_);
 }
 
 bool ToggleAction::checkOptionName(std::string_view name) const {
     return name == option_;
+}
+
+std::string ToggleAction::optionLabel(InputContext *ic) {
+    auto value = optionValue(engine_, ic, /*requestSession=*/true, option_);
+    if (!value.has_value()) {
+        return "";
+    }
+    return *value ? enabledText_ : disabledText_;
 }
 
 SelectAction::SelectAction(RimeEngine *engine, std::string_view schema,
@@ -139,5 +156,9 @@ std::optional<std::string> SelectAction::snapshotOption(InputContext *ic) {
 
 bool SelectAction::checkOptionName(std::string_view name) const {
     return std::find(options_.begin(), options_.end(), name) != options_.end();
+}
+
+std::string SelectAction::optionLabel(InputContext *ic) {
+    return shortText(ic);
 }
 } // namespace fcitx

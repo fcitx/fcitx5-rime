@@ -6,14 +6,13 @@
 #ifndef _FCITX_RIMEACTION_H_
 #define _FCITX_RIMEACTION_H_
 
-#include <cstddef>
 #include <fcitx/action.h>
+#include <fcitx/inputcontext.h>
 #include <fcitx/menu.h>
 #include <list>
 #include <optional>
 #include <string>
 #include <string_view>
-#include <utility>
 #include <vector>
 
 namespace fcitx {
@@ -24,6 +23,8 @@ class RimeOptionAction : public Action {
 public:
     // This is used to save the option when we need to release the session.
     virtual std::optional<std::string> snapshotOption(InputContext *ic) = 0;
+    // Return the label of current option.
+    virtual std::string optionLabel(InputContext* ic) = 0;
     // Check whether a option name belongs to the action.
     virtual bool checkOptionName(std::string_view name) const = 0;
 };
@@ -43,6 +44,8 @@ public:
     std::optional<std::string> snapshotOption(InputContext *ic) override;
 
     const std::string &option() const { return option_; }
+
+    std::string optionLabel(InputContext *ic) override;
 
     bool checkOptionName(std::string_view name) const override;
 
@@ -66,6 +69,8 @@ public:
     std::optional<std::string> snapshotOption(InputContext *ic) override;
 
     const std::vector<std::string> &options() const { return options_; }
+
+    std::string optionLabel(InputContext *ic) override;
 
     bool checkOptionName(std::string_view name) const override;
 

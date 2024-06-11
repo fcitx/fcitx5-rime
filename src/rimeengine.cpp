@@ -403,6 +403,9 @@ void RimeEngine::updateConfig() {
     updateSchemaMenu();
     refreshSessionPoolPolicy();
 
+    deployAction_.setHotkey(config_.deploy.value());
+    syncAction_.setHotkey(config_.synchronize.value());
+
     if (constructed_) {
         refreshStatusArea(0);
     }
@@ -494,6 +497,15 @@ void RimeEngine::keyEvent(const InputMethodEntry &entry, KeyEvent &event) {
     RIME_DEBUG() << "Rime receive key: " << event.rawKey() << " "
                  << event.isRelease();
     auto *inputContext = event.inputContext();
+    if (!event.isRelease()) {
+        if (event.key().checkKeyList(*config_.deploy)) {
+            deploy();
+            return event.filterAndAccept();
+        } else if (event.key().checkKeyList(*config_.synchronize)) {
+            sync();
+            return event.filterAndAccept();
+        }
+    }
     auto *state = this->state(inputContext);
     currentKeyEventState_ = state;
     state->keyEvent(event);

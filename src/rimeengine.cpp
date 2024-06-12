@@ -568,6 +568,7 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
     const char *icon = "";
     const char *tipId = "";
     int timeout = 3000;
+    bool blockMessage = false;
     if (messageType == "deploy") {
         tipId = "fcitx-rime-deploy";
         icon = "fcitx_rime_deploy";
@@ -585,10 +586,12 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
             }
             updateSchemaMenu();
             refreshStatusArea(0);
+            blockMessage = true;
         } else if (messageValue == "failure") {
             needRefreshAppOption_ = false;
             message = _("Rime has encountered an error. "
                         "See log for details.");
+            blockMessage = true;
         }
     } else if (messageType == "option") {
         updateStatusArea(session);
@@ -602,6 +605,10 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
         now(CLOCK_MONOTONIC) > blockNotificationBefore_) {
         notifications->call<INotifications::showTip>(
             tipId, _("Rime"), icon, _("Rime"), message, timeout);
+    }
+    // Block message after error / success.
+    if (blockMessage) {
+        blockNotificationFor(30000);
     }
 }
 

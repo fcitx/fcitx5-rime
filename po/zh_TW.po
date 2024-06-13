@@ -8,15 +8,15 @@
 # 菘菘 <rrt467778@gmail.com>, 2022
 # Neko ◣ 0xFF, 2022
 # csslayer <wengxt@gmail.com>, 2023
-# Yiyu Liu, 2023
+# Yiyu Liu, 2024
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2024-06-09 20:24+0000\n"
+"POT-Creation-Date: 2024-06-13 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: Yiyu Liu, 2023\n"
+"Last-Translator: Yiyu Liu, 2024\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/fcitx/teams/12005/"
 "zh_TW/)\n"
 "Language: zh_TW\n"
@@ -41,7 +41,7 @@ msgstr "提交預覽"
 msgid "Composing text"
 msgstr "編輯中文本"
 
-#: src/rimeengine.cpp:198
+#: src/rimeengine.h:104 src/rimeengine.cpp:198
 msgid "Deploy"
 msgstr "重新部署"
 
@@ -59,9 +59,9 @@ msgstr "跟隨全域配置"
 
 #: src/rimecandidate.cpp:170
 msgid "Forget word"
-msgstr ""
+msgstr "忘記字詞"
 
-#: src/rimestate.cpp:90 src/rimeengine.cpp:713
+#: src/rimestate.cpp:90 src/rimeengine.cpp:732
 msgid "Latin Mode"
 msgstr "羅馬拼音模式"
 
@@ -89,7 +89,7 @@ msgstr "預編輯模式"
 msgid "Program"
 msgstr "程式"
 
-#: src/rimeengine.cpp:592 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
+#: src/rimeengine.cpp:607 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
 msgid "Rime"
 msgstr "中州韻"
 
@@ -101,7 +101,7 @@ msgstr "Fcitx 的中州韻封裝"
 msgid "Rime for Fcitx 5"
 msgstr "Fcitx 5 的中州韻支援"
 
-#: src/rimeengine.cpp:578
+#: src/rimeengine.cpp:592
 msgid "Rime has encountered an error. See log for details."
 msgstr "Rime 遇到了一個錯誤。詳細信息請檢視日誌。"
 
@@ -109,11 +109,11 @@ msgstr "Rime 遇到了一個錯誤。詳細信息請檢視日誌。"
 msgid "Rime input method"
 msgstr "Rime 輸入法"
 
-#: src/rimeengine.cpp:566
+#: src/rimeengine.cpp:579
 msgid "Rime is ready."
 msgstr "Rime 準備好了。"
 
-#: src/rimeengine.cpp:563
+#: src/rimeengine.cpp:576
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -123,7 +123,7 @@ msgstr "Rime 正在維護中。這可能需要幾秒鐘。請等待完成…"
 msgid "Shared Input State"
 msgstr "共享輸入狀態"
 
-#: src/rimeengine.cpp:210
+#: src/rimeengine.h:108 src/rimeengine.cpp:210
 msgid "Synchronize"
 msgstr "同步"
 

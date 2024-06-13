@@ -5,14 +5,15 @@
 # Translators:
 # rocka, 2023
 # csslayer <wengxt@gmail.com>, 2023
+# Yiyu Liu, 2024
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2024-06-09 20:24+0000\n"
+"POT-Creation-Date: 2024-06-13 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: csslayer <wengxt@gmail.com>, 2023\n"
+"Last-Translator: Yiyu Liu, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/fcitx/teams/12005/"
 "zh_CN/)\n"
 "Language: zh_CN\n"
@@ -37,7 +38,7 @@ msgstr "提交预览"
 msgid "Composing text"
 msgstr "编辑中文本"
 
-#: src/rimeengine.cpp:198
+#: src/rimeengine.h:104 src/rimeengine.cpp:198
 msgid "Deploy"
 msgstr "重新部署"
 
@@ -55,9 +56,9 @@ msgstr "跟随全局选项"
 
 #: src/rimecandidate.cpp:170
 msgid "Forget word"
-msgstr ""
+msgstr "忘记词汇"
 
-#: src/rimestate.cpp:90 src/rimeengine.cpp:713
+#: src/rimestate.cpp:90 src/rimeengine.cpp:732
 msgid "Latin Mode"
 msgstr "英文模式"
 
@@ -85,7 +86,7 @@ msgstr "预编辑模式"
 msgid "Program"
 msgstr "程序"
 
-#: src/rimeengine.cpp:592 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
+#: src/rimeengine.cpp:607 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
 msgid "Rime"
 msgstr "中州韵"
 
@@ -97,7 +98,7 @@ msgstr "Fcitx 的中州韵封装"
 msgid "Rime for Fcitx 5"
 msgstr "Fcitx 5 的中州韵支持"
 
-#: src/rimeengine.cpp:578
+#: src/rimeengine.cpp:592
 msgid "Rime has encountered an error. See log for details."
 msgstr "Rime 出现了一个错误。详细信息请参阅日志。"
 
@@ -105,11 +106,11 @@ msgstr "Rime 出现了一个错误。详细信息请参阅日志。"
 msgid "Rime input method"
 msgstr "中州韵输入法"
 
-#: src/rimeengine.cpp:566
+#: src/rimeengine.cpp:579
 msgid "Rime is ready."
 msgstr "Rime 就绪。"
 
-#: src/rimeengine.cpp:563
+#: src/rimeengine.cpp:576
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -119,7 +120,7 @@ msgstr "Rime 正在进行维护程序。可能需要几秒钟。请等待完成�
 msgid "Shared Input State"
 msgstr "共享输入状态"
 
-#: src/rimeengine.cpp:210
+#: src/rimeengine.h:108 src/rimeengine.cpp:210
 msgid "Synchronize"
 msgstr "同步"
 

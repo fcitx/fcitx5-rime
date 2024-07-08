@@ -3,20 +3,21 @@
 # This file is distributed under the same license as the fcitx5-rime package.
 #
 # Translators:
+# csslayer <wengxt@gmail.com>, 2017
 # pan93412 <pan93412@gmail.com>, 2019
 # bruh, 2020
 # 菘菘 <rrt467778@gmail.com>, 2022
 # Neko ◣ 0xFF, 2022
-# csslayer <wengxt@gmail.com>, 2023
 # Yiyu Liu, 2024
+# Kisaragi Hiu <flyingfeather1501@gmail.com>, 2024
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2024-06-13 20:24+0000\n"
+"POT-Creation-Date: 2024-07-08 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: Yiyu Liu, 2024\n"
+"Last-Translator: Kisaragi Hiu <flyingfeather1501@gmail.com>, 2024\n"
 "Language-Team: Chinese (Taiwan) (https://app.transifex.com/fcitx/teams/12005/"
 "zh_TW/)\n"
 "Language: zh_TW\n"
@@ -51,7 +52,7 @@ msgstr "不顯示"
 
 #: src/rimeengine.h:79
 msgid "Fix embedded preedit cursor at the beginning of the preedit"
-msgstr "將預編輯光標位置固定在預編輯的開頭"
+msgstr "將內嵌預編輯游標位置固定在預編輯的開頭"
 
 #: src/rimeengine.h:58
 msgid "Follow Global Configuration"
@@ -103,7 +104,7 @@ msgstr "Fcitx 5 的中州韻支援"
 
 #: src/rimeengine.cpp:592
 msgid "Rime has encountered an error. See log for details."
-msgstr "Rime 遇到了一個錯誤。詳細信息請檢視日誌。"
+msgstr "Rime 遇到了一個錯誤。詳細資訊請檢視日誌。"
 
 #: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:8
 msgid "Rime input method"

@@ -482,11 +482,22 @@ void RimeEngine::activate(const InputMethodEntry & /*entry*/,
 
 void RimeEngine::deactivate(const InputMethodEntry &entry,
                             InputContextEvent &event) {
-    if (event.type() == EventType::InputContextSwitchInputMethod &&
-        *config_.commitWhenDeactivate) {
+    if (event.type() == EventType::InputContextSwitchInputMethod) {
         auto *inputContext = event.inputContext();
         auto *state = this->state(inputContext);
-        state->commitPreedit(inputContext);
+        switch (*config_.switchInputMethodBehavior) {
+        case SwitchInputMethodBehavior::Clear:
+            break;
+        case SwitchInputMethodBehavior::CommitRawInput:
+            state->commitInput(inputContext);
+            break;
+        case SwitchInputMethodBehavior::CommitComposingText:
+            state->commitComposing(inputContext);
+            break;
+        case SwitchInputMethodBehavior::CommitCommitPreview:
+            state->commitPreedit(inputContext);
+            break;
+        }
     }
     reset(entry, event);
 }

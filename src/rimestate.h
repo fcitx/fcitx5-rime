@@ -43,6 +43,8 @@ public:
     void updatePreedit(InputContext *ic, const RimeContext &context);
     void updateUI(InputContext *ic, bool keyRelease);
     void release();
+    void commitInput(InputContext *ic);
+    void commitComposing(InputContext *ic);
     void commitPreedit(InputContext *ic);
     std::string subMode();
     std::string subModeLabel();

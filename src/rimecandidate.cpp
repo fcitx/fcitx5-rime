@@ -199,7 +199,7 @@ int RimeCandidateList::globalCursorIndex() const {
 void RimeCandidateList::setGlobalCursorIndex(int index) {
     auto session = engine_->state(ic_)->session(false);
     if (!session) {
-        throw std::invalid_argument("Invalid session");
+        return;
     }
     auto *api = engine_->api();
     api->highlight_candidate(session, index);

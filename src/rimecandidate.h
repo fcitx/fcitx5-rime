@@ -52,6 +52,10 @@ class RimeCandidateList final : public CandidateList,
     ,
                                 public BulkCandidateList
 #endif
+#ifndef FCITX_RIME_NO_HIGHLIGHT_CANDIDATE
+    ,
+                                public BulkCursorCandidateList
+#endif
 {
 public:
     RimeCandidateList(RimeEngine *engine, InputContext *ic,
@@ -92,6 +96,11 @@ public:
 #ifndef FCITX_RIME_NO_SELECT_CANDIDATE
     const CandidateWord &candidateFromAll(int idx) const override;
     int totalSize() const override;
+#endif
+
+#ifndef FCITX_RIME_NO_HIGHLIGHT_CANDIDATE
+    int globalCursorIndex() const override;
+    void setGlobalCursorIndex(int index) override;
 #endif
 
     bool hasAction(const CandidateWord &candidate) const override;

@@ -75,6 +75,9 @@ RimeCandidateList::RimeCandidateList(RimeEngine *engine, InputContext *ic,
     setPageable(this);
     setBulk(this);
     setActionable(this);
+#ifndef FCITX_RIME_NO_HIGHLIGHT_CANDIDATE
+    setBulkCursor(this);
+#endif
 
     const auto &menu = context.menu;
 
@@ -187,4 +190,19 @@ void RimeCandidateList::triggerAction(const CandidateWord &candidate, int id) {
         }
     }
 }
+
+#ifndef FCITX_RIME_NO_HIGHLIGHT_CANDIDATE
+int RimeCandidateList::globalCursorIndex() const {
+    return -1; // No API available.
+}
+
+void RimeCandidateList::setGlobalCursorIndex(int index) {
+    auto session = engine_->state(ic_)->session(false);
+    if (!session) {
+        return;
+    }
+    auto *api = engine_->api();
+    api->highlight_candidate(session, index);
+}
+#endif
 } // namespace fcitx

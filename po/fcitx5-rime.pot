@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2024-06-09 20:24+0000\n"
+"POT-Creation-Date: 2024-09-13 20:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,23 +15,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: src/rimeengine.h:97
+msgid "Action when switching input method"
+msgstr ""
+
 #: src/rimeengine.h:58
 msgid "All"
 msgstr ""
 
-#: src/rimeengine.h:83
-msgid "Commit current text when deactivating"
+#: src/rimeengine.h:73
+msgid "Clear"
+msgstr ""
+
+#: src/rimeengine.h:76
+msgid "Commit commit preview"
+msgstr ""
+
+#: src/rimeengine.h:75
+msgid "Commit composing text"
 msgstr ""
 
 #: src/rimeengine.h:64
 msgid "Commit preview"
 msgstr ""
 
+#: src/rimeengine.h:74
+msgid "Commit raw input"
+msgstr ""
+
 #: src/rimeengine.h:64
 msgid "Composing text"
 msgstr ""
 
-#: src/rimeengine.cpp:198
+#: src/rimeengine.h:119 src/rimeengine.cpp:198
 msgid "Deploy"
 msgstr ""
 
@@ -39,7 +55,7 @@ msgstr ""
 msgid "Do not show"
 msgstr ""
 
-#: src/rimeengine.h:79
+#: src/rimeengine.h:91
 msgid "Fix embedded preedit cursor at the beginning of the preedit"
 msgstr ""
 
@@ -47,19 +63,19 @@ msgstr ""
 msgid "Follow Global Configuration"
 msgstr ""
 
-#: src/rimecandidate.cpp:170
+#: src/rimecandidate.cpp:173
 msgid "Forget word"
 msgstr ""
 
-#: src/rimestate.cpp:90 src/rimeengine.cpp:713
+#: src/rimestate.cpp:91 src/rimeengine.cpp:743
 msgid "Latin Mode"
 msgstr ""
 
-#: src/rimeengine.h:96
+#: src/rimeengine.h:111
 msgid "Load available plugins automatically"
 msgstr ""
 
-#: src/rimeengine.h:100
+#: src/rimeengine.h:115
 msgid "Modules"
 msgstr ""
 
@@ -67,11 +83,11 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: src/rimeengine.h:98
+#: src/rimeengine.h:113
 msgid "Plugins"
 msgstr ""
 
-#: src/rimeengine.h:69
+#: src/rimeengine.h:81
 msgid "Preedit Mode"
 msgstr ""
 
@@ -79,7 +95,7 @@ msgstr ""
 msgid "Program"
 msgstr ""
 
-#: src/rimeengine.cpp:592 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
+#: src/rimeengine.cpp:618 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
 msgid "Rime"
 msgstr ""
 
@@ -91,7 +107,7 @@ msgstr ""
 msgid "Rime for Fcitx 5"
 msgstr ""
 
-#: src/rimeengine.cpp:578
+#: src/rimeengine.cpp:603
 msgid "Rime has encountered an error. See log for details."
 msgstr ""
 
@@ -99,24 +115,24 @@ msgstr ""
 msgid "Rime input method"
 msgstr ""
 
-#: src/rimeengine.cpp:566
+#: src/rimeengine.cpp:590
 msgid "Rime is ready."
 msgstr ""
 
-#: src/rimeengine.cpp:563
+#: src/rimeengine.cpp:587
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
 msgstr ""
 
-#: src/rimeengine.h:72
+#: src/rimeengine.h:84
 msgid "Shared Input State"
 msgstr ""
 
-#: src/rimeengine.cpp:210
+#: src/rimeengine.h:123 src/rimeengine.cpp:210
 msgid "Synchronize"
 msgstr ""
 
-#: src/rimeengine.h:85
+#: src/rimeengine.h:100
 msgid "User data dir"
 msgstr ""

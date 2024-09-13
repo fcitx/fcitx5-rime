@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2024-06-09 20:24+0000\n"
+"POT-Creation-Date: 2024-09-13 20:25+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Junghee Lee <daemul72@gmail.com>, 2022\n"
 "Language-Team: Korean (https://app.transifex.com/fcitx/teams/12005/ko/)\n"
@@ -20,23 +20,39 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: src/rimeengine.h:97
+msgid "Action when switching input method"
+msgstr ""
+
 #: src/rimeengine.h:58
 msgid "All"
 msgstr ""
 
-#: src/rimeengine.h:83
-msgid "Commit current text when deactivating"
-msgstr "비활성화할 때 현재 텍스트 입력완료"
+#: src/rimeengine.h:73
+msgid "Clear"
+msgstr ""
+
+#: src/rimeengine.h:76
+msgid "Commit commit preview"
+msgstr ""
+
+#: src/rimeengine.h:75
+msgid "Commit composing text"
+msgstr ""
 
 #: src/rimeengine.h:64
 msgid "Commit preview"
+msgstr ""
+
+#: src/rimeengine.h:74
+msgid "Commit raw input"
 msgstr ""
 
 #: src/rimeengine.h:64
 msgid "Composing text"
 msgstr ""
 
-#: src/rimeengine.cpp:198
+#: src/rimeengine.h:119 src/rimeengine.cpp:198
 msgid "Deploy"
 msgstr "배치"
 
@@ -44,7 +60,7 @@ msgstr "배치"
 msgid "Do not show"
 msgstr ""
 
-#: src/rimeengine.h:79
+#: src/rimeengine.h:91
 msgid "Fix embedded preedit cursor at the beginning of the preedit"
 msgstr "사전편집 시작 부분에 포함된 사전편집 커서 수정"
 
@@ -52,19 +68,19 @@ msgstr "사전편집 시작 부분에 포함된 사전편집 커서 수정"
 msgid "Follow Global Configuration"
 msgstr ""
 
-#: src/rimecandidate.cpp:170
+#: src/rimecandidate.cpp:173
 msgid "Forget word"
 msgstr ""
 
-#: src/rimestate.cpp:90 src/rimeengine.cpp:713
+#: src/rimestate.cpp:91 src/rimeengine.cpp:743
 msgid "Latin Mode"
 msgstr "로마자 모드"
 
-#: src/rimeengine.h:96
+#: src/rimeengine.h:111
 msgid "Load available plugins automatically"
 msgstr "사용 가능한 플러그인 자동으로 불러오기"
 
-#: src/rimeengine.h:100
+#: src/rimeengine.h:115
 msgid "Modules"
 msgstr "모듈"
 
@@ -72,11 +88,11 @@ msgstr "모듈"
 msgid "No"
 msgstr ""
 
-#: src/rimeengine.h:98
+#: src/rimeengine.h:113
 msgid "Plugins"
 msgstr "플러그인"
 
-#: src/rimeengine.h:69
+#: src/rimeengine.h:81
 msgid "Preedit Mode"
 msgstr ""
 
@@ -84,7 +100,7 @@ msgstr ""
 msgid "Program"
 msgstr ""
 
-#: src/rimeengine.cpp:592 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
+#: src/rimeengine.cpp:618 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
 msgid "Rime"
 msgstr "Rime"
 
@@ -96,7 +112,7 @@ msgstr "Fcitx용 Rime 래퍼"
 msgid "Rime for Fcitx 5"
 msgstr "Fcitx5용 Rime"
 
-#: src/rimeengine.cpp:578
+#: src/rimeengine.cpp:603
 msgid "Rime has encountered an error. See log for details."
 msgstr ""
 
@@ -104,11 +120,11 @@ msgstr ""
 msgid "Rime input method"
 msgstr "Rime 입력 방식"
 
-#: src/rimeengine.cpp:566
+#: src/rimeengine.cpp:590
 msgid "Rime is ready."
 msgstr "Rime이 준비되었습니다."
 
-#: src/rimeengine.cpp:563
+#: src/rimeengine.cpp:587
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -116,14 +132,14 @@ msgstr ""
 "라임이 점검중입니다. 몇 초 정도 걸릴 수 있습니다. 완료될 때까지 기다려 주십시"
 "오..."
 
-#: src/rimeengine.h:72
+#: src/rimeengine.h:84
 msgid "Shared Input State"
 msgstr ""
 
-#: src/rimeengine.cpp:210
+#: src/rimeengine.h:123 src/rimeengine.cpp:210
 msgid "Synchronize"
 msgstr "동기화"
 
-#: src/rimeengine.h:85
+#: src/rimeengine.h:100
 msgid "User data dir"
 msgstr "사용자 데이터 디렉터리"

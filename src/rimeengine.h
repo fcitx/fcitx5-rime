@@ -63,6 +63,18 @@ enum class PreeditMode { No, ComposingText, CommitPreview };
 FCITX_CONFIG_ENUM_NAME_WITH_I18N(PreeditMode, N_("Do not show"),
                                  N_("Composing text"), N_("Commit preview"))
 
+enum class SwitchInputMethodBehavior {
+    Clear,
+    CommitRawInput,
+    CommitComposingText,
+    CommitCommitPreview
+};
+
+FCITX_CONFIG_ENUM_NAME_WITH_I18N(SwitchInputMethodBehavior, N_("Clear"),
+                                 N_("Commit raw input"),
+                                 N_("Commit composing text"),
+                                 N_("Commit commit preview"))
+
 FCITX_CONFIGURATION(
     RimeEngineConfig,
     OptionWithAnnotation<PreeditMode, PreeditModeI18NAnnotation> preeditMode{
@@ -78,9 +90,12 @@ FCITX_CONFIGURATION(
         this, "PreeditCursorPositionAtBeginning",
         _("Fix embedded preedit cursor at the beginning of the preedit"),
         !isAndroid() && !isApple()};
-    Option<bool> commitWhenDeactivate{
-        this, "Commit when deactivate",
-        _("Commit current text when deactivating"), true};
+    OptionWithAnnotation<SwitchInputMethodBehavior,
+                         SwitchInputMethodBehaviorI18NAnnotation>
+        switchInputMethodBehavior{
+            this, "SwitchInputMethodBehavior",
+            _("Action when switching input method"),
+            SwitchInputMethodBehavior::CommitCommitPreview};
     ExternalOption userDataDir{
         this, "UserDataDir", _("User data dir"),
         stringutils::concat(

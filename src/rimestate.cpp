@@ -11,6 +11,7 @@
 #include "rimesession.h"
 #include <algorithm>
 #include <cstdint>
+#include <cstring>
 #include <fcitx-utils/capabilityflags.h>
 #include <fcitx-utils/i18n.h>
 #include <fcitx-utils/key.h>
@@ -439,6 +440,30 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
 }
 
 void RimeState::release() { session_.reset(); }
+
+void RimeState::commitInput(InputContext *ic) {
+    if (auto *api = engine_->api()) {
+        if (const char *input = api->get_input(this->session())) {
+            if (std::strlen(input) > 0) {
+                ic->commitString(input);
+            }
+        }
+    }
+}
+
+void RimeState::commitComposing(InputContext *ic) {
+    if (auto *api = engine_->api()) {
+        RIME_STRUCT(RimeContext, context);
+        auto session = this->session();
+        if (!api->get_context(session, &context)) {
+            return;
+        }
+        if (context.composition.length > 0) {
+            ic->commitString(context.composition.preedit);
+        }
+        api->free_context(&context);
+    }
+}
 
 void RimeState::commitPreedit(InputContext *ic) {
     if (auto *api = engine_->api()) {

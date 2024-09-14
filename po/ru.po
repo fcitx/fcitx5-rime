@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2024-09-13 20:25+0000\n"
+"POT-Creation-Date: 2024-09-14 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Dmitry <dmitrydmitry761@gmail.com>, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/fcitx/teams/12005/ru/)\n"
@@ -24,7 +24,7 @@ msgstr ""
 
 #: src/rimeengine.h:97
 msgid "Action when switching input method"
-msgstr ""
+msgstr "Действие при переключении метода ввода"
 
 #: src/rimeengine.h:58
 msgid "All"
@@ -32,7 +32,7 @@ msgstr "Все"
 
 #: src/rimeengine.h:73
 msgid "Clear"
-msgstr ""
+msgstr "Очистить"
 
 #: src/rimeengine.h:76
 msgid "Commit commit preview"
@@ -40,7 +40,7 @@ msgstr ""
 
 #: src/rimeengine.h:75
 msgid "Commit composing text"
-msgstr ""
+msgstr "Составить текст"
 
 #: src/rimeengine.h:64
 msgid "Commit preview"
@@ -48,7 +48,7 @@ msgstr "Отправить превью"
 
 #: src/rimeengine.h:74
 msgid "Commit raw input"
-msgstr ""
+msgstr "Совершать необработанный ввод"
 
 #: src/rimeengine.h:64
 msgid "Composing text"

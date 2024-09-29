@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2024-09-13 20:25+0000\n"
+"POT-Creation-Date: 2024-09-29 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Yiyu Liu, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/fcitx/teams/12005/"
@@ -24,7 +24,7 @@ msgstr ""
 
 #: src/rimeengine.h:97
 msgid "Action when switching input method"
-msgstr ""
+msgstr "切换输入法时的行为"
 
 #: src/rimeengine.h:58
 msgid "All"
@@ -32,15 +32,15 @@ msgstr "全部"
 
 #: src/rimeengine.h:73
 msgid "Clear"
-msgstr ""
+msgstr "清空"
 
 #: src/rimeengine.h:76
 msgid "Commit commit preview"
-msgstr ""
+msgstr "提交预览"
 
 #: src/rimeengine.h:75
 msgid "Commit composing text"
-msgstr ""
+msgstr "提交编辑中文本"
 
 #: src/rimeengine.h:64
 msgid "Commit preview"
@@ -48,7 +48,7 @@ msgstr "提交预览"
 
 #: src/rimeengine.h:74
 msgid "Commit raw input"
-msgstr ""
+msgstr "提交原始字符串"
 
 #: src/rimeengine.h:64
 msgid "Composing text"

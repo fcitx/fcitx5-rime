@@ -186,6 +186,13 @@ RimeEngine::RimeEngine(Instance *instance)
     } else {
         sharedDataDir_ = RIME_DATA_DIR;
     }
+
+    // allow user override shared data dir via environment variable
+    const char *sharedDataDirFromEnv = getenv("FCITX_RIME_DATA_DIR");
+    if (sharedDataDirFromEnv) {
+        sharedDataDir_ = sharedDataDirFromEnv;
+    }
+
     imAction_ = std::make_unique<IMAction>(this);
     instance_->userInterfaceManager().registerAction("fcitx-rime-im",
                                                      imAction_.get());

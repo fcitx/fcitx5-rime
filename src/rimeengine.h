@@ -24,7 +24,6 @@
 #include <fcitx-utils/standardpath.h>
 #include <fcitx-utils/stringutils.h>
 #include <fcitx/action.h>
-#include <fcitx/addonfactory.h>
 #include <fcitx/addoninstance.h>
 #include <fcitx/addonmanager.h>
 #include <fcitx/event.h>
@@ -233,14 +232,6 @@ private:
     RimeSessionPool sessionPool_;
     std::thread::id mainThreadId_ = std::this_thread::get_id();
     RimeState *currentKeyEventState_ = nullptr;
-};
-
-class RimeEngineFactory : public AddonFactory {
-public:
-    AddonInstance *create(AddonManager *manager) override {
-        registerDomain("fcitx5-rime", FCITX_INSTALL_LOCALEDIR);
-        return new RimeEngine(manager->instance());
-    }
 };
 } // namespace fcitx
 

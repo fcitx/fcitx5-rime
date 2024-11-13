@@ -4,6 +4,7 @@ set(RIME_SOURCES
     rimecandidate.cpp
     rimesession.cpp
     rimeaction.cpp
+    rimefactory.cpp
 )
 
 set(RIME_LINK_LIBRARIES

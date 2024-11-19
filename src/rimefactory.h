@@ -8,13 +8,13 @@
 
 #include <fcitx/addonfactory.h>
 
-namespace fcitx {
+namespace fcitx::rime {
 
 class RimeEngineFactory : public AddonFactory {
 public:
     AddonInstance *create(AddonManager *manager) override;
 };
 
-} // namespace fcitx
+} // namespace fcitx::rime
 
 #endif

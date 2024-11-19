@@ -38,7 +38,7 @@
 #include <utility>
 #include <vector>
 
-namespace fcitx {
+namespace fcitx::rime {
 
 namespace {
 
@@ -620,4 +620,4 @@ void RimeState::showChangedOptions() {
         engine_->instance()->showCustomInputMethodInformation(&ic_, labels);
     }
 }
-} // namespace fcitx
+} // namespace fcitx::rime

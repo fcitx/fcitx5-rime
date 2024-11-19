@@ -46,7 +46,7 @@
 #include "rimeservice.h"
 #endif
 
-namespace fcitx {
+namespace fcitx::rime {
 
 class RimeState;
 class RimeOptionAction;
@@ -233,11 +233,11 @@ private:
     std::thread::id mainThreadId_ = std::this_thread::get_id();
     RimeState *currentKeyEventState_ = nullptr;
 };
-} // namespace fcitx
+} // namespace fcitx::rime
 
-FCITX_DECLARE_LOG_CATEGORY(rime);
+FCITX_DECLARE_LOG_CATEGORY(rime_log);
 
-#define RIME_DEBUG() FCITX_LOGC(rime, Debug)
-#define RIME_ERROR() FCITX_LOGC(rime, Error)
+#define RIME_DEBUG() FCITX_LOGC(rime_log, Debug)
+#define RIME_ERROR() FCITX_LOGC(rime_log, Error)
 
 #endif // _FCITX_RIMEENGINE_H_

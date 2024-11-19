@@ -9,7 +9,7 @@
 #include "rimeengine.h"
 #include "rimestate.h"
 
-namespace fcitx {
+namespace fcitx::rime {
 
 RimeService::RimeService(RimeEngine *engine) : engine_(engine) {
     auto dbus = engine->dbus();
@@ -84,4 +84,4 @@ std::vector<std::string> RimeService::listAllSchemas() {
     return schemas;
 }
 
-} // namespace fcitx
+} // namespace fcitx::rime

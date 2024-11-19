@@ -20,7 +20,7 @@
 
 #define RIME_ASCII_MODE "ascii_mode"
 
-namespace fcitx {
+namespace fcitx::rime {
 
 class RimeEngine;
 
@@ -72,6 +72,6 @@ private:
     std::vector<std::string> savedOptions_;
     std::vector<std::string> changedOptions_;
 };
-} // namespace fcitx
+} // namespace fcitx::rime
 
 #endif // _FCITX_RIMESTATE_H_

@@ -15,7 +15,7 @@
 #include <string_view>
 #include <vector>
 
-namespace fcitx {
+namespace fcitx::rime {
 
 class RimeEngine;
 
@@ -82,6 +82,6 @@ private:
     Menu menu_;
 };
 
-} // namespace fcitx
+} // namespace fcitx::rime
 
 #endif // _FCITX_RIMEENGINE_H_

@@ -18,7 +18,7 @@
 #include <utility>
 #include <vector>
 
-namespace fcitx {
+namespace fcitx::rime {
 
 namespace {
 
@@ -161,4 +161,4 @@ bool SelectAction::checkOptionName(std::string_view name) const {
 std::string SelectAction::optionLabel(InputContext *ic) {
     return shortText(ic);
 }
-} // namespace fcitx
+} // namespace fcitx::rime

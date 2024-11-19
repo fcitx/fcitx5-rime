@@ -10,7 +10,7 @@
 #include <fcitx-utils/dbus/message.h>
 #include <fcitx-utils/dbus/objectvtable.h>
 
-namespace fcitx {
+namespace fcitx::rime {
 
 class RimeEngine;
 class RimeState;
@@ -36,6 +36,6 @@ private:
     RimeEngine *engine_;
 };
 
-} // namespace fcitx
+} // namespace fcitx::rime
 
 #endif // _FCITX5_RIME_RIMESERVICE_H_

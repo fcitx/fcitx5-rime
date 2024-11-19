@@ -14,7 +14,7 @@
 #include <memory>
 #include <vector>
 
-namespace fcitx {
+namespace fcitx::rime {
 
 class RimeCandidateWord : public CandidateWord {
 public:
@@ -129,6 +129,6 @@ private:
     mutable std::vector<std::unique_ptr<RimeGlobalCandidateWord>>
         globalCandidateWords_;
 };
-} // namespace fcitx
+} // namespace fcitx::rime
 
 #endif // _FCITX_RIMECANDIDATE_H_

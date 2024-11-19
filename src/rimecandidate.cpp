@@ -13,7 +13,7 @@
 #include <rime_api.h>
 #include <stdexcept>
 
-namespace fcitx {
+namespace fcitx::rime {
 
 RimeCandidateWord::RimeCandidateWord(RimeEngine *engine,
                                      const RimeCandidate &candidate, KeySym sym,
@@ -205,4 +205,4 @@ void RimeCandidateList::setGlobalCursorIndex(int index) {
     api->highlight_candidate(session, index);
 }
 #endif
-} // namespace fcitx
+} // namespace fcitx::rime

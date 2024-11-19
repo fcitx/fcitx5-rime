@@ -8,13 +8,13 @@
 #include "rimeengine.h"
 #include <fcitx-utils/i18n.h>
 
-namespace fcitx {
+namespace fcitx::rime {
 
 AddonInstance *RimeEngineFactory::create(AddonManager *manager) {
     registerDomain("fcitx5-rime", FCITX_INSTALL_LOCALEDIR);
     return new RimeEngine(manager->instance());
 }
 
-} // namespace fcitx
+} // namespace fcitx::rime
 
-FCITX_ADDON_FACTORY(fcitx::RimeEngineFactory)
+FCITX_ADDON_FACTORY_V2(rime, fcitx::rime::RimeEngineFactory)

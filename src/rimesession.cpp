@@ -20,7 +20,7 @@
 #include <tuple>
 #include <utility>
 
-namespace fcitx {
+namespace fcitx::rime {
 
 RimeSessionHolder::RimeSessionHolder(RimeSessionPool *pool,
                                      const std::string &program)
@@ -148,4 +148,4 @@ void RimeSessionPool::unregisterSession(const std::string &key) {
     assert(count > 0);
 }
 
-} // namespace fcitx
+} // namespace fcitx::rime

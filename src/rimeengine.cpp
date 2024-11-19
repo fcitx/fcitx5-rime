@@ -47,9 +47,9 @@
 #include <utility>
 #include <vector>
 
-FCITX_DEFINE_LOG_CATEGORY(rime, "rime");
+FCITX_DEFINE_LOG_CATEGORY(rime_log, "rime");
 
-namespace fcitx {
+namespace fcitx::rime {
 
 namespace {
 
@@ -261,7 +261,7 @@ void RimeEngine::rimeStart(bool fullcheck) {
     // make librime only log to stderr
     // https://github.com/rime/librime/commit/6d1b9b65de4e7784a68a17d10a3e5c900e4fd511
     fcitx_rime_traits.log_dir = "";
-    switch (rime().logLevel()) {
+    switch (rime_log().logLevel()) {
     case NoLog:
         fcitx_rime_traits.min_log_level = 4;
         break;
@@ -792,4 +792,4 @@ PropertyPropagatePolicy RimeEngine::getSharedStatePolicy() {
     }
 }
 
-} // namespace fcitx
+} // namespace fcitx::rime

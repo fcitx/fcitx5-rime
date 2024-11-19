@@ -17,7 +17,7 @@
 #include <tuple>
 #include <unordered_map>
 
-namespace fcitx {
+namespace fcitx::rime {
 
 class RimeEngine;
 class RimeSessionPool;
@@ -66,6 +66,6 @@ private:
     std::unordered_map<std::string, std::weak_ptr<RimeSessionHolder>> sessions_;
 };
 
-} // namespace fcitx
+} // namespace fcitx::rime
 
 #endif

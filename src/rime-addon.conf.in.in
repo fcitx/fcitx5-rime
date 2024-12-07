@@ -4,7 +4,7 @@ Comment=Rime Wrapper For Fcitx
 Category=InputMethod
 Version=@PROJECT_VERSION@
 Library=export:librime
-Type=SharedLibrary
+Type=@FCITX_ADDON_TYPE@
 OnDemand=True
 Configurable=True
 

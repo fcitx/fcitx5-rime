@@ -16,6 +16,7 @@
 #include <fcitx-config/iniparser.h>
 #include <fcitx-config/rawconfig.h>
 #include <fcitx-utils/event.h>
+#include <fcitx-utils/eventloopinterface.h>
 #include <fcitx-utils/fs.h>
 #include <fcitx-utils/i18n.h>
 #include <fcitx-utils/log.h>
@@ -52,6 +53,9 @@ FCITX_DEFINE_LOG_CATEGORY(rime_log, "rime");
 namespace fcitx::rime {
 
 namespace {
+
+// Allow notification for 60secs.
+constexpr uint64_t NotificationTimeout = 60000000;
 
 std::unordered_map<std::string, std::unordered_map<std::string, bool>>
 parseAppOptions(rime_api_t *api, RimeConfig *config) {
@@ -210,7 +214,7 @@ RimeEngine::RimeEngine(Instance *instance)
     syncAction_.setShortText(_("Synchronize"));
 
     syncAction_.connect<SimpleAction::Activated>([this](InputContext *ic) {
-        sync();
+        sync(/*userTriggered=*/true);
         auto *state = this->state(ic);
         if (state && ic->hasFocus()) {
             state->updateUI(ic, false);
@@ -224,6 +228,8 @@ RimeEngine::RimeEngine(Instance *instance)
     globalConfigReloadHandle_ = instance_->watchEvent(
         EventType::GlobalConfigReloaded, EventWatcherPhase::Default,
         [this](Event &) { refreshSessionPoolPolicy(); });
+
+    allowNotification("failure");
     reloadConfig();
     constructed_ = true;
 }
@@ -335,7 +341,7 @@ void RimeEngine::setSubConfig(const std::string &path,
     if (path == "deploy") {
         deploy();
     } else if (path == "sync") {
-        sync();
+        sync(/*userTriggered=*/true);
     }
 }
 
@@ -504,7 +510,6 @@ void RimeEngine::deactivate(const InputMethodEntry &entry,
 
 void RimeEngine::keyEvent(const InputMethodEntry &entry, KeyEvent &event) {
     FCITX_UNUSED(entry);
-    lastKeyEventTime_ = now(CLOCK_MONOTONIC);
     RIME_DEBUG() << "Rime receive key: " << event.rawKey() << " "
                  << event.isRelease();
     auto *inputContext = event.inputContext();
@@ -513,7 +518,7 @@ void RimeEngine::keyEvent(const InputMethodEntry &entry, KeyEvent &event) {
             deploy();
             return event.filterAndAccept();
         } else if (event.key().checkKeyList(*config_.synchronize)) {
-            sync();
+            sync(/*userTriggered=*/true);
             return event.filterAndAccept();
         }
     }
@@ -534,15 +539,12 @@ void RimeEngine::reset(const InputMethodEntry & /*entry*/,
     inputContext->updateUserInterface(UserInterfaceComponent::InputPanel);
 }
 
-void RimeEngine::blockNotificationFor(uint64_t usec) {
-    blockNotificationBefore_ = now(CLOCK_MONOTONIC) + usec;
+void RimeEngine::allowNotification(std::string type) {
+    allowNotificationUntil_ = now(CLOCK_MONOTONIC) + NotificationTimeout;
+    allowNotificationType_ = std::move(type);
 }
 
-void RimeEngine::save() {
-    // Block notification for 5 sec.
-    blockNotificationFor(5000000);
-    sync();
-}
+void RimeEngine::save() { sync(/*userTriggered=*/false); }
 
 void RimeEngine::rimeNotificationHandler(void *context, RimeSessionId session,
                                          const char *messageType,
@@ -578,7 +580,7 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
     const char *message = nullptr;
     const char *icon = "";
     const char *tipId = "";
-    int timeout = 3000;
+    const int timeout = 3000;
     bool blockMessage = false;
     if (messageType == "deploy") {
         tipId = "fcitx-rime-deploy";
@@ -612,14 +614,17 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
     }
 
     auto *notifications = this->notifications();
-    if (message && notifications &&
-        now(CLOCK_MONOTONIC) > blockNotificationBefore_) {
+    const auto current = now(CLOCK_MONOTONIC);
+    if (message && notifications && current > silenceNotificationUntil_ &&
+        (current < allowNotificationUntil_ &&
+         (allowNotificationType_.empty() ||
+          messageType == allowNotificationType_))) {
         notifications->call<INotifications::showTip>(
             tipId, _("Rime"), icon, _("Rime"), message, timeout);
     }
     // Block message after error / success.
     if (blockMessage) {
-        blockNotificationFor(30000);
+        silenceNotificationUntil_ = current + 30000;
     }
 }
 
@@ -683,12 +688,16 @@ void RimeEngine::deploy() {
     RIME_DEBUG() << "Rime Deploy";
     releaseAllSession(true);
     api_->finalize();
+    allowNotification();
     rimeStart(true);
 }
 
-void RimeEngine::sync() {
+void RimeEngine::sync(bool userTriggered) {
     RIME_DEBUG() << "Rime Sync user data";
     releaseAllSession(true);
+    if (userTriggered) {
+        allowNotification();
+    }
     api_->sync_user_data();
 }
 
@@ -757,7 +766,6 @@ void RimeEngine::updateSchemaMenu() {
             schemaAction.connect<SimpleAction::Activated>(
                 [this, schemaId](InputContext *ic) {
                     auto *state = this->state(ic);
-                    blockNotificationFor(30000);
                     state->selectSchema(schemaId);
                     imAction_->update(ic);
                 });

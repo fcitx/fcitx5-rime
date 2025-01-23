@@ -53,8 +53,6 @@ void ToggleAction::activate(InputContext *ic) {
     if (!state) {
         return;
     }
-    // Do not send notification since user is explicitly select it.
-    engine_->blockNotificationFor(30000);
     auto session = state->session();
     Bool oldValue = api->get_option(session, option_.c_str());
     api->set_option(session, option_.c_str(), !oldValue);

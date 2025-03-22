@@ -4,14 +4,15 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
+# hoanghuy309 <hoanghuy309@gmail.com>, 2025
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2024-09-13 20:25+0000\n"
+"POT-Creation-Date: 2025-03-22 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: csslayer <wengxt@gmail.com>, 2017\n"
+"Last-Translator: hoanghuy309 <hoanghuy309@gmail.com>, 2025\n"
 "Language-Team: Vietnamese (https://app.transifex.com/fcitx/teams/12005/vi/)\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
@@ -19,51 +20,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/rimeengine.h:97
+#: src/rimeengine.h:96
 msgid "Action when switching input method"
-msgstr ""
+msgstr "Hành động khi chuyển đổi kiểu gõ"
 
-#: src/rimeengine.h:58
+#: src/rimeengine.h:57
 msgid "All"
 msgstr ""
 
-#: src/rimeengine.h:73
+#: src/rimeengine.h:72
 msgid "Clear"
 msgstr ""
 
-#: src/rimeengine.h:76
+#: src/rimeengine.h:75
 msgid "Commit commit preview"
 msgstr ""
 
-#: src/rimeengine.h:75
+#: src/rimeengine.h:74
 msgid "Commit composing text"
 msgstr ""
 
-#: src/rimeengine.h:64
+#: src/rimeengine.h:63
 msgid "Commit preview"
 msgstr ""
 
-#: src/rimeengine.h:74
+#: src/rimeengine.h:73
 msgid "Commit raw input"
 msgstr ""
 
-#: src/rimeengine.h:64
+#: src/rimeengine.h:63
 msgid "Composing text"
 msgstr ""
 
-#: src/rimeengine.h:119 src/rimeengine.cpp:198
+#: src/rimeengine.h:118 src/rimeengine.cpp:198
 msgid "Deploy"
 msgstr "Triển khai"
 
-#: src/rimeengine.h:63
+#: src/rimeengine.h:62
 msgid "Do not show"
 msgstr ""
 
-#: src/rimeengine.h:91
+#: src/rimeengine.h:90
 msgid "Fix embedded preedit cursor at the beginning of the preedit"
 msgstr ""
 
-#: src/rimeengine.h:58
+#: src/rimeengine.h:57
 msgid "Follow Global Configuration"
 msgstr ""
 
@@ -75,35 +76,35 @@ msgstr ""
 msgid "Latin Mode"
 msgstr ""
 
-#: src/rimeengine.h:111
+#: src/rimeengine.h:110
 msgid "Load available plugins automatically"
 msgstr ""
 
-#: src/rimeengine.h:115
+#: src/rimeengine.h:114
 msgid "Modules"
 msgstr ""
 
-#: src/rimeengine.h:59
+#: src/rimeengine.h:58
 msgid "No"
 msgstr ""
 
-#: src/rimeengine.h:113
+#: src/rimeengine.h:112
 msgid "Plugins"
 msgstr ""
 
-#: src/rimeengine.h:81
+#: src/rimeengine.h:80
 msgid "Preedit Mode"
 msgstr ""
 
-#: src/rimeengine.h:59
+#: src/rimeengine.h:58
 msgid "Program"
 msgstr ""
 
-#: src/rimeengine.cpp:618 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
+#: src/rimeengine.cpp:618 src/rime.conf.in:2 src/rime-addon.conf.in.in:2
 msgid "Rime"
 msgstr "Rime"
 
-#: src/rime-addon.conf.in.in:4
+#: src/rime-addon.conf.in.in:3
 msgid "Rime Wrapper For Fcitx"
 msgstr "Bộ Wrapper cho Fcitx"
 
@@ -129,14 +130,14 @@ msgid ""
 "is finished..."
 msgstr ""
 
-#: src/rimeengine.h:84
+#: src/rimeengine.h:83
 msgid "Shared Input State"
 msgstr ""
 
-#: src/rimeengine.h:123 src/rimeengine.cpp:210
+#: src/rimeengine.h:122 src/rimeengine.cpp:210
 msgid "Synchronize"
 msgstr "Đồng bộ hóa"
 
-#: src/rimeengine.h:100
+#: src/rimeengine.h:99
 msgid "User data dir"
 msgstr ""

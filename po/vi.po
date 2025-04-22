@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2025-03-22 20:24+0000\n"
+"POT-Creation-Date: 2025-04-22 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: hoanghuy309 <hoanghuy309@gmail.com>, 2025\n"
 "Language-Team: Vietnamese (https://app.transifex.com/fcitx/teams/12005/vi/)\n"
@@ -26,7 +26,7 @@ msgstr "Hành động khi chuyển đổi kiểu gõ"
 
 #: src/rimeengine.h:57
 msgid "All"
-msgstr ""
+msgstr "Tất cả"
 
 #: src/rimeengine.h:72
 msgid "Clear"
@@ -66,7 +66,7 @@ msgstr ""
 
 #: src/rimeengine.h:57
 msgid "Follow Global Configuration"
-msgstr ""
+msgstr "Theo Cấu Hình Chung"
 
 #: src/rimecandidate.cpp:173
 msgid "Forget word"

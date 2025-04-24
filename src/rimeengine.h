@@ -167,7 +167,7 @@ public:
     FCITX_ADDON_DEPENDENCY_LOADER(dbus, instance_->addonManager());
 #endif
 
-    void blockNotificationFor(uint64_t usec);
+    void allowNotification(std::string type = "");
     const auto &schemas() const { return schemas_; }
     const auto &optionActions() const { return optionActions_; };
 
@@ -177,7 +177,7 @@ private:
                                         const char *messageValue);
 
     void deploy();
-    void sync();
+    void sync(bool userTriggered);
     void updateSchemaMenu();
     void updateActionsForSchema(const std::string &schema);
     void notifyImmediately(RimeSessionId session, std::string_view type,
@@ -199,8 +199,9 @@ private:
     EventDispatcher eventDispatcher_;
     rime_api_t *api_;
     static bool firstRun_;
-    uint64_t blockNotificationBefore_ = 0;
-    uint64_t lastKeyEventTime_ = 0;
+    uint64_t silenceNotificationUntil_ = 0;
+    uint64_t allowNotificationUntil_ = 0;
+    std::string allowNotificationType_;
     FactoryFor<RimeState> factory_;
     bool needRefreshAppOption_ = false;
 

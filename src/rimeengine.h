@@ -18,10 +18,11 @@
 #include <fcitx-utils/eventdispatcher.h>
 #include <fcitx-utils/handlertable_details.h>
 #include <fcitx-utils/i18n.h>
+#include <fcitx-utils/key.h>
 #include <fcitx-utils/library.h>
 #include <fcitx-utils/log.h>
 #include <fcitx-utils/misc.h>
-#include <fcitx-utils/standardpath.h>
+#include <fcitx-utils/standardpaths.h>
 #include <fcitx-utils/stringutils.h>
 #include <fcitx/action.h>
 #include <fcitx/addoninstance.h>
@@ -99,21 +100,12 @@ FCITX_CONFIGURATION(
         this, "UserDataDir", _("User data dir"),
         stringutils::concat(
             "xdg-open \"",
-            stringutils::replaceAll(
-                stringutils::joinPath(StandardPath::global().userDirectory(
-                                          StandardPath::Type::PkgData),
-                                      "rime"),
-                "\"", "\"\"\""),
+            stringutils::replaceAll((StandardPaths::global().userDirectory(
+                                         StandardPathsType::PkgData) /
+                                     "rime")
+                                        .string(),
+                                    "\"", "\"\"\""),
             "\"")};
-#ifdef FCITX_RIME_LOAD_PLUGIN
-    Option<bool> autoloadPlugins{this, "AutoloadPlugins",
-                                 _("Load available plugins automatically"),
-                                 false};
-    Option<std::vector<std::string>> plugins{this, "Plugins", _("Plugins"),
-                                             std::vector<std::string>()};
-    Option<std::vector<std::string>> modules{this, "Modules", _("Modules"),
-                                             std::vector<std::string>()};
-#endif
     fcitx::Option<fcitx::KeyList> deploy{
         this, "Deploy", _("Deploy"),
         isApple() ? fcitx::KeyList{fcitx::Key("Control+Alt+grave")}
@@ -222,9 +214,6 @@ private:
                        std::list<std::unique_ptr<RimeOptionAction>>>
         optionActions_;
     Menu schemaMenu_;
-#ifdef FCITX_RIME_LOAD_PLUGIN
-    std::unordered_map<std::string, Library> pluginPool_;
-#endif
     std::unique_ptr<HandlerTableEntry<EventHandler>> globalConfigReloadHandle_;
 
 #ifndef FCITX_RIME_NO_DBUS

@@ -22,7 +22,7 @@
 #include <fcitx-utils/log.h>
 #include <fcitx-utils/macros.h>
 #include <fcitx-utils/misc.h>
-#include <fcitx-utils/standardpath.h>
+#include <fcitx-utils/standardpaths.h>
 #include <fcitx-utils/stringutils.h>
 #include <fcitx/action.h>
 #include <fcitx/addoninstance.h>
@@ -180,9 +180,9 @@ RimeEngine::RimeEngine(Instance *instance)
       factory_([this](InputContext &ic) { return new RimeState(this, ic); }),
       sessionPool_(this, getSharedStatePolicy()) {
     if constexpr (isAndroid() || isApple()) {
-        const auto &sp = fcitx::StandardPath::global();
-        std::string defaultYaml = sp.locate(fcitx::StandardPath::Type::Data,
-                                            "rime-data/default.yaml");
+        const auto &sp = StandardPaths::global();
+        std::string defaultYaml =
+            sp.locate(StandardPathsType::Data, "rime-data/default.yaml");
         if (defaultYaml.empty()) {
             throw std::runtime_error("Fail to locate shared data directory");
         }
@@ -246,9 +246,9 @@ RimeEngine::~RimeEngine() {
 void RimeEngine::rimeStart(bool fullcheck) {
     RIME_DEBUG() << "Rime Start (fullcheck: " << fullcheck << ")";
 
-    auto userDir = stringutils::joinPath(
-        StandardPath::global().userDirectory(StandardPath::Type::PkgData),
-        "rime");
+    auto userDir =
+        StandardPaths::global().userDirectory(StandardPathsType::PkgData) /
+        "rime";
     RIME_DEBUG() << "Rime data directory: " << userDir;
     if (!fs::makePath(userDir)) {
         if (!fs::isdir(userDir)) {
@@ -263,7 +263,6 @@ void RimeEngine::rimeStart(bool fullcheck) {
     fcitx_rime_traits.distribution_name = "Rime";
     fcitx_rime_traits.distribution_code_name = "fcitx-rime";
     fcitx_rime_traits.distribution_version = FCITX_RIME_VERSION;
-#ifndef FCITX_RIME_NO_LOG_LEVEL
     // make librime only log to stderr
     // https://github.com/rime/librime/commit/6d1b9b65de4e7784a68a17d10a3e5c900e4fd511
     fcitx_rime_traits.log_dir = "";
@@ -285,25 +284,8 @@ void RimeEngine::rimeStart(bool fullcheck) {
         fcitx_rime_traits.min_log_level = 0;
         break;
     }
-#endif
 
-#ifdef FCITX_RIME_LOAD_PLUGIN
-    std::vector<const char *> modules;
-    // When it is not test, rime will load the default set.
-    RIME_DEBUG() << "Modules: " << *config_.modules;
-    if (!config_.modules->empty()) {
-        modules.push_back("default");
-        for (const std::string &module : *config_.modules) {
-            modules.push_back(module.data());
-        }
-        modules.push_back(nullptr);
-        fcitx_rime_traits.modules = modules.data();
-    } else {
-        fcitx_rime_traits.modules = nullptr;
-    }
-#else
     fcitx_rime_traits.modules = nullptr;
-#endif
 
     if (firstRun_) {
         api_->setup(&fcitx_rime_traits);
@@ -355,54 +337,6 @@ void RimeEngine::updateConfig() {
     } catch (const std::exception &e) {
         RIME_ERROR() << e.what();
     }
-
-#ifdef FCITX_RIME_LOAD_PLUGIN
-    std::vector<std::string> plugins;
-    if (*config_.autoloadPlugins) {
-        auto closedir0 = [](DIR *dir) {
-            if (dir) {
-                closedir(dir);
-            }
-        };
-
-        const char *libdir = StandardPath::fcitxPath("libdir");
-        std::unique_ptr<DIR, void (*)(DIR *)> scopedDir{opendir(libdir),
-                                                        closedir0};
-        if (scopedDir) {
-            auto dir = scopedDir.get();
-            struct dirent *drt;
-            while ((drt = readdir(dir)) != nullptr) {
-                if (strcmp(drt->d_name, ".") == 0 ||
-                    strcmp(drt->d_name, "..") == 0) {
-                    continue;
-                }
-
-                auto name = drt->d_name;
-                if (stringutils::startsWith(name, "librime-") &&
-                    stringutils::endsWith(name, ".so")) {
-                    plugins.push_back(
-                        stringutils::joinPath(libdir, std::move(name)));
-                }
-            }
-        }
-    } else {
-        plugins = *config_.plugins;
-    }
-
-    for (const std::string &plugin : plugins) {
-        if (pluginPool_.count(plugin)) {
-            continue;
-        }
-        pluginPool_.emplace(plugin, Library(plugin));
-        pluginPool_[plugin].load({LibraryLoadHint::ExportExternalSymbolsHint});
-        RIME_DEBUG() << "Trying to load rime plugin: " << plugin;
-        if (!pluginPool_[plugin].loaded()) {
-            RIME_ERROR() << "Failed to load plugin: " << plugin
-                         << " error: " << pluginPool_[plugin].error();
-            pluginPool_.erase(plugin);
-        }
-    }
-#endif
 
     rimeStart(false);
     instance_->inputContextManager().registerProperty("rimeState", &factory_);
@@ -516,10 +450,13 @@ void RimeEngine::keyEvent(const InputMethodEntry &entry, KeyEvent &event) {
     if (!event.isRelease()) {
         if (event.key().checkKeyList(*config_.deploy)) {
             deploy();
-            return event.filterAndAccept();
-        } else if (event.key().checkKeyList(*config_.synchronize)) {
+            event.filterAndAccept();
+            return;
+        }
+        if (event.key().checkKeyList(*config_.synchronize)) {
             sync(/*userTriggered=*/true);
-            return event.filterAndAccept();
+            event.filterAndAccept();
+            return;
         }
     }
     auto *state = this->state(inputContext);

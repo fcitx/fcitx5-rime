@@ -33,9 +33,7 @@ public:
     void clear();
     void activate();
     void keyEvent(KeyEvent &event);
-#ifndef FCITX_RIME_NO_SELECT_CANDIDATE
     void selectCandidate(InputContext *inputContext, int idx, bool global);
-#endif
 #ifndef FCITX_RIME_NO_DELETE_CANDIDATE
     void deleteCandidate(int idx, bool global);
 #endif

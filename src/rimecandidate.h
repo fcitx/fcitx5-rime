@@ -30,7 +30,6 @@ private:
     int idx_;
 };
 
-#ifndef FCITX_RIME_NO_SELECT_CANDIDATE
 class RimeGlobalCandidateWord : public CandidateWord {
 public:
     RimeGlobalCandidateWord(RimeEngine *engine, const RimeCandidate &candidate,
@@ -43,15 +42,11 @@ private:
     RimeEngine *engine_;
     int idx_;
 };
-#endif
 
 class RimeCandidateList final : public CandidateList,
                                 public ActionableCandidateList,
-                                public PageableCandidateList
-#ifndef FCITX_RIME_NO_SELECT_CANDIDATE
-    ,
+                                public PageableCandidateList,
                                 public BulkCandidateList
-#endif
 #ifndef FCITX_RIME_NO_HIGHLIGHT_CANDIDATE
     ,
                                 public BulkCursorCandidateList
@@ -93,10 +88,8 @@ public:
 
     bool usedNextBefore() const override { return true; }
 
-#ifndef FCITX_RIME_NO_SELECT_CANDIDATE
     const CandidateWord &candidateFromAll(int idx) const override;
     int totalSize() const override;
-#endif
 
 #ifndef FCITX_RIME_NO_HIGHLIGHT_CANDIDATE
     int globalCursorIndex() const override;

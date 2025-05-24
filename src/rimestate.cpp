@@ -235,7 +235,6 @@ void RimeState::keyEvent(KeyEvent &event) {
     }
 }
 
-#ifndef FCITX_RIME_NO_SELECT_CANDIDATE
 void RimeState::selectCandidate(InputContext *inputContext, int idx,
                                 bool global) {
     auto *api = engine_->api();
@@ -258,7 +257,6 @@ void RimeState::selectCandidate(InputContext *inputContext, int idx,
     }
     updateUI(inputContext, false);
 }
-#endif
 
 #ifndef FCITX_RIME_NO_DELETE_CANDIDATE
 void RimeState::deleteCandidate(int idx, bool global) {
@@ -525,7 +523,7 @@ void RimeState::restore() {
 
     selectSchema(savedCurrentSchema_);
     for (const auto &option : savedOptions_) {
-        if (stringutils::startsWith(option, "!")) {
+        if (option.starts_with("!")) {
             engine_->api()->set_option(session(), option.c_str() + 1, false);
         } else {
             engine_->api()->set_option(session(), option.c_str(), true);
@@ -580,7 +578,7 @@ void RimeState::showChangedOptions() {
         }
         extractOptionName(option);
         // Skip internal options.
-        if (stringutils::startsWith(option, "_")) {
+        if (option.starts_with("_")) {
             continue;
         }
 

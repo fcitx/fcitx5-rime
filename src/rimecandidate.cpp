@@ -27,13 +27,7 @@ RimeCandidateWord::RimeCandidateWord(RimeEngine *engine,
 
 void RimeCandidateWord::select(InputContext *inputContext) const {
     if (auto *state = engine_->state(inputContext)) {
-#ifndef FCITX_RIME_NO_SELECT_CANDIDATE
         state->selectCandidate(inputContext, idx_, /*global=*/false);
-#else
-        // Simulate the selection with a fake key event.
-        KeyEvent event(inputContext, Key(sym_));
-        state->keyEvent(event);
-#endif
     }
 }
 
@@ -43,7 +37,6 @@ void RimeCandidateWord::forget(RimeState *state) const {
 #endif
 }
 
-#ifndef FCITX_RIME_NO_SELECT_CANDIDATE
 RimeGlobalCandidateWord::RimeGlobalCandidateWord(RimeEngine *engine,
                                                  const RimeCandidate &candidate,
                                                  int idx)
@@ -65,8 +58,6 @@ void RimeGlobalCandidateWord::forget(RimeState *state) const {
     state->deleteCandidate(idx_, /*global=*/true);
 #endif
 }
-
-#endif
 
 RimeCandidateList::RimeCandidateList(RimeEngine *engine, InputContext *ic,
                                      const RimeContext &context)

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2024-09-29 20:24+0000\n"
+"POT-Creation-Date: 2025-05-25 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Yiyu Liu, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/fcitx/teams/12005/"
@@ -54,7 +54,7 @@ msgstr "提交原始字符串"
 msgid "Composing text"
 msgstr "编辑中文本"
 
-#: src/rimeengine.h:119 src/rimeengine.cpp:198
+#: src/rimeengine.h:110 src/rimeengine.cpp:202
 msgid "Deploy"
 msgstr "重新部署"
 
@@ -70,29 +70,17 @@ msgstr "将嵌入式预编辑文本的光标固定在开头"
 msgid "Follow Global Configuration"
 msgstr "跟随全局选项"
 
-#: src/rimecandidate.cpp:173
+#: src/rimecandidate.cpp:164
 msgid "Forget word"
 msgstr "忘记词汇"
 
-#: src/rimestate.cpp:91 src/rimeengine.cpp:743
+#: src/rimestate.cpp:91 src/rimeengine.cpp:689
 msgid "Latin Mode"
 msgstr "英文模式"
-
-#: src/rimeengine.h:111
-msgid "Load available plugins automatically"
-msgstr "自动加载可用插件"
-
-#: src/rimeengine.h:115
-msgid "Modules"
-msgstr "模块"
 
 #: src/rimeengine.h:59
 msgid "No"
 msgstr "否"
-
-#: src/rimeengine.h:113
-msgid "Plugins"
-msgstr "插件"
 
 #: src/rimeengine.h:81
 msgid "Preedit Mode"
@@ -102,11 +90,11 @@ msgstr "预编辑模式"
 msgid "Program"
 msgstr "程序"
 
-#: src/rimeengine.cpp:618 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
+#: src/rimeengine.cpp:560 src/rime.conf.in:2 src/rime-addon.conf.in.in:2
 msgid "Rime"
 msgstr "中州韵"
 
-#: src/rime-addon.conf.in.in:4
+#: src/rime-addon.conf.in.in:3
 msgid "Rime Wrapper For Fcitx"
 msgstr "Fcitx 的中州韵封装"
 
@@ -114,7 +102,7 @@ msgstr "Fcitx 的中州韵封装"
 msgid "Rime for Fcitx 5"
 msgstr "Fcitx 5 的中州韵支持"
 
-#: src/rimeengine.cpp:603
+#: src/rimeengine.cpp:542
 msgid "Rime has encountered an error. See log for details."
 msgstr "Rime 出现了一个错误。详细信息请参阅日志。"
 
@@ -122,11 +110,11 @@ msgstr "Rime 出现了一个错误。详细信息请参阅日志。"
 msgid "Rime input method"
 msgstr "中州韵输入法"
 
-#: src/rimeengine.cpp:590
+#: src/rimeengine.cpp:529
 msgid "Rime is ready."
 msgstr "Rime 就绪。"
 
-#: src/rimeengine.cpp:587
+#: src/rimeengine.cpp:526
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -136,7 +124,7 @@ msgstr "Rime 正在进行维护程序。可能需要几秒钟。请等待完成�
 msgid "Shared Input State"
 msgstr "共享输入状态"
 
-#: src/rimeengine.h:123 src/rimeengine.cpp:210
+#: src/rimeengine.h:114 src/rimeengine.cpp:214
 msgid "Synchronize"
 msgstr "同步"
 

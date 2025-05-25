@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2024-09-13 20:25+0000\n"
+"POT-Creation-Date: 2025-05-25 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: scootergrisen, 2021\n"
 "Language-Team: Danish (https://app.transifex.com/fcitx/teams/12005/da/)\n"
@@ -51,7 +51,7 @@ msgstr ""
 msgid "Composing text"
 msgstr ""
 
-#: src/rimeengine.h:119 src/rimeengine.cpp:198
+#: src/rimeengine.h:110 src/rimeengine.cpp:202
 msgid "Deploy"
 msgstr "Udsend"
 
@@ -67,28 +67,16 @@ msgstr ""
 msgid "Follow Global Configuration"
 msgstr ""
 
-#: src/rimecandidate.cpp:173
+#: src/rimecandidate.cpp:164
 msgid "Forget word"
 msgstr ""
 
-#: src/rimestate.cpp:91 src/rimeengine.cpp:743
+#: src/rimestate.cpp:91 src/rimeengine.cpp:689
 msgid "Latin Mode"
 msgstr "Latinsk tilstand"
 
-#: src/rimeengine.h:111
-msgid "Load available plugins automatically"
-msgstr ""
-
-#: src/rimeengine.h:115
-msgid "Modules"
-msgstr ""
-
 #: src/rimeengine.h:59
 msgid "No"
-msgstr ""
-
-#: src/rimeengine.h:113
-msgid "Plugins"
 msgstr ""
 
 #: src/rimeengine.h:81
@@ -99,11 +87,11 @@ msgstr ""
 msgid "Program"
 msgstr ""
 
-#: src/rimeengine.cpp:618 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
+#: src/rimeengine.cpp:560 src/rime.conf.in:2 src/rime-addon.conf.in.in:2
 msgid "Rime"
 msgstr "Rime"
 
-#: src/rime-addon.conf.in.in:4
+#: src/rime-addon.conf.in.in:3
 msgid "Rime Wrapper For Fcitx"
 msgstr "Rime-wrapper til Fcitx"
 
@@ -111,7 +99,7 @@ msgstr "Rime-wrapper til Fcitx"
 msgid "Rime for Fcitx 5"
 msgstr "Rime til Fcitx 5"
 
-#: src/rimeengine.cpp:603
+#: src/rimeengine.cpp:542
 msgid "Rime has encountered an error. See log for details."
 msgstr ""
 
@@ -119,11 +107,11 @@ msgstr ""
 msgid "Rime input method"
 msgstr "Rime-inputmetode"
 
-#: src/rimeengine.cpp:590
+#: src/rimeengine.cpp:529
 msgid "Rime is ready."
 msgstr "Rime er klar."
 
-#: src/rimeengine.cpp:587
+#: src/rimeengine.cpp:526
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -135,7 +123,7 @@ msgstr ""
 msgid "Shared Input State"
 msgstr ""
 
-#: src/rimeengine.h:123 src/rimeengine.cpp:210
+#: src/rimeengine.h:114 src/rimeengine.cpp:214
 msgid "Synchronize"
 msgstr "Synkroniser"
 

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2024-09-30 20:24+0000\n"
+"POT-Creation-Date: 2025-05-25 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Dmitry <dmitrydmitry761@gmail.com>, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/fcitx/teams/12005/ru/)\n"
@@ -54,7 +54,7 @@ msgstr "Совершать необработанный ввод"
 msgid "Composing text"
 msgstr "Составление текста"
 
-#: src/rimeengine.h:119 src/rimeengine.cpp:198
+#: src/rimeengine.h:110 src/rimeengine.cpp:202
 msgid "Deploy"
 msgstr "Развернуть"
 
@@ -71,29 +71,17 @@ msgstr ""
 msgid "Follow Global Configuration"
 msgstr "Следовать глобальной конфигурации"
 
-#: src/rimecandidate.cpp:173
+#: src/rimecandidate.cpp:164
 msgid "Forget word"
 msgstr "Забыть слово"
 
-#: src/rimestate.cpp:91 src/rimeengine.cpp:743
+#: src/rimestate.cpp:91 src/rimeengine.cpp:689
 msgid "Latin Mode"
 msgstr "Режим Латиницы"
-
-#: src/rimeengine.h:111
-msgid "Load available plugins automatically"
-msgstr "Автоматически загружать доступные плагины"
-
-#: src/rimeengine.h:115
-msgid "Modules"
-msgstr "Модули"
 
 #: src/rimeengine.h:59
 msgid "No"
 msgstr "Нет"
-
-#: src/rimeengine.h:113
-msgid "Plugins"
-msgstr "Плагины"
 
 #: src/rimeengine.h:81
 msgid "Preedit Mode"
@@ -103,11 +91,11 @@ msgstr "Режим Предварительного Редактирования
 msgid "Program"
 msgstr "Программа"
 
-#: src/rimeengine.cpp:618 src/rime.conf.in:3 src/rime-addon.conf.in.in:3
+#: src/rimeengine.cpp:560 src/rime.conf.in:2 src/rime-addon.conf.in.in:2
 msgid "Rime"
 msgstr "Rime"
 
-#: src/rime-addon.conf.in.in:4
+#: src/rime-addon.conf.in.in:3
 msgid "Rime Wrapper For Fcitx"
 msgstr "Обертка Rime для Fcitx"
 
@@ -115,7 +103,7 @@ msgstr "Обертка Rime для Fcitx"
 msgid "Rime for Fcitx 5"
 msgstr "Rime для Fcitx 5"
 
-#: src/rimeengine.cpp:603
+#: src/rimeengine.cpp:542
 msgid "Rime has encountered an error. See log for details."
 msgstr "Rime обнаружил ошибку. Подробности смотрите в журнале."
 
@@ -123,11 +111,11 @@ msgstr "Rime обнаружил ошибку. Подробности смотр�
 msgid "Rime input method"
 msgstr "Метод ввода Rime"
 
-#: src/rimeengine.cpp:590
+#: src/rimeengine.cpp:529
 msgid "Rime is ready."
 msgstr "Rime готов."
 
-#: src/rimeengine.cpp:587
+#: src/rimeengine.cpp:526
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -139,7 +127,7 @@ msgstr ""
 msgid "Shared Input State"
 msgstr "Общее состояние ввода"
 
-#: src/rimeengine.h:123 src/rimeengine.cpp:210
+#: src/rimeengine.h:114 src/rimeengine.cpp:214
 msgid "Synchronize"
 msgstr "Синхронизировать"
 

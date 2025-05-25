@@ -4,15 +4,15 @@
 #
 # Translators:
 # csslayer <wengxt@gmail.com>, 2017
-# hoanghuy309 <hoanghuy309@gmail.com>, 2025
+# Huy Võ <hoanghuy309@gmail.com>, 2025
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2025-04-22 20:24+0000\n"
+"POT-Creation-Date: 2025-05-25 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: hoanghuy309 <hoanghuy309@gmail.com>, 2025\n"
+"Last-Translator: Huy Võ <hoanghuy309@gmail.com>, 2025\n"
 "Language-Team: Vietnamese (https://app.transifex.com/fcitx/teams/12005/vi/)\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
@@ -20,87 +20,75 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/rimeengine.h:96
+#: src/rimeengine.h:97
 msgid "Action when switching input method"
 msgstr "Hành động khi chuyển đổi kiểu gõ"
 
-#: src/rimeengine.h:57
+#: src/rimeengine.h:58
 msgid "All"
 msgstr "Tất cả"
 
-#: src/rimeengine.h:72
+#: src/rimeengine.h:73
 msgid "Clear"
 msgstr ""
 
-#: src/rimeengine.h:75
+#: src/rimeengine.h:76
 msgid "Commit commit preview"
 msgstr ""
 
-#: src/rimeengine.h:74
+#: src/rimeengine.h:75
 msgid "Commit composing text"
 msgstr ""
 
-#: src/rimeengine.h:63
+#: src/rimeengine.h:64
 msgid "Commit preview"
 msgstr ""
 
-#: src/rimeengine.h:73
+#: src/rimeengine.h:74
 msgid "Commit raw input"
 msgstr ""
 
-#: src/rimeengine.h:63
+#: src/rimeengine.h:64
 msgid "Composing text"
 msgstr ""
 
-#: src/rimeengine.h:118 src/rimeengine.cpp:198
+#: src/rimeengine.h:110 src/rimeengine.cpp:202
 msgid "Deploy"
 msgstr "Triển khai"
 
-#: src/rimeengine.h:62
+#: src/rimeengine.h:63
 msgid "Do not show"
 msgstr ""
 
-#: src/rimeengine.h:90
+#: src/rimeengine.h:91
 msgid "Fix embedded preedit cursor at the beginning of the preedit"
 msgstr ""
 
-#: src/rimeengine.h:57
+#: src/rimeengine.h:58
 msgid "Follow Global Configuration"
 msgstr "Theo Cấu Hình Chung"
 
-#: src/rimecandidate.cpp:173
+#: src/rimecandidate.cpp:164
 msgid "Forget word"
 msgstr ""
 
-#: src/rimestate.cpp:91 src/rimeengine.cpp:743
+#: src/rimestate.cpp:91 src/rimeengine.cpp:689
 msgid "Latin Mode"
 msgstr ""
 
-#: src/rimeengine.h:110
-msgid "Load available plugins automatically"
-msgstr ""
-
-#: src/rimeengine.h:114
-msgid "Modules"
-msgstr ""
-
-#: src/rimeengine.h:58
+#: src/rimeengine.h:59
 msgid "No"
 msgstr ""
 
-#: src/rimeengine.h:112
-msgid "Plugins"
-msgstr ""
-
-#: src/rimeengine.h:80
+#: src/rimeengine.h:81
 msgid "Preedit Mode"
 msgstr ""
 
-#: src/rimeengine.h:58
+#: src/rimeengine.h:59
 msgid "Program"
 msgstr ""
 
-#: src/rimeengine.cpp:618 src/rime.conf.in:2 src/rime-addon.conf.in.in:2
+#: src/rimeengine.cpp:560 src/rime.conf.in:2 src/rime-addon.conf.in.in:2
 msgid "Rime"
 msgstr "Rime"
 
@@ -112,7 +100,7 @@ msgstr "Bộ Wrapper cho Fcitx"
 msgid "Rime for Fcitx 5"
 msgstr ""
 
-#: src/rimeengine.cpp:603
+#: src/rimeengine.cpp:542
 msgid "Rime has encountered an error. See log for details."
 msgstr ""
 
@@ -120,24 +108,24 @@ msgstr ""
 msgid "Rime input method"
 msgstr ""
 
-#: src/rimeengine.cpp:590
+#: src/rimeengine.cpp:529
 msgid "Rime is ready."
 msgstr "Rime sẵn sàng,"
 
-#: src/rimeengine.cpp:587
+#: src/rimeengine.cpp:526
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
 msgstr ""
 
-#: src/rimeengine.h:83
+#: src/rimeengine.h:84
 msgid "Shared Input State"
 msgstr ""
 
-#: src/rimeengine.h:122 src/rimeengine.cpp:210
+#: src/rimeengine.h:114 src/rimeengine.cpp:214
 msgid "Synchronize"
 msgstr "Đồng bộ hóa"
 
-#: src/rimeengine.h:99
+#: src/rimeengine.h:100
 msgid "User data dir"
 msgstr ""

@@ -14,6 +14,7 @@
   <url type="vcs-browser">https://github.com/fcitx/fcitx5-rime</url>
   <project_group>Fcitx</project_group>
   <releases>
+    <release version="5.1.11" date="2025-06-15"/>
     <release version="5.1.10" date="2025-01-22"/>
     <release version="5.1.9" date="2024-10-08"/>
     <release version="5.1.8" date="2024-06-01"/>

@@ -122,7 +122,7 @@ SelectAction::SelectAction(RimeEngine *engine, std::string_view schema,
 std::string SelectAction::shortText(InputContext *ic) const {
     auto *state = engine_->state(ic);
     auto *api = engine_->api();
-    if (!state) {
+    if (!state || texts_.empty()) {
         return "";
     }
     auto session = state->session();
@@ -131,7 +131,7 @@ std::string SelectAction::shortText(InputContext *ic) const {
             return texts_[i];
         }
     }
-    return "";
+    return texts_[0];
 }
 
 std::optional<std::string> SelectAction::snapshotOption(InputContext *ic) {

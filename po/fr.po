@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2025-09-11 20:24+0000\n"
+"POT-Creation-Date: 2025-09-12 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Popolon_Github, 2025\n"
 "Language-Team: French (https://app.transifex.com/fcitx/teams/12005/fr/)\n"
@@ -62,11 +62,11 @@ msgstr "Ne pas montrer"
 
 #: src/rimeengine.h:91
 msgid "Fix embedded preedit cursor at the beginning of the preedit"
-msgstr ""
+msgstr "Fixer le curseur de pré-édition embarqué en début de pré-édition"
 
 #: src/rimeengine.h:58
 msgid "Follow Global Configuration"
-msgstr ""
+msgstr "Suivre la configuration globale"
 
 #: src/rimecandidate.cpp:164
 msgid "Forget word"
@@ -117,10 +117,12 @@ msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
 msgstr ""
+"Rime est en maintenance. cela pourrait prendre quelques secondes. Attendez "
+"que cela se termine s'il vous plaît..."
 
 #: src/rimeengine.h:84
 msgid "Shared Input State"
-msgstr ""
+msgstr "État de saisie partagé"
 
 #: src/rimeengine.h:114 src/rimeengine.cpp:214
 msgid "Synchronize"

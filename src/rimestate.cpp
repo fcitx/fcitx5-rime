@@ -408,8 +408,8 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
 
         updatePreedit(ic, context);
 
-        if (!api->get_option(session, FCITX_HIDE_CANDIDATES) &&
-            context.menu.num_candidates) {
+        if (context.menu.num_candidates &&
+            !api->get_option(session, RIME_HIDE_CANDIDATES)) {
             ic->inputPanel().setCandidateList(
                 std::make_unique<RimeCandidateList>(engine_, ic, context));
         } else {

@@ -344,16 +344,34 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
     PreeditMode mode = ic->capabilityFlags().test(CapabilityFlag::Preedit)
                            ? *engine_->config().preeditMode
                            : PreeditMode::No;
+    PreeditMode modeUI = ic->capabilityFlags().test(CapabilityFlag::Preedit)
+                           ? *engine_->config().preeditModeUI
+                           : PreeditMode::ComposingText;
+
+    switch (modeUI) {
+    case PreeditMode::No:
+        ic->inputPanel().setPreedit(Text());
+        break;
+    case PreeditMode::ComposingText:
+        ic->inputPanel().setPreedit(preeditFromRimeContext(
+            context, TextFormatFlag::NoFlag, TextFormatFlag::NoFlag));
+        break;
+    case PreeditMode::CommitPreview:
+        if (context.composition.length > 0 && context.commit_text_preview) {
+            Text preeditText;
+            preeditText.append(context.commit_text_preview);
+            ic->inputPanel().setPreedit(preeditText);
+        } else {
+            ic->inputPanel().setPreedit(Text());
+        }
+        break;
+    }
 
     switch (mode) {
     case PreeditMode::No:
-        ic->inputPanel().setPreedit(preeditFromRimeContext(
-            context, TextFormatFlag::NoFlag, TextFormatFlag::NoFlag));
         ic->inputPanel().setClientPreedit(Text());
         break;
     case PreeditMode::CommitPreview: {
-        ic->inputPanel().setPreedit(preeditFromRimeContext(
-            context, TextFormatFlag::NoFlag, TextFormatFlag::NoFlag));
         if (context.composition.length > 0 && context.commit_text_preview) {
             Text clientPreedit;
             clientPreedit.append(context.commit_text_preview,

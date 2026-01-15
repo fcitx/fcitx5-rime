@@ -44,7 +44,7 @@ namespace {
 
 bool emptyExceptAux(const InputPanel &inputPanel) {
 
-    return inputPanel.preedit().empty() && inputPanel.preedit().empty() &&
+    return inputPanel.preedit().empty() && inputPanel.clientPreedit().empty() &&
            (!inputPanel.candidateList() || inputPanel.candidateList()->empty());
 }
 

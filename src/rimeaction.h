@@ -39,7 +39,7 @@ public:
 
     std::string shortText(InputContext *ic) const override;
 
-    std::string icon(InputContext * /*unused*/) const override { return ""; }
+    std::string icon(InputContext *ic) const override;
 
     std::optional<std::string> snapshotOption(InputContext *ic) override;
 

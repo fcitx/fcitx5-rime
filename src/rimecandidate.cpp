@@ -16,9 +16,8 @@
 namespace fcitx::rime {
 
 RimeCandidateWord::RimeCandidateWord(RimeEngine *engine,
-                                     const RimeCandidate &candidate, KeySym sym,
-                                     int idx)
-    : engine_(engine), sym_(sym), idx_(idx) {
+                                     const RimeCandidate &candidate, int idx)
+    : engine_(engine), idx_(idx) {
     setText(Text{candidate.text});
     if (candidate.comment && candidate.comment[0]) {
         setComment(Text{candidate.comment});
@@ -78,7 +77,6 @@ RimeCandidateList::RimeCandidateList(RimeEngine *engine, InputContext *ic,
 
     int i;
     for (i = 0; i < menu.num_candidates; ++i) {
-        KeySym sym = FcitxKey_None;
         std::string label;
         if (i < menu.page_size && has_label) {
             label = context.select_labels[i];
@@ -90,13 +88,8 @@ RimeCandidateList::RimeCandidateList(RimeEngine *engine, InputContext *ic,
         label.append(" ");
         labels_.emplace_back(label);
 
-        if (i < num_select_keys) {
-            sym = static_cast<KeySym>(menu.select_keys[i]);
-        } else {
-            sym = static_cast<KeySym>('0' + (i + 1) % 10);
-        }
-        candidateWords_.emplace_back(std::make_unique<RimeCandidateWord>(
-            engine, menu.candidates[i], sym, i));
+        candidateWords_.emplace_back(
+            std::make_unique<RimeCandidateWord>(engine, menu.candidates[i], i));
 
         if (i == menu.highlighted_candidate_index) {
             cursor_ = i;

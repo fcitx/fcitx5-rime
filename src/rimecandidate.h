@@ -19,14 +19,13 @@ namespace fcitx::rime {
 class RimeCandidateWord : public CandidateWord {
 public:
     RimeCandidateWord(RimeEngine *engine, const RimeCandidate &candidate,
-                      KeySym sym, int idx);
+                      int idx);
 
     void select(InputContext *inputContext) const override;
     void forget(RimeState *state) const;
 
 private:
     RimeEngine *engine_;
-    KeySym sym_;
     int idx_;
 };
 

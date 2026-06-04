@@ -1,0 +1,26 @@
+{
+    "name": "Claude Code Sandbox",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {}
+    },
+    // 【關鍵：掛載Linux主機ê .claude 登入資訊到容器內】
+    "mounts": [
+        "source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind",
+        "source=${localEnv:HOME}/.claude.json,target=/home/vscode/.claude.json,type=bind,consistency=cached"
+
+    ],
+    // 【關鍵新增：Kā Claude Code 講，設定檔tī tsia】
+    "remoteEnv": {
+        "CLAUDE_CONFIG_DIR": "/home/vscode/.claude"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "anthropic.claude-code"
+            ]
+        }
+    },
+    "postCreateCommand": "npm install -g @fission-ai/openspec@latest",
+    "remoteUser": "vscode"
+}

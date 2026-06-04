@@ -47,7 +47,24 @@
 #include <utility>
 #include <vector>
 
-FCITX_DEFINE_LOG_CATEGORY(rime, "rime");
+#ifdef HAVE_SCHEME_CONFIG
+#include "scheme_config.h"
+#endif
+
+#ifndef SCHEME_ADDON_NAME
+#define SCHEME_ADDON_NAME "rime"
+#endif
+#ifndef SCHEME_ICON_PREFIX
+#define SCHEME_ICON_PREFIX "fcitx_rime"
+#endif
+#ifndef SCHEME_CONF_PREFIX
+#define SCHEME_CONF_PREFIX "fcitx-rime"
+#endif
+#ifndef SCHEME_DISPLAY_NAME
+#define SCHEME_DISPLAY_NAME "Rime"
+#endif
+
+FCITX_DEFINE_LOG_CATEGORY(rime, SCHEME_ADDON_NAME);
 
 namespace fcitx {
 
@@ -160,9 +177,9 @@ public:
             });
         }
         if (isDisabled) {
-            return "fcitx_rime_disabled";
+            return SCHEME_ICON_PREFIX "_disabled";
         }
-        return "fcitx_rime_im";
+        return SCHEME_ICON_PREFIX "_im";
     }
 
 private:
@@ -187,14 +204,14 @@ RimeEngine::RimeEngine(Instance *instance)
         sharedDataDir_ = RIME_DATA_DIR;
     }
     imAction_ = std::make_unique<IMAction>(this);
-    instance_->userInterfaceManager().registerAction("fcitx-rime-im",
+    instance_->userInterfaceManager().registerAction(SCHEME_CONF_PREFIX "-im",
                                                      imAction_.get());
     imAction_->setMenu(&schemaMenu_);
     eventDispatcher_.attach(&instance_->eventLoop());
     separatorAction_.setSeparator(true);
-    instance_->userInterfaceManager().registerAction("fcitx-rime-separator",
+    instance_->userInterfaceManager().registerAction(SCHEME_CONF_PREFIX "-separator",
                                                      &separatorAction_);
-    deployAction_.setIcon("fcitx_rime_deploy");
+    deployAction_.setIcon(SCHEME_ICON_PREFIX "_deploy");
     deployAction_.setShortText(_("Deploy"));
     deployAction_.connect<SimpleAction::Activated>([this](InputContext *ic) {
         deploy();
@@ -203,10 +220,10 @@ RimeEngine::RimeEngine(Instance *instance)
             state->updateUI(ic, false);
         }
     });
-    instance_->userInterfaceManager().registerAction("fcitx-rime-deploy",
+    instance_->userInterfaceManager().registerAction(SCHEME_CONF_PREFIX "-deploy",
                                                      &deployAction_);
 
-    syncAction_.setIcon("fcitx_rime_sync");
+    syncAction_.setIcon(SCHEME_ICON_PREFIX "_sync");
     syncAction_.setShortText(_("Synchronize"));
 
     syncAction_.connect<SimpleAction::Activated>([this](InputContext *ic) {
@@ -216,7 +233,7 @@ RimeEngine::RimeEngine(Instance *instance)
             state->updateUI(ic, false);
         }
     });
-    instance_->userInterfaceManager().registerAction("fcitx-rime-sync",
+    instance_->userInterfaceManager().registerAction(SCHEME_CONF_PREFIX "-sync",
                                                      &syncAction_);
     schemaMenu_.addAction(&separatorAction_);
     schemaMenu_.addAction(&deployAction_);
@@ -242,7 +259,7 @@ void RimeEngine::rimeStart(bool fullcheck) {
 
     auto userDir = stringutils::joinPath(
         StandardPath::global().userDirectory(StandardPath::Type::PkgData),
-        "rime");
+        SCHEME_ADDON_NAME);
     RIME_DEBUG() << "Rime data directory: " << userDir;
     if (!fs::makePath(userDir)) {
         if (!fs::isdir(userDir)) {
@@ -252,10 +269,10 @@ void RimeEngine::rimeStart(bool fullcheck) {
 
     RIME_STRUCT(RimeTraits, fcitx_rime_traits);
     fcitx_rime_traits.shared_data_dir = sharedDataDir_.c_str();
-    fcitx_rime_traits.app_name = "rime.fcitx-rime";
+    fcitx_rime_traits.app_name = SCHEME_ADDON_NAME "." SCHEME_CONF_PREFIX;
     fcitx_rime_traits.user_data_dir = userDir.c_str();
-    fcitx_rime_traits.distribution_name = "Rime";
-    fcitx_rime_traits.distribution_code_name = "fcitx-rime";
+    fcitx_rime_traits.distribution_name = SCHEME_DISPLAY_NAME;
+    fcitx_rime_traits.distribution_code_name = SCHEME_CONF_PREFIX;
     fcitx_rime_traits.distribution_version = FCITX_RIME_VERSION;
 #ifndef FCITX_RIME_NO_LOG_LEVEL
     // make librime only log to stderr
@@ -326,7 +343,7 @@ void RimeEngine::updateAppOptions() {
 }
 
 void RimeEngine::reloadConfig() {
-    readAsIni(config_, "conf/rime.conf");
+    readAsIni(config_, "conf/" SCHEME_ADDON_NAME ".conf");
     updateConfig();
 }
 
@@ -399,7 +416,7 @@ void RimeEngine::updateConfig() {
 #endif
 
     rimeStart(false);
-    instance_->inputContextManager().registerProperty("rimeState", &factory_);
+    instance_->inputContextManager().registerProperty(SCHEME_ADDON_NAME "State", &factory_);
     updateSchemaMenu();
     refreshSessionPoolPolicy();
 
@@ -414,7 +431,7 @@ void RimeEngine::updateConfig() {
 void RimeEngine::refreshStatusArea(InputContext &ic) {
     // prevent modifying status area owned by other ime
     // e.g. keyboard-us when typing password
-    if (instance_->inputMethod(&ic) != "rime") {
+    if (instance_->inputMethod(&ic) != SCHEME_ADDON_NAME) {
         return;
     }
     auto &statusArea = ic.statusArea();
@@ -457,7 +474,7 @@ void RimeEngine::refreshStatusArea(RimeSessionId session) {
 void RimeEngine::updateStatusArea(RimeSessionId session) {
     instance_->inputContextManager().foreachFocused(
         [this, session](InputContext *ic) {
-            if (instance_->inputMethod(ic) != "rime") {
+            if (instance_->inputMethod(ic) != SCHEME_ADDON_NAME) {
                 return true;
             }
             if (auto *state = this->state(ic)) {
@@ -581,8 +598,8 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
     int timeout = 3000;
     bool blockMessage = false;
     if (messageType == "deploy") {
-        tipId = "fcitx-rime-deploy";
-        icon = "fcitx_rime_deploy";
+        tipId = SCHEME_CONF_PREFIX "-deploy";
+        icon = SCHEME_ICON_PREFIX "_deploy";
         if (messageValue == "start") {
             message = _("Rime is under maintenance. It may take a few "
                         "seconds. Please wait until it is finished...");
@@ -615,7 +632,7 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
     if (message && notifications &&
         now(CLOCK_MONOTONIC) > blockNotificationBefore_) {
         notifications->call<INotifications::showTip>(
-            tipId, _("Rime"), icon, _("Rime"), message, timeout);
+            tipId, _(SCHEME_DISPLAY_NAME), icon, _(SCHEME_DISPLAY_NAME), message, timeout);
     }
     // Block message after error / success.
     if (blockMessage) {
@@ -648,7 +665,7 @@ std::string RimeEngine::subModeLabelImpl(const InputMethodEntry & /*unused*/,
 
 std::string RimeEngine::subModeIconImpl(const InputMethodEntry & /*unused*/,
                                         InputContext &ic) {
-    std::string result = "fcitx-rime";
+    std::string result = SCHEME_CONF_PREFIX;
     if (!factory_.registered()) {
         return result;
     }
@@ -656,11 +673,11 @@ std::string RimeEngine::subModeIconImpl(const InputMethodEntry & /*unused*/,
     if (state) {
         state->getStatus([&result](const RimeStatus &status) {
             if (status.is_disabled) {
-                result = "fcitx_rime_disable";
+                result = SCHEME_ICON_PREFIX "_disable";
             } else if (status.is_ascii_mode) {
-                result = "fcitx_rime_latin";
+                result = SCHEME_ICON_PREFIX "_latin";
             } else {
-                result = "fcitx-rime";
+                result = SCHEME_CONF_PREFIX;
             }
         });
     }

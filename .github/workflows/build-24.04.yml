@@ -1,0 +1,33 @@
+name: Build Ubuntu 24.04 .deb
+
+# Lives on the compat/ubuntu-24.04 branch: push/PR events read the workflow
+# from the branch tree, so this file must be present on that branch to fire.
+on:
+  push:
+    branches:
+      - compat/ubuntu-24.04
+  pull_request:
+    branches:
+      - compat/ubuntu-24.04
+
+jobs:
+  build-deb:
+    name: Build and verify .deb packages (Ubuntu 24.04)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Show docker version
+        run: docker --version
+
+      - name: Build all schemes
+        run: ./packaging/build-all.sh
+
+      - name: Upload .deb artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: fcitx5-schemes-ubuntu24.04-deb
+          path: build/deb/*.deb
+          if-no-files-found: error

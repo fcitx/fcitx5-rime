@@ -1,0 +1,7 @@
+[InputMethod]
+Name=@SCHEME_NAME@
+Icon=fcitx-@SCHEME_ID@
+Label=@SCHEME_LABEL@
+LangCode=@SCHEME_LANG_CODE@
+Addon=@SCHEME_ID@
+Configurable=True

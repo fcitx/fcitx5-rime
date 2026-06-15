@@ -1,0 +1,102 @@
+# ─── Stage 1: deps ───────────────────────────────────────────────────────────
+FROM ubuntu:24.04 AS deps
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Taipei
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    extra-cmake-modules \
+    gettext \
+    git \
+    pkg-config \
+    fcitx5-modules-dev \
+    libfcitx5core-dev \
+    librime-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# ─── Stage 2: builder ────────────────────────────────────────────────────────
+FROM deps AS builder
+
+ARG SCHEME_SUBMODULE
+ARG SCHEME_ID
+ARG SCHEME_NAME
+ARG SCHEME_LABEL
+ARG SCHEME_LANG_CODE=nan-TW
+ARG SCHEME_ICON_TOO
+
+COPY CMakeLists.txt schemes.cmake org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in /src/
+COPY cmake/ /src/cmake/
+COPY src/ /src/src/
+COPY data/ /src/data/
+COPY po/ /src/po/
+COPY schemes/ /src/schemes/
+COPY Rime-Logo/ /src/Rime-Logo/
+WORKDIR /build
+
+RUN cmake /src \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DSCHEME_ID=${SCHEME_ID} \
+    -DSCHEME_NAME="${SCHEME_NAME}" \
+    -DSCHEME_SUBMODULE=${SCHEME_SUBMODULE} \
+    -DSCHEME_LABEL="${SCHEME_LABEL}" \
+    -DSCHEME_LANG_CODE=${SCHEME_LANG_CODE} \
+    -DSCHEME_ICON_TOO=${SCHEME_ICON_TOO}
+
+RUN make -j$(nproc)
+RUN make install DESTDIR=/staging
+
+# ─── Stage 3: packager ───────────────────────────────────────────────────────
+FROM builder AS packager
+
+ARG SCHEME_ID
+ARG SCHEME_NAME
+ARG APP_VERSION
+
+RUN mkdir -p /staging/DEBIAN /output
+RUN echo "Package: fcitx5-${SCHEME_ID}\n\
+Source: fcitx5-${SCHEME_ID}\n\
+Section: utils\n\
+Priority: optional\n\
+Version: ${APP_VERSION}\n\
+Architecture: $(dpkg --print-architecture)\n\
+Depends: fcitx5, librime1 (>= 1.7.0), libc6 (>= 2.14), libstdc++6 (>= 7)\n\
+Maintainer: ÌTHUÂNKHOKI <ithuan@ithuan.tw>\n\
+Homepage: https://ithuan.tw\n\
+Description: ${SCHEME_NAME} Input Method for Fcitx5\n\
+ ${SCHEME_NAME} Taioanoe input method powered by Rime engine.\n\
+" > /staging/DEBIAN/control
+
+RUN dpkg-deb --build /staging /output/fcitx5-${SCHEME_ID}_${APP_VERSION}_$(dpkg --print-architecture).deb
+
+# ─── Stage 4: verifier ───────────────────────────────────────────────────────
+FROM ubuntu:24.04 AS verifier
+
+ARG SCHEME_ID
+ARG SCHEME_ICON_TOO
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Taipei
+
+COPY --from=packager /output/ /tmp/deb/
+
+RUN apt-get update \
+    && apt-get install -y fcitx5 librime1 \
+    && rm -rf /var/lib/apt/lists/* \
+    && dpkg -i /tmp/deb/*.deb \
+    && ls /usr/lib/*/fcitx5/lib${SCHEME_ID}.so \
+    && test -f /usr/share/fcitx5/addon/${SCHEME_ID}.conf \
+    && test -f /usr/share/fcitx5/inputmethod/${SCHEME_ID}.conf \
+    && ls /usr/share/${SCHEME_ID}/data/*.yaml \
+    && ls /usr/share/icons/hicolor/48x48/apps/fcitx-${SCHEME_ID}.png \
+    && ls /usr/share/icons/hicolor/scalable/apps/fcitx-${SCHEME_ID}.svg \
+    && [ -z "${SCHEME_ICON_TOO}" ] || ls /usr/share/icons/hicolor/48x48/apps/fcitx_${SCHEME_ID}_im.png
+
+# ─── Stage 5: exporter ───────────────────────────────────────────────────────
+FROM verifier AS exporter
+
+COPY --from=packager /output/ /output/
+
+USER nobody
+CMD ["sh", "-c", "cat /output/*.deb"]

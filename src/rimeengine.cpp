@@ -879,4 +879,6 @@ PropertyPropagatePolicy RimeEngine::getSharedStatePolicy() {
 
 } // namespace fcitx
 
+#ifndef HAVE_SCHEME_CONFIG
 FCITX_ADDON_FACTORY(fcitx::RimeEngineFactory)
+#endif

@@ -8,3 +8,5 @@ build/*
 tags
 astyle.sh
 .cache
+.claude/
+other/

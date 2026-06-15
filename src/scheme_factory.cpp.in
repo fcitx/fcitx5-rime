@@ -1,0 +1,3 @@
+#include "rimeengine.h"
+
+FCITX_ADDON_FACTORY(fcitx::RimeEngineFactory)

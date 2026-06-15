@@ -1,0 +1,20 @@
+---
+os: linux
+dist: noble
+language: minimal
+services:
+  - docker
+branches:
+  only:
+    - main
+    - ithuan-ubuntu24.04
+git:
+  submodules: false
+before_install:
+  - git config --global url."https://${GITHUB_TOKEN}@github.com/".insteadOf "git@github.com:"
+  - git submodule update --init --recursive
+jobs:
+  include:
+    - name: Build and verify .deb packages (Ubuntu 24.04)
+      script:
+        - ./packaging/build-all.sh

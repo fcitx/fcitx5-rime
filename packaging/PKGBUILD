@@ -1,0 +1,42 @@
+# Arch Linux PKGBUILD for fcitx5 scheme addons
+#
+# To build a specific scheme, set the variables before running makepkg:
+#   SCHEME_ID=hanlo SCHEME_NAME="意傳教育部漢羅" SCHEME_SUBMODULE=Rime-HanLo makepkg
+#
+# Or copy this file and hardcode the values for a specific scheme.
+
+_scheme_id="${SCHEME_ID:-hanlo}"
+_scheme_name="${SCHEME_NAME:-意傳教育部漢羅}"
+_scheme_submodule="${SCHEME_SUBMODULE:-Rime-HanLo}"
+_scheme_label="${SCHEME_LABEL:-漢}"
+_scheme_lang_code="${SCHEME_LANG_CODE:-nan-TW}"
+_scheme_icon_too="${SCHEME_ICON_TOO:-kip-hanlo}"
+
+pkgname="fcitx5-${_scheme_id}"
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="${_scheme_name} Input Method for Fcitx5"
+arch=('x86_64' 'aarch64')
+url="https://ithuan.tw"
+license=('LGPL-2.1-or-later')
+depends=('fcitx5' 'librime>=1.7.0')
+makedepends=('cmake' 'extra-cmake-modules' 'gcc' 'gettext' 'fcitx5-headers')
+source=("${pkgname}-${pkgver}.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+    cmake -B build -S "${pkgname}-${pkgver}" \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DSCHEME_ID="${_scheme_id}" \
+        -DSCHEME_NAME="${_scheme_name}" \
+        -DSCHEME_SUBMODULE="${_scheme_submodule}" \
+        -DSCHEME_LABEL="${_scheme_label}" \
+        -DSCHEME_LANG_CODE="${_scheme_lang_code}" \
+        -DSCHEME_ICON_TOO="${_scheme_icon_too}"
+    cmake --build build
+}
+
+package() {
+    DESTDIR="$pkgdir" cmake --install build
+}

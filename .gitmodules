@@ -1,0 +1,18 @@
+[submodule "schemes/Rime-HanLo"]
+	path = schemes/Rime-HanLo
+	url = git@github.com:i3thuan5/Rime-HanLo.git
+[submodule "schemes/Rime-POJ"]
+	path = schemes/Rime-POJ
+	url = git@github.com:i3thuan5/Rime-POJ.git
+[submodule "schemes/Rime-POJHan"]
+	path = schemes/Rime-POJHan
+	url = git@github.com:i3thuan5/Rime-POJHan.git
+[submodule "schemes/Rime-TOJ"]
+	path = schemes/Rime-TOJ
+	url = git@github.com:i3thuan5/Rime-TOJ.git
+[submodule "schemes/Rime-TsuanLo"]
+	path = schemes/Rime-TsuanLo
+	url = git@github.com:i3thuan5/Rime-TsuanLo.git
+[submodule "Rime-Logo"]
+	path = Rime-Logo
+	url = git@github.com:i3thuan5/Rime-Logo.git

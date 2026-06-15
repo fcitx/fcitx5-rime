@@ -1,0 +1,16 @@
+[Addon]
+Name=@SCHEME_NAME@
+Comment=@SCHEME_NAME@ Input Method For Fcitx5
+Category=InputMethod
+Version=@PROJECT_VERSION@
+Library=export:lib@SCHEME_ID@
+Type=@FCITX_ADDON_TYPE@
+OnDemand=True
+Configurable=True
+
+[Addon/Dependencies]
+0=core:@REQUIRED_FCITX_VERSION@
+
+[Addon/OptionalDependencies]
+0=notifications
+1=dbus

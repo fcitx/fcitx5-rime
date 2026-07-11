@@ -13,6 +13,7 @@
 #include <cstdint>
 #include <cstring>
 #include <fcitx-utils/capabilityflags.h>
+#include <fcitx-utils/eventloopinterface.h>
 #include <fcitx-utils/i18n.h>
 #include <fcitx-utils/key.h>
 #include <fcitx-utils/keysym.h>
@@ -230,7 +231,7 @@ void RimeState::keyEvent(KeyEvent &event) {
     updateUI(ic, event.isRelease());
     if (!event.isRelease() && !lastSchema.empty() &&
         lastSchema == currentSchema() && ic->inputPanel().empty() &&
-        !changedOptions_.empty()) {
+        !changedOptions_.empty() && !engine_->isModeChangeSilenced()) {
         showChangedOptions();
     }
 }
@@ -427,7 +428,8 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
         inputPanel.setAuxUp(Text());
         inputPanel.setAuxDown(Text());
     }
-    if (newEmptyExceptAux && lastMode_ != subMode()) {
+    if (newEmptyExceptAux && lastMode_ != subMode() &&
+        !engine_->isModeChangeSilenced()) {
         engine_->instance()->showInputMethodInformation(ic);
         ic->updateUserInterface(UserInterfaceComponent::StatusArea);
     }

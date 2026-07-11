@@ -56,6 +56,7 @@ namespace {
 
 // Allow notification for 60secs.
 constexpr uint64_t NotificationTimeout = 60000000;
+constexpr uint64_t ModeChangeTimeout = 10000000;
 
 std::unordered_map<std::string, std::unordered_map<std::string, bool>>
 parseAppOptions(rime_api_t *api, RimeConfig *config) {
@@ -481,6 +482,10 @@ void RimeEngine::allowNotification(std::string type) {
     allowNotificationType_ = std::move(type);
 }
 
+bool RimeEngine::isModeChangeSilenced() const {
+    return now(CLOCK_MONOTONIC) <= silenceModeChangeUntil_;
+}
+
 void RimeEngine::save() { sync(/*userTriggered=*/false); }
 
 void RimeEngine::rimeNotificationHandler(void *context, RimeSessionId session,
@@ -562,6 +567,10 @@ void RimeEngine::notify(RimeSessionId session, const std::string &messageType,
     // Block message after error / success.
     if (blockMessage) {
         silenceNotificationUntil_ = current + 30000;
+        // Shortly silence mode change notification after deploy / sync.
+        // This may effectively unblock early if after sync is done before 10s
+        // timeout is reached..
+        silenceModeChangeUntil_ = current + 30000;
     }
 }
 
@@ -635,6 +644,9 @@ void RimeEngine::sync(bool userTriggered) {
     if (userTriggered) {
         allowNotification();
     }
+    // To prevent unexpected mode change notification, we silence mode change
+    // for a while after sync.
+    silenceModeChangeUntil_ = now(CLOCK_MONOTONIC) + ModeChangeTimeout;
     api_->sync_user_data();
 }
 

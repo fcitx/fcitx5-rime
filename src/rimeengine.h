@@ -162,6 +162,7 @@ public:
     void allowNotification(std::string type = "");
     const auto &schemas() const { return schemas_; }
     const auto &optionActions() const { return optionActions_; };
+    bool isModeChangeSilenced() const;
 
 private:
     static void rimeNotificationHandler(void *context, RimeSessionId session,
@@ -192,6 +193,7 @@ private:
     rime_api_t *api_;
     static bool firstRun_;
     uint64_t silenceNotificationUntil_ = 0;
+    uint64_t silenceModeChangeUntil_ = 0;
     uint64_t allowNotificationUntil_ = 0;
     std::string allowNotificationType_;
     FactoryFor<RimeState> factory_;

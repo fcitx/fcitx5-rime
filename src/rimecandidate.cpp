@@ -95,6 +95,9 @@ RimeCandidateList::RimeCandidateList(RimeEngine *engine, InputContext *ic,
             cursor_ = i;
         }
     }
+
+    globalCursor_ =
+        menu.page_size * menu.page_no + menu.highlighted_candidate_index;
 }
 
 const CandidateWord &RimeCandidateList::candidateFromAll(int idx) const {
@@ -176,9 +179,7 @@ void RimeCandidateList::triggerAction(const CandidateWord &candidate, int id) {
 }
 
 #ifndef FCITX_RIME_NO_HIGHLIGHT_CANDIDATE
-int RimeCandidateList::globalCursorIndex() const {
-    return -1; // No API available.
-}
+int RimeCandidateList::globalCursorIndex() const { return globalCursor_; }
 
 void RimeCandidateList::setGlobalCursorIndex(int index) {
     auto session = engine_->state(ic_)->session(false);

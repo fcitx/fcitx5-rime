@@ -114,6 +114,7 @@ private:
     bool hasNext_ = false;
     CandidateLayoutHint layout_ = CandidateLayoutHint::NotSet;
     int cursor_ = -1;
+    int globalCursor_ = -1;
 
     std::vector<std::unique_ptr<CandidateWord>> candidateWords_;
 

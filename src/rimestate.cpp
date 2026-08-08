@@ -74,13 +74,25 @@ void RimeState::clear() {
 
 void RimeState::activate() { maybeSyncProgramNameToSession(); }
 
+std::string RimeState::asciiModeName(bool abbrev) {
+    std::string result = abbrev ? "A" : _("Latin Mode");
+    if (engine_->config().latinModeNameFromSchema.value()) {
+        RimeStringSlice label = engine_->api()->get_state_label_abbreviated(
+            session(), "ascii_mode", True, abbrev);
+        if (label.str && label.length > 0) {
+            result.assign(label.str, label.length);
+        }
+    }
+    return result;
+}
+
 std::string RimeState::subMode() {
     std::string result;
-    getStatus([&result](const RimeStatus &status) {
+    getStatus([this, &result](const RimeStatus &status) {
         if (status.is_disabled) {
             result = "\xe2\x8c\x9b";
         } else if (status.is_ascii_mode) {
-            result = _("Latin Mode");
+            result = asciiModeName(/*abbrev=*/false);
         } else if (status.schema_name && status.schema_name[0] != '.') {
             result = status.schema_name;
         }
@@ -90,11 +102,12 @@ std::string RimeState::subMode() {
 
 std::string RimeState::subModeLabel() {
     std::string result;
-    getStatus([&result](const RimeStatus &status) {
+
+    getStatus([this, &result](const RimeStatus &status) {
         if (status.is_disabled) {
             result = "";
         } else if (status.is_ascii_mode) {
-            result = "A";
+            result = asciiModeName(/*abbrev=*/true);
         } else if (status.schema_name && status.schema_name[0] != '.') {
             result = status.schema_name;
             if (!result.empty() &&

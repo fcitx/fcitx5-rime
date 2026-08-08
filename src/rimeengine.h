@@ -112,7 +112,10 @@ FCITX_CONFIGURATION(
         isApple() ? fcitx::KeyList{fcitx::Key("Control+Alt+grave")}
                   : fcitx::KeyList{}};
     fcitx::Option<fcitx::KeyList> synchronize{
-        this, "Synchronize", _("Synchronize"), {}};);
+        this, "Synchronize", _("Synchronize"), {}};
+    Option<bool> latinModeNameFromSchema{
+        this, "LatinModeNameFromSchema",
+        _("Use latin mode name defined in schema"), false};);
 
 class RimeEngine final : public InputMethodEngineV2 {
 public:

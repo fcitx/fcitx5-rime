@@ -59,6 +59,7 @@ public:
     void showChangedOptions();
 
 private:
+    std::string asciiModeName(bool abbrev);
     void maybeSyncProgramNameToSession();
     std::vector<std::string> snapshotOptions(const std::string &schema);
 

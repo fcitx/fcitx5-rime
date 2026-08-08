@@ -18,7 +18,7 @@ find_package(PkgConfig REQUIRED)
 find_package(Pthread REQUIRED)
 
 if (NOT DEFINED RIME_TARGET)
-    pkg_check_modules(Rime REQUIRED IMPORTED_TARGET "rime>=1.7.0")
+    pkg_check_modules(Rime REQUIRED IMPORTED_TARGET "rime>=1.9.0")
     set(RIME_TARGET PkgConfig::Rime)
 endif()
 

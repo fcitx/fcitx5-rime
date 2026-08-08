@@ -22,6 +22,7 @@
 #include <fcitx-utils/library.h>
 #include <fcitx-utils/log.h>
 #include <fcitx-utils/misc.h>
+#include <fcitx-utils/signals.h>
 #include <fcitx-utils/standardpaths.h>
 #include <fcitx-utils/stringutils.h>
 #include <fcitx/action.h>
@@ -222,6 +223,7 @@ private:
     RimeSessionPool sessionPool_;
     std::thread::id mainThreadId_ = std::this_thread::get_id();
     RimeState *currentKeyEventState_ = nullptr;
+    ScopedConnection xkbStateChangedConnection_;
 };
 } // namespace fcitx::rime
 

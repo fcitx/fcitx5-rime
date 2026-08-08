@@ -19,6 +19,8 @@
 #include <fcitx-utils/eventloopinterface.h>
 #include <fcitx-utils/fs.h>
 #include <fcitx-utils/i18n.h>
+#include <fcitx-utils/key.h>
+#include <fcitx-utils/keysym.h>
 #include <fcitx-utils/log.h>
 #include <fcitx-utils/macros.h>
 #include <fcitx-utils/misc.h>
@@ -28,6 +30,7 @@
 #include <fcitx/addoninstance.h>
 #include <fcitx/candidatelist.h>
 #include <fcitx/event.h>
+#include <fcitx/focusgroup.h>
 #include <fcitx/inputcontext.h>
 #include <fcitx/inputcontextmanager.h>
 #include <fcitx/inputmethodentry.h>
@@ -39,11 +42,13 @@
 #include <fcitx/userinterfacemanager.h>
 #include <list>
 #include <memory>
+#include <optional>
 #include <rime_api.h>
 #include <stdexcept>
 #include <string>
 #include <string_view>
 #include <thread>
+#include <tuple>
 #include <unordered_map>
 #include <utility>
 #include <vector>
@@ -232,6 +237,41 @@ RimeEngine::RimeEngine(Instance *instance)
     allowNotification("failure");
     reloadConfig();
     constructed_ = true;
+    xkbStateChangedConnection_ =
+        instance_->connect<Instance::XkbStateMaskChanged>(
+            [this](
+                const std::string &display,
+                std::optional<std::tuple<uint32_t, uint32_t, uint32_t>> oldMask,
+                std::optional<std::tuple<uint32_t, uint32_t, uint32_t>>
+                    newMask) {
+                auto hasLock =
+                    [](std::optional<std::tuple<uint32_t, uint32_t, uint32_t>>
+                           mask) {
+                        if (!mask) {
+                            return false;
+                        }
+                        auto [base, latched, locked] = *mask;
+                        return KeyStates(locked).test(KeyState::CapsLock);
+                    };
+                bool oldHasLock = hasLock(oldMask);
+                bool newHasLock = hasLock(newMask);
+                if (oldHasLock == newHasLock) {
+                    return;
+                }
+                instance_->inputContextManager().foreachGroup(
+                    [this, &display](FocusGroup *group) {
+                        if (group->display() != display) {
+                            if (auto *ic = group->focusedInputContext()) {
+                                if (instance_->inputMethod(ic) == "rime") {
+                                    ic->updateUserInterface(
+                                        UserInterfaceComponent::StatusArea);
+                                }
+                            }
+                            return false;
+                        }
+                        return true;
+                    });
+            });
 }
 
 RimeEngine::~RimeEngine() {
@@ -596,11 +636,18 @@ std::string RimeEngine::subModeIconImpl(const InputMethodEntry & /*unused*/,
     }
     auto *state = this->state(&ic);
     if (state) {
-        state->getStatus([&result](const RimeStatus &status) {
+        state->getStatus([this, &ic, &result](const RimeStatus &status) {
             if (status.is_disabled) {
                 result = "fcitx_rime_disable";
             } else if (status.is_ascii_mode) {
                 result = "fcitx_rime_latin";
+                if (auto xkbState = instance_->xkbStateMask(ic.display())) {
+                    auto lockedMods = std::get<2>(*xkbState);
+                    if (lockedMods &
+                        static_cast<uint32_t>(KeyState::CapsLock)) {
+                        result = "fcitx_rime_latin_upper";
+                    }
+                }
             } else {
                 result = "fcitx-rime";
             }

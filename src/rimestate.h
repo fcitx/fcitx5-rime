@@ -7,6 +7,7 @@
 #define _FCITX_RIMESTATE_H_
 
 #include "rimesession.h"
+#include <fcitx-utils/key.h>
 #include <fcitx/event.h>
 #include <fcitx/globalconfig.h>
 #include <fcitx/inputcontextmanager.h>

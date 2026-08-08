@@ -40,15 +40,7 @@
 
 namespace fcitx::rime {
 
-namespace {
-
-bool emptyExceptAux(const InputPanel &inputPanel) {
-
-    return inputPanel.preedit().empty() && inputPanel.clientPreedit().empty() &&
-           (!inputPanel.candidateList() || inputPanel.candidateList()->empty());
-}
-
-} // namespace
+namespace {} // namespace
 
 RimeState::RimeState(RimeEngine *engine, InputContext &ic)
     : engine_(engine), ic_(ic) {}
@@ -388,7 +380,6 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
     if (!keyRelease) {
         inputPanel.reset();
     }
-    bool oldEmptyExceptAux = emptyExceptAux(inputPanel);
 
     do {
         auto *api = engine_->api();
@@ -418,21 +409,12 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
     } while (false);
 
     ic->updatePreedit();
-    // HACK: for show input method information.
-    // Since we don't use aux, which is great for this hack.
-    bool newEmptyExceptAux = emptyExceptAux(inputPanel);
-    // If it's key release and old information is not "empty", do the rest of
-    // "reset".
-    if (keyRelease && !newEmptyExceptAux) {
-        inputPanel.setAuxUp(Text());
-        inputPanel.setAuxDown(Text());
-    }
-    if (newEmptyExceptAux && lastMode_ != subMode()) {
+    if (lastMode_ != subMode()) {
         engine_->instance()->showInputMethodInformation(ic);
         ic->updateUserInterface(UserInterfaceComponent::StatusArea);
     }
 
-    if (!keyRelease || !oldEmptyExceptAux || !newEmptyExceptAux) {
+    if (!keyRelease) {
         ic->updateUserInterface(UserInterfaceComponent::InputPanel);
     }
 }
@@ -517,7 +499,7 @@ void RimeState::restore() {
     if (savedCurrentSchema_.empty()) {
         return;
     }
-    if (!engine_->schemas().count(savedCurrentSchema_)) {
+    if (!engine_->schemas().contains(savedCurrentSchema_)) {
         return;
     }
 
@@ -584,6 +566,7 @@ void RimeState::showChangedOptions() {
 
         // This is hard coded latin-mode.
         if (option == "ascii_mode") {
+            ic_.updateUserInterface(UserInterfaceComponent::StatusArea);
             continue;
         }
 
@@ -596,7 +579,7 @@ void RimeState::showChangedOptions() {
         if (actionIter == actions.end()) {
             continue;
         }
-        if (actionSet.count(actionIter->get())) {
+        if (actionSet.contains(actionIter->get())) {
             continue;
         }
         actionSet.insert(actionIter->get());

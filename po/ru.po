@@ -4,15 +4,15 @@
 #
 # Translators:
 # Xuetian Weng <wengxt@gmail.com>, 2017
-# Dmitry <dmitrydmitry761@gmail.com>, 2024
+# Dmitry <dmitrydmitry761@gmail.com>, 2026
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2026-08-09 00:49+0000\n"
+"POT-Creation-Date: 2026-08-09 20:24+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
-"Last-Translator: Dmitry <dmitrydmitry761@gmail.com>, 2024\n"
+"Last-Translator: Dmitry <dmitrydmitry761@gmail.com>, 2026\n"
 "Language-Team: Russian (https://app.transifex.com/fcitx/teams/12005/ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -97,7 +97,7 @@ msgstr "Синхронизировать"
 
 #: src/rimeengine.h:118
 msgid "Use latin mode name defined in schema"
-msgstr ""
+msgstr "Использовать название режима на латинице, определенное в схеме"
 
 #: src/rimecandidate.cpp:157
 msgid "Forget word"

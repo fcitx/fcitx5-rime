@@ -4,14 +4,14 @@
 #
 # Translators:
 # rocka, 2023
-# csslayer <wengxt@gmail.com>, 2023
+# Xuetian Weng <wengxt@gmail.com>, 2023
 # Yiyu Liu, 2024
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2025-05-25 20:24+0000\n"
+"POT-Creation-Date: 2026-08-09 00:49+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Yiyu Liu, 2024\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/fcitx/teams/12005/"
@@ -22,112 +22,116 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/rimeengine.h:97
-msgid "Action when switching input method"
-msgstr "切换输入法时的行为"
+#: src/rimeengine.h:59
+msgid "Follow Global Configuration"
+msgstr "跟随全局选项"
 
-#: src/rimeengine.h:58
+#: src/rimeengine.h:59
 msgid "All"
 msgstr "全部"
 
-#: src/rimeengine.h:73
-msgid "Clear"
-msgstr "清空"
+#: src/rimeengine.h:60
+msgid "Program"
+msgstr "程序"
 
-#: src/rimeengine.h:76
-msgid "Commit commit preview"
-msgstr "提交预览"
-
-#: src/rimeengine.h:75
-msgid "Commit composing text"
-msgstr "提交编辑中文本"
+#: src/rimeengine.h:60
+msgid "No"
+msgstr "否"
 
 #: src/rimeengine.h:64
+msgid "Do not show"
+msgstr "不显示"
+
+#: src/rimeengine.h:65
+msgid "Composing text"
+msgstr "编辑中文本"
+
+#: src/rimeengine.h:65
 msgid "Commit preview"
 msgstr "提交预览"
 
 #: src/rimeengine.h:74
+msgid "Clear"
+msgstr "清空"
+
+#: src/rimeengine.h:75
 msgid "Commit raw input"
 msgstr "提交原始字符串"
 
-#: src/rimeengine.h:64
-msgid "Composing text"
-msgstr "编辑中文本"
+#: src/rimeengine.h:76
+msgid "Commit composing text"
+msgstr "提交编辑中文本"
 
-#: src/rimeengine.h:110 src/rimeengine.cpp:202
-msgid "Deploy"
-msgstr "重新部署"
+#: src/rimeengine.h:77
+msgid "Commit commit preview"
+msgstr "提交预览"
 
-#: src/rimeengine.h:63
-msgid "Do not show"
-msgstr "不显示"
-
-#: src/rimeengine.h:91
-msgid "Fix embedded preedit cursor at the beginning of the preedit"
-msgstr "将嵌入式预编辑文本的光标固定在开头"
-
-#: src/rimeengine.h:58
-msgid "Follow Global Configuration"
-msgstr "跟随全局选项"
-
-#: src/rimecandidate.cpp:164
-msgid "Forget word"
-msgstr "忘记词汇"
-
-#: src/rimestate.cpp:91 src/rimeengine.cpp:689
-msgid "Latin Mode"
-msgstr "英文模式"
-
-#: src/rimeengine.h:59
-msgid "No"
-msgstr "否"
-
-#: src/rimeengine.h:81
+#: src/rimeengine.h:82
 msgid "Preedit Mode"
 msgstr "预编辑模式"
 
-#: src/rimeengine.h:59
-msgid "Program"
-msgstr "程序"
+#: src/rimeengine.h:85
+msgid "Shared Input State"
+msgstr "共享输入状态"
 
-#: src/rimeengine.cpp:560 src/rime.conf.in:2 src/rime-addon.conf.in.in:2
-msgid "Rime"
-msgstr "中州韵"
+#: src/rimeengine.h:92
+msgid "Fix embedded preedit cursor at the beginning of the preedit"
+msgstr "将嵌入式预编辑文本的光标固定在开头"
 
-#: src/rime-addon.conf.in.in:3
-msgid "Rime Wrapper For Fcitx"
-msgstr "Fcitx 的中州韵封装"
+#: src/rimeengine.h:98
+msgid "Action when switching input method"
+msgstr "切换输入法时的行为"
 
-#: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:7
-msgid "Rime for Fcitx 5"
-msgstr "Fcitx 5 的中州韵支持"
+#: src/rimeengine.h:101
+msgid "User data dir"
+msgstr "用户数据目录"
 
-#: src/rimeengine.cpp:542
-msgid "Rime has encountered an error. See log for details."
-msgstr "Rime 出现了一个错误。详细信息请参阅日志。"
+#: src/rimeengine.h:111 src/rimeengine.cpp:207
+msgid "Deploy"
+msgstr "重新部署"
 
-#: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:8
-msgid "Rime input method"
-msgstr "中州韵输入法"
+#: src/rimeengine.h:115 src/rimeengine.cpp:219
+msgid "Synchronize"
+msgstr "同步"
 
-#: src/rimeengine.cpp:529
-msgid "Rime is ready."
-msgstr "Rime 就绪。"
+#: src/rimeengine.h:118
+msgid "Use latin mode name defined in schema"
+msgstr ""
 
-#: src/rimeengine.cpp:526
+#: src/rimecandidate.cpp:157
+msgid "Forget word"
+msgstr "忘记词汇"
+
+#: src/rimestate.cpp:78 src/rimeengine.cpp:736
+msgid "Latin Mode"
+msgstr "英文模式"
+
+#: src/rimeengine.cpp:566
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
 msgstr "Rime 正在进行维护程序。可能需要几秒钟。请等待完成……"
 
-#: src/rimeengine.h:84
-msgid "Shared Input State"
-msgstr "共享输入状态"
+#: src/rimeengine.cpp:569
+msgid "Rime is ready."
+msgstr "Rime 就绪。"
 
-#: src/rimeengine.h:114 src/rimeengine.cpp:214
-msgid "Synchronize"
-msgstr "同步"
+#: src/rimeengine.cpp:582
+msgid "Rime has encountered an error. See log for details."
+msgstr "Rime 出现了一个错误。详细信息请参阅日志。"
 
-#: src/rimeengine.h:100
-msgid "User data dir"
-msgstr "用户数据目录"
+#: src/rimeengine.cpp:600 src/rime.conf.in:2 src/rime-addon.conf.in.in:2
+msgid "Rime"
+msgstr "中州韵"
+
+#: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:7
+msgid "Rime for Fcitx 5"
+msgstr "Fcitx 5 的中州韵支持"
+
+#: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:8
+msgid "Rime input method"
+msgstr "中州韵输入法"
+
+#: src/rime-addon.conf.in.in:3
+msgid "Rime Wrapper For Fcitx"
+msgstr "Fcitx 的中州韵封装"

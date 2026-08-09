@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2025-09-17 20:24+0000\n"
+"POT-Creation-Date: 2026-08-09 00:49+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Popolon_Github, 2025\n"
 "Language-Team: French (https://app.transifex.com/fcitx/teams/12005/fr/)\n"
@@ -20,99 +20,91 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
 "1000000 == 0 ? 1 : 2;\n"
 
-#: src/rimeengine.h:97
-msgid "Action when switching input method"
-msgstr "Action lors d'un changement de méthode de saisie"
+#: src/rimeengine.h:59
+msgid "Follow Global Configuration"
+msgstr "Suivre la configuration globale"
 
-#: src/rimeengine.h:58
+#: src/rimeengine.h:59
 msgid "All"
 msgstr "Tout"
 
-#: src/rimeengine.h:73
-msgid "Clear"
-msgstr "Nettoyer"
+#: src/rimeengine.h:60
+msgid "Program"
+msgstr "Programme"
 
-#: src/rimeengine.h:76
-msgid "Commit commit preview"
-msgstr ""
-
-#: src/rimeengine.h:75
-msgid "Commit composing text"
-msgstr "Valider le texte de composition"
+#: src/rimeengine.h:60
+msgid "No"
+msgstr "Non"
 
 #: src/rimeengine.h:64
+msgid "Do not show"
+msgstr "Ne pas montrer"
+
+#: src/rimeengine.h:65
+msgid "Composing text"
+msgstr "Composer du texte"
+
+#: src/rimeengine.h:65
 msgid "Commit preview"
 msgstr "Valider la prévisualisation"
 
 #: src/rimeengine.h:74
+msgid "Clear"
+msgstr "Nettoyer"
+
+#: src/rimeengine.h:75
 msgid "Commit raw input"
 msgstr "Valider la saisie brute"
 
-#: src/rimeengine.h:64
-msgid "Composing text"
-msgstr "Composer du texte"
+#: src/rimeengine.h:76
+msgid "Commit composing text"
+msgstr "Valider le texte de composition"
 
-#: src/rimeengine.h:110 src/rimeengine.cpp:202
-msgid "Deploy"
-msgstr "Déployer"
+#: src/rimeengine.h:77
+msgid "Commit commit preview"
+msgstr ""
 
-#: src/rimeengine.h:63
-msgid "Do not show"
-msgstr "Ne pas montrer"
-
-#: src/rimeengine.h:91
-msgid "Fix embedded preedit cursor at the beginning of the preedit"
-msgstr "Fixer le curseur de pré-édition embarqué en début de pré-édition"
-
-#: src/rimeengine.h:58
-msgid "Follow Global Configuration"
-msgstr "Suivre la configuration globale"
-
-#: src/rimecandidate.cpp:164
-msgid "Forget word"
-msgstr "Oublier le mot"
-
-#: src/rimestate.cpp:91 src/rimeengine.cpp:689
-msgid "Latin Mode"
-msgstr "Mode latin"
-
-#: src/rimeengine.h:59
-msgid "No"
-msgstr "Non"
-
-#: src/rimeengine.h:81
+#: src/rimeengine.h:82
 msgid "Preedit Mode"
 msgstr "Mode pré-édition"
 
-#: src/rimeengine.h:59
-msgid "Program"
-msgstr "Programme"
+#: src/rimeengine.h:85
+msgid "Shared Input State"
+msgstr "État de saisie partagé"
 
-#: src/rimeengine.cpp:560 src/rime.conf.in:2 src/rime-addon.conf.in.in:2
-msgid "Rime"
-msgstr "Rime"
+#: src/rimeengine.h:92
+msgid "Fix embedded preedit cursor at the beginning of the preedit"
+msgstr "Fixer le curseur de pré-édition embarqué en début de pré-édition"
 
-#: src/rime-addon.conf.in.in:3
-msgid "Rime Wrapper For Fcitx"
-msgstr "Adaptateur Rime pour Fcitx"
+#: src/rimeengine.h:98
+msgid "Action when switching input method"
+msgstr "Action lors d'un changement de méthode de saisie"
 
-#: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:7
-msgid "Rime for Fcitx 5"
-msgstr "Rime pour Fcitx"
+#: src/rimeengine.h:101
+msgid "User data dir"
+msgstr "Dossier des données utilisateur"
 
-#: src/rimeengine.cpp:542
-msgid "Rime has encountered an error. See log for details."
-msgstr "Rime à rencontré une erreur. Voir le journal pour les détails. "
+#: src/rimeengine.h:111 src/rimeengine.cpp:207
+msgid "Deploy"
+msgstr "Déployer"
 
-#: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:8
-msgid "Rime input method"
-msgstr "Méthode de saisie Rime"
+#: src/rimeengine.h:115 src/rimeengine.cpp:219
+msgid "Synchronize"
+msgstr "Synchroniser"
 
-#: src/rimeengine.cpp:529
-msgid "Rime is ready."
-msgstr "Rime est prêt"
+#: src/rimeengine.h:118
+msgid "Use latin mode name defined in schema"
+msgstr ""
 
-#: src/rimeengine.cpp:526
+#: src/rimecandidate.cpp:157
+msgid "Forget word"
+msgstr "Oublier le mot"
+
+#: src/rimestate.cpp:78 src/rimeengine.cpp:736
+msgid "Latin Mode"
+msgstr "Mode latin"
+
+#: src/rimeengine.cpp:566
 msgid ""
 "Rime is under maintenance. It may take a few seconds. Please wait until it "
 "is finished..."
@@ -120,14 +112,26 @@ msgstr ""
 "Rime est en maintenance. cela pourrait prendre quelques secondes. Attendez "
 "que cela se termine s'il vous plaît..."
 
-#: src/rimeengine.h:84
-msgid "Shared Input State"
-msgstr "État de saisie partagé"
+#: src/rimeengine.cpp:569
+msgid "Rime is ready."
+msgstr "Rime est prêt"
 
-#: src/rimeengine.h:114 src/rimeengine.cpp:214
-msgid "Synchronize"
-msgstr "Synchroniser"
+#: src/rimeengine.cpp:582
+msgid "Rime has encountered an error. See log for details."
+msgstr "Rime à rencontré une erreur. Voir le journal pour les détails. "
 
-#: src/rimeengine.h:100
-msgid "User data dir"
-msgstr "Dossier des données utilisateur"
+#: src/rimeengine.cpp:600 src/rime.conf.in:2 src/rime-addon.conf.in.in:2
+msgid "Rime"
+msgstr "Rime"
+
+#: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:7
+msgid "Rime for Fcitx 5"
+msgstr "Rime pour Fcitx"
+
+#: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:8
+msgid "Rime input method"
+msgstr "Méthode de saisie Rime"
+
+#: src/rime-addon.conf.in.in:3
+msgid "Rime Wrapper For Fcitx"
+msgstr "Adaptateur Rime pour Fcitx"

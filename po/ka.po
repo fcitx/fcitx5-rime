@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-rime\n"
 "Report-Msgid-Bugs-To: fcitx-dev@googlegroups.com\n"
-"POT-Creation-Date: 2026-02-01 20:24+0000\n"
+"POT-Creation-Date: 2026-08-09 00:49+0000\n"
 "PO-Revision-Date: 2017-11-23 05:02+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2026\n"
 "Language-Team: Georgian (https://app.transifex.com/fcitx/teams/12005/ka/)\n"
@@ -19,112 +19,116 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: src/rimeengine.h:97
-msgid "Action when switching input method"
+#: src/rimeengine.h:59
+msgid "Follow Global Configuration"
 msgstr ""
 
-#: src/rimeengine.h:58
+#: src/rimeengine.h:59
 msgid "All"
 msgstr "ყველა"
 
-#: src/rimeengine.h:73
-msgid "Clear"
-msgstr "გასუფთავება"
+#: src/rimeengine.h:60
+msgid "Program"
+msgstr "პროგრამა"
 
-#: src/rimeengine.h:76
-msgid "Commit commit preview"
-msgstr ""
-
-#: src/rimeengine.h:75
-msgid "Commit composing text"
-msgstr ""
+#: src/rimeengine.h:60
+msgid "No"
+msgstr "არა"
 
 #: src/rimeengine.h:64
+msgid "Do not show"
+msgstr "აღარ მაჩვენო"
+
+#: src/rimeengine.h:65
+msgid "Composing text"
+msgstr ""
+
+#: src/rimeengine.h:65
 msgid "Commit preview"
 msgstr ""
 
 #: src/rimeengine.h:74
+msgid "Clear"
+msgstr "გასუფთავება"
+
+#: src/rimeengine.h:75
 msgid "Commit raw input"
 msgstr ""
 
-#: src/rimeengine.h:64
-msgid "Composing text"
+#: src/rimeengine.h:76
+msgid "Commit composing text"
 msgstr ""
 
-#: src/rimeengine.h:110 src/rimeengine.cpp:202
-msgid "Deploy"
-msgstr "განთავსება"
-
-#: src/rimeengine.h:63
-msgid "Do not show"
-msgstr "აღარ მაჩვენო"
-
-#: src/rimeengine.h:91
-msgid "Fix embedded preedit cursor at the beginning of the preedit"
+#: src/rimeengine.h:77
+msgid "Commit commit preview"
 msgstr ""
 
-#: src/rimeengine.h:58
-msgid "Follow Global Configuration"
-msgstr ""
-
-#: src/rimecandidate.cpp:164
-msgid "Forget word"
-msgstr "სიტყვის დავიწყება"
-
-#: src/rimestate.cpp:91 src/rimeengine.cpp:689
-msgid "Latin Mode"
-msgstr ""
-
-#: src/rimeengine.h:59
-msgid "No"
-msgstr "არა"
-
-#: src/rimeengine.h:81
+#: src/rimeengine.h:82
 msgid "Preedit Mode"
 msgstr ""
 
-#: src/rimeengine.h:59
-msgid "Program"
-msgstr "პროგრამა"
+#: src/rimeengine.h:85
+msgid "Shared Input State"
+msgstr ""
 
-#: src/rimeengine.cpp:560 src/rime.conf.in:2 src/rime-addon.conf.in.in:2
+#: src/rimeengine.h:92
+msgid "Fix embedded preedit cursor at the beginning of the preedit"
+msgstr ""
+
+#: src/rimeengine.h:98
+msgid "Action when switching input method"
+msgstr ""
+
+#: src/rimeengine.h:101
+msgid "User data dir"
+msgstr ""
+
+#: src/rimeengine.h:111 src/rimeengine.cpp:207
+msgid "Deploy"
+msgstr "განთავსება"
+
+#: src/rimeengine.h:115 src/rimeengine.cpp:219
+msgid "Synchronize"
+msgstr "სინქრონიზაცია"
+
+#: src/rimeengine.h:118
+msgid "Use latin mode name defined in schema"
+msgstr ""
+
+#: src/rimecandidate.cpp:157
+msgid "Forget word"
+msgstr "სიტყვის დავიწყება"
+
+#: src/rimestate.cpp:78 src/rimeengine.cpp:736
+msgid "Latin Mode"
+msgstr ""
+
+#: src/rimeengine.cpp:566
+msgid ""
+"Rime is under maintenance. It may take a few seconds. Please wait until it "
+"is finished..."
+msgstr ""
+
+#: src/rimeengine.cpp:569
+msgid "Rime is ready."
+msgstr "Rime მზადაა."
+
+#: src/rimeengine.cpp:582
+msgid "Rime has encountered an error. See log for details."
+msgstr ""
+
+#: src/rimeengine.cpp:600 src/rime.conf.in:2 src/rime-addon.conf.in.in:2
 msgid "Rime"
 msgstr "Rime"
 
-#: src/rime-addon.conf.in.in:3
-msgid "Rime Wrapper For Fcitx"
-msgstr ""
-
 #: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:7
 msgid "Rime for Fcitx 5"
-msgstr ""
-
-#: src/rimeengine.cpp:542
-msgid "Rime has encountered an error. See log for details."
 msgstr ""
 
 #: org.fcitx.Fcitx5.Addon.Rime.metainfo.xml.in:8
 msgid "Rime input method"
 msgstr ""
 
-#: src/rimeengine.cpp:529
-msgid "Rime is ready."
-msgstr "Rime მზადაა."
-
-#: src/rimeengine.cpp:526
-msgid ""
-"Rime is under maintenance. It may take a few seconds. Please wait until it "
-"is finished..."
-msgstr ""
-
-#: src/rimeengine.h:84
-msgid "Shared Input State"
-msgstr ""
-
-#: src/rimeengine.h:114 src/rimeengine.cpp:214
-msgid "Synchronize"
-msgstr "სინქრონიზაცია"
-
-#: src/rimeengine.h:100
-msgid "User data dir"
+#: src/rime-addon.conf.in.in:3
+msgid "Rime Wrapper For Fcitx"
 msgstr ""

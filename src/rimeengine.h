@@ -19,6 +19,7 @@
 #include <fcitx-utils/handlertable_details.h>
 #include <fcitx-utils/i18n.h>
 #include <fcitx-utils/key.h>
+#include <fcitx-utils/keysym.h>
 #include <fcitx-utils/library.h>
 #include <fcitx-utils/log.h>
 #include <fcitx-utils/misc.h>
@@ -166,6 +167,8 @@ public:
     void allowNotification(std::string type = "");
     const auto &schemas() const { return schemas_; }
     const auto &optionActions() const { return optionActions_; };
+
+    bool isCapsLockOn(InputContext *ic) const;
 
 private:
     static void rimeNotificationHandler(void *context, RimeSessionId session,

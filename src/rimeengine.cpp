@@ -263,6 +263,7 @@ RimeEngine::RimeEngine(Instance *instance)
                         if (group->display() != display) {
                             if (auto *ic = group->focusedInputContext()) {
                                 if (instance_->inputMethod(ic) == "rime") {
+                                    instance_->showInputMethodInformation(ic);
                                     ic->updateUserInterface(
                                         UserInterfaceComponent::StatusArea);
                                 }
@@ -641,12 +642,8 @@ std::string RimeEngine::subModeIconImpl(const InputMethodEntry & /*unused*/,
                 result = "fcitx_rime_disable";
             } else if (status.is_ascii_mode) {
                 result = "fcitx_rime_latin";
-                if (auto xkbState = instance_->xkbStateMask(ic.display())) {
-                    auto lockedMods = std::get<2>(*xkbState);
-                    if (lockedMods &
-                        static_cast<uint32_t>(KeyState::CapsLock)) {
-                        result = "fcitx_rime_latin_upper";
-                    }
+                if (isCapsLockOn(&ic)) {
+                    result = "fcitx_rime_latin_upper";
                 }
             } else {
                 result = "fcitx-rime";
@@ -782,6 +779,14 @@ PropertyPropagatePolicy RimeEngine::getSharedStatePolicy() {
     default:
         return instance_->globalConfig().shareInputState();
     }
+}
+
+bool RimeEngine::isCapsLockOn(InputContext *ic) const {
+    if (auto xkbState = instance_->xkbStateMask(ic->display())) {
+        auto lockedMods = std::get<2>(*xkbState);
+        return lockedMods & static_cast<uint32_t>(KeyState::CapsLock);
+    }
+    return false;
 }
 
 } // namespace fcitx::rime

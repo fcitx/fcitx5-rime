@@ -260,7 +260,7 @@ RimeEngine::RimeEngine(Instance *instance)
                 }
                 instance_->inputContextManager().foreachGroup(
                     [this, &display](FocusGroup *group) {
-                        if (group->display() != display) {
+                        if (group->display() == display) {
                             if (auto *ic = group->focusedInputContext()) {
                                 if (instance_->inputMethod(ic) == "rime") {
                                     instance_->showInputMethodInformation(ic);

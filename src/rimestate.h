@@ -71,6 +71,7 @@ private:
     std::string savedCurrentSchema_;
     std::vector<std::string> savedOptions_;
     std::vector<std::string> changedOptions_;
+    bool capsLock;
 };
 } // namespace fcitx::rime
 

@@ -77,7 +77,7 @@ void RimeState::activate() { maybeSyncProgramNameToSession(); }
 std::string RimeState::asciiModeName(bool abbrev) {
     std::string result = _("Latin Mode");
     if (abbrev) {
-        result = engine_->isCapsLockOn(&ic_) ? "ABC" : "abc";
+        result = capsLock ? "ABC" : "abc";
     }
     if (engine_->config().latinModeNameFromSchema.value()) {
         RimeStringSlice label = engine_->api()->get_state_label_abbreviated(
@@ -195,6 +195,10 @@ void RimeState::keyEvent(KeyEvent &event) {
     auto states = event.rawKey().states() &
                   KeyStates{KeyState::Mod1, KeyState::CapsLock, KeyState::Shift,
                             KeyState::Ctrl, KeyState::Super};
+    capsLock = states.test(KeyState::CapsLock);
+    if (event.rawKey().sym() == FcitxKey_Caps_Lock && !event.isRelease()) {
+        capsLock = !capsLock;
+    }
     if (states.test(KeyState::Super)) {
         // IBus uses virtual super mask.
         states |= KeyState::Super2;

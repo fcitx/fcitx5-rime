@@ -116,7 +116,9 @@ FCITX_CONFIGURATION(
         this, "Synchronize", _("Synchronize"), {}};
     Option<bool> latinModeNameFromSchema{
         this, "LatinModeNameFromSchema",
-        _("Use latin mode name defined in schema"), false};);
+        _("Use latin mode name defined in schema"), false};
+    Option<std::string> capsLockLabelPrompt{
+        this, "CapsLockLabelPrompt", _("Caps Lock label prompt"), "ABC"};);
 
 class RimeEngine final : public InputMethodEngineV2 {
 public:

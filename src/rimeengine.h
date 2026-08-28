@@ -116,7 +116,10 @@ FCITX_CONFIGURATION(
         this, "Synchronize", _("Synchronize"), {}};
     Option<bool> latinModeNameFromSchema{
         this, "LatinModeNameFromSchema",
-        _("Use latin mode name defined in schema"), false};);
+        _("Use latin mode name defined in schema"), false};
+    Option<bool> applyAppOptionOnFocusChange{
+        this, "ApplyAppOptionOnFocusChange",
+        _("Apply app_option to status on focus change"), false};);
 
 class RimeEngine final : public InputMethodEngineV2 {
 public:

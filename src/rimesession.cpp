@@ -64,8 +64,21 @@ void RimeSessionHolder::setProgramName(const std::string &program) {
         return;
     }
 
+    auto *api = pool_->engine()->api();
+
     currentProgram_ = program;
-    pool_->engine()->api()->set_property(id_, "client_app", program.data());
+    api->set_property(id_, "client_app", program.data());
+
+    if (pool_->engine()->config().applyAppOptionOnFocusChange.value()) {
+        const auto &appOptions = pool_->engine()->appOptions();
+        if (auto iter = appOptions.find(program); iter != appOptions.end()) {
+            RIME_DEBUG() << "Apply app options to " << program << ": "
+                         << iter->second;
+            for (const auto &[key, value] : iter->second) {
+                api->set_option(id_, key.data(), value);
+            }
+        }
+    }
 }
 
 #if 0

@@ -235,7 +235,7 @@ void RimeState::keyEvent(KeyEvent &event) {
         engine_->instance()->resetCompose(ic);
     }
 
-    updateUI(ic, event.isRelease());
+    updateUI(ic);
     if (!event.isRelease() && !lastSchema.empty() &&
         lastSchema == currentSchema() && ic->inputPanel().empty() &&
         !changedOptions_.empty()) {
@@ -263,7 +263,7 @@ void RimeState::selectCandidate(InputContext *inputContext, int idx,
         inputContext->commitString(commit.text);
         api->free_commit(&commit);
     }
-    updateUI(inputContext, false);
+    updateUI(inputContext);
 }
 
 #ifndef FCITX_RIME_NO_DELETE_CANDIDATE
@@ -281,7 +281,7 @@ void RimeState::deleteCandidate(int idx, bool global) {
     } else {
         api->delete_candidate_on_current_page(session, idx);
     }
-    updateUI(&ic_, false);
+    updateUI(&ic_);
 }
 #endif
 
@@ -391,9 +391,10 @@ void RimeState::updatePreedit(InputContext *ic, const RimeContext &context) {
     }
 }
 
-void RimeState::updateUI(InputContext *ic, bool keyRelease) {
+void RimeState::updateUI(InputContext *ic) {
     auto &inputPanel = ic->inputPanel();
-    if (!keyRelease) {
+    // A small check to avoid reset overlay message upon key release.
+    if (!inputPanel.empty()) {
         inputPanel.reset();
     }
 
@@ -430,9 +431,7 @@ void RimeState::updateUI(InputContext *ic, bool keyRelease) {
         ic->updateUserInterface(UserInterfaceComponent::StatusArea);
     }
 
-    if (!keyRelease) {
-        ic->updateUserInterface(UserInterfaceComponent::InputPanel);
-    }
+    ic->updateUserInterface(UserInterfaceComponent::InputPanel);
 }
 
 void RimeState::release() { session_.reset(); }

@@ -209,7 +209,7 @@ RimeEngine::RimeEngine(Instance *instance)
         deploy();
         auto *state = this->state(ic);
         if (state && ic->hasFocus()) {
-            state->updateUI(ic, false);
+            state->updateUI(ic);
         }
     });
     instance_->userInterfaceManager().registerAction("fcitx-rime-deploy",
@@ -222,7 +222,7 @@ RimeEngine::RimeEngine(Instance *instance)
         sync(/*userTriggered=*/true);
         auto *state = this->state(ic);
         if (state && ic->hasFocus()) {
-            state->updateUI(ic, false);
+            state->updateUI(ic);
         }
     });
     instance_->userInterfaceManager().registerAction("fcitx-rime-sync",

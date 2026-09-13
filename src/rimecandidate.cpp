@@ -31,9 +31,7 @@ void RimeCandidateWord::select(InputContext *inputContext) const {
 }
 
 void RimeCandidateWord::forget(RimeState *state) const {
-#ifndef FCITX_RIME_NO_DELETE_CANDIDATE
     state->deleteCandidate(idx_, /*global=*/false);
-#endif
 }
 
 RimeGlobalCandidateWord::RimeGlobalCandidateWord(RimeEngine *engine,
@@ -53,9 +51,7 @@ void RimeGlobalCandidateWord::select(InputContext *inputContext) const {
 }
 
 void RimeGlobalCandidateWord::forget(RimeState *state) const {
-#ifndef FCITX_RIME_NO_DELETE_CANDIDATE
     state->deleteCandidate(idx_, /*global=*/true);
-#endif
 }
 
 RimeCandidateList::RimeCandidateList(RimeEngine *engine, InputContext *ic,
@@ -140,23 +136,17 @@ const CandidateWord &RimeCandidateList::candidateFromAll(int idx) const {
 int RimeCandidateList::totalSize() const { return -1; }
 
 bool RimeCandidateList::hasAction(const CandidateWord & /*candidate*/) const {
-#ifndef FCITX_RIME_NO_DELETE_CANDIDATE
     // We can always reset rime candidate's frequency.
     return true;
-#else
-    return false;
-#endif
 }
 
 std::vector<CandidateAction>
 RimeCandidateList::candidateActions(const CandidateWord & /*candidate*/) const {
     std::vector<CandidateAction> actions;
-#ifndef FCITX_RIME_NO_DELETE_CANDIDATE
     CandidateAction action;
     action.setId(0);
     action.setText(_("Forget word"));
     actions.push_back(std::move(action));
-#endif
     return actions;
 }
 

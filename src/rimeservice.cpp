@@ -84,4 +84,17 @@ std::vector<std::string> RimeService::listAllSchemas() {
     return schemas;
 }
 
+void RimeService::setOption(const std::string &option, bool value) {
+    if (auto *state = currentState()) {
+        engine_->api()->set_option(state->session(), option.c_str(), value);
+    }
+}
+
+bool RimeService::getOption(const std::string &option) {
+    if (auto *state = currentState()) {
+        return bool(engine_->api()->get_option(state->session(), option.c_str()));
+    }
+    return false;
+}
+
 } // namespace fcitx::rime

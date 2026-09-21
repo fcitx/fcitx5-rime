@@ -118,6 +118,21 @@ FCITX_CONFIGURATION(
         this, "LatinModeNameFromSchema",
         _("Use latin mode name defined in schema"), false};);
 
+// Options configured for a single program under "app_options/<program>" in the
+// rime fcitx5 config. applyOnFocus makes them the default state of the program
+// instead of just its initial state.
+struct AppOptions {
+    std::unordered_map<std::string, bool> options;
+    bool applyOnFocus = false;
+};
+
+inline LogMessageBuilder &operator<<(LogMessageBuilder &log,
+                                     const AppOptions &appOptions) {
+    log << "(applyOnFocus: " << appOptions.applyOnFocus
+        << ", options: " << appOptions.options << ")";
+    return log;
+}
+
 class RimeEngine final : public InputMethodEngineV2 {
 public:
     RimeEngine(Instance *instance);
@@ -210,8 +225,7 @@ private:
     SimpleAction syncAction_;
 
     RimeEngineConfig config_;
-    std::unordered_map<std::string, std::unordered_map<std::string, bool>>
-        appOptions_;
+    std::unordered_map<std::string, AppOptions> appOptions_;
 
     FCITX_ADDON_DEPENDENCY_LOADER(notifications, instance_->addonManager());
 

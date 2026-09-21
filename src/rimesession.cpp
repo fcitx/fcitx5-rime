@@ -41,8 +41,8 @@ RimeSessionHolder::RimeSessionHolder(RimeSessionPool *pool,
     const auto &appOptions = pool_->engine()->appOptions();
     if (auto iter = appOptions.find(program); iter != appOptions.end()) {
         RIME_DEBUG() << "Apply app options to " << program << ": "
-                     << iter->second;
-        for (const auto &[key, value] : iter->second) {
+                     << iter->second.options;
+        for (const auto &[key, value] : iter->second.options) {
             api->set_option(id_, key.data(), value);
         }
     }

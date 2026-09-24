@@ -22,6 +22,11 @@ namespace fcitx::rime {
 
 namespace {
 
+constexpr std::string_view FULL_SHAPE = "full_shape";
+constexpr std::string_view SIMPLIFICATION = "simplification";
+constexpr std::string_view ASCII_PUNC = "ascii_punct";
+constexpr std::string_view PREDICTION = "prediction";
+
 std::optional<bool> optionValue(RimeEngine *engine, InputContext *ic,
                                 bool requestSession,
                                 const std::string &option) {
@@ -67,6 +72,32 @@ std::string ToggleAction::shortText(InputContext *ic) const {
         return stringutils::concat(enabledText_, " → ", disabledText_);
     }
     return stringutils::concat(disabledText_, " → ", enabledText_);
+}
+
+std::string ToggleAction::icon(InputContext *ic) const {
+    if (option_ == FULL_SHAPE) {
+        auto value = optionValue(engine_, ic, /*requestSession=*/true, option_);
+        if (value.has_value()) {
+            return *value ? "fcitx-fullwidth-active"
+                          : "fcitx-fullwidth-inactive";
+        }
+    } else if (option_ == SIMPLIFICATION) {
+        auto value = optionValue(engine_, ic, /*requestSession=*/true, option_);
+        if (value.has_value()) {
+            return *value ? "fcitx-chttrans-inactive" : "fcitx-chttrans-active";
+        }
+    } else if (option_ == ASCII_PUNC) {
+        auto value = optionValue(engine_, ic, /*requestSession=*/true, option_);
+        if (value.has_value()) {
+            return *value ? "fcitx-punc-inactive" : "fcitx-punc-active";
+        }
+    } else if (option_ == PREDICTION) {
+        auto value = optionValue(engine_, ic, /*requestSession=*/true, option_);
+        if (value.has_value()) {
+            return *value ? "fcitx-remind-active" : "fcitx-remind-inactive";
+        }
+    }
+    return "";
 }
 
 std::optional<std::string> ToggleAction::snapshotOption(InputContext *ic) {

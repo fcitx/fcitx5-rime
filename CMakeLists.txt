@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.6.0)
 
-project(fcitx5-rime VERSION 5.1.16)
+project(fcitx5-rime VERSION 5.1.17)
 
 set(REQUIRED_FCITX_VERSION 5.1.22)
 

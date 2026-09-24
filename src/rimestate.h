@@ -59,6 +59,7 @@ public:
 private:
     std::string asciiModeName(bool abbrev);
     void maybeSyncProgramNameToSession();
+    void applyAppOptions();
     std::vector<std::string> snapshotOptions(const std::string &schema);
 
     std::string lastMode_;

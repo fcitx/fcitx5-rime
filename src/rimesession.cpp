@@ -33,19 +33,7 @@ RimeSessionHolder::RimeSessionHolder(RimeSessionPool *pool,
     }
 
     setProgramName(program);
-
-    if (program.empty()) {
-        return;
-    }
-
-    const auto &appOptions = pool_->engine()->appOptions();
-    if (auto iter = appOptions.find(program); iter != appOptions.end()) {
-        RIME_DEBUG() << "Apply app options to " << program << ": "
-                     << iter->second;
-        for (const auto &[key, value] : iter->second) {
-            api->set_option(id_, key.data(), value);
-        }
-    }
+    pool_->engine()->applyAppOptions(id_, program);
 }
 
 RimeSessionHolder::~RimeSessionHolder() {

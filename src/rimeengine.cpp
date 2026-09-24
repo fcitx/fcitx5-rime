@@ -62,10 +62,14 @@ namespace {
 // Allow notification for 60secs.
 constexpr uint64_t NotificationTimeout = 60000000;
 
-std::unordered_map<std::string, std::unordered_map<std::string, bool>>
+// Directive inside a program's app_options entry. It is not a rime option, but
+// the per program switch of RimeState::applyAppOptions(), and is therefore
+// never passed to set_option.
+constexpr std::string_view ApplyOnFocusKey = "__apply_on_focus";
+
+std::unordered_map<std::string, AppOptions>
 parseAppOptions(rime_api_t *api, RimeConfig *config) {
-    std::unordered_map<std::string, std::unordered_map<std::string, bool>>
-        appOptions;
+    std::unordered_map<std::string, AppOptions> appOptions;
     RimeConfigIterator appIter;
     RimeConfigIterator optionIter;
     if (api->config_begin_map(&appIter, config, "app_options")) {
@@ -74,8 +78,13 @@ parseAppOptions(rime_api_t *api, RimeConfig *config) {
             if (api->config_begin_map(&optionIter, config, appIter.path)) {
                 while (api->config_next(&optionIter)) {
                     Bool value = False;
-                    if (api->config_get_bool(config, optionIter.path, &value)) {
-                        options[optionIter.key] = !!value;
+                    if (!api->config_get_bool(config, optionIter.path, &value)) {
+                        continue;
+                    }
+                    if (ApplyOnFocusKey == optionIter.key) {
+                        options.applyOnFocus = value;
+                    } else {
+                        options.options[optionIter.key] = value;
                     }
                 }
                 api->config_end(&optionIter);
@@ -340,6 +349,22 @@ void RimeEngine::rimeStart(bool fullcheck) {
         updateAppOptions();
     } else {
         needRefreshAppOption_ = true;
+    }
+}
+
+void RimeEngine::applyAppOptions(RimeSessionId session,
+                                 const std::string &program) {
+    if (!session || program.empty()) {
+        return;
+    }
+    auto iter = appOptions_.find(program);
+    if (iter == appOptions_.end()) {
+        return;
+    }
+    RIME_DEBUG() << "Apply app options to " << program << ": "
+                 << iter->second.options;
+    for (const auto &[key, value] : iter->second.options) {
+        api_->set_option(session, key.data(), value);
     }
 }
 

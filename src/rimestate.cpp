@@ -72,7 +72,33 @@ void RimeState::clear() {
     }
 }
 
-void RimeState::activate() { maybeSyncProgramNameToSession(); }
+void RimeState::activate() {
+    maybeSyncProgramNameToSession();
+    applyAppOptions();
+}
+
+// app_options are applied only once, when the rime session is created (see
+// RimeSessionHolder), i.e. they are the initial state of the program. An input
+// context may keep its session for a very long time, e.g. the GNOME shell
+// search entry (program=gnome-shell, ibus frontend), which lives as long as the
+// desktop session does. The configured options are therefore applied only once
+// and any later state toggle wins forever, which makes "the default state of
+// this application" ineffective. A program that opts in with the
+// "__apply_on_focus" directive gets its options reapplied on every activation,
+// so that they are its default state rather than only its initial one.
+void RimeState::applyAppOptions() {
+    if (engine_->api()->is_maintenance_mode()) {
+        return;
+    }
+    const auto &program = ic_.program();
+    const auto &appOptions = engine_->appOptions();
+    auto iter = appOptions.find(program);
+    // Check the opt-in before session(), which may create a new session.
+    if (iter == appOptions.end() || !iter->second.applyOnFocus) {
+        return;
+    }
+    engine_->applyAppOptions(session(), program);
+}
 
 std::string RimeState::asciiModeName(bool abbrev) {
     std::string result = _("Latin Mode");

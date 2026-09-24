@@ -7,6 +7,15 @@ config_version: "0.22"
 # e.g.
 # "app_options/kwrite":
 #   ascii_mode: true
+# They are applied when the rime session of the app is created, i.e. they are
+# the initial state of the app.
+# Add the "__apply_on_focus: true" directive to the same app to also apply them
+# every time the app is focused, so that they are its default state and a state
+# toggled inside the app does not persist.
+# e.g.
+# "app_options/gnome-shell":
+#   ascii_mode: true
+#   __apply_on_focus: true
 # You may obtain the app name via
 # dbus-send --print-reply=literal --dest=org.fcitx.Fcitx5 /controller org.fcitx.Fcitx.Controller1.DebugInfo
 app_options: {}

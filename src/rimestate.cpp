@@ -77,7 +77,7 @@ void RimeState::activate() { maybeSyncProgramNameToSession(); }
 std::string RimeState::asciiModeName(bool abbrev) {
     std::string result = _("Latin Mode");
     if (abbrev) {
-        result = engine_->isCapsLockOn(&ic_) ? "ABC" : "abc";
+        result = "abc";
     }
     if (engine_->config().latinModeNameFromSchema.value()) {
         RimeStringSlice label = engine_->api()->get_state_label_abbreviated(
@@ -85,6 +85,11 @@ std::string RimeState::asciiModeName(bool abbrev) {
         if (label.str && label.length > 0) {
             result.assign(label.str, label.length);
         }
+    }
+    if (abbrev) {
+        result = engine_->isCapsLockOn(&ic_)
+                     ? engine_->config().capsLockLabelPrompt.value()
+                     : result;
     }
     return result;
 }

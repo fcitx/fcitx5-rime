@@ -169,6 +169,8 @@ public:
 
     rime_api_t *api() { return api_; }
     const auto &appOptions() const { return appOptions_; }
+    // Apply the app_options configured for program to session.
+    void applyAppOptions(RimeSessionId session, const std::string &program);
 
     void rimeStart(bool fullcheck);
 

@@ -87,29 +87,17 @@ void RimeState::activate() {
 // "__apply_on_focus" directive gets its options reapplied on every activation,
 // so that they are its default state rather than only its initial one.
 void RimeState::applyAppOptions() {
-    auto *api = engine_->api();
-    if (api->is_maintenance_mode()) {
+    if (engine_->api()->is_maintenance_mode()) {
         return;
     }
     const auto &program = ic_.program();
-    if (program.empty()) {
-        return;
-    }
     const auto &appOptions = engine_->appOptions();
     auto iter = appOptions.find(program);
-    if (iter == appOptions.end() || !iter->second.applyOnFocus ||
-        iter->second.options.empty()) {
+    // Check the opt-in before session(), which may create a new session.
+    if (iter == appOptions.end() || !iter->second.applyOnFocus) {
         return;
     }
-    auto id = session();
-    if (!id) {
-        return;
-    }
-    RIME_DEBUG() << "Reapply app options to " << program << ": "
-                 << iter->second.options;
-    for (const auto &[key, value] : iter->second.options) {
-        api->set_option(id, key.data(), value);
-    }
+    engine_->applyAppOptions(session(), program);
 }
 
 std::string RimeState::asciiModeName(bool abbrev) {

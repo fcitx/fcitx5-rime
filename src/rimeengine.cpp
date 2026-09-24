@@ -352,6 +352,22 @@ void RimeEngine::rimeStart(bool fullcheck) {
     }
 }
 
+void RimeEngine::applyAppOptions(RimeSessionId session,
+                                 const std::string &program) {
+    if (!session || program.empty()) {
+        return;
+    }
+    auto iter = appOptions_.find(program);
+    if (iter == appOptions_.end()) {
+        return;
+    }
+    RIME_DEBUG() << "Apply app options to " << program << ": "
+                 << iter->second.options;
+    for (const auto &[key, value] : iter->second.options) {
+        api_->set_option(session, key.data(), value);
+    }
+}
+
 void RimeEngine::updateAppOptions() {
     appOptions_.clear();
     RimeConfig config = {nullptr};
